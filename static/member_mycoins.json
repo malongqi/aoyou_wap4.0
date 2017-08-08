@@ -1,0 +1,17 @@
+{
+    "YouBi" :"1000",
+    "YouBiViewList":[
+        {
+            "YouBiTypeText":"论坛游币",
+            "YouBiDate":"2016-01-01",
+            "YouBi":"36",
+            "YouBiType":"1"
+        },
+        {
+            "YouBiTypeText":"订单03343434消费",
+            "YouBiDate":"2016-01-04",
+            "YouBi":"36",
+            "YouBiType":"2"
+        }
+    ]
+}

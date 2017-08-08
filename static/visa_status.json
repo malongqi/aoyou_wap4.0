@@ -1,0 +1,136 @@
+﻿{
+    "VisaXianlu": [
+        {
+            "OrderName": "1欧洲-法瑞意一价全含11日游【雪朗峰/凡尔赛/双游船】",
+            "SubOrderId": 1648298,
+            "OrderType": 3,
+            "OrderNumber": "011612069335",
+            "GuestVisaInfo": [
+                {                    
+                    "GuestId": 1929770,
+                    "GuestName": "1卷卷卷",
+                    "StatusNode": {
+                        "VisaStatus": 21,
+                        "VisaStatusText": "已收取",
+                        "VisaStatusDesc": "已收到您的办签材料"
+                    },
+                    "StageNode": {
+                        "VisaStage": 1,
+                        "VisaStageText": "提交资料"
+                    },
+                    "VisaStatusUpdateTime": "2016-12-06T10:15:18.747"
+                }
+            ]
+        },
+        {
+            "OrderName": "2欧洲-法瑞意一价全含11日游【雪朗峰/凡尔赛/双游船】",
+            "SubOrderId": 1648298,
+            "OrderType": 4,
+            "OrderNumber": "011612069335",
+            "GuestVisaInfo": [
+                {                    
+                    "GuestId": 1929770,
+                    "GuestName": "2卷卷卷",
+                    "StatusNode": {
+                        "VisaStatus": 21,
+                        "VisaStatusText": "已收取",
+                        "VisaStatusDesc": "已收到您的办签材料"
+                    },
+                    "StageNode": {
+                        "VisaStage": 1,
+                        "VisaStageText": "提交资料"
+                    },
+                    "VisaStatusUpdateTime": "2016-12-06T10:15:18.747"
+                }
+            ]
+        }
+    ],
+    "Visa": [
+        {
+            "OrderName": "3欧洲-法瑞意一价全含11日游【雪朗峰/凡尔赛/双游船】",
+            "SubOrderId": 1648298,
+            "OrderType": 97,
+            "OrderNumber": "011612069335",
+            "GuestVisaInfo": [
+                {                    
+                    "GuestId": 1929770,
+                    "GuestName": "3卷卷卷",
+                    "StatusNode": {
+                        "VisaStatus": 21,
+                        "VisaStatusText": "已收取",
+                        "VisaStatusDesc": "已收到您的办签材料"
+                    },
+                    "StageNode": {
+                        "VisaStage": 1,
+                        "VisaStageText": "提交资料"
+                    },
+                    "VisaStatusUpdateTime": "2016-12-06T10:15:18.747"
+                }
+            ]
+        },
+        {
+            "OrderName": "4欧洲-法瑞意一价全含11日游【雪朗峰/凡尔赛/双游船】",
+            "SubOrderId": 1648298,
+            "OrderType": 97,
+            "OrderNumber": "011612069335",
+            "GuestVisaInfo": [
+                {                    
+                    "GuestId": 1929770,
+                    "GuestName": "4卷卷卷",
+                    "StatusNode": {
+                        "VisaStatus": 21,
+                        "VisaStatusText": "已收取",
+                        "VisaStatusDesc": "已收到您的办签材料"
+                    },
+                    "StageNode": {
+                        "VisaStage": 1,
+                        "VisaStageText": "提交资料"
+                    },
+                    "VisaStatusUpdateTime": "2016-12-06T10:15:18.747"
+                }
+            ]
+        }
+    ],
+    "RecommendProducts": [
+        {
+            "ProductId": "1",
+            "Title": "1美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+            "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+            "ImgUrl": "http://images1.aoyou.com/upload/201611/6n0pd616093801.jpg",
+            "TypeId": "4",
+            "TypeName": "自由行",
+            "Price": "4900",
+            "SortNo": "1"
+        },
+        {
+            "ProductId": "2",
+            "Title": "2美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+            "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+            "ImgUrl": "http://images1.aoyou.com/upload/201611/6n0pd616093801.jpg",
+            "TypeId": "1",
+            "TypeName": "跟团游",
+            "Price": "4900",
+            "SortNo": "1"
+        },
+        {
+            "ProductId": "3",
+            "Title": "3美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+            "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+            "ImgUrl": "http://images1.aoyou.com/upload/201611/6n0pd616093801.jpg",
+            "TypeId": "4",
+            "TypeName": "自由行",
+            "Price": "4900",
+            "SortNo": "1"
+        },
+        {
+            "ProductId": "4",
+            "Title": "4美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+            "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+            "ImgUrl": "http://images1.aoyou.com/upload/201611/6n0pd616093801.jpg",
+            "TypeId": "4",
+            "TypeName": "自由行",
+            "Price": "4900",
+            "SortNo": "1"
+        }
+    ]
+}

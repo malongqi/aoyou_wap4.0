@@ -1,0 +1,216 @@
+{
+    "MenuList": [
+      {
+        "title": "热门",
+        "sortNum": "1",
+        "listguidAndType":[
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "1"
+          },{
+              "spaceGuid": "12039812-123123-12312-12312",
+              "spaceType": "2"
+          }
+        ]
+      },{
+        "title": "免签",
+        "sortNum": "2",
+        "listguidAndType":[
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "2"
+          },{
+              "spaceGuid": "12039812-123123-12312-12312",
+              "spaceType": "3"
+            }
+        ]
+      },{
+        "title": "海岛",
+        "sortNum": "2",
+        "listguidAndType":[{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "1"
+        },{
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "3"
+          }
+        ]
+      },{
+        "title": "国内",
+        "sortNum": "2",
+        "listguidAndType":[{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "1"
+        },{
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "2"
+          }
+        ]
+      },{
+        "title": "日韩",
+        "sortNum": "2",
+        "listguidAndType":[{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "2"
+        },
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "1"
+          }
+        ]
+      },{
+        "title": "东南亚",
+        "sortNum": "2",
+        "listguidAndType":[{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "2"
+        },
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "1"
+          }
+        ]
+      },{
+        "title": "热门",
+        "sortNum": "1",
+        "listguidAndType": [
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "2"
+          },{
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "1"
+          }
+        ]
+      },{
+        "title": "免签",
+        "sortNum": "2",
+        "listguidAndType":[
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "2"
+          },{
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "1"
+          }
+        ]
+      },{
+        "title": "海岛",
+        "sortNum": "2",
+        "listguidAndType":[{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "2"
+        },{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "1"
+        }
+        ]
+      },{
+        "title": "国内",
+        "sortNum": "2",
+        "listguidAndType":[{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "2"
+        },
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "1"
+          }
+        ]
+      },{
+        "title": "日韩",
+        "sortNum": "2",
+        "listguidAndType":[{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "2"
+        },
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "3"
+          }
+        ]
+      },{
+        "title": "东南亚",
+        "sortNum": "2",
+        "listguidAndType":[{
+          "spaceGuid": "12039812-123123-12312-12312",
+          "spaceType": "2"
+        },
+          {
+            "spaceGuid": "12039812-123123-12312-12312",
+            "spaceType": "3"
+          }
+        ]
+      }
+    ],
+    "HomeAdvs":[
+      {
+        "spaceName": "至少不会迷茫",
+        "sortNo": "1",
+        "advertises":[
+          {
+            "adName": "日本",
+            "picUrl": "http://bbspic.aoyou.com/block/e6/e69f822740fff62dfe3f454baaa76a58.jpg",
+            "linkUrl": "",
+            "sortNo": "1",
+            "adDec": ""
+          },{
+            "adName": "韩国",
+            "picUrl": "http://bbspic.aoyou.com/block/e6/e69f822740fff62dfe3f454baaa76a58.jpg",
+            "linkUrl": "",
+            "sortNo": "2",
+            "adDec": "免签"
+          }
+        ]
+      },{
+        "spaceName": "第二组广告",
+        "sortNo": "2",
+        "advertises":[
+          {
+            "adName": "美国",
+            "picUrl": "http://bbspic.aoyou.com/block/e6/e69f822740fff62dfe3f454baaa76a58.jpg",
+            "linkUrl": "",
+            "sortNo": "1",
+            "adDec": ""
+          },{
+            "adName": "马尔代夫",
+            "picUrl": "http://bbspic.aoyou.com/block/e6/e69f822740fff62dfe3f454baaa76a58.jpg",
+            "linkUrl": "",
+            "sortNo": "2",
+            "adDec": "落地签"
+          }
+        ]
+      }
+    ],
+    "HomeKeyWords":[
+      {
+        "keyWordTypeName": "东南亚",
+        "sortNoType": "1",
+        "keyWords": [
+          { "keyWordName": "冲绳", "linkUrl": "", "sortNo": "1" },
+          { "keyWordName": "苏梅岛", "linkUrl": "", "sortNo": "2" }
+        ]
+      },{
+        "keyWordTypeName": "日韩",
+        "sortNoType": "2",
+        "keyWords": [
+          { "keyWordName": "济州岛", "linkUrl": "", "sortNo": "1" },
+          { "keyWordName": "北海道", "linkUrl": "", "sortNo": "2" }
+        ]
+      },{
+        "keyWordTypeName": "东南亚",
+        "sortNoType": "1",
+        "keyWords": [
+          { "keyWordName": "冲绳", "linkUrl": "", "sortNo": "1" },
+          { "keyWordName": "苏梅岛", "linkUrl": "", "sortNo": "2" }
+        ]
+      },{
+        "keyWordTypeName": "日韩",
+        "sortNoType": "2",
+        "keyWords": [
+          { "keyWordName": "济州岛", "linkUrl": "", "sortNo": "1" },
+          { "keyWordName": "北海道", "linkUrl": "", "sortNo": "2" }
+        ]
+      }
+    ]
+}

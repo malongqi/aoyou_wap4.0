@@ -1,0 +1,28 @@
+{
+    "expericePercetage":64,
+    "HeadPicUrl":"http://bbs.aoyou.com/uc_server/./data/avatar/000/44/70/46_avatar_middle.jpg?v=20170208064251068",
+    "MemberLevel": 3,
+    "MemberLevelTxt":"黄金会员",
+    "MemberLevelPicUrl":"",
+    "TotalPoint":"1000",
+    "YouBi":"18500",
+    "NextLevelGrowth":"3万",
+    "NextLevel":4,
+    "NextLevelTxt":"钻石会员",
+
+    "YuDingJiangLi":true,
+    "JiFenDiXian":true,
+    "YouHuiSuiXing":true,
+    "TeXuanTeHui":true,
+    "ZunXiangHuiyuanRi":true,
+    "GouWuFanLi":true,
+    "HuiYuanLeXiang":true,
+    "AoYouPeiQian":true,
+    "HuZhaoGuoQiTiXing":true,
+    "LvYouZhuanShu":true,
+    "AoYouDaoJia":false,
+    "ZengSongLvYouBaoXian":false,
+    "ShengRiZhuanShu":false,
+    "ZengSongShengRiDanGao":false
+
+}

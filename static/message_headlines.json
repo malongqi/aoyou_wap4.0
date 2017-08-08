@@ -1,0 +1,34 @@
+{
+  "NavList": {
+    "Phone": "11111111111",
+    "DepartCity": "北京"
+  },
+
+  "MessageList":[
+    {
+      "MessageState":true,
+      "MessageTime":"08:11",
+      "MessageTitle":"日本古城镰仓的荻原肉店设计",
+      "MessageImageUrl":"http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+      "MessageDescription":"这是位于日本古城，也是旅游胜地镰仓的荻原肉店。由来自日本的Design Eight设计。",
+      "MessageLink": "/detail"
+    },
+    {
+      "MessageState":false,
+      "MessageTime":"07:11",
+      "MessageTitle":"2日本古城镰仓的荻原肉店设计",
+      "MessageImageUrl":"http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+      "MessageDescription":"2这是位于日本古城，也是旅游胜地镰仓的荻原肉店。由来自日本的Design Eight设计。",
+      "MessageLink": "http://www.baidu.com"
+    },
+    {
+      "MessageState":true,
+      "MessageTime":"昨天",
+      "MessageTitle":"3日本古城镰仓的荻原肉店设计",
+      "MessageImageUrl":"http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+      "MessageDescription":"3这是位于日本古城，也是旅游胜地镰仓的荻原肉店。由来自日本的Design Eight设计。",
+      "MessageLink": "http://www.baidu.com"
+    }
+  ]
+
+}

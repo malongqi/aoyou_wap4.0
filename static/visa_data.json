@@ -1,0 +1,158 @@
+{
+  "NavList": {
+    "Phone": "11111111111",
+    "DepartCity": "北京"
+  },
+  "BannerLists": [
+    {
+      "img": "http://images1.aoyou.com/upload/201611/6n0pd616093801.jpg?imageView2/1/w/375/h/180",
+      "url": "http://www.baidu.com"
+    },
+    {
+      "img": "http://images1.aoyou.com/upload/201611/0nx8v016145954.jpg?imageView2/1/w/375/h/180",
+      "url": "http://www.baidu.com"
+    },
+    {
+      "img": "http://images1.aoyou.com/upload/201609/8dtb2p26091805.jpg?imageView2/1/w/375/h/180",
+      "url": "http://www.baidu.com"
+    }
+  ],
+
+  "VisaList": {
+    "VisaListTitle": "热门签证目的地",
+    "VisaListLink": "http://www.baidu.com"
+  },
+
+  "HotVisaList": [
+    {
+      "VisaListTitle": "时间紧迫？可加急办理",
+      "VisaProducts": [
+        {
+          "ProductId": "1",
+          "ProductName": "入台证",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201507/z8d66f05150208.jpg?imageView2/2/w/640",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        },
+        {
+          "ProductId": "2",
+          "ProductName": "美国",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        },
+        {
+          "ProductId": "3",
+          "ProductName": "日本",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        }
+      ]
+    },
+    {
+      "VisaListTitle": "需要往返多次？多次入境产品",
+      "VisaProducts": [
+        {
+          "ProductId": "1",
+          "ProductName": "入台证",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201507/z8d66f05150208.jpg?imageView2/2/w/640",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        },
+        {
+          "ProductId": "2",
+          "ProductName": "美国",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        },
+        {
+          "ProductId": "3",
+          "ProductName": "日本",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        }
+      ]
+    },
+    {
+      "VisaListTitle": "1对1，专业陪签",
+      "VisaProducts": [
+        {
+          "ProductId": "1",
+          "ProductName": "入台证",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201507/z8d66f05150208.jpg?imageView2/2/w/640",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        },
+        {
+          "ProductId": "2",
+          "ProductName": "美国",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        },
+        {
+          "ProductId": "3",
+          "ProductName": "日本",
+          "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+          "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+          "ProductLink": "http://www.baidu.com",
+          "ProductPrice": "8999"
+        }
+      ]
+    }
+  ],
+  "WeeklySalesList": [
+    {
+      "ProductId": "1",
+      "ProductName": "美国签证【全国受理/多领区约签】【探亲/旅游/商务】",
+      "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+      "ProductPrice": "4900"
+    },
+    {
+      "ProductId": "2",
+      "ProductName": "韩国个人签证【旅游/商务】【北京领区/上海户籍】",
+      "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+      "ProductPrice": "4900"
+      },
+    {
+      "ProductId": "3",
+      "ProductName": "日本签证【北京/上海领区】【旅游/商务/探亲访友/在留资格】",
+      "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+      "ProductPrice": "4900"
+    }
+  ],
+
+  "OtherMenuList": [
+    {
+      "Href": "http://m.aoyou.com/route.html?cid=3188#!/",
+      "BcgroundImg": "http://pic1.aoyou.com/visahall/visa-menu-fit1.png"
+    },
+    {
+      "Href": "http://m.aoyou.com/route.html?cid=3193#!/",
+      "BcgroundImg": "http://pic2.aoyou.com/visahall/visa-menu-fit2.png"
+    },
+    {
+      "Href": "http://m.aoyou.com/single.html?cid=3189#!/",
+      "BcgroundImg": "http://pic3.aoyou.com/visahall/visa-menu-local.png"
+    },
+    {
+      "Href": "http://m.aoyou.com/single.html?cid=3187#!/",
+      "BcgroundImg": "http://pic4.aoyou.com/visahall/visa-menu-wifi.png"
+    },
+    {
+      "Href": "http://m.aoyou.com/single.html?cid=3206#!/",
+      "BcgroundImg": "http://pic5.aoyou.com/visahall/visa-menu-car.png"
+    }
+  ]
+}

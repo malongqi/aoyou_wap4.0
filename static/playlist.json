@@ -1,0 +1,75 @@
+[
+    {
+        "Id": "1",
+        "Title": "东京一地经典5天",
+        "AuthorName": "Li_Suming",
+        "AuthorLabel":"日本资深产品设计师",
+        "AuthorImg": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+        "BannerImg": "http://images1.aoyou.com/productlist/201412/6d4hll09092009.jpg",
+        "DesTagsJSON": [
+            {
+                "TypeId": "0",
+                "Value": "12"
+            }, {
+                "TypeId": "0",
+                "Value": "34"
+            }
+        ],
+        "Days": "10",
+        "Attractions": "10"
+    }, {
+        "Id": "2",
+        "Title": "东京4天文化之旅",
+        "AuthorName": "Li_Suming",
+        "AuthorLabel":"日本资深产品设计师",
+        "AuthorImg": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+        "BannerImg": "http://images1.aoyou.com/productlist/201310/bflr2p11104847.jpg",
+        "DesTagsJSON": [
+            {
+                "TypeId": "0",
+                "Value": "12"
+            }, {
+                "TypeId": "0",
+                "Value": "34"
+            }
+        ],
+        "Days": "10",
+        "Attractions": "10"
+    }, {
+        "Id": "3",
+        "Title": "东京4天文化之旅",
+        "AuthorName": "Li_Suming",
+        "AuthorLabel":"日本资深产品设计师",
+        "AuthorImg": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+        "BannerImg": "http://images1.aoyou.com/productlist/201412/6d4hll09092009.jpg",
+        "DesTagsJSON": [
+            {
+                "TypeId": "0",
+                "Value": "12"
+            }, {
+                "TypeId": "0",
+                "Value": "34"
+            }
+        ],
+        "Days": "10",
+        "Attractions": "10"
+    }, {
+        "Id": "3",
+        "Title": "东京4天文化之旅",
+        "AuthorName": "Li_Suming",
+        "AuthorLabel":"日本资深产品设计师",
+        "AuthorImg": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+        "BannerImg": "http://images1.aoyou.com/productlist/201412/6d4hll09092009.jpg",
+        "DesTagsJSON": [
+            {
+                "TypeId": "0",
+                "Value": "12"
+            }, {
+                "TypeId": "0",
+                "Value": "34"
+            }
+        ],
+        "Days": "10",
+        "Attractions": "10"
+    }
+]

@@ -1,0 +1,599 @@
+﻿{
+    "update": {
+        "html": [{
+                "file": "http://m.aoyou.com/s/CustomChannel/Index.html",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/s/hd/a.html",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/s/hd/b.html",
+                "ver": "104"
+            },
+            {
+                "file": "http://m.aoyou.com/s/discovery/index.html",
+                "ver": "106"
+            },
+            {
+                "file": "http://m.aoyou.com/s/package/index.html",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/s/discovery/index2.html",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/s/LocalTour/detail.html",
+                "ver": "138"
+            },
+            {
+                "file": "http://m.aoyou.com/s/LocalTour/detail_special.html",
+                "ver": "135"
+            },
+            {
+                "file": "http://m.aoyou.com/s/LocalTour/detail_e.html",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/s/LocalTour/index.html",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/s/LocalTour/search.html",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/mdd.html",
+                "ver": "103"
+            },
+            {
+                "file": "http://m.aoyou.com/find.html",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/index.html",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/message.html",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/visa.html",
+                "ver": "105"
+            },
+            {
+                "file": "http://m.aoyou.com/visastatus.html",
+                "ver": "103"
+            },
+            {
+                "file": "http://m.aoyou.com/wap.html",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/order.html",
+                "ver": "108"
+            },
+            {
+                "file": "http://m.aoyou.com/tour.html",
+                "ver": "114"
+            },
+            {
+                "file": "http://m.aoyou.com/member.html",
+                "ver": "100"
+            }
+        ],
+        "style": [{
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/customchannel.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/recommendv1.css",
+                "ver": "113"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/recommendv2.css",
+                "ver": "114"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/fonts/iconfont.woff",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/fonts/iconfont.ttf",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/fonts/iconfont.svg",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/fonts/iconfont.eot",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/common/crema.min.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/index.css",
+                "ver": "102"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/faxian.css",
+                "ver": "104"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/package.css",
+                "ver": "103"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/css/webapp/msitewebsite/animate.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/mdd.css",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/index.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/find.css",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/message.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/visa.css",
+                "ver": "105"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/visastatus.css",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/wap.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/find.css.map",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/index.css.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/mdd.css.map",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/message.css.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/visa.css.map",
+                "ver": "105"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/visastatus.css.map",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/wap.css.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/order.css.map",
+                "ver": "108"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/order.css",
+                "ver": "108"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/tourstatic.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/tourstatic.css.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/group.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/group.css.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/tour.css",
+                "ver": "113"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/tour.css.map",
+                "ver": "113"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/member.css",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/css/member.css.map",
+                "ver": "100"
+            }
+
+        ],
+        "script": [{
+                "file": "http://webresource1.aoyou.com/js/webapp/common/angular.min.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/api.js",
+                "ver": "101"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/share.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/api4.0.js",
+                "ver": "116"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/apijq.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/jquery.min.js",
+                "ver": "101"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/aoyou-min.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/msitewebsite/customchannel.js",
+                "ver": "105"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/msitewebsite/sendverificationcode.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/msitewebsite/recommendv1.js",
+                "ver": "101"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/msitewebsite/recommendv2.js",
+                "ver": "104"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/fastclick.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/angular-lazyload.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/angular-touch1.4.7.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/angular1.4.7.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/common/zepto.min.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/msitewebsite/iscroll.min.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://webresource1.aoyou.com/js/webapp/msitewebsite/packagenew.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/manifest.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/vendor.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/find.js",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/index.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/mdd.js",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/message.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/visa.js",
+                "ver": "105"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/visastatus.js",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/wap.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/find.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/index.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/manifest.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/mdd.js.map",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/message.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/vendor.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/visa.js.map",
+                "ver": "105"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/visastatus.js.map",
+                "ver": "101"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/wap.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/order.js.map",
+                "ver": "108"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/order.js",
+                "ver": "108"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/tourstatic.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/tourstatic.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/group.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/group.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/tour.js",
+                "ver": "113"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/tour.js.map",
+                "ver": "113"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/member.js",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/jquery.js",
+                "ver": "101"
+            },
+
+            {
+                "file": "http://m.aoyou.com/static/jquery.js.map",
+                "ver": "100"
+            },
+            {
+                "file": "http://m.aoyou.com/static/js/member.js.map",
+                "ver": "100"
+            }
+        ],
+        "images": [{
+                "file": "http://pic3.aoyou.com/webapp/msite/aoyou-edit.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/city.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/coupons.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/people.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/recommenddz.jpg",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/recommendrules.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/recommendrule-tt.jpg",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/recommendtop.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/recommendtt-bg.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/images/favicon.ico",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/head_grey.jpg",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/head-mask.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/msite/pull_icon@2x.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic3.aoyou.com/webapp/common/appicon.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-01.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-02.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-03.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-04.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-05.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-06.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-07.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-08.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-09.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-10.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-11.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-12.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-13.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-14.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/privilege-bg.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/badge-01.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/badge-02.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/badge-03.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/badge-04.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/imagebadge-05.png",
+                "ver": "100"
+            },
+            {
+                "file": "http://pic1.aoyou.com/app40/badge-06.png",
+                "ver": "100"
+            },
+            {
+                "file": "https://passport.aoyou.com/home/top.png",
+                "ver": "100"
+            }
+
+        ]
+    },
+    "replace": {
+        ".html": [{
+                "old": "http://webresource1.aoyou.com",
+                "new": "../webresource1.aoyou.com"
+            },
+            {
+                "old": "http://pic3.aoyou.com",
+                "new": "../pic3.aoyou.com"
+            },
+            {
+                "old": "/static/",
+                "new": "../m.aoyou.com/static/"
+            }
+        ],
+        ".js": [],
+        ".css": [{
+            "old": "http://pic3.aoyou.com",
+            "new": "../pic3.aoyou.com"
+        }]
+    },
+    "hybridVersion": {
+        "ios": "1",
+        "android": "1"
+    }
+}

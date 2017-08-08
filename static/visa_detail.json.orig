@@ -1,0 +1,94 @@
+{
+    "VisaCountryName": "美国",
+    "VisaCountryFlag": "http://pic2.aoyou.com/visalogo/221.jpg",
+    "VisaName": "美国签证【全国受理/多领区约签】【探亲/旅游/商务】【拒签全退/加急套餐】",
+    "PackageMinPrice": "4900",
+    "ApplyDataTxt": "【常规】初审2工作日，翻译+填表+约签6个工作日，共8个工作日给预约结果",
+    "DeliveryCityName": "北京",
+    "NeedInterview": true,
+    "VisaValidDateTxt": "1-10年",
+    "EntryCountTxt": "多次",
+    "StayDayTxt": "180天",
+    "VisaArea": "适用于长期工作地为北京市、河北省、湖北省、河南省、黑龙江、吉林省、辽宁省、内蒙古、宁夏省、青海省、山西省、天津市、西藏的申请人",
+    "VisaPackageList": [
+        {
+            "VisaPackageId": "26",
+            "VisaPackageName": "1198元【常规办理】=6个工作日约签",
+            "SellingPrice": "1298",
+            "Instruction": "【常规】初审2工作日，翻译+填表+约签6个工作日，共8个工作日给预约结果"
+        },
+        {
+            "VisaPackageId": "27",
+            "VisaPackageName": "1298元【快速办理】=5个工作日约签",
+            "SellingPrice": "1298",
+            "Instruction": "【快速】初审1个工作日，翻译+填表+约签4个工作日，共5个工作日给预约结果"
+        },
+        {
+            "VisaPackageId": "28",
+            "VisaPackageName": "给钱越多办越快套餐",
+            "SellingPrice": "99999",
+            "Instruction": "立等可取"
+        }
+    ],
+    "PersonTypeList": [
+        {
+            "PersonTypeID": 1,
+            "PersonTypeName": "在职人员",
+            "MaterialList": [
+                {
+                    "MaterialName": "护照扫描件",
+                    "MaterialRemark": "1. 有效期为行程结束日起至少六个月以上；\r\n2. 内有不少于2页空白签证页；\r\n3. 护照最后一页必须有本人签名；",
+                    "FilePath": "http://erpsoa.aoyou.com/FileSite/Other/2015/4/24/%e7%be%8e%e5%9b%bd%e7%ad%be%e8%af%81%e7%94%b3%e8%af%b7%e8%a1%a8.docx"
+                },
+                {
+                    "MaterialName": "美国签证申请表",
+                    "MaterialRemark": "请您认真清晰的填写美国签证申请表，我们将为您填写美国签证申请表正式表。",
+                    "FilePath": "http: //erpsoa.aoyou.com/FileSite/Other/2015/4/24/%e7%be%8e%e5%9b%bd%e7%ad%be%e8%af%81%e7%94%b3%e8%af%b7%e8%a1%a8.docx"
+                }
+            ]
+        },
+        {
+            "PersonTypeID": 2,
+            "PersonTypeName": "退休人员",
+            "MaterialList": [
+                {
+                    "MaterialName": "护照扫描件",
+                    "MaterialRemark": "办不了，别看了",
+                    "FilePath": "http://erpsoa.aoyou.com/FileSite/Other/2015/4/24/%e7%be%8e%e5%9b%bd%e7%ad%be%e8%af%81%e7%94%b3%e8%af%b7%e8%a1%a8.docx"
+                },
+                {
+                    "MaterialName": "美国签证申请表",
+                    "MaterialRemark": "办不了，别看了",
+                    "FilePath": "http: //erpsoa.aoyou.com/FileSite/Other/2015/4/24/%e7%be%8e%e5%9b%bd%e7%ad%be%e8%af%81%e7%94%b3%e8%af%b7%e8%a1%a8.docx"
+                }
+            ]
+        },
+        {
+            "PersonTypeID": 3,
+            "PersonTypeName": "学生",
+            "MaterialList": [
+                {
+                    "MaterialName": "护照扫描件",
+                    "MaterialRemark": "3办不了，别看了",
+                    "FilePath": "http://erpsoa.aoyou.com/FileSite/Other/2015/4/24/%e7%be%8e%e5%9b%bd%e7%ad%be%e8%af%81%e7%94%b3%e8%af%b7%e8%a1%a8.docx"
+                },
+                {
+                    "MaterialName": "美国签证申请表",
+                    "MaterialRemark": "3办不了，别看了",
+                    "FilePath": "http: //erpsoa.aoyou.com/FileSite/Other/2015/4/24/%e7%be%8e%e5%9b%bd%e7%ad%be%e8%af%81%e7%94%b3%e8%af%b7%e8%a1%a8.docx"
+                }
+            ]
+        }
+    ],
+    "ReceiveAddress": "北京市东城区东直门南大街5号中青旅大厦5层中庭前台",
+    "ReceivePostcode": "100007",
+    "ReceiveContacts": "遨游网美国签证",
+    "ReceiveMobile": "",
+    "ReceiveEmail": "zhongqinglvus@163.com",
+    "ReceiveWorkTime": "周一至周日09:00-18:00",
+    "ReceiveRemark": "1 申请人请尽量邮寄签证资料！<br>2 签证办理完成后统一邮件或短信通知结果，不能自取请在收到通知邮件后回复邮寄地址（内容包括：订单号码/申请人姓名/详细地址/收件人/联系电话）。不接受快递到付！",
+    "PickupAddressAbout": "中信银行北京来福士支行<br />地址：北京市东城区东直门南大街1号来福士购物中心1楼<br />电话：010-64008610<br />说明：本人领取护照需携带身份证原件+预约单<br />          其他人代为领取护照需携带身份证复印件+关系证明（如户口本，结婚证，在职证明等）<br />          领取14岁以下申请人护照需携带出生证明复印件+父母双方身份证复印件",
+    "ApplyPrecautions": "1、以上所列美国签证均需要申请者本人前往使馆亲自递交资料并接受面试；<br />2、请根据自身的行程安排尽早办理签证，以免因领馆工作日不稳定而影响出游；<br />3、建议签证办理好后再支付机票和酒店费用，以避免不必要的损失；<br />4、请在收到出签护照后仔细查看签证有效期，并在有效期合理安排出行时间，按时归国；<br />5、请您按照与中青旅遨游网协商一致后，我们为您安排的时间去面试。如果由于您的个人原因，面试当天无法参加，我们可以为您更改面试时间。但由于使馆的要求，我们只能为您更改2次时间，并且由于预约面签的成本，部门指定套餐我们会免费为您修改一次面试时间（旺季除外），第二次将加收您的预约成本费。若您第三次仍无法参加面试，您需要重新缴纳签证费用并自行进行预约，或前往中青旅遨游网再次购买相应签证产品。<br />6、凡申请过移民或非移民签证的客人，无论其以前的申请是否被批准，都必须如实说明；<br />7、凡在美国有直系亲属，无论是否前往探望，都必须如实说明。 <br />8、请在发送资料邮件后,实时关注网站上的办理进度,如出现在提交资料一周后申请进度无变化等异常情况,请尽快与网站客服联系!<br />9、拒签全退条件<br />（1）无美国拒签记录<br />（2）近五年内有发达国家出入境记录，英国、申根、加拿大<br />（3）提供真实的送签材料<br />（4）购买拒签全退套餐<br />（5）目前处于非孕期<br />（6）没有不良出入境记录（例如，在任何国家预期停留或没有其他国家身份的子女等）",
+    "OtherRemark": "<p>1、受理时间：<br>中青旅按照您拍下套餐的类型区分为3-5个工作日预约面签<br>美国大使馆受理签证时间通常在5-7个工作日<br>美国大使馆邮寄到中信银行的时间，北京地区通常在2个工作日左右寄到。外省市通常在4个工作日左右寄到。</p><p>如遇使馆闭馆或公众假期，工作日顺延；<br>使馆受理时间会因个人资料情况不同而有差异，具体以使馆为准；</p><p>2、提前预订天数：<br>美国签证需提前预约面试时间，通常建议至少提前一个月办理，旺季的时候请提前2-3个月办理，否则很有可能耽误您的行程。行程着急的客人可以参考加急套餐，收到资料第二天预约面试时间（具体面试时间需根据当月实际配额计算）</p><p>3、办理流程<br>①下单支付；②专属客服一对一；③递交资料；④审核资料；⑤签证办理；⑥签证成功，领取签证</p><p>4.特殊说明<br>①要求指定面试时间及日期的客人请提前打遨游网客服电话咨询。<br>②半年内曾被美国拒签的客人无法申请拒签退款套餐。<br>③凡有探亲，商务，医疗等赴美目的的客人，请如实告知销售，按真实情况受理。<br>④请提供遨游网官网上指定的表格和材料，其他版本不予受理<br><br></p><p>5.出签护照领取方式</p><p><strong>【中信银行自取护照】</strong>选择最近的中信银行营业网点<br>请注意: 中信银行只会将您的护照资料保留15天，如15天后未被领取，将会被退还至大使馆或领事馆。请勿在未得到通知可以领取护照的情况下去您选择的中信银行。您只能在您选择的支行领取护照。</p><p>查询中信银行地址链接:<a data-cke-saved-"
+
+}

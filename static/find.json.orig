@@ -1,0 +1,98 @@
+{
+    "news": {
+        "page": 1,
+        "has_next": "1",
+        "total_num": "100",
+        "list": [{
+            "board_name": "南麂土著",
+            "title": "听弋阳腔，品弋阳菜，弋阳龟峰这样玩",
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=318166&size=middle",
+            "imageList": ["http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg"],
+            "hits": "9988",
+            "recommendAdd": "68",
+            "customerstatus": "中国摄影协会会员",
+            "activity": ""
+        }, {
+            "board_name": "英子",
+            "title": "莫斯科 乌法 巴尔瑙尔：不一样的俄罗斯发现你",
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=318166&size=middle",
+            "imageList": ["http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg"],
+            "hits": "109988",
+            "recommendAdd": "68",
+            "customerstatus": "退休后热心于旅游",
+            "activity": {
+                "icon": "活动标签图片",
+                "sponsor": "如是户外",
+                "statusName": "正在报名",
+                "title": "不负春光不负卿 邂逅琼海慢生活不负春光不负卿 邂逅琼海慢生活",
+                "imageList": ["http://bbs.aoyou.com/uc_server/avatar.php?uid=318166&size=middle"],
+                "hits": "9988",
+                "recommendAdd": "98"
+            }
+        }, {
+            "board_name": "rt的意识流世界",
+            "title": "少女心爆棚的大阪希尔顿草莓放题",
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+            "imageList": ["http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg"],
+            "hits": "9988",
+            "recommendAdd": "68",
+            "customerstatus": "从青岛海岸到西班牙马拉加",
+            "activity": ""
+        }, {
+            "board_name": "南麂土著",
+            "title": "听弋阳腔，品弋阳菜，弋阳龟峰这样玩",
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+            "imageList": ["http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg"],
+            "hits": "9988",
+            "recommendAdd": "68",
+            "customerstatus": "中国摄影协会会员",
+            "activity": {
+                "icon": "活动标签图片",
+                "sponsor": "如是户外",
+                "statusName": "正在报名",
+                "title": "不负春光不负卿 邂逅琼海慢生活不负春光不负卿 邂逅琼海慢生活",
+                "imageList": ["http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg", "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg"],
+                "hits": "9988",
+                "recommendAdd": "68"
+            }
+        }]
+    },
+    "traveler": {
+        "page": 1,
+        "has_next": "1",
+        "total_num": "100",
+        "list": [{
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=298273&size=middle",
+            "board_name": "南麂土著 ",
+            "customerstatus": "中国摄影协会会员"
+        }, {
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=168889&size=middle",
+            "board_name": "英子 ",
+            "customerstatus": "退休后热心于旅游、摄影、撰写游记，曾走访了国内外近70"
+        }, {
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=168889&size=middle",
+            "board_name": "叶红 ",
+            "customerstatus": "自由职业，这五年主要在做JA公益教育,热爱旅行和生活。"
+        }, {
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=168889&size=middle",
+            "board_name": "李贝贝 ",
+            "customerstatus": "热爱旅游"
+        }, {
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=168889&size=middle",
+            "board_name": "湖北宋君 ",
+            "customerstatus": "重庆市铜梁区旅游宣传大使 新浪微博签约自媒体"
+        }, {
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=168889&size=middle",
+            "board_name": "rt的意识流世界 ",
+            "customerstatus": "从青岛海岸的放声呐喊到独自在西班牙马拉加寻找毕加索"
+        }, {
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=168889&size=middle",
+            "board_name": "熊猫妈老武 ",
+            "customerstatus": "热衷于旅游，摄影，美食，曾经去过70多个城市"
+        }, {
+            "userAvatar": "http://bbs.aoyou.com/uc_server/avatar.php?uid=168889&size=middle",
+            "board_name": "Jennynui ",
+            "customerstatus": "旅行策划体验师、目前定居于上海。做过旅游策划、杂志"
+        }]
+    }
+}

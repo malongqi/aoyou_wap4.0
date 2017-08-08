@@ -1,0 +1,504 @@
+{
+    "NavList": {
+        "Phone": "11111111111",
+        "DepartCity": "北京"
+    },
+    "DepCityList": {
+        "HotCities": [
+            { "CityID": "1", "ChannelID": "1", "Phone": "400-600-6666", "OrderNum": "1", "CityName": "北京", "CityNamePY": "beijing", "GroupWord": "B" },
+            { "CityID": "2", "ChannelID": "2", "Phone": "4000-588-766", "OrderNum": "2", "CityName": "上海", "CityNamePY": "shanghai", "GroupWord": "S" },
+            { "CityID": "3", "ChannelID": "3", "Phone": "10108008转6802", "OrderNum": "3", "CityName ": "天津", "CityNamePY": "tianjin", "GroupWord": "T" }
+        ],
+        "Cities": [
+            { "CityID": "1", "ChannelID": "1", "Phone": "400-600-6666", "OrderNum": "1", "CityName": "北京", "CityNamePY": "beijing", "GroupWord": "B" },
+            { "CityID": "2", "ChannelID": "2", "Phone": "4000-588-766", "OrderNum": "2", "CityName": "上海", "CityNamePY": "shanghai", "GroupWord": "S" },
+            { "CityID": "3", "ChannelID": "3", "Phone": "10108008转6802", "OrderNum": "3", "CityName ": "天津", "CityNamePY": "tianjin", "GroupWord": "T" }
+        ]
+    },
+    "Tools": {
+        "Phone": "400-600-6666",
+        "WebUrl": "http:www.aoyou.com/?m",
+        "AppDownload": "http://mact.aoyou.com/app"
+    },
+    "bannerLists": [{
+            "img": "http://images1.aoyou.com/upload/201611/6n0pd616093801.jpg?imageView2/1/w/375/h/180",
+            "url": "http://www.baidu.com"
+        },
+        {
+            "img": "http://images1.aoyou.com/upload/201611/0nx8v016145954.jpg?imageView2/1/w/375/h/180",
+            "url": "http://www.baidu.com"
+        },
+        {
+            "img": "http://images1.aoyou.com/upload/201609/8dtb2p26091805.jpg?imageView2/1/w/375/h/180",
+            "url": "http://www.baidu.com"
+        }
+    ],
+    "ChannelLists": [{
+            "Name": "出境游",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#FF7375 url(http://img.mukewang.com/user/54584ee0000179f302200220-40-40.jpg)"
+        },
+        {
+            "Name": "国内游",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#FF7375"
+        },
+        {
+            "Name": "抢游惠",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#FF7375"
+        },
+        {
+            "Name": "邮轮",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#FF7375"
+        },
+        {
+            "Name": "定制",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#FF7375"
+        },
+        {
+            "Name": "自由行",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#58AEE5"
+        },
+        {
+            "Name": "跟团游",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#58AEE5"
+        },
+        {
+            "Name": "半自助",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#58AEE5"
+        },
+        {
+            "Name": "签证",
+            "Href": "www.",
+            "BcgroundImg": "#F2AA2E"
+        },
+        {
+            "Name": "出境WiFi",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#F2AA2E"
+        },
+        {
+            "Name": "包车游览",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#F2AA2E"
+        },
+        {
+            "Name": "当地玩乐",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#F2AA2E"
+        },
+        {
+            "Name": "全球购物",
+            "Href": "http://www.baidu.com",
+            "BcgroundImg": "#F2AA2E"
+        }
+    ],
+    "NewsList": [{
+            "ListText": "家门口的银杏都黄了，是时候出门赏家门口的银杏都黄了，是时候出门赏...",
+            "Href": "http://www.baidu.com"
+        },
+        {
+            "ListText": "家门口的银杏都黄了，是时候出门赏...",
+            "Href": "http://www.baidu.com"
+        }
+    ],
+    "VisaList": {
+        "VisaListTitle": "王牌签证",
+        "VisaListInfor": "淘宝4.96评分全网最高，10万客户共同选择",
+        "VisaListLink": "http://www.baidu.com",
+        "VisaProducts": [{
+                "ProductName": "入台证",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201507/z8d66f05150208.jpg?imageView2/2/w/640",
+                "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductPrice": "8999.0"
+            },
+            {
+                "ProductName": "美国",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductPrice": "8999.0"
+            },
+            {
+                "ProductName": "日本",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductPrice": "8999.0"
+            },
+            {
+                "ProductName": "入台证",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201507/z8d66f05150208.jpg?imageView2/2/w/640",
+                "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductPrice": "8999.0"
+            },
+            {
+                "ProductName": "美国",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductPrice": "8999.0"
+            },
+            {
+                "ProductName": "日本",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLogoImg": "http://pic3.aoyou.com/visa/flag/small/11.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductPrice": "8999.0"
+            }
+        ]
+    },
+    "HotProductList": {
+        "HotProductTitle": "周周爆款",
+        "HotProducInfor": "您不容错过的旅游特价",
+        "HotProducLink": "http://www.baidu.com",
+        "MiaoShaChanPin": [{
+            "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+            "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+            "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+            "ProductLink": "http://www.baidu.com",
+            "MiaoShaJieShuShiJian": "74889",
+            "ClasstTag": [
+                { "TypeID": 1, "Value": "4钻" },
+                { "TypeID": 2, "Value": "国庆" },
+                { "TypeID": 2, "Value": "中秋" },
+                { "TypeID": 3, "Value": "蜜月度假" }
+            ],
+            "ProductOriginalPrice": "9999.0",
+            "ProductPrice": "8999.0"
+        }],
+        "HotProducts": [{
+                "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductTag": "",
+                "ProductOriginalPrice": "9999.0",
+                "ProductPrice": "8999.0"
+            },
+            {
+                "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                "ProductSubName": "",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductTag": "1200",
+                "ProductOriginalPrice": "9999.0",
+                "ProductPrice": "8999.0"
+            },
+            {
+                "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductTag": "",
+                "ProductOriginalPrice": "9999.0",
+                "ProductPrice": "8999.0"
+            },
+            {
+                "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                "ProductSubName": "",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductTag": "1200",
+                "ProductOriginalPrice": "9999.0",
+                "ProductPrice": "8999.0"
+            }
+        ]
+    },
+    "HotDestination": {
+        "HotDestinationTitle": "热门目的地",
+        "HotDestinationInfor": "您不容错过的旅游特价",
+        "HotDestinationLink": "http://www.baidu.com",
+        "HotList": [{
+                "HotListName": "厦门",
+                "HotListLink": "http://www.baidu.com"
+            },
+            {
+                "HotListName": "海南",
+                "HotListLink": "http://www.baidu.com"
+            },
+            {
+                "HotListName": "日本",
+                "HotListLink": "http://www.baidu.com"
+            },
+            {
+                "HotListName": "云南",
+                "HotListLink": "http://www.baidu.com"
+            },
+            {
+                "HotListName": "巴厘岛",
+                "HotListLink": "http://www.baidu.com"
+            },
+            {
+                "HotListName": "厦门",
+                "HotListLink": "http://www.baidu.com"
+            }
+        ]
+    },
+    "Theme": {
+        "ThemeTitle": "特色专题",
+        "ThemeInfor": "拒绝走马观花，遨游匠心制造",
+        "ThemeLink": "http://www.baidu.com",
+        "ThemeProduct": [{
+            "ProductName": "为什么美国是最受欢迎的留学国家",
+            "TravelerAvatar": "http://images1.aoyou.com/productlist/201412/ld20d808172627.jpg",
+            "TravelerTag": "大师课堂",
+            "TravelerRecommend": [{
+                "ProductName": "上海杭州研学5日游【遨游研学/原汁原味迪士尼/别具一格杭州风】",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductPrice": "4900"
+            }, {
+                "ProductName": "上海杭州研学5日游【遨游研学/原汁原味迪士尼/别具一格杭州风】",
+                "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                "ProductLink": "http://www.baidu.com",
+                "ProductPrice": "4900"
+            }]
+        },
+            {
+                "TravelerName": "最适合骑行的10个目的地",
+                "TravelerAvatar": "http://images1.aoyou.com/productlist/201412/ld20d808172627.jpg",
+                "TravelerTag": "户外榜单",
+                "TravelerRecommend": [{
+                    "ProductName": "上海杭州研学5日游【遨游研学/原汁原味迪士尼/别具一格杭州风】",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ProductPrice": "8999.0"
+                }, {
+                    "ProductName": "上海杭州研学5日游【遨游研学/原汁原味迪士尼/别具一格杭州风】",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ProductPrice": "8999.0"
+                }]
+            }
+        ]
+    },
+    "TravelArea": {
+        "TravelAreaTitle": "旅友圈",
+        "TravelAreaInfor": "跟随旅游达人，在陌生的地方发现一种久违的感动",
+        "Traveler": [{
+                "TravelerName": "陈依依",
+                "TravelerAvatar": "http://cdn-wz.xiaoyun.com/m/f/http%253A%252F%252Fbbs.aoyou.com%252Fuc_server%252Favatar.php%253Fuid%253D318364%2526size%253Dmiddle",
+                "TravelerTag": "YY人气主播、杂志美食专栏编辑",
+                "TravelerRecommend": [{
+                    "LvYouDeYiJuHua": "募集对象为20-30岁的年轻食客，针对此群体特别设计Branch，慵懒地在西式餐厅里享受冬日阳光；安排面临搬迁筑地早市市场的美食搜索环节，用当地人的方式体验美食。",
+                    "ProductName": "日本东京美食5日游【FM87.6吃喝玩乐人气主播带队】",
+                    "ProductSubName": "轻奢米其林餐厅 7大人气美食店挑战味蕾",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ProductPrice": "8999.0"
+                }]
+            },
+            {
+                "TravelerName": "陈依依",
+                "TravelerAvatar": "http://cdn-wz.xiaoyun.com/m/f/http%253A%252F%252Fbbs.aoyou.com%252Fuc_server%252Favatar.php%253Fuid%253D318364%2526size%253Dmiddle",
+                "TravelerTag": "YY人气主播、杂志美食专栏编辑",
+                "TravelerRecommend": [{
+                    "LvYouDeYiJuHua": "募集对象为20-30岁的年轻食客，针对此群体特别设计Branch，慵懒地在西式餐厅里享受冬日阳光；安排面临搬迁筑地早市市场的美食搜索环节，用当地人的方式体验美食。",
+                    "ProductName": "日本东京美食5日游【FM87.6吃喝玩乐人气主播带队】",
+                    "ProductSubName": "轻奢米其林餐厅 7大人气美食店挑战味蕾",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ProductPrice": "8999.0"
+                }]
+            }
+        ]
+    },
+    "TuiJianChanPin": [{
+            "TabId": "1",
+            "TabName": "春节优选",
+            "ProductList": [{
+                    "ProductName": "1美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "自由行",
+                    "ProductPrice": "8999.0"
+                },
+                {
+                    "ProductName": "1美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "跟团游",
+                    "ProductPrice": "8999.0"
+                },
+                {
+                    "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "当地玩乐",
+                    "ProductPrice": "8999.0"
+                }
+            ]
+        },
+        {
+            "TabId": "2",
+            "TabName": "销量明星",
+            "ProductList": [{
+                    "ProductName": "2美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "耀悦",
+                    "ProductPrice": "8999.0"
+                },
+                {
+                    "ProductName": "2美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "签证",
+                    "ProductPrice": "8999.0"
+                },
+                {
+                    "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "门票",
+                    "ProductPrice": "8999.0"
+                }
+            ]
+        },
+        {
+            "TabId": "3",
+            "TabName": "亲子游乐",
+            "ProductList": [{
+                    "ProductName": "3美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "邮轮",
+                    "ProductPrice": "8999.0"
+                },
+                {
+                    "ProductName": "3美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "邮轮",
+                    "ProductPrice": "8999.0"
+                },
+                {
+                    "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "邮轮",
+                    "ProductPrice": "8999.0"
+                }
+            ]
+        },
+        {
+            "TabId": "4",
+            "TabName": "蜜月圣地",
+            "ProductList": [{
+                    "ProductName": "4美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "邮轮",
+                    "ProductPrice": "8999.0"
+                },
+                {
+                    "ProductName": "3美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "邮轮",
+                    "ProductPrice": "8999.0"
+                },
+                {
+                    "ProductName": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环岛游军舰岛】",
+                    "ProductSubName": "全程特色酒店＋当地5星酒店；伊斯坦布尔、卡帕多奇亚、棉花",
+                    "ProductImageUrl": "http://images1.aoyou.com/productlist/201312/h8db8431133322.jpg",
+                    "ProductLink": "http://www.baidu.com",
+                    "ClasstTag": [
+                        { "TypeID": 1, "Value": "4钻" },
+                        { "TypeID": 2, "Value": "国庆" },
+                        { "TypeID": 2, "Value": "中秋" },
+                        { "TypeID": 3, "Value": "蜜月度假" }
+                    ],
+                    "ProductTag": "邮轮",
+                    "ProductPrice": "8999.0"
+                }
+            ]
+        }
+    ]
+}

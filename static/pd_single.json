@@ -1,0 +1,86 @@
+﻿{
+    "ChannelID": "1",  //频道ID
+    "ChannelName": "签证", //频道名称
+    "ChannelAdvNum": 1,    //模块排序
+    "ChannelWordNum": 2,   //模块排序
+    "ChannelGroupNum": 3,  //模块排序
+    "ChannelLable": 5,     //模块所属地理标签
+    "ChannelTemplateAdv": [  //广告模块集合
+        {
+            "channelAdvImg": "https://www.baidu.com/img/baidu_jgylogo3.gif",  //广告图片
+            "channelAdvWapurl": "https://www.baidu.com/"                      //广告跳转地址
+        },
+        {
+            "channelAdvImg": "https://www.baidu.com/img/baidu_jgylogo3.gif", //广告图片
+            "channelAdvWapurl": "https://www.baidu.com/"                     //广告跳转地址
+        }
+    ],
+    "ChannelKeyGroupName": "关键词组名称",   //关键词标题
+    "ChannelTemplateKey": [           //关键词模块集合
+        {
+            "channelKeyTitle": "https://www.baidu.com/img/baidu_jgylogo3.gif",   //关键词
+            "channelKeyWordWapurl": "https://www.baidu.com/"					 //关键词链接
+        },
+        {
+            "channelKeyTitle": "https://www.baidu.com/img/baidu_jgylogo3.gif",	//关键词
+            "channelKeyWordWapurl": "https://www.baidu.com/"					//关键词链接
+        }
+    ],
+    "ChannelProductGroupName": "产品组名称",  //产品组名称
+    "ChannelTemplateProduct": [				//产品模块集合
+        {
+            "channelProductName": "澳大利亚黄金海岸",							//产品标题
+            "channelProductDoc": "初次去日本顾客",								//产品描述
+            "channelProductimg": "http://baidu_jgylogo3.gif",					//产品图片
+            "channelProductUrl": "https://www.baidu.com/",						//产品链接
+            "channelProductPrice": 9996											//产品价格
+        },
+        {
+            "channelProductName": "澳大利亚黄金海岸",							//产品标题
+            "channelProductDoc": "初次去日本顾客",								//产品描述
+            "channelProductimg": "http://baidu_jgylogo3.gif",					//产品图片
+            "channelProductUrl": "https://www.baidu.com/",						//产品链接
+            "channelProductPrice": 9996											//产品价格
+        }
+    ],
+    "ZidingyiProductGroup": [		 //底部自定义产品组模块						
+        {
+            "ChannelProductGroupName": "产品组名称",		//产品组名称
+            "ChannelTemplateProduct": [						//产品模块集合
+                {
+                     "channelProductName": "澳大利亚黄金海岸",							//产品标题
+					 "channelProductDoc": "初次去日本顾客",								//产品描述
+					 "channelProductimg": "http://baidu_jgylogo3.gif",					//产品图片
+					 "channelProductUrl": "https://www.baidu.com/",						//产品链接
+					 "channelProductPrice": 9996									    //产品价格
+                },
+                {
+                     "channelProductName": "澳大利亚黄金海岸",							//产品标题
+					 "channelProductDoc": "初次去日本顾客",								//产品描述
+					 "channelProductimg": "http://baidu_jgylogo3.gif",					//产品图片
+					 "channelProductUrl": "https://www.baidu.com/",						//产品链接
+					 "channelProductPrice": 9996									    //产品价格
+                }
+            ]
+        },
+        {
+            "ChannelProductGroupName": "产品组名称",		//产品组名称
+            "ChannelTemplateProduct": [						//产品模块集合
+                {
+                     "channelProductName": "澳大利亚黄金海岸",							//产品标题
+					 "channelProductDoc": "初次去日本顾客",								//产品描述
+					 "channelProductimg": "http://baidu_jgylogo3.gif",					//产品图片
+					 "channelProductUrl": "https://www.baidu.com/",						//产品链接
+					 "channelProductPrice": 9996									    //产品价格
+                },
+                {
+                     "channelProductName": "澳大利亚黄金海岸",							//产品标题
+					 "channelProductDoc": "初次去日本顾客",								//产品描述
+					 "channelProductimg": "http://baidu_jgylogo3.gif",					//产品图片
+					 "channelProductUrl": "https://www.baidu.com/",						//产品链接
+					 "channelProductPrice": 9996									    //产品价格
+                }
+            ]
+        }
+    ]
+}

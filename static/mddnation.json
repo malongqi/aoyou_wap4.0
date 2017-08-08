@@ -1,0 +1,218 @@
+{
+  "DesMain": {
+    "Id": "1",
+    "TypeId": "1",
+    "Name": "日本",
+    "NameEng": "Japan",
+    "SubTitle": "副标题",
+    "BannerImg": "http://images1.aoyou.com/productlist/201604/24p6v819095656.jpg",
+    "Summary": "春观夜樱，夏看碧海，秋见红叶，冬踏落雪。日本在她潮流的外表下依然保持着传统的模样。准备对来到这里的每一位游客用她那不胜凉花的娇羞道一句：阿依西带路！",
+    "LabelId": "5",
+    "ShareImg": ""
+  },
+  "LinkDes": [
+    {
+      "Id": "1",
+      "Name": "东京",
+      "TypeId": "2",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "SubTitle": "迪士尼乐园",
+      "SortNo": "1"
+    }, {
+      "Id": "2",
+      "Name": "大阪",
+      "TypeId": "2",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "SubTitle": "环球影城",
+      "SortNo": "2"
+    }, {
+      "Id": "3",
+      "Name": "京都",
+      "TypeId": "2",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "SubTitle": "去看海啊",
+      "SortNo": "3"
+    }, {
+      "Id": "4",
+      "Name": "北海道",
+      "TypeId": "2",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "SubTitle": "迪士尼乐园",
+      "SortNo": "4"
+    }, {
+      "Id": "5",
+      "Name": "冲绳",
+      "TypeId": "2",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "SubTitle": "迪士尼乐园",
+      "SortNo": "5"
+    }, {
+      "Id": "6",
+      "Name": "名古屋",
+      "TypeId": "2",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "SubTitle": "迪士尼乐园",
+      "SortNo": "6"
+    }
+
+  ],
+  "DesSub": [
+    {
+      "Id": "1",
+      "TypeId": "0",
+      "linkUrl":"",
+      "TypeName": "城市档案"
+    }, {
+      "Id": "2",
+      "TypeId": "1",
+      "linkUrl":"",
+      "TypeName": "游·景点"
+    }, {
+      "Id": "3",
+      "TypeId": "2",
+      "linkUrl":"",
+      "TypeName": "吃·美食"
+    }, {
+      "Id": "4",
+      "TypeId": "3",
+      "linkUrl":"",
+      "TypeName": "购·潮流"
+    }, {
+      "Id": "5",
+      "TypeId": "4",
+      "linkUrl":"",
+      "TypeName": "行·交通"
+    }, {
+      "Id": "6",
+      "TypeId": "5",
+      "linkUrl":"",
+      "TypeName": "旅游信息"
+    }
+  ],
+  "RecommendItinerary": [
+    {
+      "Id": "1",
+      "Title": "东京一地经典5天",
+      "AuthorName": "Li_Suming",
+      "AuthorLabel":"日本资深产品设计师",
+      "AuthorImg": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+      "Summary": "银座、新宿、浅草、上野、迪斯尼乐园；落樱、霓虹、美术馆、幽深酒巷，为这座城的独特和精致，值得玩5天。",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "DesTagsJSON": [
+        {
+          "TypeId": "0",
+          "Value": "40%"
+        }, {
+          "TypeId": "0",
+          "Value": "初次去东京顾客选择了此线路"
+        }, {
+          "TypeId": "1",
+          "Value": "4"
+        }, {
+          "TypeId": "2",
+          "Value": "34"
+        }
+      ],
+      "LabelId": "1，3，5",
+      "Duration": "2，4，6",
+      "Theme": "8，9，10"
+    }, {
+      "Id": "2",
+      "Title": "东京4天文化之旅",
+      "AuthorName": "Li_Suming",
+      "AuthorLabel":"日本资深产品设计师",
+      "AuthorImg": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+      "Summary": "不再走马观花，和日本传统文化的精髓来个亲密接触。相扑、歌妓......",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "DesTagsJSON": [
+        {
+          "TypeId": "0",
+          "Value": "体验升级"
+        }, {
+          "TypeId": "0",
+          "Value": "深度线路"
+        }, {
+          "TypeId": "1",
+          "Value": "4"
+        }, {
+          "TypeId": "2",
+          "Value": "34"
+        }
+      ],
+      "LabelId": "1，3，5",
+      "Duration": "2，4，6",
+      "Theme": "8，9，10"
+    }
+  ],
+  "TravelNotes": [
+    {
+      "Id": "1",
+      "Title": "【遨游日本】东京五日游",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "AuthorName": "AY_11285143",
+      "AuthorImg": "http://cdn-wz.xiaoyun.com/m/f/http%253A%252F%252Fbbs.aoyou.com%252Fuc_server%252Favatar.php%253Fuid%253D313342%2526size%253Dmiddle",
+      "ImgUrl": "",
+      "Views": "9988",
+      "Recommends": "68",
+      "Link": ""
+    }, {
+      "Id": "1",
+      "Title": "遨游日本3家9人日本旅行",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "AuthorName": "衣鱼911",
+      "AuthorImg": "http://cdn-wz.xiaoyun.com/m/f/http%253A%252F%252Fbbs.aoyou.com%252Fuc_server%252Favatar.php%253Fuid%253D313342%2526size%253Dmiddle",
+      "ImgUrl": "",
+      "Views": "9988",
+      "Recommends": "68",
+      "Link": ""
+    }
+  ],
+  "RecommendProducts": [
+    {
+      "ProductUrl":"",
+      "ProductId": "1",
+      "Title": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+      "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "ImgUrl": "",
+      "TypeId": "4",
+      "TypeName": "自由行",
+      "Price": "4900",
+      "SortNo": "1"
+    }, {
+      "ProductUrl":"",
+      "ProductId": "2",
+      "Title": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+      "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "ImgUrl": "",
+      "TypeId": "1",
+      "TypeName": "跟团游",
+      "Price": "4900",
+      "SortNo": "1"
+    }, {
+      "ProductId": "3",
+      "Title": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+      "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "ImgUrl": "",
+      "TypeId": "4",
+      "TypeName": "自由行",
+      "Price": "4900",
+      "SortNo": "1"
+    }, {
+      "ProductUrl":"",
+      "ProductId": "4",
+      "Title": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+      "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+      "BannerImg":"http://images1.aoyou.com/productlist/201404/0vxt6625090731.jpg",
+      "ImgUrl": "",
+      "TypeId": "4",
+      "TypeName": "自由行",
+      "Price": "4900",
+      "SortNo": "1"
+    }
+  ]
+}
+
+

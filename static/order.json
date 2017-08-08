@@ -1,0 +1,331 @@
+{
+  "OrderItems": [
+    {
+      "Source": 1,
+      "Evaluated": 0,
+      "OrderName": "日本冲绳4晚5天百变自由行【本岛中线/喜璃愈志都市度假酒店那霸/标准双床房】(狂扫海边奥莱 吃遍国际大道 可申请三年多次签证)",
+      "StartDate": "2017-01-20",
+      "EndDate": "01-26",
+      "Status": 1,
+      "Status_m": 19,
+      "StatuText": "新建",
+      "OnlinePayStatus": 2,
+      "TotalReceivable": 9999,
+      "TotalActual": -9999,
+      "OrderType": 2,
+      "OrderType_m": 4001,
+      "ProductID": 31837,
+      "ProductType": 4,
+      "MainOrderNO": "011701123573",
+      "MainOrderID": 1563629,
+      "SubOrderID": 1650261,
+      "InputDate": 1484212141,
+      "HaveVisaInfo": 0,
+      "ContractStatus": 0,
+      "DepartureDate": 0,
+      "IsCanPayOnline": 1,
+      "OrderNumber": 2,
+      "NoticeStatus": 0
+    },
+    {
+      "Source": 1,
+      "Evaluated": 0,
+      "OrderName": "日本冲绳4晚5天百变自由行【本岛中线/喜璃愈志都市度假酒店那霸/标准双床房】(狂扫海边奥莱 吃遍国际大道 可申请三年多次签证)",
+      "StartDate": "2017-01-20",
+      "EndDate": "01-26",
+      "Status": 1,
+      "Status_m": 1,
+      "StatuText": "新建",
+      "OnlinePayStatus": 2,
+      "TotalReceivable": 1111,
+      "TotalActual": -9999,
+      "OrderType": 2,
+      "OrderType_m": 3,
+      "ProductID": 31837,
+      "ProductType": 4,
+      "MainOrderNO": "011701123573",
+      "MainOrderID": 1563629,
+      "SubOrderID": 1650261,
+      "InputDate": 1484212141,
+      "HaveVisaInfo": 0,
+      "ContractStatus": 0,
+      "DepartureDate": 0,
+      "IsCanPayOnline": 1,
+      "OrderNumber": 99,
+      "NoticeStatus": 0
+    },
+    {
+      "Source": 1,
+      "Evaluated": 0,
+      "OrderName": "日本冲绳4晚5天百变自由行【本岛中线/喜璃愈志都市度假酒店那霸/标准双床房】(狂扫海边奥莱 吃遍国际大道 可申请三年多次签证)",
+      "StartDate": "2017-01-20",
+      "EndDate": "01-26",
+      "Status": 1,
+      "Status_m": 45,
+      "StatuText": "新建",
+      "OnlinePayStatus": 2,
+      "TotalReceivable": 1111,
+      "TotalActual": -9999,
+      "OrderType": 2,
+      "OrderType_m": 3001,
+      "ProductID": 31837,
+      "ProductType": 4,
+      "MainOrderNO": "011701123573",
+      "MainOrderID": 1563629,
+      "SubOrderID": 1650261,
+      "InputDate": 1484212141,
+      "HaveVisaInfo": 0,
+      "ContractStatus": 0,
+      "DepartureDate": 0,
+      "IsCanPayOnline": 1,
+      "OrderNumber": 99,
+      "NoticeStatus": 0
+    }
+  ],
+  "FreeDetails": {
+    "OrderType": 3,
+    "SubOrderType": 1,
+    "orderDetailSegments": [
+      {
+        "AirCabinName": "经济舱",
+        "AirLineCode": "CA",
+        "AirLineName": "中国国际航空公司",
+        "ArrAirPortName": "那霸机场",
+        "ArrCityName": "冲绳",
+        "ArrTime": "06:55",
+        "DepAirPortName": "首都国际",
+        "DepCityName": "北京",
+        "DepTime": "06:55",
+        "DepDate": "2017-01-20",
+        "FlightCode": "CA831",
+        "NoOfDay": 1,
+        "PlaneTypeName": "机型待定",
+        "AddDays": 0
+      },
+      {
+        "AirCabinName": "经济舱",
+        "AirLineCode": "CA",
+        "AirLineName": "中国国际航空公司",
+        "ArrAirPortName": "那霸机场",
+        "ArrCityName": "冲绳",
+        "ArrTime": "06:55",
+        "DepAirPortName": "首都国际",
+        "DepCityName": "北京",
+        "DepTime": "06:55",
+        "DepDate": "2017-01-20",
+        "FlightCode": "CA831",
+        "NoOfDay": 1,
+        "PlaneTypeName": "机型待定",
+        "AddDays": 0
+      }
+    ],
+    "OrderHotelInfos": [
+      {
+        "HomeCity": "泰国",
+        "EndDate": "2017-01-26",
+        "HotelClass": 4,
+        "HotelId": 481832,
+        "HotelName": "冲绳喜璃愈志都市度假酒店那霸",
+        "NoOfDay": [
+          1
+        ],
+        "NOOfDay_m": 2,
+        "RoomName": "标准双人间",
+        "RoomTypeId": 0,
+        "StartDate": "2017-01-26",
+        "Num": 1
+      },
+      {
+        "HomeCity": "泰国",
+        "EndDate": "2017-01-26",
+        "HotelClass": 4,
+        "HotelId": 481832,
+        "HotelName": "冲绳喜璃愈志都市度假酒店那霸",
+        "NoOfDay": [
+          1
+        ],
+        "NOOfDay_m": 2,
+        "RoomName": "标准双人间",
+        "RoomTypeId": 0,
+        "StartDate": "2017-01-26",
+        "Num": 1
+      }
+    ],
+    "CustomerId": 10306383,
+    "OrderNO": "011701123566",
+    "ProductID": 31837,
+    "DepartureDate": "2017-12-12",
+    "DepartureAddress": "北京",
+    "ReturnDate": "2017-12-12",
+    "ProductName": "日本冲绳4晚5天百变自由行【本岛中线/喜璃愈志都市度假酒店那霸/标准双床房】(狂扫海边奥莱 吃遍国际大道 可申请三年多次签证)",
+    "OrderAccount": 12398,
+    "OrderNumber": 2,
+    "OrderLinkInfo": {
+      "CustomerID": 10306383,
+      "CustomerName": "测试郭丽娟",
+      "Email": "707463404@qq.com",
+      "Mobile": "13426265644"
+    },
+    "OrderGuestViews": [
+      {
+        "Birthday": "1990-06-30",
+        "CustomIDCardTypeName": "身份证",
+        "CustomIDNO": "11111111",
+        "CustomMobile": "123123123123",
+        "CustomName": "测试郭丽娟",
+        "CustomPinYin": "Ce ShiGuoLiJuan",
+        "PassportId": "1111111",
+        "PassportTypeIdStr": "护照",
+        "SexName": "女",
+        "VisaStatuTxt": "待收取资料",
+        "ValidDate": "2021-06-06",
+        "GuestType": "在职人员"
+      },
+      {
+        "Birthday": "1990-06-30",
+        "CustomIDCardTypeName": "身份证",
+        "CustomIDNO": "11111111",
+        "CustomMobile": "123123123123",
+        "CustomName": "测试郭丽娟",
+        "CustomPinYin": "Ce ShiGuoLiJuan",
+        "PassportId": "1111111",
+        "PassportTypeIdStr": "护照",
+        "SexName": "女",
+        "VisaStatuTxt": "已收取",
+        "ValidDate": "2021-06-06",
+        "GuestType": "在职人员"
+      }
+    ],
+    "ContractStatus": 2,
+    "OrderInvoice": {
+      "StatuTxt": "已提交",
+      "Name": "发票名称",
+      "TypeTxt": "团费",
+      "PostTypeTxt": "邮寄",
+      "PostName": "张三",
+      "PostPhone": "129292383010",
+      "PostAddress": "北京市东城区王府井大街180号北京市东城区王府井大街180号"
+    },
+    "Status_m": 1,
+    "OrderType_m": 97,
+    "OrderExpressInfoView": {
+      "DeliverName": "邮寄",
+      "DeliverPhone": "13426265644",
+      "DeliverAddress": "北京市东城区王府井大街180号北京市东城区王府井大街180号"
+    }
+  },
+  "AttachItems": [
+    {
+      "OrderName": "日本冲绳4晚5天百变自由行【本岛中线/喜璃愈志都市度假酒店那霸/标准双床房】(狂扫海边奥莱 吃遍国际大道 可申请三年多次签证)",
+      "OrderType_m": 3,
+      "MainOrderNO": "011701123573"
+    },
+    {
+      "OrderName": "日本冲绳4晚5天百变自由行【本岛中线/喜璃愈志都市度假酒店那霸/标准双床房】(狂扫海边奥莱 吃遍国际大道 可申请三年多次签证)",
+      "OrderType_m": 97,
+      "MainOrderNO": "011701123573"
+    },
+    {
+      "OrderName": "日本冲绳4晚5天百变自由行【本岛中线/喜璃愈志都市度假酒店那霸/标准双床房】(狂扫海边奥莱 吃遍国际大道 可申请三年多次签证)",
+      "OrderType_m": 3001,
+      "MainOrderNO": "011701123573"
+    }
+  ],
+  "SpellPrice":{
+    "State":true,
+     "PaperInfo":[{
+            "QuestionId": "2a6800d5-7201-4d96-9cbb-a7e656c9aa77",
+            "Paper_Description": "您的打分及评价，对其他游客很重要！",
+            "Question_Title": "满意=",
+            "Question_Description": "最令您满意的地方，和大家分享吧~",
+            "IsSocre": 4,
+            "IsReplay": 1
+        },
+        {
+            "QuestionId": "95b85d21-33ce-4127-ac86-74ca4e21f625",
+            "Paper_Description": "您的打分及评价，对其他游客很重要！",
+            "Question_Title": "不满意=",
+            "Question_Description": "您还有什么不满意的地方？快点吐槽吧~",
+            "IsSocre": 0,
+            "IsReplay": 1
+     }],
+    "SF":{
+      "Title":"出游身份",
+      "ProductID":"123456789",
+      "ProductType":"1",
+      "CriuseID":"邮轮ID",
+      "CriuseCompany":"邮轮公司ID",
+      "CurrentPerson": -1,
+      "CurrentTitle":"",
+      "Infos":[
+        {"Question_Title":"独行侠","no":1},
+        {"Question_Title":"年轻夫妇/情侣","no":2},
+        {"Question_Title":"年长的夫妇","no":3},
+        {"Question_Title":"有年纪较小的孩子同行的家庭","no":4},
+        {"Question_Title":"有老人同行","no":5},
+        {"Question_Title":"有年纪较大的孩子同行的家庭","no":6},
+        {"Question_Title":"朋友团体","no":7}
+      ]
+    },
+    "DynamicQuestion":{
+        "Title":"打分评价",
+        "Desc":"评价可获得更多游币",
+        "Infos":[
+          {
+            "QuestionId": "2a6800d5-7201-4d96-9cbb-a7e656c9aa77",
+            "Question_Description_quick": [
+              ["1排合理","不浪费时间","承诺的都实现了"],
+              ["2排合理","不浪费时间","承诺的都实现了"],
+              ["3排合理","不浪费时间","承诺的都实现了"],
+              ["4排合理","不浪费时间","承诺的都实现了"],
+              ["5排合理","不浪费时间","承诺的都实现了"]
+            ],
+            "Question_Title": "行程11",
+            "IsSocre": 5
+          },{
+            "QuestionId": "95b85d221-33ce-4127-ac86-74ca4e21f625",
+            "Question_Description_quick":[  
+               ["1排合理","不浪费时间","承诺的都实现了"],
+              ["2排合理","不浪费时间","承诺的都实现了"],
+              ["3排合理","不浪费时间","承诺的都实现了"],
+              ["4排合理","不浪费时间","承诺的都实现了"],
+              ["5排合理","不浪费时间","承诺的都实现了"]
+              ],
+            "Question_Title": "餐饮22",
+            "IsSocre": 0
+          }
+        ]
+    },
+    "ST":{
+      "Title":"晒美图",
+      "Desc":"可获得更多游币奖励！",
+      "MaxNum":8,
+      "imgLists":[
+          ]
+
+    },
+    "AboutService":{
+      "Title":"关于服务",
+      "Desc":"您对本次产品预订的服务人员是否满意？",
+      "Infos":[
+        {
+          "QuestionId": "2a6800d5-7201-4d96-9cbb-a7e656c9aa77",
+          "Question_Description": "",
+          "Question_Title": "服务态度",
+          "IsSocre": 0
+        },{
+          "QuestionId": "95b85d221-33ce-4127-ac86-74ca4e21f625",
+          "Question_Description": "",
+          "Question_Title": "反馈速度",
+          "IsSocre": 0
+        },{
+          "QuestionId": "95b85d221-33ce-4127-ac86-74ca4e21f625",
+          "Question_Description": "",
+          "Question_Title": "回复内容",
+          "IsSocre": 0
+        }
+      ]
+    }
+  }
+
+}

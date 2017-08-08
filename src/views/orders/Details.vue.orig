@@ -1,0 +1,2960 @@
+<template>
+  <div class="page-wrap page-fix">
+    <x-header :left-options="{showBack: true,preventGoBack:true}" @on-click-back="pagegoback">
+      订单详情
+      <!--<a slot="right"><span class="icon-message"></span></a>-->
+    </x-header>
+    <div class="page-content" :class="{'fix-page':!(btnSwitchlen(lists.OrderStatu_m)||airbtnSwitchlen(lists.AirStatu,lists.IsCanPayOnline))}">
+      <!--解决三星浏览器定位-->
+      <div :class="{'fix-scroll':isTermsShow||isShow}">
+        <!--banner-->
+        <div class="header-banner" v-if="lists.OrderType_m!=6">
+          <img :src="lists.OrderStatu_m | wrap">
+          <div class="tip">{{ lists.OrderStatu_m | txt}}</div>
+        </div>
+        <div class="header-banner fix-banner-top" v-if="lists.OrderType_m==6?showcountdowntxt:false">
+          <!--<img :src="lists.OrderStatu_m | wrap">-->
+          <div class="tip">请在{{countdowntxt}}内完成支付,超时订单将取消</div>
+        </div>
+        <!--出行通知列表-->
+        <cell class="notice" title="出行通知" inline-desc='出行前1-2天发送，请您耐心等待' is-link='' v-if="lists.OrderStatu_m == 30"></cell>
+        <!--订单信息-->
+        <card class="fix-card">
+          <div slot="header" class="card-header">
+            <div class="title">订单号：{{lists.OrderNO}}</div>
+            <div :class="['staute']" v-if="lists.OrderStatu_m != 45">{{lists.OrderStatu_m | txt1 lists.OrderType_m  lists.AirStatuTxt }}</div>
+            <div class="img-info" v-if="lists.OrderStatu_m == 45"></div>
+          </div>
+          <div slot="content" class="card-content">
+            <span :class="['orange',{lightg:lists.OrderType_m==6,
+                        green:lists.OrderType_m==2,
+                        blue:lists.OrderType_m==3,
+                        light:lists.OrderType_m==4?true:lists.OrderType_m==8,
+                        red:lists.OrderType_m==5,
+                        brown:lists.OrderType_m==7}]">{{lists.OrderType_m | liter}}</span>
+            <div class="name" v-if="lists.OrderType_m==6">{{lists.ProductName|fordername}}</div>
+            <div class="name"  v-if="lists.OrderType_m!=6">{{lists.ProductName}}</div>
+            <div class="fix-ticket" v-if="lists.OrderType_m==6">
+                <ul class="fix-ticket-ul" v-if="!isArrowInfos">
+                    <li v-for="(index, item) in lists.AirSegments">
+                        <i class="flight-tag" v-if="lists.FlightType == '3'||lists.FlightType == '2'||lists.FlightType == '4'" :class="{'tag-blue':index == 1 && (lists.FlightType == '1'||lists.FlightType == '2')}">{{index | flightTag item.FlightFlag lists.FlightType 0}}</i>
+                        <span>
+                            {{item.DepartDate_m}}/{{item.DepartWeek | toweek}}/{{item.DepartTime}}　　
+                            <div>{{item.DepartPortName}} - {{item.ArrivalPortName}}</div>
+                        </span>
+                    </li>
+                </ul>
+              <ul class="itinerary-list" v-if="isArrowInfos">
+                <li v-for="(index, item) in lists.AirSegments" class="itinerary-item">
+                  <div class="fix-air" :class="{'fix-air-left':lists.FlightType != '3'&& lists.FlightType != '2'&& lists.FlightType != '4'}" v-if="item.AirChannel==1">国航旗舰店直销</div>
+                  <div class="itinerary-title">
+                    <p v-if="lists.FlightType == '3'||lists.FlightType == '2'||lists.FlightType == '4'" class="flight-tag-wrap">
+                      <i class="flight-tag" :class="{'tag-blue':index == 1 && (lists.FlightType == '1'||lists.FlightType == '2')}">{{index | flightTag item.FlightFlag lists.FlightType 0}}</i>
+                    </p>
+                    <p class="itinerary-city" :class="{'fix-air-city':item.AirChannel==1}">
+                        <span>{{item.DepartCityName}}</span><i class="icon-arrow-single"></i><span>{{item.ArrivalCityName}}</span>
+                    </p>
+                    <p class="itinerary-hour"><i class="icon-hour"></i><span>{{item.Durationhours>0?item.Durationhours+"h":""}}{{item.Durationminute+"m"}}</span></p>
+                  </div>
+                  <div class="itinerary-content">
+                    <!--行程起点-->
+                    <div class="itinerary-start">
+                      <div class="itinerary-cell-item">
+                        <div class="item-before">
+                            <p class="flight-time">{{item.DepartTime}}</p>
+                            <p class="flight-date">{{item.DepartDate_m}}/周{{item.DepartWeek | toweek}}</p>
+                            <p class="flight-hour" v-if="item.StopNumber >0">
+                                <i class="icon-hour"></i>
+                                <span>{{item.AirSegmentStopInfos[0].ArriveDurationTime}}</span>
+                            </p>
+                        </div>
+                        <div class="item-media"><i class="icon-dot-ring"></i></div>
+                        <div class="item-inner">
+                          <p class="flight-airport">{{item.DepartPortName}}{{item.DepartAirportTerm}}</p>
+                          <p class="flight-info" >
+                              <i class="flight-icon" :class="'icon-'+item.AirLineCode"></i>
+                                <span>{{item.AirLineName}} {{item.FlightCode}}</span>
+                          </p>
+                          <p class="flight-info" v-if="item.IsCodeShare==1">
+                            <i class="icon-flight-share"></i><em>实际乘坐</em><i class="flight-icon" :class="'icon-'+item.shareAirportIcon"></i><span>{{item.ShareAirLineName}}{{item.ShareFlightCode}}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <!--行程经停／中转-->
+                    <ul class="itinerary-group">
+                      <li v-for="subItem in item.AirSegmentStopInfos">
+                        <div class="itinerary-cell">
+                          <div class="itinerary-cell-item"><!--抵达经停或中转地-->
+                            <div class="item-before"><p class="flight-time">{{subItem.ArriveTime}}</p><p class="flight-date">{{subItem.ArriveDate_m}}/周{{subItem.ArriveWeek|toweek}}</p></div>
+                            <div class="item-media"><i class="icon-dot-round"></i></div>
+                            <div class="item-inner">
+                              <p class="flight-airport">{{subItem.ArriveAirportName}}</p>
+                            </div>
+                          </div>
+                          <div class="itinerary-cell-item itinerary-port"><!--经停或中转 图标-->
+                            <div class="item-before"></div>
+                            <div class="item-media"><i :class="{'icon-dot-stop':item.StopNumber >0,'icon-dot-transfer': item.StopNumber == 0}"></i></div>
+                            <div class="item-inner">
+                              <p class="stop-city">{{subItem.ArriveCityName}}</p>
+                              <p class="flight-hour"><i class="icon-hour"></i><span :class="{'font-green': item.StopNumber >0,'font-red': item.StopNumber == 0}">{{subItem.StopTime}}</span></p>
+                            </div>
+                          </div>
+                          <div class="itinerary-cell-item"><!--离开经停或中转地-->
+                            <div class="item-before"><p class="flight-time">{{subItem.LeaveTime}}</p>
+                                <p class="flight-date">{{subItem.LeaveDate_m}}/周{{subItem.LeaveWeek|toweek}}</p>
+                                <p class="flight-hour"><i class="icon-hour"></i><span>{{subItem.LeaveDurationTime}}</span>
+                                </p>
+                            </div>
+                            <div class="item-media"><i class="icon-dot-round"></i></div>
+                            <div class="item-inner">
+                              <p class="flight-airport">{{subItem.ArriveAirportName}}</p>
+                              <p class="flight-info"><i class="flight-icon" :class="'icon-'+item.AirLineCode"></i><span>{{subItem.CarrierName}} {{subItem.FlightCode}}</span></p>
+                              <p class="flight-info" v-if="item.IsCodeShare==1"><i class="flight-icon" :class="'icon-'+subItem.shareAirportIcon"></i><em>实际乘坐</em><i class="icon-airline" ></i><span>{{subItem.ShareAirLineName}} {{subItem.ShareFlightCode}}</span></p>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                    <!--行程终点-->
+                    <div class="itinerary-end">
+                      <div class="itinerary-cell-item">
+                        <div class="item-before"><p class="flight-time">{{item.ArrivalTime}}</p><p class="flight-date">{{item.ArrivalDate_m}}/周{{item.DepartWeek | toweek}}</p></div>
+                        <div class="item-media"><i class="icon-dot-ring"></i></div>
+                        <div class="item-inner">
+                          <p class="flight-airport">{{item.ArrivalPortName}}{{item.ArrivalAirportTerm}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              
+            </div>
+            <div class="fix-height">
+              <div class="date" v-if="lists.OrderType_m!=6">时间：{{lists.DepartureDate}} 至 {{lists.ReturnDate}}   {{lists.IsWifi==0?lists.DepartureAddress:""}}{{lists.IsWifi==0?"出发":""}}</div>
+              <div class="date"  v-if="lists.OrderType_m==6">人数：{{lists.TotalCount|airnumber}}{{lists.ChdTotalCount|airchdnumber}}</div>
+              <div class="date"  v-if="lists.OrderType_m!=4?lists.OrderType_m!=8?lists.OrderType_m!=6:false:false">人数：{{lists.OrderNumText_m}}</div>
+              <div class="date"  v-if="lists.OrderType_m==2?lists.JourneyDec:false">行程：{{lists.JourneyDec}}</div>
+           </div>
+            <div v-if="lists.OrderBookingFrees">
+              <div class="date" v-for="item in lists.OrderBookingFrees"><span v-if="item.FeeType==3">房型：{{item.bizName}}</span></div>
+              <div class="date" v-for="item in lists.OrderBookingFrees"><span v-if="item.FeeType!=3?item.IsMustSelected==1:false">必选服务：{{item.bizName}}</span></div>
+              <div class="date" v-for="item in lists.OrderBookingFrees"><span v-if="item.FeeType!=3?item.IsMustSelected==0:false">可选服务：{{item.bizName}}</span></div>
+            </div>
+            <div class="price price-right">
+              <h2>￥{{lists.OrderMoney>0?lists.OrderMoney:0}}</h2>
+              <h3 @click="isShow = !isShow">费用明细</h3>
+            </div>
+            <!--费用明细 START-->
+            <!--<div class="price-detail-box"v-if="isShowTip">
+              <ul>
+                  <li v-if="lists.TotalCount > 0">
+                      <p class="price-item">
+                          <span class="price-label">成人票</span>
+                          <span class="price-value">¥{{lists.TotalUnit}} x {{lists.TotalCount}}</span>
+                      </p>
+                  </li>
+                  <li v-if="lists.TotalCount > 0">
+                      <p class="price-item">
+                          <span class="price-label">机建费+燃油(成人)</span>
+                          <span class="price-value">¥{{lists.TotalPortAndFuel}} x {{lists.TotalCount}}</span>
+                      </p>
+                  </li>
+                  <li v-if="lists.ChdTotalCount > 0">
+                      <p class="price-item">
+                          <span class="price-label">儿童票</span>
+                          <span class="price-value">¥{{lists.ChdTotalUnit}} x {{lists.ChdTotalCount}}</span>
+                      </p>
+                  </li>
+                  <li v-if="lists.ChdTotalCount > 0">
+                      <p class="price-item">
+                          <span class="price-label">机建费+燃油(儿童)</span>
+                          <span class="price-value">¥{{lists.ChdTotalPortAndFuel}} x {{lists.ChdTotalCount}}</span>
+                      </p>
+                  </li>  
+                  <li v-for="pre in preferentialsother">
+                      <p class="price-item">
+                          <span class="price-label">{{pre.key}}</span>
+                          <span class="price-value">-{{pre.value}}</span>
+                      </p>
+                  </li>
+              </ul>
+              <div class="price-total">
+                  <p class="price-item">
+                      <span class="price-label">总额</span>
+                      <span class="price-value">¥ {{lists.OrderMoney}}</span>
+                  </p>
+              </div>
+            </div>-->
+            <!--费用明细 END-->
+          </div>
+          <div slot="footer" class="card-footer" v-if="lists.OrderType_m==1||6==lists.OrderType_m">
+            <div class="more" v-if="isArrowInfos&&1==lists.OrderType_m" >
+              <!--机票列表-->
+              <div class="ticket" v-if="lists.OrderDetailSegments">
+                <h2>机票信息</h2>
+                <div class="ticket-wrap" v-for="item in lists.OrderDetailSegments">
+                  <p class="date">{{($index > (lists.OrderDetailSegments.length)/2-1) ? '回程' : '去程'}}：{{item.DepDate}}  {{item.DepCityName}} - {{item.ArrCityName}}</p>
+                  <p class="plane">{{item.AirLineName}}{{item.FlightCode}}   {{item.AirCabinName}}</p>
+                  <div class="airport">
+                    <div class="item">
+                      <h4>{{item.DepTime}}</h4>
+                      <p>{{item.DepAirPortName}}</p>
+                    </div>
+                    <div class="item">
+                      <em></em>
+                    </div>
+                    <div class="item">
+                      <h4>{{item.ArrTime}}</h4>
+                      <p>{{item.ArrAirPortName}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--酒店列表-->
+              <div class="hotel" v-if="lists.OrderHotelInfos">
+                <h2>酒店信息</h2>
+                <div class="hotel-wrap" v-for="item in lists.OrderHotelInfos">
+                  <h4>{{item.HomeCity}}（入住{{item.NOOfDay_m}}晚）</h4>
+                  <p class="date">入住{{item.StartDate}}　　　离开{{item.EndDate}}</p>
+                  <p class="hotel-name">{{item.HotelName}}</p>
+                  <p class="room">{{item.RoomName}}　　{{item.Num}}间　　含餐</p>
+                </div>
+              </div>
+            </div>
+            <div @click="showInfo">
+              <div :class="['arrow-down',{up:isArrowInfos}]"></div>
+            </div>
+          </div>
+          
+        </card>
+        <!--推荐列表-->
+        <!--<cell title="日本Wifi，接送机，门票等……日本Wifi，接送机，门票等……" is-link>
+                    <img slot="icon" width="25" height="13" style="display:block;margin-right:5px;margin-top: 3px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAaCAYAAAD1wA/qAAAAAXNSR0IArs4c6QAABYdJREFUWAnVmHuQzlUYxz+7605JosgtrRiDTBmhYpqaKJKMyhRNEiaVa4lqmJKSlEsXUZLWMJHcbxlNoYaNKVK7oSYGuS6x7mt/Pd/3+O37ey+/dtf0R/vMvu+e8zzn9n2u5z0pnhFHD0LGG/BrJuQcoETQlVdD45bQYzio7eUc8Ly+rT1vwYdepC1kJYF07oVTPa9PK887st9L8SYN8qjTCLr0KxGGSDjkommwK4vUiDu1eyBBXsDIz4f1S2DnlgJWQWP7j3Bob0G32A3N/zMrcZrW/GMbXMhLlMVz2naJhERqJCaqVI8XR/upqTDtZVi7MMrzW9LGS91cbA3rDHt/9yVF+//Fe7Dys8SxW9bBOPOQFNu7MNLZLa5LFTYuIr+8CtRpGDv02CH4aS2MyoD6TaHmddZ+BF6ZDddeHztWPVn07GkoXwnSbNvUNMi/4MbFKyD3byhdFvaZYi7YGFlGc9Vu0ipxbeMUDUiZcomTl34CTVvDDTc52YB34PXeMN+0PGBC4nhZb4eBKVfBdhUQ+xw2F9qdneheucdAipo81IEV4DOnoMJlMH5Z4trGCQeyeg4c+QvKlodTJ5z2c/ZDw5uhem1YPhMefNYO8lt04W7POE2KJy1qbs36Tj70/eg4vzVxEFxVA5q3hRr1oKq1ResWwZcfmHstdv0ifIcDOZ0Lx3PcYXyNqC8TTx8Feefgm/mw+Wu3zcE97vA6kJWmiNsI9OMWX2HUpqOz0JThDvCI6WYpiwu5ZruuYbOS8sOBdO4TnZD1A7TqAHd1hxmjIXuTM/PDg0GHEc0cA0fNHQZNdP347z07zHrbzWJlnNVKlQbFXvZmOGGu1LHXxcwoJVimbHAjbP3OKUdKO28fAaxrpSIJhQNJMphzZ6FaTeg1EuTzxaFfNro5ijeBUMCft/X27HRxtmCKsyQGxP4iFvUMkAJcIM6dgfaP/kdApJn05tDIXEZAtq43bR51cHZlu1hameEOoY079DTXqejk7XvYQewTpPH9TfO23lNjg9xLahfdIhtWwJy34Q6rGwIiOmVx5APRwaU5xZFcQ/18qTaEVD8E/q2lLpFo/bKW0dLSXGr24yzvvItLubCSQgiFA9EC8t/vbSOZP918dthUy1oX060WbH2Pfe51S5887mLkoYEhWwXYG1fBpxZTAye4YJfVlAmVmlVfUlLcYAFd8zncYvF5RbXAAonNcCBjn4RtG+D2+0HV87b7YkFoLWmtuKTUOvVFFyeqCyJZ2Ley48CyGZC52sBa8vATii9L8j8cSPehLvXWbgDDuySZaqxZb4KCVKSfArLi850cQAXymPlQqbKTK23PHg+rZsHT41ydkEQ/G2QJ3xribVoDSz6G1+bCNXXFsYJ4EnLN6qo7SSgcSHqzJMPjWF37Q4s7HXPuJKvGh6Hv6CgQX+MaMeNVc9PlMORdaHl3FMjox6J3NGUyxYhiKz8PnrO4ULwpyYhUYDN+du2473AgcQOTdnVQ33e1iVKr34+foJTdqTfUSo+VvGDZT3PLW5zofiUwmV/B4o/MIvOiQE6bRRSHIXTpQORGxSEdNghC8aWP7zoxa10MdvFU6aUgfSpXjRkV7IQD0SVNfp5mxUv+ryIWJMnmTXY+L/6B3S5GRnZ3B9RdS2DD7kuS+S4TXDfSNoDFpHAguqEO6WA31H0uEFW4giQzd3wCmt0a5Lq27maRimxgw0iKUh0K0rcL3H5Zmc4CQVkh7X8BYneiwaZxXRPqNY5dWFeVRi3samHg6jcpZIswsWldYIJU8XJYYbfq6rWgc9+gpPC2169NyXp0iH8Y0SOEYUiNPKkk+xlbuA7+HyPkjnoW0lNK5ElFTytCV1JIZ9UTlp6yrJ2ic0eq66yxJfOBrueIyBXqHyN8JQaitqi6AAAAAElFTkSuQmCC">
+                </cell>-->
+        <!--详情列表-->
+        <div class="section-bottom" v-if="lists.OrderType_m==6" @click="isTermsShow = true">
+          <span class="ay-note-blue">退改签规则</span>
+        </div>
+        <section class="card-section">
+          <!--联系人列表-->
+          <ul class="pay-info">
+            <li>
+              <div class="wrap">
+                <div class="left">联系人</div>
+                <div class="right" v-if="lists.OrderLinkInfo">{{lists.OrderLinkInfo.CustomerName}}</div>
+              </div>
+              <div class="wrap">
+                <div class="left">联系方式</div>
+                <div class="right" v-if="lists.OrderLinkInfo">{{lists.OrderLinkInfo.Mobile}}</div>
+              </div>
+              <div class="wrap">
+                <div class="left">邮箱</div>
+                <div class="right" v-if="lists.OrderLinkInfo">{{lists.OrderLinkInfo.Email}}</div>
+              </div>
+            </li>
+          </ul>
+          <section v-if="lists.OrderType_m!=97&&((lists.OrderGuestViews?lists.OrderGuestViews.length>0:false)||(lists.AirOrderGuestViews?lists.AirOrderGuestViews.length>0:false))">
+            <!--出行人缩略信息-->
+            <div class="card-person" v-if="!isShowPerson">
+              <ul class="pay-info fix-person" v-if="lists.OrderType_m!=6">
+                <li>
+                  <div class="wrap" v-for="item in lists.OrderGuestViews">
+                    <div class="item">出行人{{$index+1}}</div>
+                    <div class="item">{{item.CustomName}}</div>
+                    <div class="item" v-if="item.VisaStatuTxt">签证状态</div>
+                    <div class="item" v-if="item.VisaStatuTxt">{{item.VisaStatuTxt}}</div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="pay-info fix-person" v-if="lists.OrderType_m==6">
+                <li>
+                  <div class="wrap" v-for="item in lists.AirOrderGuestViews">
+                    <div class="item">出行人</div>
+                    <div class="item">{{item.CustomName}}</div>
+                  </div>
+                </li>
+              </ul>
+              <div class="arrow-down" @click="isShowPerson = true"></div>
+            </div>
+            <!--出行人详细信息-->
+            <div class="card-person-detail" v-if="isShowPerson?lists.OrderType_m!=7:false">
+              <ul v-if="lists.OrderType_m!=6">
+                <li v-for="item in lists.OrderGuestViews">
+                  <div class="wrap">
+                    <div class="item">出行人{{$index+1}}</div>
+                    <div class="item">{{item.CustomName}} {{item.CustomPinYin!=''?'-':''}} {{item.CustomPinYin}}</div>
+                  </div>
+                  <div class="wrap" v-if="item.CustomIDNO!=''">
+                    <div class="item">证件类型</div>
+                    <div class="item">{{(item.CustomIDCardTypeName==''||item.CustomIDCardTypeName==null)?'其他':item.CustomIDCardTypeName}} - {{item.CustomIDNO}}</div>
+                  </div>
+                  <div class="wrap" v-if="item.SexName">
+                    <div class="item">性别</div>
+                    <div class="item">{{item.SexName}}</div>
+                  </div>
+                  <div class="wrap" v-if="item.Birthday!=''">
+                    <div class="item">出生日期</div>
+                    <div class="item">{{item.Birthday}}</div>
+                  </div>
+                  <div class="wrap" v-if="item.PassportId">
+                    <div class="item">旅游证件</div>
+                    <div class="item">{{item.PassportId}}</div>
+                  </div>
+                  <div class="wrap" v-if="item.ValidDate">
+                    <div class="item">有效期</div>
+                    <div class="item">{{item.ValidDate}}</div>
+                  </div>
+                  <div class="wrap" v-if="item.CustomMobile!=''">
+                    <div class="item">联系电话</div>
+                    <div class="item">{{item.CustomMobile}}</div>
+                  </div>
+                  <div class="wrap" v-if="item.VisaStatuTxt">
+                    <div class="item">签证状态</div>
+                    <div class="item">{{item.VisaStatuTxt}}</div>
+                  </div>
+                </li>
+              </ul>
+              <ul v-if="lists.OrderType_m==6">
+                <li v-for="item in lists.AirOrderGuestViews">
+                  <div class="wrap">
+                    <div class="item">出行人</div>
+                    <div class="item">{{item.CustomName}}</div>
+                  </div>
+                  <div class="wrap">
+                    <div class="item">姓名拼音</div>
+                    <div class="item">{{item.CustomPinYin}}</div>
+                  </div>
+                  <div class="wrap">
+                    <div class="item">证件类型</div>
+                    <div class="item">{{(item.CustomIDCardTypeName==''||item.CustomIDCardTypeName==null)?'其他':item.CustomIDCardTypeName}}</div>
+                  </div>
+                  <div class="wrap">
+                    <div class="item">证件号</div>
+                    <div class="item">{{item.CustomIDNO}}</div>
+                  </div>
+                  <div class="wrap" v-if="item.CustomMobile">
+                    <div class="item">手机号</div>
+                    <div class="item">{{item.CustomMobile}}</div>
+                  </div>
+                  <div class="wrap" v-for="ps in item.PassengerSegments">
+                    <div class="item">票号{{lists.FlightType | ftickeno ps.FlightFlag}}</div>
+                    <div class="item">{{ps.Ticket_NO}}</div>
+                  </div>
+                </li>
+              </ul>
+              <div class="fix-bottom" @click="isShowPerson = false">
+                  <div class="arrow-down up"></div>
+              </div>
+            </div>
+          </section>
+          <!--签证列表-->
+          <section class="visa-wrap" v-if="isShowPerson?(lists.OrderType_m==7&&lists.OrderGuestViews.length>0):false">
+            <ul class="pay-info">
+              <li v-for="item in lists.OrderGuestViews">
+                <div class="wrap">
+                  <div class="item">办签人{{$index+1}}</div>
+                  <div class="item" v-if="item.CustomName!=''">{{item.CustomName}}</div>
+                  <div class="item" v-if="item.VisaStatuTxt">签证状态</div>
+                  <div class="item" v-if="item.VisaStatuTxt">{{item.VisaStatuTxt}}</div>
+                </div>
+                <div class="wrap">
+                  <div class="item">人员类型</div>
+                  <div class="item" v-if="item.GuestType!=''">{{item.GuestType}}</div>
+                </div>
+              </li>
+            </ul>
+            <ul class="pay-info fix-pay-info">
+              <li>
+                <div class="wrap">
+                  <div class="left">提取方式</div>
+                  <div class="right" >{{lists.Visa_isDeliver==1?'配送':'自取'}}</div>
+                </div>
+                <div class="wrap">
+                  <div class="left">配送地址</div>
+                  <div class="right" v-if="lists.OrderExpressInfoView">{{lists.OrderExpressInfoView.DeliverAddress}}</div>
+                </div>
+              </li>
+            </ul>
+          </section>
+          <!--合同列表-->
+          <div class="contract" v-if="lists.OrderType_m!=6">
+            <div class="contract-wrap">
+              <div class="item">合同信息</div>
+              <div class="item">{{lists.ContractStatus | contract}}</div>
+            </div>
+          </div>
+          <section v-if="lists.OrderType_m!=97&lists.OrderInvoice!=null?lists.OrderInvoice.StatuTxt!='':false">
+            <!--发票缩略信息-->
+            <section class="card-person" v-if="!isShowInvoice">
+              <div class="contract">
+                <div class="contract-wrap">
+                  <div class="item">发票信息</div>
+                  <div class="item" v-if="lists.OrderInvoice">{{lists.OrderInvoice.StatuTxt}}</div>
+                </div>
+              </div>
+              <div class="arrow-down" @click="isShowInvoice = true"></div>
+            </section>
+            <!--发票详细信息-->
+            <div class="card-person-detail" v-if="isShowInvoice">
+              <ul>
+                <li v-if="lists.OrderInvoice">
+                  <div class="wrap">
+                    <div class="item">发票抬头</div>
+                    <div class="item">{{lists.OrderInvoice.Name}}</div>
+                  </div>
+                  <div class="wrap">
+                    <div class="item">发票类别</div>
+                    <div class="item">{{lists.OrderInvoice.TypeTxt}}</div>
+                  </div>
+                  <div class="wrap">
+                    <div class="item">提取方式</div>
+                    <div class="item">{{lists.OrderInvoice.PostTypeTxt}}</div>
+                  </div>
+                  <div class="wrap">
+                    <div class="item">收件人</div>
+                    <div class="item">{{lists.OrderInvoice.PostName}}</div>
+                  </div>
+                  <div class="wrap">
+                    <div class="item">联系电话</div>
+                    <div class="item">{{lists.OrderInvoice.PostPhone}}</div>
+                  </div>
+                  <div class="wrap">
+                    <div class="item">配送地址</div>
+                    <div class="item">{{lists.OrderInvoice.PostAddress}}</div>
+                  </div>
+                </li>
+              </ul>
+                <div class="fix-bottom" @click="isShowInvoice = false">
+                    <div class="arrow-down up"></div>
+                </div>
+            </div>
+          </section>
+          <section v-if="lists.OrderType_m==6">
+              <!--报销凭证缩略信息-->
+              <section class="card-person">
+                  <div class="contract">
+                      <div class="contract-wrap">
+                          <div class="item">报销凭证</div>
+                          <div class="item" v-if="lists.DeliverInvoice&&lists.DeliverInvoice.PostType>0">需要报销凭证</div>
+                          <div class="item" v-if="(!lists.DeliverInvoice||lists.DeliverInvoice.PostType==0)&&!lists.allac">不需要报销凭证</div>
+                          <div class="item" v-if="(!lists.DeliverInvoice||lists.DeliverInvoice.PostType==0)&&lists.allac">自行打印或索取</div>                  
+                      </div>
+                  </div>
+                  <div class="arrow-down"  v-if="((lists.DeliverInvoice&&lists.DeliverInvoice.PostType != 0)||lists.allac)&&!isShowExpense" @click="isShowExpense = true"></div>
+              </section>
+              <!--报销凭证详细信息-->
+              <div class="card-person-detail" v-if="isShowExpense">
+                  <ul>
+                      <li>
+                          <div class="flight-Expense">
+                                <div  v-if="acairsegments.length > 0">                                
+                                    <p class="flight-info">您预订的以下航班，如需要行程单，您需要在机场自行打印或致电国航客服电话95583索取。</p>             
+                                    <div v-for="(index,item) in acairsegments">
+                                            <p class="flight-cell" >
+                                                <i v-if="4==lists.FlightType || 2==lists.FlightType" :class="{'tag-blue':2==lists.FlightType&&item.No==2}">{{item.No | typesel}}</i>
+                                                {{item.DepartCityName}}<b></b>{{item.ArrivalCityName}}</p>
+                                            <p class="flight-sub-cell">{{item.AirLineShortName}} {{item.FlightCode}} {{item.BasicCabinCodeName}}</p>       
+                                    </div>  
+                                </div>
+                                <div  v-if="0!=lists.DeliverInvoice.PostType&&airsegments.length > 0">
+                                    <p class="flight-info" >您预订的以下航班行程单，我们将为您快递。</p>
+                                    <div v-for="(index,item) in airsegments">  
+                                            <p class="flight-cell"> 
+                                                <i v-if="4==lists.FlightType || 2==lists.FlightType" :class="{'tag-blue':2==lists.FlightType&&item.No==2}">{{item.No | typesel}}</i>
+                                                {{item.DepartCityName}}<b></b>{{item.ArrivalCityName}}</p>
+                                            <p class="flight-sub-cell">{{item.AirLineShortName}} {{item.FlightCode}} {{item.BasicCabinCodeName}}</p>
+                                    </div>
+                                </div>
+                          </div>
+                          <div  v-if="0!=lists.DeliverInvoice.PostType &&lists.ChannelCount > 0">
+                                <div class="wrap">
+                                    <div class="item">报销清单</div>
+                                    <div class="item">机票行程单</div>
+                                </div>
+                                <div class="wrap" v-if="lists.DeliverInvoice.PostTypeTxt">
+                                    <div class="item">配送方式</div>
+                                    <div class="item">{{lists.DeliverInvoice.PostTypeTxt}}</div>
+                                </div>
+                                <div class="wrap">
+                                    <div class="item">联系人</div>
+                                    <div class="item">{{lists.DeliverInvoice.PostName}}</div>
+                                </div>
+                                <div class="wrap">
+                                    <div class="item">联系电话</div>
+                                    <div class="item">{{lists.DeliverInvoice.PostPhone}}</div>
+                                </div>
+                                <div class="wrap">
+                                    <div class="item">邮寄地址</div>
+                                    <div class="item">{{lists.DeliverInvoice.PostAddress}}</div>
+                                </div>
+                                <div class="wrap">
+                                    <div class="item">邮编</div>
+                                    <div class="item">{{lists.DeliverInvoice.PostCode}}</div>
+                                </div>
+                          </div>
+                      </li>
+                  </ul>
+                  <div class="fix-bottom" @click="isShowExpense = false">
+                      <div class="arrow-down up"></div>
+                  </div>
+              </div>
+          </section>
+          <section>
+            <!--优惠信息缩略信息-->
+            <section class="card-person" v-if="!isShowPreferential?preferentials.length>0:false">
+                <div class="contract fix-Preferential">
+                    <div class="contract-wrap">
+                        <div class="item">优惠信息</div>
+                        <div class="item">
+                            <p>{{preferentials[0]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="arrow-down" v-if="preferentials.length>1" @click="isShowPreferential = true"></div>
+            </section>
+            <!--优惠信息详细信息-->
+            <div class="card-person-detail" v-if="isShowPreferential?preferentials.length>1:false">
+              <ul>
+                  <li>
+                      <div class="wrap">
+                          <div class="item">优惠信息</div>
+                          <div class="item" v-for="p in preferentials">
+                              <p>{{p}}}</p>      
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+              <div class="fix-bottom" @click="isShowPreferential = false">
+                  <div class="arrow-down up"></div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+    <!--底部 按钮-->
+    <div class="tabbar" v-if="btnSwitchlen(lists.OrderStatu_m)||airbtnSwitchlen(lists.AirStatu,lists.IsCanPayOnline)">
+      <div v-if="lists.OrderStatu_m != 45&&lists.OrderType_m!=6">
+        <span v-if="lists.NoticeStatus==1"
+        @click="tap('出行通知',lists.OrderNO,lists.ProductID,lists.OrderType_m,lists.OrderID,lists.OrderType,lists.ProductType,lists.SubOrderID,lists.SubOrderType,lists.OrderNumber,lists.SubProductType,lists.CruiseID,lists.CruiseCompanyID,lists.CruiseRouteID)">出行通知</span>
+        <span v-for="item in lists.OrderStatu_m | btnSwitch"
+        @click="tap(item,lists.OrderNO,lists.ProductID,lists.OrderType_m,lists.OrderID,lists.OrderType,lists.ProductType,lists.SubOrderID,lists.SubOrderType,lists.OrderNumber,lists.SubProductType,lists.CruiseID,lists.CruiseCompanyID,lists.CruiseRouteID)">{{item}}</span>
+      </div>
+      <div v-if="lists.OrderType_m==6">
+        <span v-for="item in lists.AirStatu | airbtnSwitch lists.IsCanPayOnline"
+        @click="tap(item,lists.OrderNO,lists.ProductID,lists.OrderType_m,lists.OrderID,lists.OrderType,lists.ProductType,lists.SubOrderID,lists.SubOrderType,lists.OrderNumber,lists.SubProductType,lists.CruiseID,lists.CruiseCompanyID,lists.CruiseRouteID)">{{item}}</span>
+      </div>
+      <p class="tabbar-info" v-if="lists.OrderStatu_m == 45">感谢您对我们的评价</p>
+    </div>
+    <!--弹出组件-->
+    <popup :show.sync="isShow">
+      <div class="popup">
+        <div class="closed" @click="isShow = false"></div>
+        <ul class="popup-list" v-if="lists.OrderType_m!=6">
+          <li v-if="!lists.OrderAccount>0?!lists.DiscoutAmount>0:false">
+            <div>
+              <div class="title">暂时没有支付信息</div>
+              <div class="price">￥{{lists.OrderMoney}}</div>
+            </div>
+          </li>
+          <li v-if="lists.DiscoutAmount>0">
+            <div>
+              <div class="title">优惠</div>
+              <div class="price">￥{{lists.DiscoutAmount}}</div>
+            </div>
+            <div class="sub" v-for="item in lists.OrderPreferentialDetails">
+              <div class="subtitle">{{item.Preferential_Name}}</div>
+              <div class="subprice">￥{{item.Preferential_Amount}}</div>
+            </div>
+          </li>
+          <li v-if="lists.OrderAccount>0">
+            <div>
+              <div class="title">在线支付</div>
+              <div class="price">￥{{lists.OrderAccount}}</div>
+            </div>
+            <div class="sub" v-for="item in lists.OrderAccountDetails">
+              <div class="subtitle">{{item.PayTypeID | paytypetxt}}</div>
+              <div class="subprice">￥{{item.SubTotal}}</div>
+            </div>
+          </li>
+        </ul>
+        <ul class="popup-list" v-if="lists.OrderType_m==6">
+          <li v-for="(index,item) in lists.AirSegments">
+            <div>
+              <div class="title" v-if="1==lists.FlightType">单程{{lists.TotalCount>0?(lists.ChdTotalCount>0?"(成人 儿童)":"(成人)"):""}}</div>
+              <div class="title" v-if="2==lists.FlightType&&1==item.FlightFlag">去程{{lists.TotalCount>0?(lists.ChdTotalCount>0?"(成人 儿童)":"(成人)"):""}}</div>
+              <div class="title" v-if="2==lists.FlightType&&2==item.FlightFlag">返程{{lists.TotalCount>0?(lists.ChdTotalCount>0?"(成人 儿童)":"(成人)"):""}}</div>
+              <div class="title" v-if="4==lists.FlightType">第{{index+1}}程{{lists.TotalCount>0?(lists.ChdTotalCount>0?"(成人 儿童)":"(成人)"):""}}</div>
+              <div class="price">¥{{(item.UnitPrice+item.FuelFee+item.AirportFee)*lists.TotalCount+(item.ChdUnitPrice+item.ChdFuelFee+item.ChdAirportTax)*lists.ChdTotalCount}}</div>
+            </div>
+            <div class="sub" v-if="lists.TotalCount>0">
+              <div class="subtitle">成人票</div>
+              <div class="subprice">￥{{item.UnitPrice}} x {{lists.TotalCount}}</div>
+            </div>
+            <div class="sub" v-if="lists.TotalCount>0">
+              <div class="subtitle">机建+燃油</div>
+              <div class="subprice">￥{{item.FuelFee+item.AirportFee}} x {{lists.TotalCount}}</div>
+            </div>
+            <div class="sub" v-if="lists.ChdTotalCount>0">
+              <div class="subtitle">儿童票</div>
+              <div class="subprice">￥{{item.ChdUnitPrice}} x {{lists.ChdTotalCount}}</div>
+            </div>
+            <div class="sub" v-if="lists.ChdTotalCount>0">
+              <div class="subtitle">机建+燃油</div>
+              <div class="subprice">￥{{item.ChdFuelFee+item.ChdAirportTax}} x {{lists.ChdTotalCount}}</div>
+            </div>
+          </li>
+          <!--<li v-if="lists.TotalCount>0">
+            <div>
+              <div class="title">机建费+燃油(成人)</div>
+              <div class="price">¥{{lists.TotalPortAndFuel}} x {{lists.TotalCount}}</div>
+            </div>
+          </li>
+ <li v-if="lists.ChdTotalCount>0">
+            <div>
+              <div class="title">儿童票</div>
+              <div class="price">¥{{lists.ChdTotalUnit}} x {{lists.ChdTotalCount}}</div>
+            </div>
+          </li>
+          <li v-if="lists.ChdTotalCount>0">
+            <div>
+              <div class="title">机建费+燃油(儿童)</div>
+              <div class="price">¥{{lists.ChdTotalPortAndFuel}} x {{lists.ChdTotalCount}}</div>
+            </div>
+          </li>   -->
+          <li v-for="pre in preferentialsother">
+            <div>
+              <div class="title">{{pre.key}}</div>
+              <div class="price">-{{pre.value}}</div>
+            </div>
+          </li>    
+        </ul>
+        <div class="totle-price" v-if="lists.OrderType_m!=6">
+          <span>待支付</span><em>¥ </em>{{(lists.OrderMoney-lists.OrderAccount-lists.DiscoutAmount)>0?(lists.OrderMoney-lists.OrderAccount-lists.DiscoutAmount):0}}
+        </div>
+         <div class="totle-price" v-if="lists.OrderType_m==6">
+          <span>总额</span><em>¥ </em>{{totalmoney}}
+        </div>
+      </div>
+    </popup>
+    <confirm class="fix-confirm" :show.sync="showConfirm" title="提示信息" @on-confirm="onConfirm">
+      <p class="text_center">请确定是否要进行这个操作?</p>
+    </confirm>
+    <alert class="successdialog" :show.sync="showCancelToast" title=" " @on-hide="alerthide" button-text="确认">取消成功</alert>
+
+    <!--弹出层 退改签规则 START-->
+    <div class="dialog-wrap" v-show="isTermsShow">
+      <div class="mask" @click="hideTerms" @touchMove.prevent="" transition="ay-fade"></div>
+      <div class="dialog-box" transition="ay-fade">
+          <div class="dialog-title">{{termsTitle}}</div>
+          <div v-if="showTerms" v-show="termsTitle == '退改签规则'" class="dialog-content">
+              <div class="terms-itinerary" v-for="(index, item) in lists.AirSegments">
+                  <p class="itinerary-title">
+                      <span ></span>{{index | flightTag item.FlightFlag lists.FlightType 1}}程</p>
+                  <p v-show="false">航班离站时间4小时前（含），退票损失50%，航班离站时间4小时以内以及飞后，退票损失100%；变更：航班离站时间4小时前（含），变更损失30%，航班离站时间4小时以内以及飞后，签转损失50%；*具体的退改签政策以航空公司为准、退改签的损失费（如有）。按照票面价的一定比例收取。<br><br>
+                      详细退改签信息可电话咨询：400-600-6666</p>
+                  <ul v-show="true">
+                      <li>
+                          <b>退票费</b>
+                          <p  v-for="refundItem in item.SegmentRules" v-html="refundItem.RuleDesc">
+                            {{refundItem.RuleDesc}}
+                            </p>
+                      </li>
+                      <!--<li>
+                          <b>改签费</b>
+                          <p  v-for="changeRules in item.ChangeRules">
+                              {{changeRules.RuleText}}
+                            </p>
+                      </li>
+                      <li>
+                          <b>变签费</b>
+                          <p v-for="reissueRules in item.ReissueRules">
+                              {{reissueRules.DescText}}
+                            </p>
+                      </li>-->
+                  </ul>
+              </div>
+          </div>
+          <div v-if="!showTerms" v-show="termsTitle == '退改签规则'" class="dialog-content">
+              <div class="terms-itinerary">
+                  <p class="itinerary-title">
+                      <span ></span></p>
+                  <p v-show="true">以航空公司规定为准。</p>
+              </div>
+          </div>
+          <div v-show="termsTitle == '儿童票说明'" class="dialog-content">
+              <p>
+                  婴儿票：<br>
+                  遨游网目前不支持婴儿（14天-2周岁）机票网上预订服务。如果您需要购买婴儿机票，可以进入遨游网 机票定制页面，填写需求信息，我们将尽快为您确认机票并回复。
+                  <br><br>
+                  儿童票：<br>
+                  根据航空公司相关规定，无成人陪伴的儿童（2周岁-12周岁）必须在航空公司营业点购买机票并办理相关手续。如果您在遨游网单独预订了儿童机票，请确保有成人陪同。
+                </p>
+          </div>
+          <div class="dialog-bottom ay-center-v">
+              <x-button @click="hideTerms">知道了</x-button>
+          </div>
+      </div>
+    </div>
+    <!--弹出层 退改签规则 END-->
+  </div>
+</template>
+
+
+
+<script>
+    import Vue from 'vue'
+    import axios from 'axios'
+    import VueAxios from 'vue-axios'
+    import store from '../../vuex/store'
+    const commit = store.commit || store.dispatch
+
+    import {
+        XHeader,
+        Card,
+        Popup,
+        Cell,
+        Confirm,
+        Alert,
+        XButton
+    } from '../../components'
+
+    export default {
+        components: {
+            XHeader,
+            Card,
+            Popup,
+            Cell,
+            Confirm,
+            Alert,
+            XButton
+        },
+        data() {
+            return {
+                lists: [],
+                isArrowInfos: false,
+                isShow: false,
+                isShowTip: false,
+                isShowPerson: false,
+                isShowInvoice: false,
+                isShowPreferential: false,
+                isShowExpense: false,
+                showCancelToast: false,
+                flightList: [],
+                airsegments: [],
+                acairsegments: [],
+                tmpList: {},
+                getOrderPara: {
+                    "memberid": 0
+                },
+                preferentials: [],
+                preferentialsother: [],
+                showConfirm: false,
+                countdowntxt: "",
+                showcountdowntxt: false,
+                myhost: "http://pic1.aoyou.com",
+                isTermsShow: false,
+                showTerms: false,
+                termsTitle: "退改签规则",
+                totalmoney:0
+            }
+        },
+        filters: {
+            'ftickeno'(flighttype,flightflag){
+                if(flighttype==2){
+                    if(flightflag==1){
+                        return "(去程)";
+                    }
+                    if(flightflag==2){
+                        return "(返程)";
+                    }
+                }
+                if(flighttype==4){
+                    if(flightflag==1){
+                        return "(1程)";
+                    }
+                    if(flightflag==2){
+                        return "(2程)";
+                    }
+                    if(flightflag==3){
+                        return "(3程)";
+                    }
+                }
+                return "";
+            },
+            'wrap' (value) {
+                switch (value) {
+                    case 1:
+                        return this.myhost + "/app40/detail_01.jpg"
+                    case 2:
+                        return this.myhost + "/app40/detail_02.jpg"
+                    case 30:
+                        return this.myhost + "/app40/detail_02.jpg"
+                    default:
+                        return this.myhost + "/app40/detail_03.jpg"
+                }
+            },
+            'typesel'(val){
+                if(2==this.lists.FlightType){
+                    var tmp = ['去','返']
+                    return tmp[val-1]
+                }else{
+                    return val
+                }
+            },
+            'txt' (value) {
+
+                switch (value) {
+                    case 1:
+                        return "待付款"
+                    case 200:
+                        return "待付款"
+                    case 5:
+                        return "待确认"
+                    case 19:
+                        return "已取消"
+                    case 2:
+                        return "待出行"
+                    case 30:
+                        return "待出行"
+                    case 35:
+                        return "出行中"
+                    case 40:
+                        return "已完成"
+                    case 45:
+                        return "已完成"
+
+                    default:
+                        return "未知"
+                }
+
+
+            },
+            'txt1' (value, ordertype_m, airstatutxt) {
+                if (ordertype_m != 6) {
+                    switch (value) {
+                        case 1:
+                            return "待付款"
+                        case 200:
+                            return "待付款"
+                        case 5:
+                            return "待确认"
+                        case 19:
+                            return "已取消"
+                        case 2:
+                            return "待出行"
+                        case 30:
+                            return "待出行"
+                        case 35:
+                            return "出行中"
+                        case 40:
+                            return "待评价"
+                        case 45:
+                            return "已完成"
+
+                        default:
+                            return "未知"
+                    }
+                } else {
+                    return airstatutxt;
+                }
+            },
+            'contract' (value) {
+                return "已签约"
+            },
+            'btnSwitch' (value) {
+                switch (value) {
+                    case 1:
+                        return ['取消订单', '去支付']
+                    case 5:
+                        return ['取消订单']
+                    case 200:
+                        return ['去支付']
+                    case 40:
+                        return ['去评价']
+                }
+
+            }, 
+            'airbtnSwitch' (value,canpay) { 
+                if (value == 0) {
+                    if(canpay==1){
+                        return ['取消订单', '去支付'];
+                    }     
+                }
+
+                if (value > 2) {
+                    return ['退票']
+                }
+             
+
+            },
+            'liter' (value) {
+                switch (value) {
+                    case 1:
+                        return "自由行"
+                    case 2:
+                        return "跟团游"
+                    case 3:
+                        return "邮轮"
+                    case 4:
+                        return "当地玩乐"
+                    case 5:
+                        return "门票"
+                    case 6:
+                        return "机票"
+                    case 7:
+                        return "签证"
+                    case 8:
+                        return "当地玩乐"
+                    default:
+                        return "半自助"
+                }
+            },
+            'paytypetxt' (value) {
+                switch (value) {
+                    case 1000:
+                        return "积分"
+                    case 2000:
+                        return "优惠券"
+                    case 3001:
+                        return "额度优惠"
+                    case 3000:
+                        return "中信额度"
+                    case 4000:
+                        return "互通卡"
+                    case 4001:
+                        return "互通卡"
+                    case 5000:
+                        return "移动额度"
+                    case 7000:
+                        return "砍价"
+                    default:
+                        return "银行、平台支付"
+                }
+            },
+            'flightTag' (index, flightflag, flighttype, txt) {
+                var re = '';
+
+                switch (flighttype) {
+                    case 1:
+                        if (txt == 1) {
+                            re = '单';
+                        }
+                        break
+                    case 2:
+                        if (flightflag == 1) {
+                            re = '去'
+                        } else {
+                            re = '返'
+                        }
+                        break
+
+                    case 4:
+                        re = index + 1
+
+                        break
+
+                }
+
+                return re;
+            },
+            'toweek' (dweek) {
+                var week;
+                switch (dweek) {
+                    case 0:
+                        week = "日";
+                        break;
+                    case 1:
+                        week = "一";
+                        break;
+                    case 2:
+                        week = "二";
+                        break;
+                    case 3:
+                        week = "三";
+                        break;
+                    case 4:
+                        week = "四";
+                        break;
+                    case 5:
+                        week = "五";
+                        break;
+                    case 6:
+                        week = "六";
+                        break;
+                }
+                return week;
+            },
+            'airnumber' (pnumber) {
+                var re = "";
+
+                re = pnumber + "成人";
+
+                return re;
+            },
+            'airchdnumber' (chdnumber) {
+                var re = "";
+
+                re = chdnumber + "儿童";
+
+                return re;
+            },
+            'fordername' (ordername) {
+                if(ordername){
+                    var ons = ordername.split("_");
+                    return ons[0];
+                }
+                return ""; 
+            }
+        },
+        methods: {
+            pagegoback(){  
+                //window.location.replace ("http://m.aoyou.com/order.html");
+                api.pageBack();
+            },
+            showInfo() {
+                this.isArrowInfos = !this.isArrowInfos
+            },
+            btnSwitchlen (value) {
+                if(value==1||value==5||value==200||value==40){
+                    return true;
+                }
+                return false;
+            }, 
+            airbtnSwitchlen (value,canpay) {
+                if (value == 0) {
+                    if(canpay==1){
+                        return true;
+                    }     
+                }
+
+                if (value > 2) {
+                    return true
+                }
+             return false;
+
+            },
+            tap(name, mainorderno,
+                productid, OrderType_m,
+                mainorderid, ordertype,
+                producttype, suborderid,
+                SubOrderType, OrderNumber,
+                SubProductType, cruiseid,
+                CruiseCompanyID, CruiseRouteID) {
+
+                if (name == "去评价") {
+
+                    var para = "ordertype_m=" + OrderType_m +
+                        "&SubOrderno=" + mainorderno +
+                        "&memberid=" + this.getOrderPara.memberid +
+                        "&ProductId=" + productid +
+                        "&suborderid=" + suborderid +
+                        "&CruiseID=" + cruiseid +
+                        "&CruiseCompanyID=" + CruiseCompanyID +
+                        "&CruiseRouteID=" + CruiseRouteID;
+
+                    window.location.href = "http://m.aoyou.com/order.html#!/evaluation?" + para;
+                    //api.pageGoTo("/order.html#!/evaluation?" + para);
+                }
+                if (name == "去支付") {
+
+                    this.GetPayId(this.getOrderPara.memberid, ordertype, producttype, suborderid, mainorderid, mainorderno, SubProductType);
+                }
+                if (name == "出行通知") {
+                    window.location.href = "http://mmy.aoyou.com/TravelTrips/FreeTravelTrip?mainOrderID=" + mainorderid;
+                }
+                if (name == "取消订单") {
+                    var cancelorderinfo = {
+                        "MainOrderID": mainorderid,
+                        "SubOrderID": suborderid,
+                        "OrderNum": OrderNumber,
+                        "CancelDetails": "会员取消的",
+                        "OrderType": ordertype,
+                        "SubOrderType": SubOrderType,
+                        "OrderNo": mainorderno
+                    };
+                    var couponParam = {
+                        "orderSn": mainorderno,
+                        "productType": producttype,
+                        "isPay": 1
+                    };
+                    this.CancelOrder(cancelorderinfo, couponParam);
+                }
+                if (name == "退票") {
+                    window.location.href = "http://m.aoyou.com/flight/refund.html?orderid=" + mainorderid + "&suborderid=" + suborderid;
+
+                }
+            },
+            onConfirm() {},
+            GetPayId(memberid, orderType, producttype, orderID, mainorderid, orderNo, subproducttype) {
+                var useCache = false;
+                var useProxy = true;
+                var paypara = {
+                    "mainorderid":mainorderid,
+                    "memberid": memberid,
+                    "orderType": producttype,
+                    "orderID": orderID,
+                    "orderNo": orderNo
+                }
+
+                api.post({
+                    path: api.config.microServiceHost.orderurl,
+                    controller: 'OrderData',
+                    action: 'ToPay',
+                    param: JSON.stringify(paypara),
+                    useCache: useCache,
+                    useProxy: useProxy,
+                    callback: function(obj) {
+                        if (obj.ReturnCode == 0) {
+
+                            if (true) {
+                                var successParam = {
+                                    OrderID: orderID,
+                                    MainOrderID: mainorderid,
+                                    OrderNo: orderNo,
+                                    IsCanPay: 1,
+                                    PayID: obj.Data,
+                                    ProductType: producttype,
+                                    SubProductType: subproducttype
+                                };
+
+                                if (window.webkit != null && window.webkit != undefined) {
+                                    window.webkit.messageHandlers.bookingSuccess.postMessage(JSON.stringify(successParam));
+                                } else if (window.action != null && window.action != undefined) {
+                                    window.action.payment(JSON.stringify(successParam));
+                                } else {
+                                    var payhref;
+                                    
+                                    if (orderType==1||orderType == 27) {
+                                        //机票
+                                        payhref = "https://mpay.aoyou.com/s/flightpay/index.html?orderid=" + successParam.OrderID +
+                                            "&mainorderid=" + successParam.MainOrderID +
+                                            "&payid=" + successParam.PayID;
+
+                                    } else {
+                                        payhref = "https://mpay.aoyou.com/S/Pay/Index.html?orderid=" + successParam.OrderID +
+                                            "&mainorderid=" + successParam.MainOrderID +
+                                            "&payid=" + successParam.PayID;
+
+                                    }
+                                    window.location.href = payhref;
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            CancelOrder(cancelorderinfo, couponParam) {
+                api.post({
+                    path: api.config.microServiceHost.orderurl,
+                    controller: 'OrderData',
+                    action: 'CancelOrder',
+                    param: JSON.stringify(cancelorderinfo),
+                    useCache: useCache,
+                    useProxy: useProxy,
+                    callback: function(obj) {
+                        if (obj.ReturnCode == 0) {
+                            globalThis.showCancelToast = true;
+                        }
+                    }
+                });
+                api.post({
+                    path: api.config.microServiceHost.preferentialmicro,
+                    controller: 'Bargain',
+                    action: 'GetCoupons',
+                    param: JSON.stringify(couponParam),
+                    useCache: useCache,
+                    useProxy: useProxy,
+                    callback: function(obj) {}
+                });
+            },
+            //获取机票赠送优惠
+            GetAirPreferential(SubOrderId, orderNo) {
+                var p = {
+                    "OrderNumber": orderNo,
+                    "SubOrderId": SubOrderId
+                };
+
+                api.post({
+                    path: api.config.microServiceHost.preferentialmicro,
+                    controller: 'Preferential',
+                    action: 'SelectHasUsedSchemeByOrderNumber',
+                    param: JSON.stringify(p),
+                    useCache: useCache,
+                    useProxy: useProxy,
+                    callback: function(obj) {
+                        if (obj.ReturnCode == 0) {
+                            if (obj.Data) {
+                                if (obj.Data.PolicyList) {
+                                    var p = obj.Data.PolicyList;
+                                    for (var i = 0; i < p.length; i++) {
+                                        if (p[i].WayTypeIsOther == true) {
+                                            globalThis.preferentials.push(p[i].Preferential_DisplayName);
+                                        } else {
+                                            globalThis.preferentialsother.push({
+                                                "key": p[i].Preferential_DisplayName,
+                                                "value": p[i].Preferential_Amount
+                                            });
+                                            globalThis.totalmoney-=p[i].Preferential_Amount;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            alerthide() {
+                window.location.reload();
+            },
+            hideTerms() {
+                this.isTermsShow = false
+            },
+            cancelcountdown(countdown) {
+                var cd = countdown;
+                if (countdowntime) {
+                    clearInterval(countdowntime);
+                }
+                countdowntime = setInterval(function() {
+
+                    var d = parseInt(cd / 86400);
+                    var h = parseInt((cd % 86400) / 3600);
+                    var m = parseInt((cd % 86400 % 3600) / 60);
+                    var s = cd % 86400 % 3600 % 60;
+
+                    var txt = "";
+                    if (d > 0) {
+                        txt += d + "天";
+                    }
+                    if (h > 0) {
+                        txt += h + "时";
+                    }
+
+                    txt += m + "分";
+                    txt += s + "秒";
+                    if (m == 0 && s >= 0) {
+                        txt = "最后一分钟";
+                    }
+                    globalThis.countdowntxt = txt;
+                    cd--;
+                    if (cd == 0) {
+                        clearInterval(countdowntime);
+                        globalThis.showcountdowntxt = false;
+                    }
+                }, 1000);
+            }
+        },
+
+        created() {
+            // this.axios.get("/static/booking.json").then((response) => {
+            //     this.tmpList = response.data
+            //     this.flightList = response.data.FlightList
+            // })
+        },
+
+        ready() {
+            // this.axios.get("/static/order.json").then((response) => {
+            //   this.lists = response.data.FreeDetails
+            // })
+            globalThis = this;
+            var memberid = api.getCookie("memberid");
+            if (memberid == undefined || memberid == "") {
+                memberid = this.$route.query.memberid;
+            }
+            if (memberid == undefined || memberid == "") {
+                var url = encodeURIComponent(location.href)
+                api.toLogin(url, url, "back")
+                return false
+                    //                window.location.href = "http://mpass.aoyou.com?from=" + encodeURIComponent(location.href) + "&forward=" + encodeURIComponent(location.href)
+            }
+            this.getOrderPara.memberid = memberid;
+            var orderno = this.$route.query.orderno;
+            var mainorderid = this.$route.query.mainorderid;
+            var suborderid = this.$route.query.suborderid;
+            var type = this.$route.query.type;
+
+            GetOrderDeatail(this.getOrderPara.memberid, orderno, mainorderid, suborderid, type);
+        }
+    }
+
+    var globalThis;
+    var useCache = false;
+    var useProxy = true;
+    var countdowntime;
+
+    function GetOrderDeatail(memberid, orderno, mainorderid, suborderid, type) {
+        var useCache = false;
+        var useProxy = true;
+commit('UPDATE_LOADING',true)
+        api.post({
+            path: api.config.microServiceHost.orderurl,
+            controller: 'OrderData',
+            action: 'GetOrderDetail',
+            param: JSON.stringify({
+                "memberid": memberid,
+                "mainorderid": mainorderid,
+                "suborderid": suborderid,
+                "orderno": orderno,
+                "type": type
+            }),
+            useCache: useCache,
+            useProxy: useProxy,
+            callback: function(obj) {
+commit('UPDATE_LOADING',false)
+
+                if (obj.ReturnCode == 0) {
+                    globalThis.lists = JSON.parse(obj.Data);
+                    if (globalThis.lists.AirSegments != null) {
+                        var allac=true;//全部都是国航订单
+                        for (var i = 0; i < globalThis.lists.AirSegments.length; i++) {
+                            var segitem=globalThis.lists.AirSegments[i];
+                            segitem.No=i+1;
+                            if (segitem.AirChannel == 1) {
+                                globalThis.acairsegments.push(segitem);
+                            } else {
+                                allac=false;
+                                globalThis.airsegments.push(segitem);
+                            }
+
+                           globalThis.totalmoney+=(segitem.UnitPrice+segitem.FuelFee+segitem.AirportFee)*globalThis.lists.TotalCount+(segitem.ChdUnitPrice+segitem.ChdFuelFee+segitem.ChdAirportTax)*globalThis.lists.ChdTotalCount;
+                        }
+                        globalThis.lists.allac=allac;
+                    }
+                    if (globalThis.lists.CancelCountDown > 0) {
+
+                        globalThis.cancelcountdown(globalThis.lists.CancelCountDown);
+                        globalThis.showcountdowntxt = true;
+                    }
+                    //退改规则
+
+                    globalThis.showTerms = globalThis.lists.HaveSegmentRules == 1
+                    globalThis.GetAirPreferential(globalThis.lists.SubOrderID, globalThis.lists.OrderNO);
+
+                }
+            }
+        });
+    }
+</script>
+
+
+<style lang="less" scoped>
+    @import '../../styles/index.less';
+    @import '../../styles/ayui/base/reset.less';
+    @import '../../styles/ayui/base/fn.less';
+    /*最外层包裹*/
+    
+    .fix-banner-top {
+        height: 40px;
+        line-height: 40px;
+        background: rgba(255, 170, 9, 0.95);
+        .tip {
+            padding: 0 5%;
+            width: 90% !important;
+            top: 0 !important;
+            text-align: left !important;
+            font-size: 14px !important;
+            letter-spacing: 0.3px !important;
+            &:before {
+                content: '';
+                width: 14px;
+                height: 14px;
+                display: inline-block;
+                margin-right: 6px;
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAaBJREFUSA29ljFOAzEQRdcRFRIVXSKKiBNAlSbaK0RKJCRKzkHJWRAIitwhBaFJWlIgJFCggYoOCvO/vY4t5F3bkPVIP57Y43nr0a5tUUSYlPIIYSNoCPWgLkR7hdbQDJoKIZZo/24ATaAHKNYYO0kmYlIfuouleOI4tx8FRmAJvUP/NeYoG6EMgL6gZnu+kpIKG3P5oRhgGcMrI+hmVysOypyb8nacJV/C33f++93PR9vv+rb3t8eczK1MAfEEfLMGVV8bzaBiFGaFF9GUvUMb6vq2t85TDAEyP+pFXZS3/+Vadx+ceIcbOo93MMgdJM3SQSb/iCXldpXLhgRyb0wzltSUNW1mjyU1G3HcVILuz2xsWnm75i21CUKe++25fmieHpcE8ojJZW8E8jzLZWsCeXjmshmB01w0sjrVtWCVAboiiyukneum1V/FUECQb4Gat4ibV4zNaUHWKfTRApQ5mVuZKWmBJ3hCzxj61kM1v+6R5Pr+cOYaV7n9ETiuSqj5qhF3pwlfoswjAJjvmmigbAHe+kVYuIA6H+CtXfV/AIrah+ngTWmhAAAAAElFTkSuQmCC) no-repeat;
+                background-size: 100%;
+                vertical-align: -1px;
+            }
+        }
+    }
+    
+    .page-wrap {
+        position: relative;
+        overflow: hidden;
+        background: #F5F5F5;
+        .ay_panel {
+            margin-top: 0;
+            overflow: visible;
+        }
+        .ay-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            width: 100%;
+            .icon-message {
+                display: block;
+                width: 23px;
+                height: 21px;
+                background: url(data:image/png;base64,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);
+                background-size: 100%;
+                background-repeat: no-repeat;
+            }
+        }
+        .page-content {
+            position: fixed;
+            top: 44px;
+            bottom: 60px;
+            left: 0;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+
+            &.fix-page{
+                bottom:0;
+            }
+
+            &>div {
+                position: relative;
+                height: 100%;
+                width: 100%;
+                overflow: auto;
+            }
+        }
+    }
+    
+    .header-banner {
+        position: relative;
+        img {
+            display: block;
+            width: 100%;
+            height: 75px;
+        }
+        .tip {
+            position: absolute;
+            top: 22px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: STHeitiSC-Medium;
+            font-size: 19px;
+            font-weight: 300;
+            color: #FFFFFF;
+            letter-spacing: 0.8px;
+        }
+    }
+    
+    .fix-card {
+        .card-content {
+            position: relative;
+            height: auto;
+            padding-bottom: 16px;
+            overflow: visible;
+            .name {
+                font-family: STHeitiSC-Medium;
+                overflow: initial;
+                white-space: initial;
+                word-wrap: initial;
+                font-size: 17px;
+                height: auto;
+                line-height: 1.4;
+            }
+            .arrow-down {
+                position: relative;
+                height: 7px;
+                background: #fff;
+                padding: 8px 0;
+                &:before {
+                    content: '';
+                    margin: 0 auto;
+                    width: 13px;
+                    height: 7px;
+                    display: block;
+                    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAOCAYAAADaOrdAAAAAAXNSR0IArs4c6QAAASlJREFUOBFj/A8EC2/9YHj94x9DrCoHgzgnEwM1wKaHPxnOv/3DEK3CwcBy6d0fhoW3voPNPfP6N0OfJS+DFBdlFk299p1h7b0fYDN//PnPwKTAy8zAwcwIFnj1/R9D0fHPDM++/SPbM8gWgAzRFGRhYOJjZWRoNeOhikXoFjhKsTHEAKMAHC6GwiwUW4TNgmojbrAF8MCnxCJ8FoCCDG4JiEOORYQswLCEVIuIsQCrJcRaRKwFIPMYQZkRxMAGQJmp+tQXhh9/IUrEgBkVlI/WP/gJzwcgfaBUBItkbObgtQSkAd0iUJ6CWQqSJ2QBSA1BS0CK0C0CiYEAMRaA1KGkLpAANoCe6kBqiLUApJYon4AUgsDV938ZFgHLOWV+ZoYUDU7iXAjUBwCTC8OYrxN9MgAAAABJRU5ErkJggg==) no-repeat;
+                    background-size: 100%;
+                }
+                ;
+                &:up {
+                    content: '';
+                    margin: 0 auto;
+                    width: 13px;
+                    height: 7px;
+                    display: block;
+                    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAAAAXNSR0IArs4c6QAAAKtJREFUKBVjdNzybibDf4Y0BnIAI8MsJhFFwVxGBobjpOoH6QHpZVqtzfiLlZU9mIGR4TnRhgDVgvSA9DKBNO304H7OxMwSzMjA+IuQISA1ILUgPSC1YANAjL2efMf/MzLmgtj4AEgNSC1MDdwAkMB+H4FZQK/Mgkli0EA5sBokCRQDQOK4AhUWaEh6wUwMA7AGKlKgETQApAA5UNEDDd0AvHzHLR/SQBifIgBzyzPiJMqtmgAAAABJRU5ErkJggg==);
+                    background-size: 100%;
+                }
+            }
+            .price-right {
+                position: absolute;
+                right: 0px;
+                bottom: 10px;
+                h2 {
+                    font-family: STHeitiSC-Light;
+                    font-size: 19px;
+                    color: #FC5A3F;
+                    letter-spacing: 0px;
+                }
+                h3 {
+                    position: relative;
+                    font-family: STHeitiSC-Light;
+                    font-size: 12px;
+                    color: #41B3EE;
+                    letter-spacing: 0.05px;
+                    &:after {
+                        content: '';
+                        display: inline-block;
+                        width: 8px;
+                        height: 5px;
+                        margin-left: 5px;
+                        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAAAAXNSR0IArs4c6QAAAKtJREFUKBVjdNzybibDf4Y0BnIAI8MsJhFFwVxGBobjpOoH6QHpZVqtzfiLlZU9mIGR4TnRhgDVgvSA9DKBNO304H7OxMwSzMjA+IuQISA1ILUgPSC1YANAjL2efMf/MzLmgtj4AEgNSC1MDdwAkMB+H4FZQK/Mgkli0EA5sBokCRQDQOK4AhUWaEh6wUwMA7AGKlKgETQApAA5UNEDDd0AvHzHLR/SQBifIgBzyzPiJMqtmgAAAABJRU5ErkJggg==);
+                        background-size: 100%;
+                        background-repeat: no-repeat;
+                    }
+                }
+            }
+        }
+        .card-footer {
+            height: auto;
+            min-height: 44px;
+            .arrow-down {
+                display: block;
+                margin: 15px auto;
+                width: 14px;
+                height: 14px;
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAOCAYAAADaOrdAAAAAAXNSR0IArs4c6QAAASlJREFUOBFj/A8EC2/9YHj94x9DrCoHgzgnEwM1wKaHPxnOv/3DEK3CwcBy6d0fhoW3voPNPfP6N0OfJS+DFBdlFk299p1h7b0fYDN//PnPwKTAy8zAwcwIFnj1/R9D0fHPDM++/SPbM8gWgAzRFGRhYOJjZWRoNeOhikXoFjhKsTHEAKMAHC6GwiwUW4TNgmojbrAF8MCnxCJ8FoCCDG4JiEOORYQswLCEVIuIsQCrJcRaRKwFIPMYQZkRxMAGQJmp+tQXhh9/IUrEgBkVlI/WP/gJzwcgfaBUBItkbObgtQSkAd0iUJ6CWQqSJ2QBSA1BS0CK0C0CiYEAMRaA1KGkLpAANoCe6kBqiLUApJYon4AUgsDV938ZFgHLOWV+ZoYUDU7iXAjUBwCTC8OYrxN9MgAAAABJRU5ErkJggg==) no-repeat;
+                background-size: 100%;
+                background-position: center;
+                &.up {
+                    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAOCAYAAADaOrdAAAAAAXNSR0IArs4c6QAAAQtJREFUOBFj/A8EDESCGx/+Miy984NBmY+ZIV6Ng4GRSH2MxFpy5f0fhvKTXxi+/4G4yU2GnaHcgIsoi5iIcQy6BSA9u578ZOi88I2BmGAgaAm6BWzMiEAi1iK8lqBbIMzBxDDbjo/BT54dHgDEWITTEmwW9FnyMshyMzEU6HKRZBFWS/BZAPMCKRZhWEKMBaRahGIJKRaQYhHcEnIsINYiFpBCSixAtgjE3vTwJ1gIlOpAAJxhP/369z9y70eGb9CcDEqmsFQEVkUiMeHyN7hFIK3JGpwMTPc//6WaBSBD0VPd5Xd/GMBl1+wb3xle//jPkAAs9KS44NEE0kM2WHP/J8P5N38Y4oBmAgA6QstZmBV8dQAAAABJRU5ErkJggg==) no-repeat;
+                    background-size: 100%;
+                    background-position: center;
+                }
+            }
+        }
+    }
+    
+    .more {
+        padding: 0 20px;
+        text-align: left;
+        .ticket {
+            .ticket-wrap {
+                padding-top: 15px;
+                padding-bottom: 18px;
+                border-bottom: 1px dashed #DFDFDF;
+                &:last-child {
+                    border-bottom: 0;
+                }
+            }
+            h2 {
+                font-family: STHeitiSC-Medium;
+                font-size: 17px;
+                color: #333333;
+                letter-spacing: 0px;
+                height: 24px;
+                line-height: 44px;
+            }
+            .date {
+                font-family: STHeitiSC-Light;
+                font-size: 14px;
+                color: #333333;
+                letter-spacing: 0px;
+            }
+            .plane {
+                font-family: STHeitiSC-Light;
+                font-size: 12px;
+                color: #999999;
+                letter-spacing: 0px;
+            }
+            .airport {
+                display: flex;
+                display: -webkit-flex;
+                .item {
+                    -webkit-box-flex: 1;
+                    -webkit-flex: 1;
+                    flex: 1;
+                    h4 {
+                        font-family: ArialMT;
+                        font-size: 18px;
+                        color: #333333;
+                    }
+                    p {
+                        font-family: STHeitiSC-Light;
+                        font-size: 12px;
+                        color: #999999;
+                        height: 19px;
+                    }
+                    em {
+                        margin: 20px;
+                        display: block;
+                        width: 35px;
+                        height: 7px;
+                        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAAAOCAYAAAB5EtGGAAAAAXNSR0IArs4c6QAAAUVJREFUSA3t1j1LxEAQBmA3m2ij115ldzaWgpVgcTZCCrGw90gg1VUWFqIWgtjZ5rMLyKUO6SwE/4BwHNeaAxshhQaEmA/fLQauuH8wLiyzS6p5mJmsWGO6PM+7bdv2R9O0R8dxfpcZxPKFyzmKoq2qqj6Q76YQYoYNF+eV8tfowClalvUtpTwFxrzrul1UzAsq54IMWFYKJZ8kyXpRFNe4XwFHoJVuUDF3rFEIB1VyBpQnbKnr+pGkD5xjmqYz0zQbGAzRStvC9/1LCD1wRqHcAaKOXywHLSGsihi+xf9MgUyWZRt5nj+jYw7Uu4U9ShzHvbIsJwA5hs8CKHusUVzXPQRECJAdxE/DMIa2bU91XNitIAj6dV3fI/ERQDBGxBt+xScAeVcYLAdt0zQ95H4OkEo92ICyTyAKhe1C64zDMBysAvgDBi578VjEFQMAAAAASUVORK5CYII=) no-repeat;
+                        background-size: 100%;
+                    }
+                }
+            }
+        }
+    }
+    
+    .hotel {
+        position: relative;
+        &:before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 1px;
+            border-bottom: 1px solid #e5e5e5;
+            color: #e5e5e5;
+            -webkit-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+        }
+        h2 {
+            height: 24px;
+            line-height: 44px;
+            font-family: STHeitiSC-Medium;
+            font-size: 17px;
+            color: #333333;
+            letter-spacing: 0px;
+        }
+        .hotel-wrap {
+            padding-top: 15px;
+            padding-bottom: 18px;
+            border-bottom: 1px dashed #DFDFDF;
+            &:last-child {
+                border-bottom: 0;
+            }
+            h4 {
+                font-family: STHeitiSC-Light;
+                font-size: 14px;
+                color: #333333;
+                letter-spacing: 0px;
+            }
+            .date {
+                font-family: STHeitiSC-Light;
+                font-size: 12px;
+                color: #999999;
+                letter-spacing: 0px;
+            }
+            .hotel-name,
+            .room {
+                font-family: STHeitiSC-Light;
+                font-size: 12px;
+                color: #333333;
+            }
+        }
+    }
+    
+    .page-wrap .ay-popup-dialog {
+        background: #fff;
+        height: 84% !important;
+    }
+    
+    .popup {
+        .closed {
+            position: relative;
+            height: 44px;
+            line-height: 44px;
+            &:after {
+                content: '';
+                position: absolute;
+                right: 20px;
+                top: 12px;
+                width: 12px;
+                height: 12px;
+                display: block;
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAW5JREFUSA2tlrGOgkAQhge04DGoIIRAQQMWJjzavRoVUGE0QPQN6CxIbEi8+8kNAdxzl/Um0V13Zr+PzU6IRlVVz/P5TK7rUhzH9B9RliVdr1cKw5B2x+Px6/F4UNd11Pc92bb9kSPLMqrrmoZhoPv9TqbneRMQVhToBvaCwQG2GUURBUHAa2OBjmQNBxNsE+TD4fCRRAQHEzEKMNGVvIMvBDoSGfxFsEWiAhcKVCSqcLD2+BIFX9LlchnT8/abz9EtXCviGM+fECV4Lc9zYgmv8SiDo27qIt60HtfdxXkVOGqlAhQZhoFhEaK1RcHvD6mgKArCy3AdWENOFm8Fa7jjOIQPh4rkzy4SwdM0ZTbdbrdxzqdLkmTKzSfCE8jgEKme5EUgg/PTqUoWAlX4Fskk2ApXlYwCXbiKZH86nRZ9jsubdwtDZCPvmXeXZVlkNk0z7dWFM2B98W3bkun7PsGEvxj8FLxBZwQDLDDB/gZWDvxiU5SqSQAAAABJRU5ErkJggg==) no-repeat;
+                background-size: 100%;
+            }
+        }
+    }
+    
+    .popup-list {
+        padding: 0 20px;
+        height: 300px;
+        overflow: auto;
+        li {
+            position: relative;
+            min-height: 50px;
+            line-height: 50px;
+
+            &:last-child{
+                &:after{
+                    display: none;
+                }
+            }
+
+
+            &:after {
+                .setBottomLine(#e5e5e5);
+            }
+            &>div {
+                position: relative;
+                display: flex;
+                display: -webkit-flex;
+
+                &:after {
+                    .setBottomLine(#e5e5e5);
+                }
+
+                .title {
+                    width: 70%;
+                    font-family: STHeitiSC-Medium;
+                    font-size: 17px;
+                    color: #333333;
+                    letter-spacing: 0.67px;
+                }
+                .price {
+                    text-align: right;
+                    width: 30%;
+                    font-family: PingFang-SC-Medium;
+                    font-size: 17px;
+                    color: #333333;
+                    letter-spacing: 0.72px;
+                }
+            }
+            .sub {
+                position: relative;
+                display: flex;
+                display: -webkit-flex;
+                height: 35px;
+                line-height: 35px;
+                font-family: STHeitiSC-Light;
+                font-size: 14px;
+                color: #999999;
+                letter-spacing: 0.5px;
+                &:after {
+                    display: none;
+                }
+                .subtitle {
+                    width: 70%;
+                }
+                .subprice {
+                    width: 30%;
+                    text-align: right;
+                }
+            }
+        }
+    }
+    
+    .totle-price {
+        text-align: right;
+        padding: 0 20px;
+        margin-top: 10%;
+        font-family: HelveticaNeue;
+        font-size: 24px;
+        color: #FC5A3F;
+        letter-spacing: 0.13px;
+        span {
+            font-family: STHeitiSC-Medium;
+            font-size: 16px;
+            color: #FC5A3F;
+            letter-spacing: 0.67px;
+            margin-right: 20px;
+        }
+        em {
+            font-family: STHeitiSC-Light;
+            font-size: 17px;
+            color: #FC5A3F;
+            letter-spacing: 0px;
+        }
+    }
+    
+    .ay_cell {
+        padding-left: 20px;
+        margin-top: 10px !important;
+        background: #fff;
+        height: 60px;
+        overflow: hidden;
+    }
+    
+    .pay-info {
+        padding: 0 20px;
+        margin-top: 0px;
+        background: #fff;
+        &.fix-person {
+            margin-top: 0;
+            li {
+                position: relative;
+                &:before {
+                    .setTopLine(#e5e5e5);
+                }
+            }
+        }
+        li {
+            padding: 15px 0;
+            /*height: 55px;*/
+            overflow: hidden;
+            .wrap {
+                display: flex;
+                display: -webkit-flex;
+                font-family: STHeitiSC-Light;
+                font-size: 14px;
+                line-height: 19px;
+                .left {
+                    width: 25%;
+                    color: #999999;
+                }
+                .right {
+                    width: 75%;
+                    color: #333333;
+                }
+                .item {
+                    width: 25%;
+                    font-family: STHeitiSC-Light;
+                    font-size: 14px;
+                    color: #999;
+                    line-height: 19px;
+                    overflow: hidden;
+                    &:nth-child(2n) {
+                        color: #333;
+                        width: 25%;
+                    }
+                }
+            }
+        }
+    }
+    
+    .card-person {
+        .arrow-down {
+            position: relative;
+            height: 7px;
+            background: #fff;
+            padding: 8px 0;
+            &:before {
+                content: '';
+                margin: 0 auto;
+                width: 13px;
+                height: 7px;
+                display: block;
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAOCAYAAADaOrdAAAAAAXNSR0IArs4c6QAAASlJREFUOBFj/A8EC2/9YHj94x9DrCoHgzgnEwM1wKaHPxnOv/3DEK3CwcBy6d0fhoW3voPNPfP6N0OfJS+DFBdlFk299p1h7b0fYDN//PnPwKTAy8zAwcwIFnj1/R9D0fHPDM++/SPbM8gWgAzRFGRhYOJjZWRoNeOhikXoFjhKsTHEAKMAHC6GwiwUW4TNgmojbrAF8MCnxCJ8FoCCDG4JiEOORYQswLCEVIuIsQCrJcRaRKwFIPMYQZkRxMAGQJmp+tQXhh9/IUrEgBkVlI/WP/gJzwcgfaBUBItkbObgtQSkAd0iUJ6CWQqSJ2QBSA1BS0CK0C0CiYEAMRaA1KGkLpAANoCe6kBqiLUApJYon4AUgsDV938ZFgHLOWV+ZoYUDU7iXAjUBwCTC8OYrxN9MgAAAABJRU5ErkJggg==) no-repeat;
+                background-size: 100%;
+            }
+        }
+    }
+    
+    .card-person-detail {
+        background: #fff;
+        ul {
+            padding: 0 20px;
+            background: #fff;
+            li {
+                position: relative;
+                padding: 15px 0;
+                /*height: 152px;*/
+                &:after {
+                    .setTopLine(#e5e5e5);
+                }
+                .wrap {
+                    display: flex;
+                    display: -webkit-flex;
+                    .item {
+                        font-family: STHeitiSC-Light;
+                        font-size: 14px;
+                        color: #999999;
+                        line-height: 19px;
+                        width: 25%;
+                        &:nth-child(2n) {
+                            width: 75%;
+                            color: #333333;
+                        }
+                    }
+                }
+            }
+        }
+        .fix-bottom {
+            position: relative;
+            margin: 0 15px;
+            &:before {
+                .setTopLine(#e5e5e5);
+            }
+        }
+        .arrow-down {
+            display: block;
+            margin: 15px auto;
+            width: 14px;
+            height: 14px;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAOCAYAAADaOrdAAAAAAXNSR0IArs4c6QAAASlJREFUOBFj/A8EC2/9YHj94x9DrCoHgzgnEwM1wKaHPxnOv/3DEK3CwcBy6d0fhoW3voPNPfP6N0OfJS+DFBdlFk299p1h7b0fYDN//PnPwKTAy8zAwcwIFnj1/R9D0fHPDM++/SPbM8gWgAzRFGRhYOJjZWRoNeOhikXoFjhKsTHEAKMAHC6GwiwUW4TNgmojbrAF8MCnxCJ8FoCCDG4JiEOORYQswLCEVIuIsQCrJcRaRKwFIPMYQZkRxMAGQJmp+tQXhh9/IUrEgBkVlI/WP/gJzwcgfaBUBItkbObgtQSkAd0iUJ6CWQqSJ2QBSA1BS0CK0C0CiYEAMRaA1KGkLpAANoCe6kBqiLUApJYon4AUgsDV938ZFgHLOWV+ZoYUDU7iXAjUBwCTC8OYrxN9MgAAAABJRU5ErkJggg==) no-repeat;
+            background-size: 100%;
+            background-position: center;
+            &.up {
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAOCAYAAADaOrdAAAAAAXNSR0IArs4c6QAAAQtJREFUOBFj/A8EDESCGx/+Miy984NBmY+ZIV6Ng4GRSH2MxFpy5f0fhvKTXxi+/4G4yU2GnaHcgIsoi5iIcQy6BSA9u578ZOi88I2BmGAgaAm6BWzMiEAi1iK8lqBbIMzBxDDbjo/BT54dHgDEWITTEmwW9FnyMshyMzEU6HKRZBFWS/BZAPMCKRZhWEKMBaRahGIJKRaQYhHcEnIsINYiFpBCSixAtgjE3vTwJ1gIlOpAAJxhP/369z9y70eGb9CcDEqmsFQEVkUiMeHyN7hFIK3JGpwMTPc//6WaBSBD0VPd5Xd/GMBl1+wb3xle//jPkAAs9KS44NEE0kM2WHP/J8P5N38Y4oBmAgA6QstZmBV8dQAAAABJRU5ErkJggg==) no-repeat;
+                background-size: 100%;
+                background-position: center;
+                padding-bottom: 10px;
+            }
+        }
+    }
+    
+    .contract {
+        background: #fff;
+        padding: 0 20px;
+        height: 50px;
+        line-height: 50px;
+        overflow: hidden;
+        .contract-wrap {
+            position: relative;
+            display: flex;
+            display: -webkit-flex;
+            .item {
+                width: 25%;
+                font-family: STHeitiSC-Light;
+                font-size: 14px;
+                color: #999999;
+                &:nth-child(2n) {
+                    width: 75%;
+                    color: #333;
+                }
+            }
+            &:after {
+                .setTopLine(#e5e5e5);
+            }
+        }
+    }
+    
+    .tabbar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0 20px;
+        background: #fff;
+        height: 59px;
+        border-top: 1px solid #e5e5e5;
+        text-align: right;
+        span {
+            display: inline-block;
+            margin-top: 15px;
+            margin-left: 4px;
+            width: 75px;
+            height: 30px;
+            line-height: 30px;
+            background: #FFFFFF;
+            border: 1px solid #dfdfdf;
+            border-radius: 15px;
+            text-align: center;
+            font-family: STHeitiSC-Light;
+            font-size: 14px;
+            color: #333;
+            letter-spacing: 0px;
+            &:last-child {
+                border: 1px solid #ff5523;
+                color: #ff5523;
+            }
+        }
+    }
+    
+    .tabbar .tabbar-info {
+        font-family: STHeitiSC-Medium;
+        line-height: 60px;
+        width: auto;
+        font-weight: 100;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        color: #999999;
+        letter-spacing: 0px;
+        border: 0;
+        border-radius: 0;
+        em {
+            display: inline-block;
+            margin-top: 15px;
+            margin-left: 4px;
+            width: 75px;
+            height: 30px;
+            line-height: 30px;
+            background: #FFFFFF;
+            border: 1px solid #dfdfdf;
+            border-radius: 15px;
+            text-align: center;
+            font-family: STHeitiSC-Light;
+            font-size: 14px;
+            color: #333;
+            letter-spacing: 0px;
+        }
+    }
+    
+    .visa-wrap .pay-info {
+        margin-top: 0;
+        li {
+            position: relative;
+            &:after {
+                .setTopLine(#e5e5e5);
+            }
+        }
+    }
+    
+    .pay-info.fix-pay-info li {
+        height: auto;
+    }
+    
+    .card-section {
+        margin-bottom: 30px;
+    }
+    
+    .fix-height {
+        min-height: 40px;
+    }
+    
+    .fix-ticket {
+        position: relative;
+        padding: 10px 0;
+        &:after {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .fix-ticket-ul {
+            li {
+                display: flex;
+                font-family: STHeitiSC-Light;
+                font-size: 14px;
+                color: #333333;
+                letter-spacing: 0;
+
+                .flight-tag {
+                    margin-top: 2px;
+                }
+            }
+        }
+    }
+    
+    .itinerary-list {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .itinerary-item {
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        &:last-child {
+            &:before {
+                display: none;
+            }
+        }
+        &:before {
+            .setBottomLine(#e5e5e5);
+            z-index: 2;
+        }
+        .itinerary-title {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            -webkit-align-items: center;
+            -webkit-box-align: center;
+            padding: 0;
+            width: 100%;
+            height: 45px;
+            background-color: #fff;
+            box-sizing: border-box;
+            .flight-tag-wrap {
+                width: 15px;
+                height: 15px;
+                margin-top: -3px;
+                margin-right: 10px;
+            }
+            .itinerary-city,
+            .itinerary-hour {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                align-items: center;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+                height: 45px;
+                font-size: 0;
+                line-height: 0;
+                span {
+                    display: inline-block;
+                    font-size: 14px;
+                    font-weight: 300;
+                    line-height: 45px;
+                }
+                i {
+                    margin-right: 5px;
+                    line-height: 45px;
+                }
+            }
+            .itinerary-city {
+                -webkit-flex: 1;
+                flex: 1;
+                -webkit-box-flex: 1;
+                -moz-box-flex: 1;
+                -ms-flex: 1;
+                span {
+                    margin-right: 5px;
+                    color: #333;
+                }
+            }
+            .itinerary-hour {
+                /*float: right;*/
+                span {
+                    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    color: #999;
+                    font-weight: normal;
+                }
+            }
+        }
+        /**/
+        .itinerary-content {
+            position: relative;
+            display: block;
+            padding: 0;
+            width: 100%;
+            background-color: #fff;
+            box-sizing: border-box;
+            &:before {
+                content: "";
+                display: block;
+                position: absolute;
+                left: 95px;
+                top: 20px;
+                bottom: 55px;
+                width: 1px;
+                height: auto;
+                background-color: #DFDFDF;
+                z-index: 0;
+            }
+            &.border-line {
+                &:after {
+                    content: " ";
+                    position: absolute;
+                    left: 20px;
+                    right: 20px;
+                    bottom: 0;
+                    width: auto;
+                    height: 1px;
+                    border-bottom: 1px solid #DFDFDF;
+                    color: #DFDFDF;
+                    -webkit-transform-origin: 0 100%;
+                    transform-origin: 0 100%;
+                    -webkit-transform: scaleY(0.5);
+                    transform: scaleY(0.5);
+                }
+            }
+        }
+        .itinerary-group {
+            li {
+                list-style: none;
+            }
+        }
+        .itinerary-cell {
+            position: relative;
+        }
+        .itinerary-cell-item {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            align-items: flex-start;
+            -webkit-align-items: flex-start;
+            -webkit-box-align: start;
+            height: 75px;
+            box-sizing: border-box;
+            overflow: hidden;
+            /*左 时间*/
+            .item-before {
+                width: 75px;
+                box-sizing: border-box;
+                p {
+                    display: block;
+                    width: 100%;
+                    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    text-align: right;
+                    line-height: 18px;
+                    .ellipsisLn(1);
+                }
+                .flight-time {
+                    font-size: 19px;
+                    color: #666;
+                    line-height: 28px;
+                }
+                .flight-date {
+                    font-size: 12px;
+                    color: #999;
+                }
+                .flight-hour {
+                    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    font-size: 12px;
+                    color: #999;
+                    font-weight: normal;
+                    i,
+                    span {
+                        vertical-align: middle;
+                    }
+                    i {
+                        margin-right: 3px;
+                    }
+                }
+            }
+            /*中 圈圈*/
+            .item-media {
+                position: relative;
+                width: 40px;
+                height: 100%;
+                text-align: center;
+                z-index: 0;
+                box-sizing: border-box;
+                i {
+                    position: relative;
+                    display: block;
+                    margin: 0 auto;
+                    z-index: 1;
+                }
+            }
+            /*右 机场*/
+            .item-inner {
+                -webkit-flex: 1;
+                flex: 1;
+                -webkit-box-flex: 1;
+                -moz-box-flex: 1;
+                -ms-flex: 1;
+                width: 100%;
+                box-sizing: border-box;
+                .flight-airport {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    font-weight: 300;
+                    font-size: 14px;
+                    line-height: 28px;
+                    color: #333;
+                    .ellipsisLn(1);
+                }
+                .flight-info {
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: flex;
+                    align-items: center;
+                    -webkit-align-items: center;
+                    -webkit-box-align: center;
+                    height: 18px;
+                    width: 100%;
+                    span {
+                        color: #999;
+                    }
+                    em {
+                        color: #41B3EE;
+                    }
+                    i,
+                    em,
+                    span {
+                        display: block;
+                        margin-right: 3px;
+                        font-size: 12px;
+                        line-height: 18px;
+                    }
+                    i.icon-flight-share {
+                        width: 25px;
+                    }
+                    i.icon-airline {
+                        width: 8px;
+                        line-height: 0;
+                        img {
+                            display: inline-block;
+                            width: 100%;
+                        }
+                    }
+                    em {
+                        width: 50px;
+                        height: 18px;
+                    }
+                    span {
+                        -webkit-flex: 1;
+                        flex: 1;
+                        -webkit-box-flex: 1;
+                        -moz-box-flex: 1;
+                        -ms-flex: 1;
+                        margin-right: 0;
+                        height: 18px;
+                        .ellipsisLn(1);
+                    }
+                }
+            }
+            &.itinerary-port {
+                height: 48px;
+                .item-inner {
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: flex;
+                    align-items: center;
+                    -webkit-align-items: center;
+                    -webkit-box-align: center;
+                    line-height: 28px;
+                }
+                .stop-city {
+                    margin-right: 7px;
+                    font-size: 14px;
+                    color: #999;
+                }
+                .flight-hour {
+                    i {
+                        margin-right: 3px;
+                        line-height: 28px;
+                    }
+                    span {
+                        font-size: 14px;
+                        line-height: 28px;
+                    }
+                }
+            }
+        }
+        .itinerary-start,
+        .itinerary-end {
+            .itinerary-cell-item {
+                height: 65px;
+                .flight-time {
+                    font-size: 23px;
+                }
+                .flight-airport {
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+    
+    .icon-hour {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: no-repeat center url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAwVJREFUSA21VjuLGlEY/WZ8RcFHSBRxGyuLJIqVWKSQkK2XbbQUjOCvSJVfIWyEbbVKJxgWixSiIqJJCgtZWNbCJERXkfWd78yurs7OuGOyueB45873nXOf51yBNJRsNqvr9Xqvl8vlgSAIHqRwvcP1S4fD8SUajc4fghHUAhhIODk58et0ug+LxeKt3W4f22w2ndVqfYKcwWBwfXV1Ne/3+yZRFD/P5/P3yWSyyeRLJUxFonQ6/dxgMHzkpMNQKGTyer2ixWJRyqfRaETn5+eLcrk85s4VuGOJeDz+Sx58j+iWpOn3+58Gg0GTXq+X5yi+z2Yzqtfr40aj0eMOvkkkEt83A7eIMpnMi+l0+i0QCCzD4fDWNyR1u13iaSS3272JsVVvtVqLYrEocqMzlUr9XH1Eg1ROT0+fceUsEokslEgQlM/npZ+UoPLw+XwiOsoz8fUWU4qUiLDwvJgZni4HAlUwaDKZSD+OVwuR2tFRJnMAE9holECxu7DwWJOdCHt8BBYwgb0mwhbG7tK68Fr4gAVMYEtEOIw4J9jCWgD2iQEmsMEh4sTjMKqdk32A5bHABDY4RJ5HD592bYdFjqThHWrCG+IAQ/Pwy6NtAjk3JAuDefR1kROt3lkPxQ6L43jVoOW/UChAVLWESuLLU9cR8eCkmZYs3q5kNBohopTL5aharRI0bleBwvPUXYrwE0g9VPihwqedYrEYsXoQn3qq1WrEW5cuLi4UU4EJbHCIMC34CaReMVrWaDabifWQjo6OyOl00nA4JBZRWdTNKzCBDQ5pW8O02E8Ouadmrergcrno+PiY2u02KeVgSuFRwF73AsLHFvGpUqlcc/1RCrCAyWB3osqLtYQzwrRKpdJuaV53T70CT2o2m7/Z294BG5Fb5gZ35bYf8KRddqFOQYSOcocFvgq83HTZLSIAwGV5uGfwk7+xch5Jj0fyatNdgXuPCI1wRpgWD/v/XU5AhIJFlF+3IL4rXYSa4KD/03XrhuruubpA8gg9EGF8gXRxZzpaL5B/ADD57RLNK9wjAAAAAElFTkSuQmCC");
+        background-size: 100%;
+        margin-top: -2px;
+    }
+    
+    .icon-dot-ring {
+        display: inline-block;
+        width: 15px;
+        height: 28px;
+        background: no-repeat center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAyhJREFUSA3FVzFomlEQvv/XquiioB1+CApCh9CQoVtLNyFTQGmhdHRROrQg2UrHJlsolC5mcSyFFhN0EUqXQKcqhAxCXSKChSA4GRo1sfc9fD/v//PHaPzbHsjdf/fuvnfv3Xv31GgOmkwm+t7e3kMemtY07QFzg3UGXPm7y6zL33Xm+7lc7jvrLmGbRdosY6lUCgyHw1c8Zot/d2eNVWynLO/6fL732Wz2t6K3iNcCc4ZPOIt3PHrF4jH/R4czL/AKfHFy0e1KBtOKxeI2889suy0owq4gxjTWlQQtCoByph/Z6Rk8VfL7/ZRIJCgej1MkEqFQKCTMg8GA+v0+tdttOjk5ofPzc9VNyp848+e8AhOp8EgB3DCMbWYvVJ3X66X19XVKpVKUTCYpHA5TIBAgXdfFDzJ0mNTq6iqKjXq9Hl1eWurrfr1ev1OtVr/J2GbG0z3F8pqErDY2NigajZq6eQQA12o1wmqoxJN6KvdcAE+r9ycPMvcUoJlMhoLBoOo7t3x2dkblctkO3uFqv4dqF8U1PTImKJYXmd4WFLODL2IglkIrUyzSuaAAjnNq0tra2sLLazorArYIsWy0BUwPF9QjNryURlQvCsnjsdSdNC/MY7EYNZtNuri4kL4hLrSvyDYtNeCoTt4HVbWUjFiIaaO0zpWGu9cknFO3yR4TmMhYXPYSDJeD2+QQ00BxWYDljeQmuD0mMMVxchPEKRYDWdS81BPsMfqpSfbbxjQsIeAysdEvZGwBxoXvNjnE7GKP8XIwCV3GbXKI+QMZ76tAaG18ramqpWTEQkyVONkDHW8kVuK5Igj99OjoSH4uzRHL1qNPgYniQuPcVRGOj49FT1V1t5HRHhHLRrvAFMcJDzM2duSA8Xgs+qlDNcohN3L4oicjlkJoi8AiAYz+yLMoKANEH0U/xawXJfg49GK8Tgry5Wm2oEql0tzc3ER3eCyBRqMRtVotMWt0mZs6Fgqp0WjQ4eGhfV8Rciefz3+QscULRH5wtf2zx54FGBOYgr9l8bWc0JJ8h6v4DS+z5d68AixB/vaD/lpgTOC//IWRmYPz8rv+p+0PaXh5naHnTUAAAAAASUVORK5CYII=);
+        background-size: 15px;
+    }
+    
+    .icon-dot-round {
+        display: inline-block;
+        width: 10px;
+        height: 28px;
+        background: no-repeat center url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAR1JREFUOBG1lU0OgjAQhW0jl3ABJK7ccxA00ZtgPIIJN3GhPYh7VyTAgkuYgO8Ra2rjHxMkgfkp72MK7aAmL46u64K6rlNYnolSasbb4DfwzzhNGIYG9urLlZ8oy3KJXA7x3B9zY8AKxFkcx6envA0A0FVV7WEzm/vFApxHUbSDbXn/1IokMGpZALR0t7z0U+Y0MXBkQnqgwhWnrwEKAMmlIEfH9x4olLtu2/bgDIhdrfWGFaZigicki8DEy4tDsjReZr9oxRRHSJZ24lFcTrkZhQQIWZzyeSwgWQSaEYFGocwAa/EC+7EZfHsoCiuwpxeskC1oUEN4A8/I6r8y9yAC8faj1raxx7K5t6DBUMKotVX/r8HaJ9DyQ0l/ATfTWZVFiRv4GQAAAABJRU5ErkJggg==");
+        background-size: 10px;
+    }
+    
+    .icon-dot-stop {
+        display: inline-block;
+        width: 20px;
+        height: 28px;
+        background: no-repeat center url("data:image/png;base64,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");
+        background-size: 20px;
+    }
+    
+    .icon-dot-transfer {
+        display: inline-block;
+        width: 20px;
+        height: 28px;
+        background: no-repeat center url(data:image/png;base64,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);
+        background-size: 20px;
+    }
+    
+    .icon-flight-share {
+        display: inline-block;
+        width: 25px;
+        height: 13px;
+        background: no-repeat center url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAaCAYAAAD1wA/qAAAAAXNSR0IArs4c6QAABNpJREFUWAnVWGlsVVUQ/t5977WlUBuKVoXYaFBwY4kSjfhDoSEmEBCoEDRGiakghEpdE40h1VQN0igKUUwgmLqk2BaESNAIVi3i0saoBWuboLFEpIZWq7XbW47z3cPtW+7S2/4pnaR5987MOWeWb2ZObwBCatX0yTCMrQgYhRjoyyPvvKeMrE6o+BFEYo8Eqlt/D2gngk0o2pCDeUVhTMw/730wDfzrT+CzvRHUbOtGJDojWDYzfxeKSmZh+bowxo0fG07QStp6zZwgjGAILQ2XGyacmInRpPY24MTXI7Pg9uVh+mCYNeEXThXrgfLV9gMrXwAeuBHo67HL/HA+3wdw784zfrRTdWi71LWRyh3izQgCF02xK43PBSZdCmRl22UWJxYFzv4B9HQD0YjF1b8rNwpMbgL2bE3l8y0eB3plTYesjQ7Y5ec4IVeJkyAkCAxn2CXkC1Q96expoGS+VgkEgIwsIFMcz8iEdExt8EA/sGGetFExPiJGD/RJlv/TMq6sOAgUTHc8ZojT09bwQCcKuPCTdZnJnd8C2ROAkEMwknXTn5mJXnEoOyddMvju7cgzK3VKwxK1kKiy5RFezQ2DG5gPXR0CmX+A0gU6eozm1BnA468n9LjugnMj6qWHgF9PyJ7MpPDTA6GU3ocO3CAZKn4WyPF23tsRYjce0wcyG3vf0BFdXJwwkE/1+4EfjwJrntf6rAGveiF0CiVISx5M3Sf97a1ygZjAzQd5OzLz1tQtPq3W6b1qdiq/uVEMl75+rRSsH2JwmGXWiRexlpgdH+TtiI8NRqRCvO+T7B6q1IXutAmd7e4Cbr7DSWrjjY4jz1XZDHFl0CEf5O7IBzt0EWaO0y03KIXZfkpj/5i0wWT6rVmi97fcfWp122Sx9/dojWXrkjWBowcA7s39CB2zE8ovn0kmlKxil1pju39RBuYQ5O5IvRzIQjP7vThjzRAWal1N6sHk5V+m+Sz0/l49A1gH6Y7Mvg24cpaeO+ndisa2/QxUvazb7cLV/utOrZiqhkWnWu3qXR123nA5HWeUeu1RpdbcotRHbysVjfjfQXxwz4hTKk82AWX3AAvuBu57Wmu0tQJPLQOWroX8K+BevF9+qKe4CVXJFOeHIcdbQ7bxCPD9F8Bj20VPEPDLcSAm9RGTDFtTntmeu8jJMvh3pPU7YLMYywG1VAaaRQXTgPWbZWpvAn6SyV36KpA7yZImfve/KUaL8YQqcc9nOmHBixdGXkkO7NRXFNYK72f849WFMsLbxRH4gtbhKqXuvV6p6m3u6W5vU+rJJUqtnavUySZ3PTdJXY1SJfPdpN58gZaExIUYicbDwKZVwDsS8Y1yM71LoONGLHa21Suu02u++dhN05nvc/A5L5bkugnMe9V7FRoGW6Tdzil0VR0UEP9P7NC6B3fr+9Kg0OGB3e2HeuD4V0DDJxpuDmp+WO41cuFkifAeYEKun30SOsT9w9I+WZhWISekqU90/N0tAOfQxIuBhfenyofxFpLi65To5zl+dBiuE9bBZlFLMfuh8vcl69LFrIHoZ02yDm/k4oNhflLh14jRInaxkTpBm+tqI/QhWHZ13jG0NBZLOwzhkoLgmPmSwkwcqoygdvu/8u/wneYFR62YNgXh4CvmF5Wx9oEuHi8NVLWc/h9GDthBxMwZVAAAAABJRU5ErkJggg==");
+        background-size: 100%;
+    }
+    
+    .font-red {
+        color: #FF5523;
+    }
+    
+    .font-green {
+        color: #53D96A;
+    }
+    
+    .font-lightg {
+        color: #09C6AB;
+        ;
+    }
+    
+    .icon-arrow-single {
+        display: inline-block;
+        width: 20px;
+        height: 6px;
+        background: no-repeat center url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAMCAYAAAAQw/9NAAAAAXNSR0IArs4c6QAAASFJREFUOBFjZBgAMGvWrJv///9fKSgo2BUWFvYFnxOY8EnSSg7ouANAs2s/fPhwB+jYjP3797PgsmtAHMjKyjqRkZER6M7/4kA8/datW1dmz57tj82RjNgE6SEGDLkdQMe5o9l1BMgvSU9PPwkTH5AQBFnOxMQ0AeYIJNoGyD4xc+bMVUCsDBJnBDK2AGlvEIceABi129LS0ryBoccIDMXrQDvVcdj7GyjeywTUQNdoBjrsPw4HYRWmq+OQXTBnzhyPv3//bkcWQ2KvBrIrgWnxLs7sjaSYJsx///4VYDEYI5MMSAjOmzdP6/fv31eRHHgTyK4AhtgGJDEwc0BCEOi4fKhDXgHpBjU1tdmOjo5/0B0H4g+IA4H50gGYV5qJqeoArkdpPoKvlq0AAAAASUVORK5CYII=");
+        background-size: 100%;
+    }
+    
+    .icon-arrow-round {
+        display: inline-block;
+        width: 26px;
+        height: 6px;
+        background: no-repeat center url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAMCAYAAAAtUZ4rAAAAAXNSR0IArs4c6QAAAdFJREFUSA3VVr9Lw0AY9dJkc+nkHyDEH3R3cbCTVQddjHsJrbgoKKJDJwdFFHUqbUMWJ+viotapCg66+4MU/Qe6pINbbOP7gpEY76xLUgx85O7dl3vv3d13hPV1earVar9t2+tI0/L5/HCX9EiGy+Wy5bruSTKZ3NU07e03Ekk0WK/XZUy02Gq1XpBTQNyIcqPGYeYaHAXSQppIm4iTa6hSqcw2Go0HTFREDDDGXEVRjkSTRI0TN2kgLaSJtJFGHi8LgqVSaQz9PcR4EMdkV7lcLhPE4m5jZ2owMxnivUV/DaVw7+Pe1sHIIIBtxLw/EHofhPqxdyVJOmy322FDtPB30H+K9yaMvTJ0yMgqQkHwHgu7M0JbjlU6xypN85KiwsB7Af4Z8DLwP4NnSMDlAN/n1pDgg38BezXU7cglEokpXddrvXRkGEYGR+5SoOHryHk1RGcPiRqMcS+FTqezgvGeGvrUEPbz41L4dsv52TA2h/YOwjuvVD+yLKey2eyTnxPn2zTNUcdxHgOcFtob2IizAOY1uTVEiaqqppCxhGhSQWLC5fDHcfUD3E3SRNp4ZkiPd+R4wtLp9DvwIn59junXB7u0wMuLAwP3BBZ16y+/Ph+b/79eXmy5NwAAAABJRU5ErkJggg==");
+        background-size: 100%;
+    }
+    
+    .flight-tag {
+        display: block;
+        width: 30px;
+        height: 30px;
+        box-sizing: border-box;
+        border: 1px solid #FF5523;
+        border-radius: 6px;
+        font-size: 20px;
+        color: #FF5523;
+        font-style: normal;
+        line-height: 28px;
+        text-align: center;
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        &.tag-blue {
+            border-color: #41B3EE;
+            color: #41B3EE;
+        }
+    }
+    
+    .flight-icon {
+        width: 8px;
+        height: 8px;
+        margin-right: 2px;
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        &.icon-3U {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAnlJREFUOBF1U0toE0EY/nbz2hCTJi3FtGltEYrGU81BxQqlUJuDoiJeKiIWH4igXnzgwYs3QZRC8YG9Cy1IBQuCIIg1eNImVdISCRJNU5PmnWxe7o75BybYUgd2/92Z7/HPP/9I2GLo+TzLh8IwZtKQayokVwdM/b0wDQxIm+EbJrR6g1Xn5lBdjkLZvZMTFZuCciqLauQ7ZLUKx/jJLYVArul795n69h3b7CL+a+EVjsl++NTCyLTI/jRYdvIpzL4DKAeXQEBB+jdavLsk5/kzqMzMohGJcAwXKL0J8JTtR4clSvP36GgLQAJ6IMAyT6ZZ8dU8Sz2aQseVSyi8eMmNoesaSz2YZLQF4bZ24w6LjB1jlEl5Zpateb18a1QjeghHgpXQEoMWjzMiCLKI9USS7zcoK9xZzItIdSBxnur/QCROQOEqyESMeXq5gaSthFn06m3Yf0aAIyfg8B8GHV1ek2HM15pHl4QydBAGj0fSVZXFr91E+UsYzpH9MLjdMErublgd22AaP4daKonMs2kwp4ubGawKZIsZVv8YL+Tq2QtAc63zuB+ZhY/o3ueDLLe1SUQwzC9ATyQgd3XBoQOCrNfqoCNefTgFY38fFzb+iEFLl2DeOwjeifrnRRZ//BwmpwNEIFeTw4lGIYdGrgApl+VZUaRRKZTQfmgI7XdvgfeB7BuUiFwMfYOyx8tJ8sgw7M0UBYmyouwoW3K3X5yA1BxcUbyoH6i6FMUcnQK1OPUFrf06dZpp67HW+kaFJqv4+j2rLi/CYLOB9fTAqpihqRXUg1+5puv6ZVDdhEHrQ0xQpLtRj0ShrmdhqTav8/ZOWPp2bCAK/F9iWVrruvRUMgAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-8C {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAfFJREFUOBFjfPnmy38GIBAX4WEEsTNadjGwLDkFEiIKsIA0wlQ+O3aMoGY7YXEG/cUBDAJ87GBtzDDNl248+9/qvwLGBdOhi6IY5L7/Yrhz5y1cPHqqOYOSmgwDDxsjGLOAZECam20mwRWBGLY1lgwOemIMKws/oIgfKb0K5F9lOPT2JVgNE8jfp1t2oijy8FBnyElzZXj1nZmBy1SAAeRsGABpBGGQWE6iAwPj3Jj5/3fsuAmTZ5hyo4aB8ccXBjEZCcZXT16AAzi9BzNs6o8XM+ioijKygDSDTAPZ9NVECK4ZZCLIEBANMuh2iiXDueAVYNtBYu/efwFRDOAwAGk2rXFn0NOQYswrAIuDCZD3bt57zbBizUkG7jPv4JpBkpO9ZoINBhsAcsUWEX6wAMxWkCJQFK/adun/4ZbjIC4G2FyxnYGpap4TWMLnzUewTTBVh07d/39+067/qn9eMIACFRsAWcwibaQHlNvHAOJ02ugz5AF52KIVmwG529IZWEDOgIFvzi5gb2QbTAALgWw2r/dh+Pf3NwMTMytMGZyWF+dmAMcCTOT39fMMm1c9hXHBsSIqyAmMmb9AMRCGgP8cPODwAfEYQ0UqwHEN4oCiE5RICIHaI3ngGAOpY0EPIA8GAZz6QTFV58QD14xTISkSAGbmxkyONQM0AAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-8L {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAlhJREFUOBFVU0tPE1EU/u7tTAtTW4EKUrQgD4kNGh+wMkbjUhduXBk1LFy78gcY4/9wady4JWFj4o5F08RUrSiKxcRSENJHOn1M517vPbczLTeZM/c8vjPfeQwTwpfoH/H5K1q7e2ClFrpbebLy0xJWdhXdyg/Sxx7eg7y8AmZx0i3GzEV4PXiFX+i9eQm++gX2yiR6W3XIBlB7J+Dc4rCvLqD6HhhbnAdLJs0HSCoRZHTz3xG/6SN+f98EZDtIf2gj8cxFr1xB9OzFAGL8gaaZ+EeeMW4LiJJKuqfexRjdtUMeNE0p0RFIKUwsySERnwVaSQudsiptLUFJtFvrnZ0M+HGdooPSrSEs5MIk5CxHLG2yaz5a53OA4oHu0h+IGhuGwHRQmUTXh5jLgk3FKUCDWOqY7rocYuQuIXbjHNhINEwSMuDRiDHmGmimIrDKkupvbcTAVSPlpo1yIY1Lr68Dfg+IGOgJBrxUhDyzTIm8XIqA8Rd1msqpV23MXPkIN/c3BOvAkIFoVOG93UT0WhXOI1VO6dAw6kt+R1A/9EKNqnIDxpRAjyTiOOA/C/Aa/04AqXZlGf0NONMemp/2wexBI6kE2gHXJaBuom5acPRE9KNt7XEzHbQ7gXswhYhtw3q8Tg49geBoBoEujyaApJoS6zdcBYVNZHEH/t3bcNYyAXbwviAoSXK5YmwxK9zEsIm9ag16Cv72DJob32gD9RLpY+U9oi+KDhIPFsGEKqU/RivY6cjEOGzehrszD555DpxXTBX48MBFamoa2FW/pWzCf/oElgIHuP+p++lloGaKlAAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-BK {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAftJREFUOBGNU01LG1EUPfMcIwU/ikgpVBHBoFK6kZjiRigIguhC13UlClkEd/oTiu7aLASFbtJtSKEl0JWhUAQRFwZUiChiBREJKkIwjvP6zk1nJhOy8C1m3rv3zj3nnvPGQoPl5D5r5ygP9eJcsqp3DvbkktWgFKo+6GwmtSoswTrMQdmjkn7KLoNN62t5DnWtnHzT+tM8mvsf4HYmYS+kJO/8+Klx+Quusy09ahmFGLjfMwHI64lgbz5WpZQwIisy9BjZQRVkZtugO+0xRKanBL2yHtNPOxtAPAm86ZdyF0m4Z2nZ+wyufye03ivg8bgFbrlHkkRhrCm+iNL4LKgFLo5rMasiXp1u6bb0V1jD72T+pum1KpJBoR5EftX3wRJtjA5k5AmMwz8Z7a5CkyrfIpj5nG48LLRIvBaScW9+xlX09q/kSZWr2GkQzaLigi6n4HEz4KDY0R0EuCMq0T3Ex2JRPCcrxjxEj2ltTES0jeL0nYhkYuW/CAL9lmWEK+8XNAXm7Hpo0nchdJHYmULad7tQK9VLRhY8l0YT0uvl/aA4wREjiV3Lt5FZdmYxkSguYyyqNM+ALvHjm9YjceHu7QjTCF0kOzoPHGRllOhBXgr4OH3/EdG2bqHdbs5qZg1dY41/Lt8+CsbLVS+k3/X/JqSBl6Tqz/2d/wFDNxDPlYKEhQAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-CA {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAgJJREFUOBFlU71PFFEQn7d7d3CLKB+BRCosNAGDdibSEEgoCBYWYsJHpbGyUKj5ByB2hgawEyFQQizkI1RECz8iiR6hhxBo1uiRvbe74/vN3r7csZu8e/Pmze838+Y3R3EcMV352HypK6poa1tfEHLweobjcplzjuOq9AL7VUK3kFfh5hbT2gpFHTeJPu4QNebJWVwmVSzWQrO2XnrHkVJ1y3/2kkEY+36msjqGYG7eAv+tbzCHWkAA674HHP48zBKEs7Mcf/shwZK5oUXeCX96xg5Cmw1N0sfHjHLDR0PCXHnYLwBk/TvyWGzcW1CtgabFBwdJhqPfEoQs6DKIYYMImPL2nrVrOQhySGlvFmz5eCtIKp2dlhQxWIhPCRwxtJatcKPRyJhcBZeX5F7ziCemSGSEu/RLLrm1KwkyvwmBPRpHxmMuv3ym8NU0qdt3JJKfjFiEhEfVCty7PaRyeRmsgv+Houbr5J6fyq4+vDfkrgo+7VJuZdUOnxC4nieM8cJbSiXS3beSLP4ZOW3thuhczt7wkAXbMmBYrU2TwslxGRpprNEcPYCNOMiOBfVq/zOE0QQJ9NYXF5zOggAMWKYRCCOpTGWVwLaMix4F9+6T2t8h7u1FMlJfv1M0MEA8OkhNT8eUfNUeqapcmfcguzo5FYKgVCI0M//ieV0cKkCzUdB/iml88+YNFJIAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-HU {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAjBJREFUOBFlU01sjFEUPe/7ZiqVJoQUiybEphQLUpKmYcGiJIqFdGVhga2fhUoXhIWEjViLRcWOSJhKNMLCSDeVsjClbSIs2vhJm0wyQfvN9653jr4a3OSb9+47595337l3HBosX8jM/fgOq9WA1jVCkmJBq5+ZgWtpgTUvR9pUdDFMGwb6Tx/h3k8gWb0K1rkTTJRduixe4fo1+ahU4GfnxHFdXXDBCgoevAM/N4u0o0PBvKFeGrLCzRtKYPv2Iu096MjF8DCy8ksklXewYImFg/RpWcGxLK62qf2327QCbsf2Rkjc+Qcl5EOP4fJlK83u34V9/oJ0y2aV6Hp69E7dGEJZka9Wzb8oq3w+g/zk1AkkWKjKcevWIg9lSQOWOTVl+PYV/PzYm6VglR908kEPmqsdOGLNTx7CT05KxHx8HIUL/bBHJRHijzvUi/rpsyj2HdWRdXfLRz49bblz+igcfa2LZxHzIyP/Y4ErJQlm23YpCdeYSMl5QfiyW7f/4uiJsTyuFIyBfFK8lX5jNcRUCdu5aEuD5F6NqgMRsIErSN6OyvVbw2BdvRghtThZv0Hd0SDVz/eDQ/Nz/2EU2zeKmDIgCEdjcP7sufbZxAdQdArKqh3fh7Y2HXBkZaF1NvYa7AiNE5rs2a3/AX137CTs3qA6Bw5IfLPvO27sOUkanLCnWHGgqMf8mXN/+CFWXSCJAJWOZCbhrNO4pxEjT0lYeTSSCDYGR+zfVRUHLo3YL1tlwKGwfiFkAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-CZ {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAVdJREFUOBFjYBjygJEYH3z89vN/wqb7DJue/kZRvjlcnoEFRQQL58vvv//tVz5guPASVXO4Fj+DlwwfIxMWPXChO19//29ffokh/s0Vhn7me3BxECNGVwDMx+kCkObpc04w2N84zGD/8ylY8W9hQ4alUpYMjKIcDNZC7LgNOPXm6//w9Y8YVhxawyD65B7Dz3cvGNiEJBiSGR4xMNgxMPz1CmTg52IHhx+GF0CaLRfeA/r5G0NEYB7DISNLsE0gojmqjGGZviNDvCQHXAzFgG1PPoE1w2TvvOYEMwU+PgTTj34yM1hKszGI83HDYw8eBqvOPf7vuxKiEGbAl39vGRrU/BkYghkYbvOIMexiVWDYrcvPMAWmAEiDTeq6+fZ/5ZZnSMKozL+KHAz8D7kZvDX+MCzzlIPbDlLFBLIZn2aQIub7PxhArgkQR9ELkmJgesDNBWYMXQIABox0BXBQBocAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-EU {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAhZJREFUOBFtU89PGmEQfay7VJQCQUi0Slq9oPEX9sqFxL/ANPHSpAcPHvgneui5x1566K2XNmmTXjxooolpL01UxASVpGjEgg0iLBjLgmx503zEJbzD7n5v583Mvpl1oQ9swjRRKu/JW38wALcvBlcHveF6L9Go7ttnG8tCP/ZG5f47cyL3P7ltO/ws4UikqQT3VtNmQC31XlHwTcTRuKl0z7eZN2jmPoINKlISkDj9+Q2+VBK54gEi1o68vzz+AMu4kmfFaYevcPzjC9rNqiSRT7DMAwxW36HgHsM8CsiGP2NqbkoVkXv26JfEXLgTCN9voZQPSic6q1/vJiVozCqgHkyIWPfMQTN02C0TLt3X4YBaKgpveQfp4h1C9ROMjM5AY/Va50Bx2gqgHVkVxykmKCaaQwsYDiSly5DXI9x1MQO9Wq6AbtcRlawcWT947DZaT1tAHhJPg2lvdwqs/BBs/SHYEYsR7NjMf5dnjRVJcESEClKtC9nnQg2h0azx6TWU6ncyvoB9CfrSC3LaxafuiPk+NPEcspqc6fnmimiYaHI0JmaSYIfsimJVlfyT+Nv/680DwS3kInEXuDScN81VIiaed1fwtdzCi8RrGJMvZaUdPweTKC8o4Lj4edxIgglpNlvXDL9oHQkYxJ+J/wMrU6zclgSL63jkX3JoHAcGcTPbf6/AJaGh9siseEAvuExeY8Ch+Qet/goBAkCSVAAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-FM {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAUZJREFUOBFjYKAQMJKi/2dB0X+mvUcYWO5/YfijyMPwU0aKgSQD/vNo/Ue28FeKBwMTsgA+NkgzyFYUIClBnAEwm0FORwbMWlqEvfBb1wzs7H/ONgwMQBsZnr9gAIUDyP882zfgDwKQZrDTN2/5//f7i/9/nz79DwpIkNjPzi6U8EB2GZgN0wxSCNL86smL/79nz/0PE4dpwBqIIEUg//73MmP4GB3H8PYtA4PQ+TMMP9dtBkfhV1s1mH7MQPziGQDWDFZUUcAgLCbMIPIK6O/Faxi4D98Ca2R1sIIbwAxnARn/whL+//71g4GJ+ScDk587A7O0JAPjs2cM/16+ZPjz5gXD//cvGP4JsjGwLV0ADzw4AxQ4bHN2gFMYsqHobPTQB4cByGaYZuS4RmeD+MjOBxnOBPIz47ZTcIuQUxs2NijxDC4AAFwNmrAMgX/BAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-G5 {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAWVJREFUOBGdUs1KAlEUPrdxKJOZIhcj4kYoW+h6KHqA0FX0FtHeh5gX8C1a+gZRuK5FJgyBGBNkNGkGk938Tt3hOtlEXpi5f993zvm+cwUtOdr9UF6NIzKW4YPc6ATUWzVJ/CdANxjLw7sR+f2Qad2DYnqAJEFPdrEn6emjQBn9UF+DXDkf6Ee89qpbPO9fDsmrRikVnN1KIKd1i4xsQUD36WASl992HWqUbPFrBSAjm5HNs0/bpkEnGxmqFR2C+/hewleZGgBBMABs3U+o9fxO/vWQz2CgZa9/VaDaUi7Z5LtO3JnmNxhAeEL0xhUgQsXJMU54N49SATm09lM6y52A/VDt0xOtNHfz4sG1mAbNymXMMAkX0L6IrOUiggyaOY+K5i7+2MR6QdaxqKCWMwnuYyjNOgbrn1043hHQrPuiZCXJ2McV6C8PhKPNtTl8L5ryXvmiLuMAOFj09uE4Bj+imaRkgE9EIKDbEKCILQAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-GS {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAg1JREFUOBFtU0toE1EUPfM6dSZjm1CqNTSBumjBQCtd+IFKwA/WD9a1FFFa6KbgToSuhO4KbrNR2pUgWNSuxA9ISyELEXQnFRf+YqeB0DQkM5OZ9D3nPuwkk8yFx7v3Ps65v3cVtAnf2xP223dovFmHU9yRr+LECOJXLiN2IQtF7VbaIE3Te7IsiiOnxd+u/shTPjslrPcfRBPRopn3FyJBu1M9gi9B1Oc0QTqR156vhklqj3KR4MYaE3wX4fOZSaIgk/1CIRJMETvALWS1+YzYdz2hlpefwhi14bhD4N+KQVHdw/VAP1D4BgPb4rAH0ojNbcHZ2ITae3QV6rqFOL7CXkvDfVmGkfSASebj+AEW3gMNpZWe/7YN97qB3puvoJiZjNCGfyOxaAHHm4AAScoPBvNUX8hFRt+9c2BupQr7tYY/N1KgFKOE/4zyApXvh8B0IylfVdPCzoweScKGgEbS6GDRB46BadkzwYNSiaH6UJcpB05S/NIGcwXZbDKJrH+2CvXqeb9N+XzHGKkv3J935BjJT3/h0rigL8DYxIRy+O4tIg6Eximb9tgPQH3xmyjFv+0vg9i+qKNxbQZdqZQiF4MWqDJ5G9anfEDSqlDK8SMl1H4BVCYFTKzkwktFJNvTsx3ltC9WaXEptAdhFj8s/XHv2QvUNz/CsUyZSDw9Dic7isSdacROjoUw/wAIUkbQdn3CggAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-HO {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAi1JREFUOBF1U79Pk2EQfr5SaCGQQqlJy6/YkpR2QgaiFQeIGxoNbg64wgoDfwaTg0wkLIQJMKhRY+oAASFB4mAr0dYoBSQtlAUKVF/73JdrIMAN33137z139z53r4VrJDP/1Jw/an48bZ239f+Sk8DN34foflUF19Y2/t2/B9OWxnLVCWKnLrh6ErBuJ8u48o/5FDGn0/04+5bC4XA1PC+ORWsl6pWpSjxs9SHbtwPtyKEBH9dCZXCT/7OAqSmNZgP8fzK2KmB2yII8kw7YduOPAnLtbvpECNje7VJTtC8ekOtYv4Ki3aOzliQojA8Ygpk51pKGo6cLSzN5uXPFZEbA5MLxYREvwxE8GFxDzrol/gpWjy9Uo7P2CDU3a9EQ2MGfhB8d60EUVw/w2t+MhhEPNpwZuAcCEpfztoAdH3udEA4ebSbBSmxRxfS+ER7uPDsTDnq7U/ZRKGlXLsUziZMW2yOzK1NZeEtkhlsBV8CgCTaJwsWujaf/RsjC4pCvFOe2OyCYTHNEnD+54Eg5GWrarEZ9shRFZWq9BPZIRiEx/rzf0KHMM5mSZNe9/NWpCQfcMGZnq+ShONGB/NuIoLQ6kzMxhUvGzeQySQKOkEko+3t5LLxrRzSbFptj5TmvsrwVlKvw4MIV6NDHw9YorKBBrMh38TMcwxccgJPRVS6/BYIKc1HDKne/R2TTiu8Naurq8TfxVRbI25cFx3nlY2ICFe2GNjnQTrSqxlH/BzfDCZziSf6QAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-CN {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAjBJREFUOBFlU01sjFEUPe/7ZiqVJoQUiybEphQLUpKmYcGiJIqFdGVhga2fhUoXhIWEjViLRcWOSJhKNMLCSDeVsjClbSIs2vhJm0wyQfvN9653jr4a3OSb9+47595337l3HBosX8jM/fgOq9WA1jVCkmJBq5+ZgWtpgTUvR9pUdDFMGwb6Tx/h3k8gWb0K1rkTTJRduixe4fo1+ahU4GfnxHFdXXDBCgoevAM/N4u0o0PBvKFeGrLCzRtKYPv2Iu096MjF8DCy8ksklXewYImFg/RpWcGxLK62qf2327QCbsf2Rkjc+Qcl5EOP4fJlK83u34V9/oJ0y2aV6Hp69E7dGEJZka9Wzb8oq3w+g/zk1AkkWKjKcevWIg9lSQOWOTVl+PYV/PzYm6VglR908kEPmqsdOGLNTx7CT05KxHx8HIUL/bBHJRHijzvUi/rpsyj2HdWRdXfLRz49bblz+igcfa2LZxHzIyP/Y4ErJQlm23YpCdeYSMl5QfiyW7f/4uiJsTyuFIyBfFK8lX5jNcRUCdu5aEuD5F6NqgMRsIErSN6OyvVbw2BdvRghtThZv0Hd0SDVz/eDQ/Nz/2EU2zeKmDIgCEdjcP7sufbZxAdQdArKqh3fh7Y2HXBkZaF1NvYa7AiNE5rs2a3/AX137CTs3qA6Bw5IfLPvO27sOUkanLCnWHGgqMf8mXN/+CFWXSCJAJWOZCbhrNO4pxEjT0lYeTSSCDYGR+zfVRUHLo3YL1tlwKGwfiFkAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-KN {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAdNJREFUOBFjYKAQMJKi//ft2/+ZX79G0cKCwsPDAWlmCIpmYLz/BUUVEwoPB+ffuQv//61bz8CQl46i4o8iDwNBAy7dePb/96JFDAzPXzAwh4Uw/ErxgBvyz9kGvwG3Xn79rz6jh4FBUoKBSVub4d+hwwysQENANoMASAynC7Y9+fRfcdMKBtZn78C2M0qIMzBJy4A1/pSRAtPMxsa4DXDdvprh39WrDP9iQ8CG/NdQZ/j39AkDo1sKA/fhWwz/vcwYerhlsRvwZ/OW/yArQM4Fgd9SQgyg6Pu7dx+YDyL+utoylKkLYyaDf8eO/f/iGfD/9+y5/3/rmv3/2dn1/9/Hj2D6P48WXOzv06dgS1DSASiu/wLjmh1uD4Txd9UaBrbmBQxfbdUYWNWVwGFyl0UALAkPRJDmn3mlDCzAhALCoECDxTtTTjE45EGa2ebsAGtUE+cGOx9sADiJVreCAwdm+d9r1xiYvDwYfh84xsDEKsXArKkF18zs7ARTxsAASmUgP4P8h45BYQAS+1lQBPY7iA1SC0pcMBNYGO2iGLhhPDQa5JU//cUMrLsPw/MAyBt6GlLw0GeERRmaXjAXlHD+i4sy/D93Hi7NaGTIwCwtDTcAACfzzw2p7HasAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-MF {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAP1JREFUOBFjYBgFFIcA462XX//f+f2X4curjwx++tIM7EyMGIbefvWNYdK1dxjiXqr8DIz//v39f+/7P4YJp14wPH35laHSRZbBVJgLRXHQypsMm57+houFa/EzNBgJM6iIcjAw/gcCkMz///8Yzrz7wdC+5zGDtDg3Q4GZBFgDyODp5z7ANW8Ol2fwkOIG8xkZmVANAIn++vWHoeT4KxRNMN0wzSCNMABngU0DSrCzszFMdpBhOB6vxGAgjvAKDxPQyazMDDDNrz5/YwBhuBdgJoJokHdAAKR4+9PPDEsuf2C4+RYSBurCrAxCHIwMdvwMDPYqQmB1owSFIQAAXkdd7fsMRuIAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-MU {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAipJREFUOBHFUktoE1EUPZOJY2zSjKmatDEltphFaWm1scYKKYrQ0EVxJcUqCNWNoKsggnblB6mgCxGMVJCuFHeC0kX94CIS1GhplkFpxXxMM23zccx3rp1nOzR+unHhg3nvvrnvnHPPexf4x8H9Ca/IMmVHrwDBiJYuVzIsVpqsMB04CH3fPgjdnVq+Jli4c49SECjOb2GrGqdcPbRw8RpVZiJUc/jXjfJ+mgFXwUlrKxXHrlM5Gl0fqBKVEimad/dpqkueQZKnXqwL1K9WwHz7L4PCIVT4epj7vZDHA9jsaNTuKZeVKSHJSM7nkC4Qtho4cKoql88g9+wVCmfOQ1/NQfD4YHx6H3JdPZ6/iyH4IYZQaJZpWW1GtLZsg8clYlebHZx0aYzKt+9CkX7eskqQD0zgMe/EuUcRCNklOJZBpwe7cci7Aza7CFHQQ1j+dDqe44pvwiT19jNlVSLe0I6jVh/mRAtTvHrKi+GhLtjMRs0KS6xMug0dbeCGDrOt6l0d0eYWtvp6XRg55v4rWD3EWNUqFk8cRymbh2A2IXjyJh4qIiZfz2FgvxNHOkzM706nhZXN2FcmRkCVMi2OT6B06wb7bfENQDd6AbMfv+HJTAxf5CocdTzcXU3Y22mHwbDxdzvV70mKn/XTdMNu+ry9mRLDI1rzVEtlUl/razpPilKt6QutD/hNjZySyVChfQ/eTk2i+DKMnrQfnwIPSEpJsK7ph7UW/n/8A5aq7NwMYuwWAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-NS {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAoFJREFUOBFdU01ME1EQ/rostiBFaiVECjbWBmqKJKAYfwgeQA9EbYzVqIl3LyR6IhrvBi/GcOFiohcxSlQCQlBMhOhFEBKhZG1okUKr0Ii01NqC3XVnml0Kc3gv75v55puZ954B20xRberbDxR9GIFNGsPs+i447QUINh5AdU0LDMXFMKim0QxEIIB2JR5H4NJ1GH2Tmn/LnnbXwdHZgbzqgzpP1CJIdeNiK0pXf2kQoiXWLefk8Fu8vlOC5xMLLEqBAi1yLKbkkom43QgTb9xGT/0VXGsfwFcpolCMoCgyl52rrJFzMUtbO4bOeNG9OM1ub2cvqGshEwgiHg4xqClrRDpT3+ZnLzB+tBFjvnlcrajh2KBfwIPeGYgL78f1PjUikfY1N8J8ognC4ToMScv4OTqBBrcTXe9G1QTcOScUbbEFLHFO8NAcXV2oONmAZAYoEQUsryXhKswDmurxanAK7vwyBBFlRiqagjCXKWAiIaZTF1BYa4T8ZhBi5h8H7TEaIanZFkNxlBeZ0efLktmpLoLz0H69hR2zXxDuluDzeBF5/JJjkul1iIkNhOdX0OfPDtC0s5h9plITROX4Mf2+6QGlVZdlbymy+sBcZBXfV/4iOBcFDY4s9SfOe4PbDkG0WiHcu6+3QY+FhljpPY20qk7lk7pvQ5sUc+GoknHzvAsGWc4o0UQKIx8DOBLysbfC0wyxzIpp/xKeDAXwsH+GcSpdU5/oPIdaV/nmp6DnSYNqcVk4eFj6zVemlZ1LftrRisv1lfyheKEXRR+Kktx91K/3mi12c6Wye9o8rKyh+rekJARS3wOfw/g0GUYkscZxdH02+27cOlsFg5ivc8j5H+rCJy2InP25AAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-PN {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAgJJREFUOBGlk19IU2EYxp/zna2JZoUb7ULI6P9FE0TK0U1/LFOCKFFCgjHvvBQKPEawrIvqzki8WLdJoJQXXSgRQReugmJR0h8imaFUa2fTQkWW+9rzwlkDt4vohfN97/t7n+c95zs7A/4zDPoX3yZ1cnkFu5vqpHZmpqbf65XBIRgLGVQ2H0N15xm4fT7j04tZTQ31LiZXwyPckMutaaVMGcI8HmjEx7RGMGLB33FCzPp3Vl9sGhI9FzU1FtdfZr+D17P7bwqNRHQUY+/8GM+24at3n5jZjI1Pi5Z6eo3ePZf0fDonxtoahWsvL6Oywo0L+yMo5gOvI/AowKofKPBtdX6oJdsU8xbtlsaj6FOpHc6Cgx4PP8GG/MkdvtOO42ciDRVs2yGGBSMr++T1GOykjfrWvVJTyCBP2RnhvNlnb4PkqqPvFAici4MeWhM4d/O4MAqdeHAjJpw19SGrBWpzYKvR2PVXxMbziRkszq+itf+QeMkYr+7F4ckoHO4+KD165Sf7lVrSV05G5UyizC88QvjWWZTioTud2GiaMD0uI/9egWpfldFuHWFaiMSHH+V5hUvMFMsAJsHTAWzaXsNUouHoLtlLcedjo6AwgI/TM9wupirvGlp6D0hezHkDh0uz1HL7/F09OTgl33pxvxwv1kjOP0py7tu6AeX4ugH/Cv4AWYDZEe/T6/IAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-SC {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAXhJREFUOBFjYEADh07d/6+WPf0/i1ASGKNJ4+beevn1v3XkYrhGkAGrtl36D9Lx8s0XsHhgwTowH8OUSzeeoWgEaS6eeBiumMV1JoprQK6EGwIzHeZkTjZ2FMX9s4+h8EHqQC6FGwByFkwzjEZ2KkgM5hqYWrhmEAOmCUTDbO/bcBVuA0gcpgGZDQsfJpgkiP7NEw3mPn34DlkYwTY2B7NBAR4VMwHMBhvA+mUpQhGQtfnWFRQ+OufC2btwIbABMJthBt1bfhquwNzdEcEW4YKzYQysXoBJgujXQl+QuRhsuAEw29FVaLOKg4VAcS8mzg1mP32KMJSJARowMG+AVChFmoIVgohINxUw+8Wbzwydle5gdmn5HAaYPgaQybDoA0UTSiIBK0clYGkBlhoZQdKghDKxcT5YpW+cD4OSoiiqLijvxIkHDCd37mfo7kxhKEy1AusFEyD5SRM2/i9q2ohVI7IgsmZkcTAblKmQszJy6gSJg+TRNQEAzb/I+4mUycYAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-ZH {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAcxJREFUOBF9UztLw1AU/pKmjWgF0UVbH1SKikUHF4eqKMHipiCIi5vQoegPcFBEcBU6Ozj7wlEEQXCQLg6C0Doovl10UrBNk+s9p2nQpvUOl5Nzz/ed7zyiiGC/QJVTjASh3X3yy9doD7RJBVrfOKyTewS2j12E5loVhm2MwFweYm9A3mr2nW1F+qyYCZHOcAKllgKKJhX59hAazm/YJlLReQd1ZpbJRPoS/xJwlEOE5SSEobMSKoOOmbtFzRI4Ql6FxSmQbPU0g3zqkdX4nEcq7V8F1m4SVnwMyvu12wO7rwVi7wWBjR2mqUlAYAqmzNZHB4T/ogR4iLiKvg8fqyugsfl7u4G2VvgGdCZitHNx82RZpMTTA+p83dKEC7JkEOIxmPPrqG9sghlq5kkokCN+ffMqMK9WSp2Wtdtra/AnDBSzZ9BXcyiXRUIKqX1u6J8eWFsGEI5CPAehhD8ZSDP3D266FVB5+pOU7mypWn6hcdnGMK8qzZtmTWDK9PvQUpXB5GcCYqVZu82RG+ZLdME+OmCZvwkqbY0yB5xFQSIKyJ23ZBSNUJ/LVcZ7vlX6s5TpNNdOr7ym6wse6R6k4/jTRFJD0it/2Vpg8v8AHcvK7g14d0sAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-VD {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAaJJREFUOBGtUj1Lw1AUPUlTiqK0OGkRCl3EiqtDcag6KX50cvYnFEeHDg4FnZwU8WPqJB0UBacWB+koLq2UglCwHaVFqYY0eb575UVTAw6aIe/dm3vOPTn3An98ND+80+kIVCoQsRi0RgPWWQFW7RGhpxYCh3vQk0kXp/sR6OGwRiDEpyDmlhg8OByBszDLsbO+Iax6XfhhPTm72RSsRmbNzKZ4XUwLa3pG2KGIMHd2fycgNiIhIIGoc+/yirsrYk/H/sA6OmEggenulMuuov5aT8zSZTdb05hAySaifvmum4qBJIqtbQ7N8SiCE3G+B1vPsKIjwNgojGwOopCHsbKsGQpIJ4Hf948RlG4TIPRQhSnzA6UbdOdTQK2NoCTQ1tLoVavyC+COkUyxiyVOGgenfGq57JeCVBI0SnrExTkCiQTf+cXOyvHQv5LTzt09u01510DZ4C2z+jlKaahCswc0Y714C+poS2l6voDAZALdlzbXDV2f//BKEfBJS6EcdmetRij3wFPsF/BopAqaM8n+Lt2v3jdHi6I8oJO2z7fwv5MfM0gOLtuc808AAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-JR {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAaJJREFUOBGlUj1PAkEQHY47iImJBiw0mGiMCST4ETUUdtZYmxiCjZUUlv4H9Q/4ldCANPoLjIWxsYPYqRASCiqVBKngjl15A7u5i4KFm9zu7MybtzPvhmjI6lTzst0sySHhv92d95QUJyRBNAptjAqKqEHmTZq69bomca4OtY1cUxHgRbZbSZLhOJnVDRKDoHy+ZevjMSO7uUtCVYGFtA9OTSADR2T1kuiuQL6tGMnAILt3iFqOkBx6OiObgmS8fOqgbiE4scaMKFsG3jQAhjFTpMnGhfaJWFjbmgAeZ3ZXB5QBQizjtd+Qb32ZUL5dLnPLBgTCJ5pNjziKwJhTVv/8iidYA3G6xA7Tl4+QXQnyxb9te9G/3FiHSlZHDGcnT9Zimx0o0/2i20Yrqh2AW3v7/Rz009jMMAkqETX2/9jcZNAhtHrMGFYeI2udr+kkvOROUAGQOxQlK3FP/kiEc3kDAMOBqVNLlctE84IcJ9WrO8l/QGFwagJcMI1mtsCiKl0wVGLlgfxj0x4s8FieObCmrsk+KGmBoIldHB+a3Kf45/4NNWafIK+1RY8AAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-KY {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAUJJREFUOBFjYBjS4Gdn139Gcn3ws6Do/++b94jT/u/jx///jh37f2/G8v//whL+X2Ti+H9W2+A/SDfj+8Mn/rO2dTDwbN+A4pq/T5/+/9PdywCy5b20NIPg06cMXLwCDNdFFBlU2D4yMGVnMrCqqkL0/Nm85f/t4HywiSBTQbZ98Qz4/1vX7P8FIUOwjdeYPMFskBhIDqQOBOC2gpyl8/guA7O0NCOIDZL8o6nBoC6nwMCqrsTAICnBcOfhdwb5++cZuFobGJiMDOB6QWoZQJpALgH5cZmkPtiAf+cuwG0CK8JHgAwAOR0WOCCDQM4FBxzQIFyGsSAb+q25i8Fg11YGBmCgPXByZ/j7l59B7sZphn/SvAxMdrbISuFsuD9g/gbJKLt7MLA6WDF8s7JjELS1gKuB68LFQA51UELBpW6YiQMAi5yVg+ALEdsAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-TV {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAWpJREFUOBFjYCADvD984v9ZbYP/IK1MpOj/ffv2/9vB+f8f2Tsw8GnYE6/195s3/2+0Tf5/Qcjw/0UmDrDtIMMImoCuEaT5tpvff5A4Qc33Ziz//0haFmwjSCOI/WfbRMIaYQEE0gTCP1PZ/y+fp/r/1+sowppBtiJr/LFB8/+/80zEaf7Z2QXWDPIjSNON28xgPP2E5P9X9/fjtJ0FFBggZ1/3z2TQTP7PwJq1hWHmT3GG/edUweG054Uow2/uTzjDDGzAmwnLGTSDrzHcL/vDUHfIhgGkqdQyjoH9kwpDjbUgTs0gCbABDJ/vM8wrFWLYf0iV4cK5SIYZ3tYMwTaaDMxsrIx4dcMkQSEN8itTQeb/Vece4/QvTD0yDU7KzIFdYDGV33oMYUayxNkKNQVswH9VLwaBazwMb6T2MJDqArhrvl+6/H//FK//Qq3B/1dtu/T/1ZMXRHkFq3Mv3XiGollPQwqrOpDtALQewugtVZXFAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-9C {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAZ9JREFUOBFjZMAC/v76/b/ryDaGB1fOgGUVdEwYymy8GJjZWBnRlbOgC4A0Z81oYlj9+RpC6vg1sGFffv/9z8PKjGIIhgEgm2GaQ3m1wIaA+CCscHgLwlAoiwldBOZskOaZec2MIAwzCCaHrAfDAJgkyN8wAGPDXAYTx0q379v4X6g1GIyPP7v1H6YIxEbmw8RRAgQk+PLT1/+ak+Ng8gyllnEMRcZyDOz8hhhqQYrggjDTLaXUGNMn1f5Hdy4sHEDecdDQZACpAxvw8dvP/9NO7GDoPr6IARZwq849/p+xvQDuCmwMkMsqHP0YWGCakRXJSnyHcz+8FmMQEH0F58MYIAtBgAnGANnem9kAFvz9hBVMgwiYZpCNr4umMjzPqQG7FCQH0gtPSCC/wVLZ0S+XQPJw8DB3MQMvHxdjJVQEFF6r50N4LCCbQQEGSiSwgPSGSoLUHwieDNYMk1P+x8dQu2Yq3HBGfAEGcnalkz/jvv2X/4cca4BrgjHWWDUwMIUZyTKCFKIDmGaQOKc6O9zfMHUgeSdHXXgygImTTAMAOcGwO0U0HIYAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-JD {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAftJREFUOBHNks9rE0EUx7+TbWGTGgNJtPmBgR5Eaig1YA9JWigechEqCPVQFS/xF8VDUFAvPXgQhJbSkyJehJ5aCi2ioGChCKUIolgh6vbUYJKSpE3X7W50s/vsDDTVxD+gc5gfb973M++9ecCBG/T3qJukLa+Qvb1NPFC+mooiPGzbIlvXiTVnQLsicjjAbBuFzD3YhQIMVYM7p6C4IcN3PgFvahD6eh6uSAgtAH3pHak3rqHqCsJVVBD5kWNKaoiO7AahHXM3YGbyDMITD9HWHEF7KAB+6dENWF0BfFrMUmD0OtznzjLFM0RWRcPhJ08hDySAn1prBDzB+toazHwR6otXYD1RdF65xHLpUdr5mMXR9AjaTvfi19IyOnp7/g8gVYXx+g3kZAJSOMw2Hz8j/e0iHMEgLKOG2noO3v4kfGN3WUsN9lLanFmg3+9XgJfzonheZxl64Dgk3yGE0pfRcWFYaFsApfEpMibHsVUoCVbniS7UozFRPG7w9cXhyVyE5I/8C7C+ZWk1PgJWzYKLKBYXgLrLKVbJKUM+2Q3PcKoh5hfiF3ZmZulLdwxyLIHw2Bz06hakUgW1r99FvvxVd+Yq2v1+hpuCtz/xAn2IniIO4VbeB/lbt6l45z5tPJ8m4/OqsO8rmnaVB48arWqWy0Kw17pNrgf0+AfiP/q7Qol7jwAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-xxbd {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAhBJREFUOBGlU01rE1EUPTOZj4QmaawzbWMHaqAiKI0Ud6JuXAr+ABH8CSL+ABcK4sKF7rpQEfykEJFCRURUKPGr4yKCX6lQTdqkaavOJJkmk8yMc5900lIiAe9i5r737jn3nMt7wH8G1wvesVvet0UDxYUSlisWg6yUylCTwxB6IVirrGHy2jPMPP4QlOcrFZw5fQx8sNMlqZqWd/nKVjCV7hkcxKGRgX8TNFtt7+aNp1s6b+6z46DW3YLrOt6Llx8xPZ1nGG1EQTqdxOholO0VF1eh7U5u5uvkBG40mp6uf/dyn5e8c2fvsNywmh6pqhTLbI/sdZ3B29wS6o6L8TEVR47uxcSEhvlPZWQyOpRdKo6fSLOO2wioM+e6aNdreHQvi5rVYoW23YZhmph7Pc/W+8dTEKVQZ4ieHyQ9++or8gUDVEBh2S77G7VW4JnI+qMiJEnoEJjrNmholy4+QfVnnYHoo8TCiCdkGNUGhoZibIjm6q/gPLDQ8KUSmKZb+LECdSCCk6cOg/dl9sfj7BbybQdOn4rCchOyLIHjeISIinxfOP8Q+vsFxiz7ICnMwxFERMIiTGMdmal36ItL0Ge/IJGIIJVSIIoCJ5Dvq9ffbLssSnInhqM8fvvS796eZee5XIkp1PalIAt/xQsPpuYwcz8LuigbQYW3Jp9vLEFrOid7FAfGYkCop2cUcHRN/gCfQvUTgqPIagAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-GJ {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAllJREFUOBGVU01IFGEYfmZ21tnZdWfFtXWpQ2ahLvRDLgaKlYGXTnXKiD2UEAh1iIKEDkFHFzpEhw4iQpfoh8hD6mHJlo1ITRaNMFELstXFdNl1/5z9duZtZ2IHwZT8YODleZ/nfd/v+d4BdjhqgVH2xUtaudJtfGosRmUqW1uj3/4zVFhZJUEHtVSK2NwC1HwOKDDQ9CwyPbdAogyHtwaZRwNQrgUMPZufp8TVHmiNRyDUusGVq+odtOFRZGcXyxAcvsMouGSwT1FY9x8AW44hH49DPN0GZ+dZWDweGBPoCmXhOyyJdWiS0yhQ6O9Hbj0F5+unYOEPyJc6yhfPo7KpCTQ+geyTQSBPfydg/QOUGBqBOjIG3u0CdXZA8nohBy4hOf4Zmzd7UftzBipvBYuEket7DNbWgo2PUXAbk5MkvhtDMjJhdK7sOAe2+AvK0jw0WYbc7Efu2XNYBRfQfBS8pEK83IXMaAjcPjcEqaoK6Q0VDrUIpbUV6eBDaKXRyycdeo+a0BDUzYIB5QdfwWKrgPt+r+GfIByqA5ueApXEyoNgWQehvh4V1V5s/vgKkmwQjx8zBFRkxAlW03yhmExBbGhA/tucIdY9cN69A+l6oCS0oyIcAX+wziy8VWyAWi5Huon6Yixb3JTqvmEujKnaJeB5u53T2tsheaoNmtpychf69hSvQ6KvkVu90IVaQUV2Krqd9T+Ibo6+9/o10kNv93QNs76qFCl5+x7FPfWk9AVJ33szuUNgPsfWfHHmC6XeDMNSeiH9H+BO+GA75Qfvcv2Tv1W75/gPybX8mzwPxxkAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-DZ {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAklJREFUOBGNkktME1EUhv+ZMpO2FCo+WmhpB0pp0NgKklRMNTRRF9bE1053bjUxLl27NEZ3RlcmJsalEiILHxEXbiANKhoNSClBKLVUaUudlunMde6tfQUbPcmcc8/c+/3nzLkD/Iep8hrRZniibimErusRvj5ptua+ONhW4VEvtNU4NE0l9KEv/ymgKRl2UPl8hYnwVgdyn9JAbrOcM9/EMfhjB9stFZ9AKHSCE6xIH3oAYjKD6Na0g3pYfufQW9dQ6ruKeNe9cjnCIbWS/PsnFDMzBHplbQnIT3QymF+xYu1sgsHdC5cg33/K1lxZrubZcN4LqFSloBL14sfskfKh227Mv9TgsFngv3uG2yZASgpB1I/EOIH5ha8G/qnxzCUifMyDgRshTL1e3v4JXIvAaX3Pt8EUpObz27BwwomH18Zhc+8Eh7Gf7JqmQiKCu1urHc1eHiOTr2IMiluAHv3WaKzYqVvHER7dB56c3oGbAxqCb7cw8S3LxJLZPJnM5BhQgSqx/7CE89fDyG4Usb6a0jvQjd6nZ/o7FhMizslJLCVUzL35AIeWhpQvVIqyGAh0QZIsCB0dxPCwVBsirR6JqrDGZGzqIDXD12UWxUQGB0wljIz0IDTkxH5XO7xSB3jewFV/pJPONlzwGZDxmKD2Ghmsel1MwDcagBw8iJh9D8s32kwsUlcdGk3oFV6cl/F4TgXUdRgWCxi0m+FuUeC0tyLSb0Wku72BaUiYiD6P6fQv3EnpIroN8QrCu4zYK3IwGwUYRKGB+Q0+z/UrjPKSSgAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+        &.icon-YI {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAARZJREFUOBFjYBjygJHFdeZ/mC8O9vsxWOtIMsL4RNM/f//5v+7Qvf88Acv/F088/B/EJ6T5x4+f/z9++4mq7uWbL/9BLgosWPf/y++/qJJQE2FqQOpu3X+DqQZkKsyQl5++oig4euU5WA7kSpA6EMDqUpghIC+BNMG8CDI4tOsYWBPICyAX4Aywz5++/RcMXoxhwdPl0QziIjyMq849/h9Vvo2BCUMFVICXj4vx7cYEhkBXXQa2Tx/Aor7aogwf/zIygAIcpBkEcBoAkuTnYmdcXGzBkBllBeIysEhJMFy5+ZIhrHk3Q76PFliMaKJvw1VwAILCAxQWIAzSjDMMsJkMClBRblYGBi5OBjVxbpL0YjNvkIgBAOTAndPJ8vEfAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-QW {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAYFJREFUOBFjYBiU4POWg/8vCBn+f5ySDcYgNkgMm2MZsQneMHb6/+P+exQpDkVBBo2z+zDUM8FU/bx+8/+/jx//f9u9D0MzSA3IwG8HD4PV/L59G+4aFpAkSNN16wgQk0E4yApMg2z8+uMdmA0imJ8zMrxdvILhbWAeWAykh8vViZHxdc/E/2+XbwTbAFPNbSLLwCx+h4GV6zNY6Pc3Xoa/L1UYvp55DFPCALJA1N+dgREUQHBRJIa4hyHDf6WjYBHGe9YML3ecR5JFMJlAtmEDIA1i8m4MQkJaODWD9DK+W7Xx/6OMBhQzuB3tGIQSPBnY/v1l+MXEzMDGyMnwYv46hq/7D6Gok5vRwACOlttufv+R/QcyGZkP0oUuBuKr7trECI5Gham9DH8lIUGBrhBmJchAkBwIgNTyz5sFZoMNYFVVZVRZsQscsgy8imAJrARQDhT6WssXM4jJSGAkKgZQQgJFKyglvps+5//Hy6/+gxINiA0Su9E2GZyQsBo+YIIAJ/Sx/iHqy3MAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-DR {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAYdJREFUOBGdU01LQlEQPe9LKlIwpRDDICUzg4IIdxEp0QeBuLFdP6HaRbToVwQSbVrWH4gIIgIp/AVBEQhqqCVGvbTne5P3go9EDXNWw73nnDkzdy7QY3yenVOPVKAwt0AvgUBvAoyYh4Wopv1f4GM1ysl6MW2SxW76MFSVW1YfMxhM7AM2l0mTzaxDwqwWQ2F+a113QY6sQLIoQgd48zGvPDxOpfAsqYlD+m29gezowCiXKed2YmgrAsEjQVmMQ3J6WirzGbynUuZQmDIjvy5tcLISHINsHYU4MQnD0JtwDMsVtac70q4uQPYg+mamUYjGYNuJQ6n3i7cslPlYU2Wqh1APU4AllUqVcLQJSutQlsMgfwjCwz3kte0mMsN2DOOrSurNLX3n8pQ98LNC1M52W4EGUL08pfzzNSczIHuJtoS/DtlMuv0sLf2xxSFRRFHsh2aXoZRqqLhH4NjdgzTlg+L1QPT6IMhtlom10fgk7CmNZJL0TIYy9gHKSg6+ztrxCbG7Rgc/YrfFu89bn5QAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-UQ {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAShJREFUOBFjYBjS4MePn/8ZyfXBr+ev/n9/w8DARK4Bf0r3MTA9vI5b+7Ynn/533Xz7/87X3/+xqbrOWPj/4+VX/5n+/8FUEHn90//sZ98ZHIQ5GHj//sLQD9LIz/iSgUdNiIHp7xZ2hv/v8+G2KJ56+X/VyaUMVyftZxCRm8KwX7COYWfIUrBtf3/9/g/y+zO9drihjD8/nv/PvN+YYfU7ZYYYpiIGGZOjDLcmrgYrYDqhz/D4bjDDqZ+v4Br0//1j+M94g0FuQjIDT14IIzgWQC74e3Ayw6O1GgxClx4wsFrLM3C1uoE1/SqbwXBvThbDRSZEeGun2zHoTvNHjUGQIX82MP3/Ol/mP8ipMCtB4r+mm/y/7eb3H+SV2ycfwuVgakZpCkMAAHUSjyIDGX6jAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-FU {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAg5JREFUOBGdUz1IW1EYPe/5L0FFRLFih9ZBEUFxK7h0cBFEUKhkFOki7dKxm4sOXTrpYMVNiCIVrYiKIIIKodSfwUjAIZqGVpL6+0xM3rvmfOE+n9LJCy/33u8775xzz30x8GSkw2F1NTWLeHBbOr6qKhR1vIGvpxuFtdWGc3GhzPJy48lrgH2XVieDQ2rPLP7vs1vZpuyjQ+U4tvK+LEwsRt9/RDJyAipmSksQn9uCXavQsrYC++wPrO9LsCIRFFSUoWZ0GEZ+wYMLKic+jygOWoz5B1So/a2rdBf7K3X26CTc2e32wDN7bRNsR6MCIunP5lbpU4TWb/cPZG+trudIyKYJNIgOWKPa2ZevKnV4pBzLUtbGpos97fPnCDTw3+aOFKjKWmJsQvasE6xFOFPIdUCLPBvt0T4Bmky7o6NEYF6cJJMpWYd0RrT1+8MnxWukum5oVW2fjpgNhXQuXEOfl1fJBsk4tFVidHCscX8TmJE+16bxooYzTDPPKKt7CScWg5EdmaZGJCa/gdaLGl5DVTQJjk6vb1Oo7vfLHnYqI2xMW2dAN0ydit7nav6HOGA2KpOWtbBcBoMCJAETjtTVu58s7V9v7UhGVOeRic/Je355LaFssvGFZZl1BgzveHxaiNknoec1PHzP2Sptny+uoqTxFS5/7SG9sCTYvMJi+N71wtfV+fg/4GV67voe6SbMEXb26GMAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-AQ {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAixJREFUOBFlUz1oFEEYfTM3690l6KFGBDFapDBY6BUWQQSR4DVaKIhYiXXwJ4L2omAZMQSxEcRCRESRpJBgEMFCNCHaBX8QNBcVNHgaucvt7ozzvrvd+/Erdnbm+95737z9VqEr4h+fnf00C/v+Gdy3RcmatVthdxSR2XkQqqcPyGWhdUYxKQ++WBu76MVt1KevA9XfcCYPFQRMwYWhrNyvKZ1DsPcklAkEa5iJ66GzTyZQn7nWAObXtZh9vp2o/vgK9MoKnA/lo0Hw8k4L3FQVya6HEPl8zQtlN/VLVtlKxf29OpSqtGPYOkHJmuSSfe+lOZj43QxUVAXalFkQbB5EUDoNrB+Ee/sA1ec3UxHpxPsUzU/CqDfebRqW0PuV4OzZ+6lRTNXGjrrw+0JKAvrksTr6s9g69IVU13sOd4BdFLpo+WNHHUmJ1XzpDrqcRFwuu9Xx47IleXeo1btnXDg3CbbUHrnt+0UhKs83jn3ebBgAO0mCNdqULsq+m7364SkIpj8kz49OddZx2IoHoDN921R25J4YJxPo2ySZOO2B2UMX0HPZE716JIRy7qlInCkOQwYpGBhSNCr49RW2siRKurAFemM/7M8vsLdGUVtou6ZXz50Ygw4KKv164euHjj+Q2XUENt8LLC/JZ+JVZE4SjwgePo9MaUS+VErADuLpG42B4WA12+QqBM09r2T2nfr/b2Qhg6Md+cmzs1Op43Sfs2F2H4MuFFJR1v8D/UL5t/PWBwYAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-GX {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAe5JREFUOBGlk89rE0EUxz+zOzHZZk0Te1GQgljqjz9ABBHszYpIKVYRKYgiePUqHryIl3r1ohUPKlZQ8QeCoGhTBSmo+AOUWvFi+kOJTbbJJruZ2XU3MZ4ES3yHecO893nznZk3oux6oZmQdGK6oRB1HYRJQ3TC4wUhhoqGTi1mjU7hNmekZauG/2kGdekyaNWO/dNbYdBSEMzNsTQ8xLKKjmO2LjSs1YiLxhbHQ8dpzlWxiJqdpZZ/jjc5hQgjK4wcxlyVYu218T+AKiwQfP5G8c4E3aNRPJsBv4F2a8hKS6XcthUZvnmLzL+k58Uj9PsPOBMPUNN50sePop48I1H3sfftoXLvIYn4ubss5PevmAf2IzIZpHP1JtbeQcjlKJ48gfCq2KdPoe7ex5wvIJSHe/4CvltBz5fQ67KYI0OYq+2mWunNzGDvGkBPv2rCuahyveQgB3eTGjtHcvwK1Y9fyGzZCIeGkX19TbA9mGePHTmzfPE6IhFiJm0SowcRpTIiCHBu3EZu7o+6TdHoXY/7eBLDrUbrt5Cb+jHtdJynQ/1zCZntpvZ0CmtgJ/7rd80NdLlMqmcN/sIiQboLHSmzNvTiL/4gtWM7wrIQlYYO273QlrVSX1W/+2ClwN/yDNnhR4qLxaz0vAbqP77zL7VK1A7WyLaCAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-OQ {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAX9JREFUOBHNUD1LA0EQnb3LxWA0QRMTDcEQIoKkE9JpYWFvkcYPLPwHWtqIf8AgpBbEkEIC2lpaWAXsgpUENEg+OXJqYZK79WZ0l1v9AXpwO29m3sy8GYB//bUbTd46L/FGfou/6BH6EVvVKhfCmQBei4XO+hpoD4/eMOGRPilj04MO+KT3DXAiJOdB+5loPEEsOcvA7lEGh/RLZZWF0trgJ6loBVZZqicVfAxHvG+Mq1nXS9g9hrlssQsdcOAobcLBRlauLpV2NnepGHf02a+EA9U7srFim+yMu9hxfQrswVAeUTbQrm6IJIoH+TyEcjm2UGgSOQRfuyNJ9xu/Fehnp9QAH2cpA8lKmV3eP3OUnQGTcmIFSXSB7IRBvGw4HoUxw8da3Te+eGEBysbpFkToBv39hFLDWtY7j4eCShAnH94aNMhbbO4FQQuHFS5bLtR4ak6H1YBNBaU60DRy3EfI9l5e5NBSt5PrGheF3mPtpAG2V1IQj04oU70N/h5/AupgnTVrN7LXAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-A6 {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAqFJREFUOBGVU1lIVFEY/u44o05mimnKaFKGSy6jppmo00NZtKgghmQRSWZQPUj5JEXRQwSWmRHkUmgZREJhZSM+pGCaKWhoCY3LKOWYkxOTjY3LLKf5zzC3aIH64d5zzr3fv33ff4D/sPEpI0svaGSLi0vM5SZ1bf5ljcurhdnwBZ6eHoKIp2jdbz+KEcUfv2woOzaUcWxn3wSLyLnBHnVqmeRJuwZXbvWAStMb5v8aaGHBioTMzdC9n8XWglpouwbg7ylAkrMtUsylOtKAn/uz6XTMbjYzu93G1shtOHcwAYUXWjk+LGMTUpQKSKifYe00Xjue7O3xGJn8DHIg04cqMaLKwvK1ffAbeoBAPznnYIW/L1qq9uNMTR8krvTLoxo8fT4IZZRCuGyqQ/nXGgRUl2N9/i7Yxt5BCI2FemAGUqMeE89OomVQj4rraogquIdHYmRYByIoyiRHvXczZMVFgsVgYO7GXLiFhwvSHTWsqfksxmZMOF16DxExwT8CuCopq+xC9/1DokxuMhkkDuerzcNMmJ1D7NpViMisALUR4OXjbCFpS5jYW6/BLBJpn5tjEh8fgYi926rBicIURB97yJ0pYWrqOmeA3MQQVwEoyYrGzcZ+XGp/zGwWC2zLFrYyuwGHk4OgGf8Eq3YSIYFePOFepa+zBZKSSqIpm543ITloNQqKX6E+5gOm9N9gdXxPit+JO23jPBF9I3x6xkZnBSTl8QNpnOH+Xi3cvOUcQEAyAgcrfLlKtCfFLh5VwUMmFUQZK0pUAg0HTRhZYpiCr1RVw/ndoEkklehMuFPFaZxokW1CL1msLC6vmjvGOAK09YzyQOrb+dhT1ITetg6Q3MauUp6dA//0alIPsdKqF6y94w2/G3Smi1RZ9/K3u/Idw5EyF0sAqfIAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-GY {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAdBJREFUOBFjYEAC/6EASYg0Jkg/MTpQLIJpgtGEDEDRDFIME8BmwI8fP////P0Hr6sYYTaCDGAEApCGDx9/MOR03QdL3f54m0GVX5WhIpyPwdhYHq4epg9DACbR+XEG2OYLz6IYTu/4xvDmFAuDE/dGhnVzklH0MP7s7PrPkhzB8PfTIQZmBSOw/jcMnxge/HoOZh/4+ZIBZIjwi48MS2ZxMoiY/WG4lS/KwMTEDDaI6e9lOYaXYhUM31uOM/ydGcfwf5MOg9jH5Qym3wMZFNgkGRzYxRk0H09keCvBz1DVwMhg+Pseg1D0e4ZbL7+CXQg25eeps/+fOuxhEHB6xvC/3ouB5/YWBtaICQwMH5kZ3nzYz7DqYTfYNd0iQgxWzNMYflx8xrD14D2GUktJBrh//v37+/8BTw9YIWfmfQZB6ZcM7IlyDL//vGZgFYlh+PdfgQHktc/fjRlef7zPIMqvyLDt3COwehTiW8yK/9eYPP8/kpb9/8fH6f/f7y/+//v9EW9UohgA4rw/fOL/7eB8sEGvVE3/f/EM+P/v2zfSDAEZ9PvNm/8gDGLDAHqCYwT5HSQJixaYQlw0hgEghaQaAtIDMwgeCyBBYgFMM0g9ABnP89eOQjINAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-Y8 {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAY5JREFUOBGdUr9LQlEU/rxPxYKGUEOMlqIhCBqiSQoUIoSmqEWaGoKW2hoa2yIh7D8ImgoCabEGCVwighSEcgrF6vl86hKvovfeqXvBhz77Yb3h3XPP+c53v/PdC3TxqVWVWmFq/paU2ajIsdZCt7Hjvgg9fSXg/yIw9hOQouFuz2vHCflwU+00JUZwtpd/35njEzBiy6C6KsB/GuGhv5fMsRF41lZhnqX/RiAPDJOrocN5fIK3ZBJsLtIdQSNzScrnzEwpA+USKHUOKRCAq6fvewJ+79V4gh4lL71Pz4iZWT4HY3MLTHuFIcswwyFB0GFiZX6RTH9QFKuMIRjfBfN7oS8tQA9FIGUu4FrfgNfvcwhQ86eUZSoNDhE3qn6UtF4ev7ba9g4JVddZ4iM1e6yVNz/FVkgZnaLKwaG4Y/vztcC2QMgQYE2DKbkh3WRhFgp42YvDKWtwywX4bHI53p6zeHmRy+YJ7n6OeTok/6iOj8AbuR985Z5Y7Lagoj5/XVOLJbqbjAg/bD1tW67kAySOyq4HnRbtAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-RY {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAqhJREFUOBFdU2tIVFEQ/u715j5MTXMxxa201krtJWhIKSGJkJkQJIlkjz9lSWkFEUv7IzCwH+aLXj9C7EEIlT0hDSrJrIU0dM0ePqKMZdWyNpXVbffUTN5LdeCcmTPffHPOzJwj/XBPiuAQo4SZ0WofFGdbetH70QPHwAhbk+JMyFkbi92ZCxGq8yF8bhhkOYA5cqAhUOWipK5dnL7ayWTNOKN8d3tQfs2BhjYXvD6hwYpulsKRbrQOiLv2z9Cb9MgxR+F44UpIfj+8kGAMAKpuv4Gj7yu+uKfxtn9YC8Bka0OnqLhk14yk7M1bgbqSNMYrm3qErb4Lngk39EEh7NdwaA22ZMRJMp38P5mcVLLj/Ygo3bwUiyN12gEUqKjyBVzuCSGfuPJKA1SForc5nIJqIhSFC2YrXMUwkWmQLK19AtD1afYPjbFUss4Lj2eKya7Rca1apBNG6VCnSKcpU3UphSW7GlFetJpz1ut1Us2+VGRbm/k0WiIjZjNWlpeA2sdOzS43N7/kzcFNCSwD3d9Yqn3uHhzTbkGAEH7cbOlmn63rzZCNUdG8yUuLQUH5fTEdMgcen59Jy+brYat+xDgVjJQDZ+zovJCPo9tTkZK4AIol1IK+oClsPPmcC0NOBYebQHlm/k5BbVtN0zuCcO5WF+offmCdOiPbimN4oxiyWNJyp2cERKaRmxLK8l7bIAejgNQBmpePpENeHhsm7dywEOOj19nx74X+QNWeDH7i6r9Q8VP71yHJYpK4smRs7PgkWp8NwTUpED/PgB3pZsBoQIB3GhHhRlgvduBptxPJFhOs25KwKCaMuYoaMT/ZLNHDCZZ9cA6PI7msRasJXVt9iUa9gtjoP8+ZuNoN1EBT3p+iuLodDQ9eqyaWuYkmVBzLRnxk0D+cX2kGIFVfy5dEAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-GT {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAiRJREFUOBHNUktrE1EU/u4kk8fkoaalcWylQhGEhIaCIgURF+6EUrsQW6H6B6rdKXZTcCvBpQuLuBBp3bgQH/hCUKSIDSbShmp8QKxpE2NmYiaZ53EmkkKiiAsXHrgcPs493/m+cy/wX0YllaHsYILy4+NkR8A+3F8LVZU6LSfilAYo5XbT2tU5+lOzu7PoFfxMSqfoa/ISuEgP1A9rnVfa8C/Svr3OUGnhHix/N1zBCJhqoPxm1bHi/52VNgW6rFBubBQMGjxDcfBxEcEdfahMn0Ax81ERnz52pjOHiDFmOaBNQS2/Ar7PwNbdBnzDA3BRAeTxQBiqI6AUocyNwm7mncZWcJYpy6ZRaC7K3cgg2JWBb2oWvDqP0L5+eIQFCIeDiCxdgzCQg15d0lrTHRK3buXAVS6ienuEjHQS4aO9sAJ3wfhFaMp1u/YM3sEReMSTzDSPEMeFWsObmbXQ6nZQ1zkBW86ch/l5BVz9LcyeCXDhYehoQFvMQs3WQBsSvP17EDhwCN5ekTUJKvdPk1m4g22TT2CUX8DiY3CFdkGTXqJ+JYn1Cw9RlRTwvB98tBu+nSJcsRh8xyerUDbW5WUeVJwZa+5Bs4g06Sapr/ZSaQL0TgTlEgkqz98gtVTe/FSG1qBqPi9D13T5y9lT9P4gT4VbUap9CpCWBn1/ECTl0RTVpZ8LblntzE0L9tPYzM9hNi6DjCg4OgZXeP/mfjqb/in+AVCz/lIAVvQGAAAAAElFTkSuQmCC) no-repeat;
+            background-size: contain;
+        }
+        &.icon-LT {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAzRJREFUOBEtkmtIU2EYx59zdrbZMWdOV6bNtOyyBLFCiqAYUdEFqi9BRtEVpIKI/OAHqSyLrhDW17KISrsiFBFUZF4IZxcrLEfZsm3qdOrMneku7un/Lj/8zvue5/J/n/d5H0lrbGFd7mwyWrPnEtEQYDARC4edQYcjK/r8JcV8PjIeLCVz8ZIZ8I2C2GQck/9QGbvSzDx85jwPnj3HkcDoF2a2gSSQH/n1e8BTUMzfIfxnx34edXtg5llAD2Qa+9nFLkMq/0JAN/DOXcRaq0MEbQLTwIIY8z63Ykr4nfaNHPjULvxCRCV8DL79R7hnyzb2kI69EHGTnvu2lvDQpcscfNs8hJi1/vIqdsEncBevhomXAlXGXaLTr1dPn1n/YLnp/kOKk0wSRUnSQhTXNBwQNyImrBQugJVIAfG2Zop4e95jm6FIkiTUQvixcSQi3IlA88XTNKWocAUMorGZscFhEl6FktFljeKeXqLsLKGJmpgX+49VJMrz6VUO1twVorlABaKZh532DdyO0E5cz0kpHOntg5ktInla4Na9RHKvTuWB23U8wVwKuxHkgUrXlWvciOTP6gxG3fxj5XqYeTMw0kQ0WuE1z0HjiGMnLvHz6mpuPnkqGu733+h/1xpw7DnAz+BrVC38BmsTKTza8U0cnwYs0vj3TvbbbDSBm1kfP6NXoWHtya5dyQVKMuljGlpKNBWINT0zm4oePPJnrFyeg19rNOxxKmQwYK+Qita1Xr0WXtvwwhT52hHqqLlpVOU0SjWZKCUrk61r7NLCo2VdxhS1CAnquO9Jp5JajJrQg56cQh7D9hG4X1XVC5sJKJPosIqnsoAUYBhpK/UHvXXY8jwhIP99WM94FAySxMexPi3ZGQ5/+NQNn3gJkZQb8bu/aG13uodq8ri/3spRHrPDrpdQjhBZPFBe+VG5eIowztQCbLhWXnoOJZkzSLKMEee7SJaDJOWj/t21NHXW9mWYIYfIFwKixNzA7VoO5MzhDpiagFg9k7hXEfeVE498vIBQzgfimlKigoTKfyEFo1XAtXXtwdcNFHJ2kTw4QvJMHekP2Cl53V5KSp+filAxuYQKYv8Ao3gVD5k9B7kAAAAASUVORK5CYII=) no-repeat;
+            background-size: contain;
+        }
+        &.icon-9H {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAwZJREFUOBF9U1tIVFEUXWfuPHRmnGymmUyqSclEm6CnRB9WSFSiQS8iIyjCKPQr66MH9VMUFdRXURH0kdFHESREHzmV9DTBcJImzBydtHQe4Tx05t47c9rn5gj+dGHdc/fZe627z977AP95OOcSwZAL4TxdkQhf5Eo6fJL2mUDON2OdIs6ndQNh05St43y8QQ4u5tkJH21x0wxSziCHlVBGWB6JxCMj/VFV4fwU2ac5D/LfT8GH37eRyfMERy9eZBTSModQpQJLXly/dq7v8WMgEoDFpUNKmXPBUb0PtU1JhD4DfWNd2L62jguunsg6WiVC6ejAQOvd+nokensxnzYWk2TxXht8Z4P4+K4bW7cAX7sBs6eSvNDOLzIQSqtjsXjbzaoq5IXD2Ey+WW4bSVqQfpHBPGRwfJ8KJSWj8wnHkTNCXsucib+Lp6mt6aghQ+T1MMIGK/RRCUU7FaAjjqKFDLY9VvQctKJuP9B5pRmpFIqIJ2kC4dHR+v77rVhFO/kQxZVIRoF1URIFFfkwVJjhb+FYc0NC+TYjPjzshr/9+QAF6oUAG3zzlpIERCWzBPE970oGSb8ERTIgf7mMpY/SwAKGrw16zCb/8JuXIkzrApsMhaE36pBXZIHJoYethP6+hc7cbsDcXUnqTxYjlyWEWjlE78yEdPSPJqAdId/lhCpnoeqyYJRU8aUMYu0MoVsS1JAR8jcjYg/EsVToKMdJEjA57NMC2ZL11UOiFcFAErFPMpiRauFkiHUyhDsAS7kMz5AMwxKGCFKYoFh3zaZ/Aowxbnc4SjyNjaAZIeck+g+ZkDKaUHgAiPqy+N4MGIo5mFtBF8W4ysrgqalx0WdaGwYaJhaPx+3Xl1WG1cGfWEFzUED9MNKIZCnplVfzoLhV3N49jhFitXzxwb3UI8ohizHOicwaj/4K3Nldzc/TjNwjvPLoeM9hM/ceBj9Gdot9Lvd7vUThdoJWv+nrOLUhru667md3vT9eP0Ui4ENiLIV40I3SHbXYeOJIgdPpFDUUPK0GfwEx4WJgrPbcVgAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+        }
+    }
+    
+    .fix-Preferential {
+        height: auto;
+        min-height: 50px;
+        .item {
+            line-height: 1.4;
+            padding: 18px 0;
+        }
+    }
+    
+    .flight-Expense {
+        margin-bottom: 20px;
+        .flight-info {
+            font-family: STHeitiSC-Light;
+            font-size: 14px;
+            color: #FF5523;
+        }
+        .flight-sub-cell {
+            font-family: STHeitiSC-Light;
+            font-size: 12px;
+            color: #999999;
+            letter-spacing: 0;
+        }
+        .flight-cell {
+            font-family: STHeitiSC-Light;
+            font-size: 14px;
+            color: #333333;
+            letter-spacing: 0.3px;
+            line-height: 1;
+            margin-top: 10px;
+            i {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                background: #FFFFFF;
+                border: 1px solid #FF5523;
+                border-radius: 4px;
+                transform: scale(0.5);
+                -webkit-transform: scale(0.5);
+                transform-origin: 0 0;
+                -webkit-transform-origin: 0 0;
+                font-style: normal;
+                text-align: center;
+                font-family: ArialMT;
+                font-size: 20px;
+                color: #FF5523;
+                letter-spacing: 0;
+                line-height: 30px;
+                vertical-align: -10px;
+
+                &.tag-blue{
+                    border-color: #41B3EE;
+                    color: #41B3EE;
+                }
+            }
+            b {
+                display: inline-block;
+                width: 20px;
+                height: 6px;
+                background: no-repeat center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAMCAYAAAAQw/9NAAAAAXNSR0IArs4c6QAAASFJREFUOBFjZBgAMGvWrJv///9fKSgo2BUWFvYFnxOY8EnSSg7ouANAs2s/fPhwB+jYjP3797PgsmtAHMjKyjqRkZER6M7/4kA8/datW1dmz57tj82RjNgE6SEGDLkdQMe5o9l1BMgvSU9PPwkTH5AQBFnOxMQ0AeYIJNoGyD4xc+bMVUCsDBJnBDK2AGlvEIceABi129LS0ryBoccIDMXrQDvVcdj7GyjeywTUQNdoBjrsPw4HYRWmq+OQXTBnzhyPv3//bkcWQ2KvBrIrgWnxLs7sjaSYJsx///4VYDEYI5MMSAjOmzdP6/fv31eRHHgTyK4AhtgGJDEwc0BCEOi4fKhDXgHpBjU1tdmOjo5/0B0H4g+IA4H50gGYV5qJqeoArkdpPoKvlq0AAAAASUVORK5CYII=);
+                background-size: 100%;
+                margin: 0 5px;
+                vertical-align: 2px;
+            }
+        }
+    }
+    
+    .section-bottom {
+        padding: 0 20px;
+        text-align: right;
+        line-height: 0;
+        .ay-note-blue {
+            display: inline-block;
+            padding-left: 20px;
+            background: no-repeat left 14.5px url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAgpJREFUSA29ljFLw0AUx99d0i5dWtysi5NzBaGLONQqFARBJ7+KjvpVnBQEoaC1g7gUBDt3crE6SV26tE3O+4dempyXJpGkt+Tu3Xv/X3J5d/cYJWj77VHNcemYEe1K96oQYh1hjLFP+RgKoheL091Tq9KHfVmTGtGtcf9zKsi9lIJb0V6LGSk2YMQvukflm4U13DMCDx5+NqcT91q61sPuiUe9QpGfPR6W3/WIP8Bme7TnOHQrSKzpzmnGjNi3ZdFJp1V5DsaFgIDNXOqQEIWgk95vVIueqTuc6FPhMWNTm1MzCPWBWMbZRLzGfRlg57WSJ3zVH1McFF9qF9mOWl6uXgn/LA4G342SHxLqKx39Cc15PnhTXjSyUY7+myA6wzSuzxnkAZH6Ji+T7WPs+uZg3zdGdBSDeZvaEW8RfkZz4qTRoi2Lbds4QTR77DAuUaIEwOIyTXFcraSBhX9YTUvDkqplTRlbtdVBnDQwuA8Rk2Z5wVpsqoTEtPtQkxV8fsVo9nyGkvWFLxzmI29UHXJcnsapHIxgcdzUOWgbJcHiKAvk/hgYPTI0ggGWl6UoCzLUNkophgec1yA9o2c2xp6qc/x9iBoEl2U2+gsVaEJbWXwgbmTUILL2m6pJ0zN4JQX7Jl9oQVPd9vCR/zLckhRR6hxddqwlKqIUeqVlooLiubJCOAhFP8tS/xdYjdBzuv8a6gAAAABJRU5ErkJggg==);
+            background-size: 14px;
+            font-size: 14px;
+            color: #41B3EE;
+            line-height: 44px;
+        }
+    }
+    /*pop terms*/
+    
+    .mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1000;
+    }
+    
+    .dialog-wrap {
+        .ay_dialog {
+            width: 270px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 6px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .dialog-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            webkit-transform: translate3d(-50%, -50%, 0);
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000px;
+            width: 270px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 6px;
+            box-sizing: border-box;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .dialog-title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 44px;
+            background-color: #fff;
+            font-size: 17px;
+            color: #333;
+            text-align: center;
+            line-height: 44px;
+            font-weight: normal;
+            z-index: 1002;
+            &:after {
+                .setBottomLine(#DFDFDF);
+            }
+        }
+        .dialog-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 44px 20px 70px 20px;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            &::-webkit-scrollbar {
+                -webkit-appearance: none !important;
+                display: none !important;
+            }
+            .terms-detail {
+                margin-bottom: 30px;
+            }
+            .itinerary-title {
+                padding: 10px 0;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            p {
+                display: block;
+                margin: 10px 0;
+                font-size: 14px;
+                color: #333;
+                font-weight: 300;
+                line-height: 21px;
+                text-align: left;
+                em {
+                    color: #FC5A3F;
+                }
+            }
+            b {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                align-items: center;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+                position: relative;
+                margin-bottom: 5px;
+                font-size: 16px;
+                color: #333;
+                &:before {
+                    content: '';
+                    display: block;
+                    margin-right: 10px;
+                    width: 4px;
+                    height: 15px;
+                    background-color: #FF5523;
+                    border-radius: 4px;
+                }
+            }
+            ul {
+                li {
+                    list-style: none;
+                    margin-bottom: 15px;
+                    p {
+                        margin: 0;
+                        padding-left: 14px;
+                    }
+                }
+            }
+        }
+        .dialog-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #fff;
+            z-index: 1002;
+            &:before {
+                .setTopLine(#DFDFDF);
+            }
+            .ay_btn_default {
+                background-color: #fff;
+                font-size: 17px;
+                color: #333;
+            }
+            button.ay_btn,
+            input.ay_btn {
+                margin: 0 auto;
+                width: 150px;
+                height: 40px;
+                font-size: 17px;
+                color: #333;
+                line-height: 38px;
+            }
+            .ay_btn:after {
+                border-radius: 40px;
+            }
+        }
+    }
+    /*弹出层 邮寄方式*/
+    
+    .pop-shipping-menu {
+        .ay_actionsheet_menu {
+            padding: 0 20px;
+        }
+        .ay_actionsheet_cell {
+            position: relative;
+            padding: 8px 0;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 300;
+            color: #333;
+            line-height: 44px;
+            &.ay-active {
+                color: #FF5523;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    margin-top: -7px;
+                    width: 14px;
+                    height: 12px;
+                    background: no-repeat center url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAVCAYAAABVAo5cAAAAAXNSR0IArs4c6QAAAV5JREFUSA291b1KA0EQB/D/pAmCYAhaWSYIkkYQBAsrn2GximBpoc+QF7AShFRKiMURfAS1EsHKJl18BQk2agonMxv3INyd97XnFPexezu/neN2D/iHYNNZdUzNXVRx5l6vxqZ9BXxN2bTu1KAqIM2pGMbDG7nqLgyaARuNSiqMYkISLmn0/Om9wgSsj2BySkTsFUzD9NV6A7Ng3sCsmBcwD6ag/UqZmfisXdeGPJEX09zEZncNNH0B07rw5xRMbrOgRTDNKxV+7IGxJQu0CeYBH7WO08Ci2ALsbD5Koa8WYZkA4/ovtAymhl0Wsrk2ge97qXLHwoQf6Tmh4G1g738PZTFNE67DNNQHtgTqTRKK7e5weSO2Uw23Kx2bNcIK3YBYlPEk/QfuGXkvhTAdHwG1MYJqo4sSmKaIBbUjFi2Jad7E/yGNxu9A/VCeeZB5zUB04X4xOrDSYLO/4guYA3Df2AcUyEqlAAAAAElFTkSuQmCC");
+                    background-size: 100%;
+                }
+            }
+        }
+    }
+    
+    .fix-scroll {
+        overflow: hidden !important;
+    }
+</style>
+
+<style lang="less">
+    .page-fix {
+        .ay_cell_bd>p {
+            font-family: STHeitiSC-Light;
+            font-size: 12px;
+            color: #333333;
+            overflow: hidden;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+        .ay_cell_ft.with_arrow:after {
+            content: " ";
+            display: inline-block;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            height: 6px;
+            width: 6px;
+            border-width: 2px 2px 0 0;
+            border-color: #C8C8CD;
+            border-style: solid;
+            position: absolute;
+            top: 26px;
+            right: 13px;
+            margin-left: .3em;
+        }
+    }
+    
+    .notice.ay_cell {
+        margin-top: 0 !important;
+        margin-bottom: 10px;
+        .ay_cell_bd.ay_cell_primary {
+            line-height: 1;
+        }
+        .ay_cell_bd>p {
+            font-size: 14px;
+        }
+        .ay-label-desc {
+            font-family: STHeitiSC-Light;
+            font-size: 12px;
+            color: #999999;
+            letter-spacing: 0px;
+        }
+    }
+    
+    .fix-confirm {
+        .ay_dialog_hd :after {
+            display: none;
+            visibility: hidden;
+        }
+        .ay_dialog {
+            height: auto;
+        }
+        .ay_dialog_ft {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+        .ay_btn_dialog {
+            border-radius: 0;
+            border: 0;
+            border-top: 1px solid #DFDFDF;
+        }
+        .ay_btn_dialog.primary {
+            color: #353535;
+        }
+        .text_center {
+            font-size: 14px;
+            text-align: center;
+        }
+    }
+
+    .fix-air{
+        position: absolute;
+        top: 16px;
+        left: 27px;
+        background: #41B3EE;
+        border-radius: 100px;
+        font-family: STHeitiSC-Light;
+        font-size: 20px;
+        color: #FFFFFF;
+        letter-spacing: 0;
+        transform: scale(0.5);
+        transform-origin: 0;
+        z-index: 9;
+        padding: 0 6px;
+
+        &.fix-air-left{
+            margin-left: -25px;
+        }
+    }
+
+
+
+    .fix-air-city{
+        margin-top: -16px;
+    }
+</style>

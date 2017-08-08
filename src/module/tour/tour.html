@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="m.aoyou.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-title" content="中青旅遨游网">
+    <meta name="location" content="province=北京;city=北京">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <title></title>
+    <meta name="Keywords" content="遨游网" id="keywords">
+    <meta name="Description" content="">
+
+    <script src="/static/jquery.js"></script>
+    <script src="/static/api4.0.js"></script>
+    <script type="text/javascript">
+        var g_param_pid = 0
+        var g_param_depDate = ''
+        var g_product_info = {}
+        var g_recommend_product_list = []
+        var g_dep_price_list = []
+        var g_dep_price_list_lit = []
+        var g_air_list = []
+        var g_hotel_list = []
+        var g_product_preferential = []
+        var g_statistics_evaluate = {}
+        var p_mainData = ''
+        var g_package_add_product = {}
+        var g_selected_data = {
+            pid: 0,
+            tid: 0,
+            an: 2,
+            cn: 0,
+            curDate: '',
+            depDate: '',
+            air: {},
+            stayPlaces: [],
+            addProducts: [],
+            calAirTotal: function() {
+                var airTotle = 0
+                if (this.air.AirPlanID != undefined) {
+                    airTotle = this.air.AdultPrice * this.an + this.air.ChildPrice * this.cn
+                }
+                return airTotle
+            },
+            calHotelTotal: function() {
+                var hotelTotle = 0
+                if (this.stayPlaces.length > 0) {
+                    for (var i = 0, len = this.stayPlaces.length; i < len; i++) {
+                        if (this.stayPlaces[i].hotel != undefined && this.stayPlaces[i].hotel.roomPlan != undefined) {
+                            hotelTotle += this.stayPlaces[i].hotel.roomPlan.PlanPrice * this.stayPlaces[i].hotel.roomPlan.roomNum
+                        } else if (this.stayPlaces[i].hotelPlan != undefined) {
+                            hotelTotle += this.stayPlaces[i].hotelPlan.HotelPlanPrice * this.stayPlaces[i].hotelPlan.roomNum
+                        }
+                    }
+                }
+                return hotelTotle
+            },
+            calTotal: function() {
+                var airTotle = 0
+                if (this.air.AirPlanID != undefined) {
+                    airTotle = this.air.AdultPrice * this.an + this.air.ChildPrice * this.cn
+                }
+                var hotelTotle = 0
+                if (this.stayPlaces.length > 0) {
+                    for (var i = 0, len = this.stayPlaces.length; i < len; i++) {
+                        if (this.stayPlaces[i].hotel != undefined && this.stayPlaces[i].hotel.roomPlan != undefined) {
+                            hotelTotle += this.stayPlaces[i].hotel.roomPlan.PlanPrice * this.stayPlaces[i].hotel.roomPlan.roomNum
+                        } else if (this.stayPlaces[i].hotelPlan != undefined) {
+                            hotelTotle += this.stayPlaces[i].hotelPlan.HotelPlanPrice * this.stayPlaces[i].hotelPlan.roomNum
+                        }
+                    }
+                }
+                var addProductsTotal = 0
+                if (this.addProducts.length > 0) {
+                    for (var i = 0, len = this.addProducts.length; i < len; i++) {
+                        var typeItem = this.addProducts[i]
+                        typeItem.total = 0
+                        for (var j = 0, lenj = typeItem.addProductList.length; j < lenj; j++) {
+                            var product = typeItem.addProductList[j]
+                            product.isHotel = product.AddProductType == 98 && product.AddProductSubType == 6
+                            product.isWifi = product.AddProductType == 98 && product.AddProductSubType == 3
+                            product.total = 0
+                            product.element_detailKey_str = ''
+                            var detailKeyArr = []
+                            var _detailKeyArr = product.isHotel ? product.Element_DetailKey.split('|') : []
+                            if (product.num > 0) {
+                                if (product.selectedDates != undefined && product.selectedDates.length > 0) {
+                                    for (var k = 0, lenk = (product.isHotel ? product.selectedDates.length - 1 : product.selectedDates.length); k < lenk; k++) {
+                                        var selectedDatePriceItem = product.selectedDates[k]
+
+                                        for (var l = 0; l < product.DatePriceList.length; l++) {
+                                            var datePriceItem = product.DatePriceList[l]
+                                            if (datePriceItem.Date.split('T')[0] == selectedDatePriceItem) {
+                                                typeItem.total += datePriceItem.Price * product.num
+                                                product.total += datePriceItem.Price
+                                                if (product.isHotel) {
+                                                    detailKeyArr.push(_detailKeyArr[l])
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (product.isHotel) {
+                                        product.element_detailKey_str = product.Element_DetailKey.split('|').join('*')
+                                    } else if (product.isWifi) {
+                                        product.element_detailKey_str = product.Element_DetailKey
+                                    }
+                                } else {
+                                    typeItem.total += product.MinPrice * product.num
+                                }
+                            }
+                        }
+                        addProductsTotal += typeItem.total
+                    }
+                }
+                if (airTotle == 0 || hotelTotle == 0) {
+                    return '...'
+                } else {
+                    return '￥' + (airTotle + hotelTotle + addProductsTotal)
+                }
+
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app" v-cloak></div>
+</body>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="//webresource1.aoyou.com/js/webapp/common/share.js"></script>
+<script src="//webresource1.aoyou.com/js/webapp/common/om_code.js"></script>
+<script>
+    var _ozuid = "";
+    var _ozprm = "";
+    api.initJiaXin()
+</script>
+<style>
+    #jiaxin-mcs-fixed-dialog {
+        position: fixed !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    #jiaxin-mcs-fixed-dialog>div {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    #jiaxin-mcs-fixed-btn {
+        z-index: -1 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+    }
+</style>
+
+</html>

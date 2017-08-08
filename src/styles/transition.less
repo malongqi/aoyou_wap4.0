@@ -1,0 +1,27 @@
+.ay-fade-transition {
+  opacity: 1;
+  transition: opacity linear 0.2s
+}
+
+.ay-fade-enter, .ay-fade-leave {
+  opacity: 0;
+}
+
+.ay-dialog-transition {
+  opacity: 1;
+  transition-duration: .4s;
+  transform: translate(-50%, -50%) scale(1)!important;
+  transition-property: transform, opacity!important;
+}
+
+.ay-dialog-enter, .ay-dialog-leave {
+  opacity: 0;
+}
+
+.ay-dialog-enter {
+  transform: translate(-50%, -50%) scale(1.185)!important;
+}
+
+.ay-dialog-leave {
+  transform: translate(-50%, -50%) scale(1)!important;
+}

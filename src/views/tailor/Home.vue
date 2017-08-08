@@ -1,0 +1,2830 @@
+<template>
+    <div class="tailor-wrap"><!--0223-F-->
+        <!--页面 START-->
+        <div class="page-main">
+
+            <!--初始页面 START-->
+            <div class="main-wrap" :class="{'fixed-wrap':isOverHidden}"><!--0225F-->
+                <!--头部标题栏 START-->
+                <div class="tailor-header-wrap" slot="header">
+                    <x-header :left-options="{showBack: true}" :right-options="{showMore: false}"  title="遨游定制"  @on-click-title="scrollTop">
+                    </x-header>
+                </div>
+                <!--头部标题栏 END-->
+                <div class="main-content">
+                    <!--顶部图片和步骤 START-->
+                    <section class="ay-section no-padding">
+                        <!--轮播 banner-->
+                        <section class="slider-box">
+                            <swiper loop auto :list="bannerLists" :duration="500" auto dots-position="center" height="110px">
+                                <!--<span class="icon-adver"></span>-->
+                            </swiper>
+                        </section>
+
+                        <!--<div class="tailor-step">-->
+                            <!--<step :current.sync="step" background-color='' gutter="0">-->
+                                <!--<step-item title="填写信息" class="step-fill"></step-item>-->
+                                <!--<step-item title="选择专家" class="step-expert" v-show="customInfo.Birthland=='北京'"></step-item>-->
+                                <!--<step-item title="成功提交" class="step-success"></step-item>-->
+                            <!--</step>-->
+                        <!--</div>-->
+                    </section>
+                    <!--顶部图片和步骤 END-->
+                    <!--左右切换个人定制and公司定制 --mlq-->
+                    <tab :line-width=2  :index.sync="currentItem" active-color='#FF5523' :animate="false">
+                        <tab-item class="ay-center"  :selected="demo2 === item" v-for="item in list2" @click="demo2 =item">{{item}}</tab-item>
+                    </tab>
+                    <swiper :stopmove="true" :index.sync="currentItem" height="800px" :show-dots="false">
+
+                        <swiper-item>
+                            <div class="swiper-item-content">
+                                <!--出行信息 START-->
+                                <section class="ay-section">
+                                    <group class="travel-info">
+                                        <!--出发地-->
+                                        <cell title="出发地" :inline-desc="customInfo.Birthland" @click="showDepart" class="departure-input"></cell>
+
+                                        <!--目的地-->
+                                        <x-input  @on-focus="onFocus" @on-blur="onBlur" title="目的地" placeholder="请输入目的地" :is-type="getDestination" :show-clear="false" :value.sync="customInfo.Destination" class="destination-input"><!--0224 F-->
+                                            <x-button slot="right" type="primary" class="input-btn-txt" @click="showDestination" text="选择"></x-button>
+                                        </x-input>
+                                        <cell title="领队" class="type-wrap">
+                                            <div slot="child" class="tailor-type">
+                                                <checker :value.sync="customInfo.LeaderNeed" default-item-class="tailor-type-item" selected-item-class="tailor-type-selected">
+                                                    <checker-item value="1">需要</checker-item>
+                                                    <checker-item value="2">不需要</checker-item>
+                                                </checker>
+                                            </div>
+                                        </cell>
+                                        <!--出游性质-->
+                                        <!--<cell title="出游性质" class="type-wrap">-->
+                                            <!--<div slot="child" class="tailor-type">-->
+                                                <!--<checker :value.sync="customInfo.TravelTypeID" default-item-class="tailor-type-item" selected-item-class="tailor-type-selected">-->
+                                                    <!--<checker-item value="1">个人定制</checker-item>-->
+                                                    <!--<checker-item value="2">公司定制</checker-item>-->
+                                                <!--</checker>-->
+                                            <!--</div>-->
+                                        <!--</cell>-->
+
+                                        <!--出游人数-->
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" title="出游人数" placeholder="请输入人数" :is-type="getNumber" keyboard="number" :show-clear="false" :value.sync="customInfo.Travelers"></x-input><!--0217 F--><!--0224 F-->
+
+                                        <!--其他需求-->
+                                        <cell title="其他需求" class="other-need"><!--0224 F-->
+                                            <span slot="after-title" class="input-after-title">(50字以内)</span>
+                                            <div class="other-area" slot="child">
+                                                <textarea @focus="onFocus" @blur="onBlur" name="" cols="30" rows="3" maxlength="50" placeholder="选填，您可以在这里补充您的需求，例如有老人、儿童出行等…" v-model="customInfo.Special"></textarea>
+                                            </div><!--0224 F-->
+                                        </cell>
+                                        <!--
+                                        <x-textarea :max="50" placeholder="选填，您可以在这里补充您的需求，例如有老人、儿童出行等…" :show-counter="false" :value.sync="customInfo.Special" class="other-input"></x-textarea>
+                                        -->
+                                    </group>
+                                </section>
+                                <!--出行信息 END-->
+
+                                <!--联系人信息 START-->
+                                <section class="ay-section">
+                                    <group class="contact-info">
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" id="inputTel" title="手机" name="mobile" placeholder="请输入您的手机" is-type="china-mobile" keyboard="number" :show-clear="false" :value.sync="customInfo.CustomerPhone"></x-input><!--0224 F-->
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" id="inputName" title="姓名" name="username" placeholder="请输入您的称呼" is-type="" :show-clear="false" :value.sync="customInfo.CustomerName"></x-input><!--0224 F-->
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" id="inputEmail" title="邮箱" name="email" placeholder="选填，便于接受材料" is-type="email" :show-clear="false" :value.sync="customInfo.CustomerEmail"></x-input><!--0224 F-->
+                                    </group>
+                                </section>
+                                <!--联系人信息 END-->
+                            </div>
+                        </swiper-item>
+                        <swiper-item>
+                            <div class="swiper-item-content">
+                                <!--出行信息 START-->
+                                <section class="ay-section">
+                                    <group class="travel-info">
+                                        <!--出发地-->
+                                        <cell title="出发地" :inline-desc="customInfo.Birthland" @click="showDepart" class="departure-input"></cell>
+
+                                        <!--目的地-->
+                                        <x-input  @on-focus="onFocus" @on-blur="onBlur" title="目的地" placeholder="请输入目的地" :is-type="getDestination" :show-clear="false" :value.sync="customInfo.Destination" class="destination-input"><!--0224 F-->
+                                            <x-button slot="right" type="primary" class="input-btn-txt" @click="showDestination" text="选择"></x-button>
+                                        </x-input>
+                                        <cell title="出行方式" class="type-wrap weituo">
+                                            <div slot="child" class="tailor-type">
+                                                <checker :value.sync="customInfo.TravelNeed" default-item-class="tailor-type-item" selected-item-class="tailor-type-selected">
+                                                    <checker-item value="1">单项委托</checker-item>
+                                                    <checker-item value="2">独立成团</checker-item>
+                                                </checker>
+                                            </div>
+                                            <div class="tips" slot="icon" @click="showAlert = true">
+                                                单项委托
+                                            </div>
+                                        </cell>
+
+
+                                        <!--出游人数-->
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" title="出游人数" placeholder="请输入人数" :is-type="getNumber" keyboard="number" :show-clear="false" :value.sync="customInfo.Travelers"></x-input><!--0217 F--><!--0224 F-->
+
+                                        <!--其他需求-->
+                                        <cell title="其他需求" class="other-need"><!--0224 F-->
+                                            <span slot="after-title" class="input-after-title">(50字以内)</span>
+                                            <div class="other-area" slot="child">
+                                                <textarea @focus="onFocus" @blur="onBlur" name="" cols="30" rows="3" maxlength="50" placeholder="选填，您可以在这里补充您的需求，例如有老人、儿童出行等…" v-model="customInfo.Special"></textarea>
+                                            </div><!--0224 F-->
+                                        </cell>
+                                        <!--
+                                        <x-textarea :max="50" placeholder="选填，您可以在这里补充您的需求，例如有老人、儿童出行等…" :show-counter="false" :value.sync="customInfo.Special" class="other-input"></x-textarea>
+                                        -->
+                                    </group>
+                                </section>
+                                <!--出行信息 END-->
+
+                                <!--联系人信息 START-->
+                                <section class="ay-section" style="padding-bottom: 60px">
+                                    <group class="contact-info">
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" id="inputTel" title="手机" name="mobile" placeholder="请输入您的手机" is-type="china-mobile" keyboard="number" :show-clear="false" :value.sync="customInfo.CustomerPhone"></x-input><!--0224 F-->
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" id="inputName" title="姓名" name="username" placeholder="请输入您的称呼" is-type="" :show-clear="false" :value.sync="customInfo.CustomerName"></x-input><!--0224 F-->
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" id="inputEmail" title="邮箱" name="email" placeholder="选填，便于接受材料" is-type="email" :show-clear="false" :value.sync="customInfo.CustomerEmail"></x-input><!--0224 F-->
+                                        <x-input @on-focus="onFocus" @on-blur="onBlur" id="inputEmail" title="公司名称" name="email" placeholder="选填，便于接受材料" is-type="text" :show-clear="false" :value.sync="customInfo.CompanyName"></x-input><!--0224 F-->
+                                    </group>
+                                </section>
+                                <!--联系人信息 END-->
+                            </div>
+                        </swiper-item>
+                    </swiper>
+                </div>
+
+            </div>
+            <!--初始页面 END-->
+
+
+            <!--出发地弹出页 START-->
+            <div v-if="isDepartShow" class="depart-wrap" transition="slideInUp"><!--0224 F-->
+                <!--标题栏 START-->
+                <div class="box-header">
+                    <div class="box-header-btn left" @click="closeDepart">
+                        <span class="icons icon-close"></span>
+                    </div>
+                    <h1 class="visa-header-title">选择城市</h1>
+                </div>
+                <!--标题栏 END-->
+                <!--搜索框 START-->
+                <div class="search-tab">
+                    <search :results="results" :value.sync="value" @result-click="resultClick"  @on-change="getResult" @on-cancel="onCancelSearch" placeholder="输入出发城市/地理位置" :list-height="screenHeight" :auto-fixed="false" cancel-text=""></search>
+                </div>
+                <!--搜索框 END-->
+                <!--index-list部分 START-->
+                <div class="page-indexlist-wrapper" v-if="!isResult">
+                    <index-list :sections="indexWords" :city="customInfo.Birthland" locationtitle="当前城市" historytitle="历史记录" hottitle="常用出发地" :history="historyCites" :hotcity="hotCities"  @select-item="selectHotFun"><!--0227 F-->
+                        <group v-for="item in alphabet" :title="item.initial" class="city-list">
+                            <cell v-for="cell in item.tempArr" track-by="$index" :title="cell" :activename="customInfo.Birthland" @click="selectCity(cell)"></cell>
+                        </group>
+                    </index-list>
+                </div>
+                <!--index-list部分 END-->
+            </div>
+            <!--确认框 START-->
+            <!-- <confirm class="taior-confirm" :show.sync="isConfirmShow" title="" @on-cancel="onCancel" @on-confirm="onConfirm" @touchmove.prevent>
+                <p style="text-align:left;">您当前定位城市已改变，是否切换出发地为 <em>{{currentcity}}</em> ？</p>
+                <a @click="closeConfirm" class="btn-close"></a>
+            </confirm> -->
+            <!--确认框 END-->
+            <!--出发地弹出页 END-->
+
+            <!--目的地弹出页 START-->
+            <div v-show="isDestinationShow" class="destination-wrap" transition="slideInRight">
+                <!--头部标题栏 START-->
+                <div class="box-header">
+                    <div class="box-header-btn left" @click="closeDestination">
+                        <span class="icons icon-back"></span>
+                    </div>
+                    <h1 class="visa-header-title">目的地</h1>
+                </div>
+                <!--头部标题栏 END-->
+                <!--页面主体 START-->
+                <div class="content">
+                    <!--已选列表 START-->
+                    <div class="destination-select" v-show="selectedList.length>0">
+                        <a class="btn-clear" @click="clearAll()">清空</a>
+                        <div class="select-list">
+                            <ul>
+                                <li v-for="selectedItem in selectedList" track-by="$index">
+                                    <div class="item-content">
+                                        <span class="item-title">{{selectedItem.name}}</span>
+                                        <a @click="removeSelect($index,selectedItem)" class="btn-delete icon-close-white"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--已选列表 END-->
+                    <!--选择列表 START-->
+                    <div class="destination-content">
+                        <!--左侧区域列表 START-->
+                        <div class="destination-menu">
+                            <div class="menu-list">
+                                <ul>
+                                    <li v-for="regionItem in destinationListAll" @click="tabSelect($index)" :class="{'active':selectedTab == $index}" class="menu-item">
+                                        <span>{{regionItem.DestRegionDesc}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--左侧区域列表 END-->
+                        <!--右侧国家列表 START-->
+                        <div class="destination-list">
+                            <ul class="checker-list" v-show="selectedContent == $index" v-for="regionItem in destinationListAll">
+                                <li class="checker-item" :class="{'current':item.checked}" v-for="item in regionItem.DestinationList" @click="checkCities(item,$index)">
+                                    <label class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">{{item.name}}</div>
+                                        </div>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--右侧国家列表 END-->
+                    </div>
+                    <!--选择列表 END-->
+                </div>
+                <!--页面主体 END-->
+
+                <div class="top-warning" v-show="isWarningShow" transition="expand">
+                    <p class="warning-title">最多可选择4个目的地</p>
+                </div>
+                <div class="top-warning" v-show="isWarningShowOne" transition="expand">
+                    <p class="warning-title">该城市已经存在咯</p>
+                </div>
+
+                <!--底部按钮 START-->
+                <tabbar class="tailor-tabbar" icon-class="ay-center"><!--0225F-->
+                    <x-button type="warn" :disabled="" @click="closeDestinationAndSubmit"  class="tailor-btn">确定</x-button>
+                </tabbar>
+                <!--底部按钮 END-->
+            </div>
+            <!--目的地弹出页 END-->
+        </div>
+        <!--页面 END-->
+        <!--底部按钮 START-->
+        <div class="tailor-footer" slot="bottom" v-show="isShowSubmit">
+            <!--<x-button type="warn" :disabled="btnDisable" @click="nextStep" v-link="{path:'/expert'}"  class="tailor-btn" v-if="customInfo.Birthland=='北京'">下一步</x-button>-->
+            <x-button type="warn" :disabled="btnDisable" @click="submit" class="tailor-btn">提交需求</x-button> <!--0214-->
+        </div>
+        <!--底部按钮 END-->
+
+        <alert :show.sync="showAlert" button-text="知道了"> <i class="btn-close"  @click="showAlert=false"></i> 对预定机票、酒店、门票、当地玩乐等无须行程的项目询价，可选择此出行方式。</alert>
+    </div>
+
+
+</template>
+
+<script>
+
+    import {go} from '../../libs/router'
+    import {ViewBox,XHeader,Group,Tab,Alert, TabItem, Cell,Step, StepItem,Swiper, SwiperItem, XInput,Checker, CheckerItem, XTextarea, Tabbar, TabbarItem, XButton, Search, IndexList, Confirm}  from '../../components'/*0220F*/
+    import store from '../../vuex/store'/*0228 F*/
+    const commit = store.commit || store.dispatch /*0228 F*/
+    var startPos = {
+        x:0,y:0
+    }
+    export default{
+        components:{
+            // 可以以key-value的形式注册组件, 此时挂载点的名字就是key
+            // 否则挂载点和组件名字一致, 即vhead
+            ViewBox,
+            XHeader,
+            Group,
+            Tab,
+            Alert,
+            TabItem,
+            Cell,
+            Step,
+            StepItem,
+            Swiper,
+            SwiperItem,
+            XInput,
+            Checker,
+            CheckerItem,
+            XTextarea,
+            Tabbar,
+            TabbarItem,
+            XButton,
+            Search,
+            IndexList,
+            Confirm
+        },/*0220F*/
+        props: {
+            isResult:Boolean,
+        },
+        data(){
+            return{
+                isPageShow:true,//初始页面是否显示
+                isOverHidden:false,//页面是否overflow:hidden /*0223-F*/
+                isInputActive:false,//软键盘弹起时样式
+                isTabbarShow:true,//底部按钮显示
+                step: 0,
+                btnDisable: true,//按钮状态
+                radioDefault: [],//其他选项
+                isConfirmShow:false,//是否显示确认切换城市页
+                depCityList:[],//出发城市列表
+                destinationListAll:[],//目的地列表
+                 bannerLists: [
+//                         {
+//                            "img": "http://images1.aoyou.com/upload/201611/6n0pd616093801.jpg?imageView2/1/w/375/h/180",
+//                            "url": ""
+//                        },
+//                        {
+//                            "img": "http://images1.aoyou.com/upload/201611/0nx8v016145954.jpg?imageView2/1/w/375/h/180",
+//                            "url": ""
+//                        },
+//                        {
+//                            "img": "http://images1.aoyou.com/upload/201609/8dtb2p26091805.jpg?imageView2/1/w/375/h/180",
+//                            "url": ""
+//                        }
+                    ],
+                customInfo: {
+                    Birthland:"",
+                    Destination: "",
+                    LeaderNeed:[],
+                    TravelNeed:[],
+                    TravelTypeID:[],
+                    Travelers:"",
+                    Special:"",
+                    CustomerPhone:"",
+                    CustomerName:"",
+                    CustomerEmail:"",
+                    CustomerID:0,
+                    GoldServiceID:0,
+                    Memo1:["Pc","Wap","App"],
+                    CompanyName:""
+                },//填写信息
+                TailorInfo:{
+                    MemberID: "",
+                    MemberName: "",
+                    MobilePhone: "",
+                    ProductType: 0,
+                    PlaceOfDeparture: "北京",
+                    DestinationOne: "",
+                    DestinationTwo: "",
+                    DestinationThree: "",
+                    StartTime: null,
+                    EndTime: null,
+                    Description: "",
+                    InputDeptCode: "010102010202",
+                    InputUserID: 2855,
+                    AccessSource: 5,
+                    Email: "",
+                    CustomType: 2,
+                    TravelMode: 1,
+                    TravelSize: "2",
+                    CustomizationMode: 0,
+                    OppClientSource: 8,
+                    CompanyName: ""
+                },//定制信息
+
+                expertList:[],//选择专家
+                isShowSubmit:true,
+
+                isDepartShow:false,//选择出发城市页
+                currentcity:"北京",
+                _oldcity:"北京",
+
+                //search组件不可定位变量
+                isFixed:false,
+
+                screenHeight:'0px',//视窗高度
+                contentHeight:0,
+                results: [],//搜索
+                isSearchInfoShow:false,//是否显示搜索无结果
+                value: '',//search组件value，默认空
+
+                indexWords:[],//选择出发城市页 分类标题
+                alphabet: [],//选择出发城市页  字母表
+                hotCities:[],//选择出发城市页 热门城市
+                historyCites:[],//选择出发城市页  历史城市
+                cityJson:[],//选择出发城市页  城市列表
+
+                isDestinationShow:false,//是否显示目的地页
+                selectedList:[],//已选列表
+                isWarningShow:false,//是否显示顶部提醒
+                isWarningShowOne:false,//已存在提示
+                selectedContent:0,//展示的右侧列表
+                selectedTab:0,//选中的左侧标签
+
+                getDestination: function (value) {
+                    return {
+                        valid: value .split("，").length <=4,
+                        msg: '最多可输入4个目的地'
+                    }
+                },//只能输入4个目的地=3个中文逗号0221F
+
+                getNumber: function (value) {
+                    return {
+                        valid: /^[0-9]*[1-9][0-9]*$/.test(value),
+                        msg: '正整数'
+                    }
+                },//人数0221F
+                list2:['个人定制', '公司定制'],
+                demo2: '个人定制',
+                currentItem:0,
+                showAlert:false,
+                swiperheight:0
+            }
+        },
+        // watch: {
+        //     //
+        //     "customInfo.Destination":{
+        //         handler:function(val,oldVal){
+        //             //要执行的任务
+        //             //这里不知道怎么才能修改到this.data的数据，有知道的麻烦告知
+        //             //现在知道的就是通过直接修改Store.state的方式来更新数据，当然效果和修改this.data是一样的
+        //             // this.customInfo.Destination='已修改'
+        //             // var val=this.customInfo.Destination
+        //             var result=val.split("，")
+        //             var count = !result ? 0 : result.length;
+        //             if(!result[result.length-1])
+        //             {
+        //                 count--
+        //             }
+        //             if(count>4)
+        //             {
+        //                 // this.$emit('on-change', this.customInfo.Destination)
+        //                 // this.customInfo.Destination=oldval
+        //                 return result.splice(0,4).join(',')                        
+        //             }
+        //             else
+        //             {
+        //                 return val
+        //             }
+        //             console.log(val+'|'+oldval)
+        //             },
+        //             // 深度观察
+        //             deep:true
+        //     }
+        // },
+
+        computed: {
+            leftOptions () {
+                return {
+                    showBack: true
+                }
+            },/*0220F*/
+            rightOptions: {
+                type: Object,
+                default () {
+                    return {
+                        showMore: false
+                    }
+                }
+            },/*0220F*/
+            btnDisable: function () {
+                if(((this.demo2=="个人定制"&&this.customInfo.LeaderNeed.length>0)||(this.demo2=="公司定制"&&this.customInfo.TravelNeed.length>0))&&this.customInfo.Birthland && (this.customInfo.Destination && this.customInfo.Destination.toString().split("，").length<5)  && (this.customInfo.Travelers && /^[0-9]*[1-9][0-9]*$/.test(this.customInfo.Travelers)) && this.customInfo.CustomerName && (this.customInfo.CustomerPhone && /^(\+?0?86\-?)?1[345789]\d{9}$/.test(this.customInfo.CustomerPhone)) && (!this.customInfo.CustomerEmail || /^([a-zA-Z0-9]*[-_.]?)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z0-9-][a-zA-Z0-9-]+)$/.test(this.customInfo.CustomerEmail))){
+                    return false
+                }else{
+                    return true
+                }/*0222F*/
+            },
+            selectedListStr(){
+                let restr = ''
+                for (let i = 0, len = this.selectedList.length; i < len; i++) {
+                    restr += (this.selectedList[i].name + "，")
+                }
+                if (restr != "") {
+                    restr = restr.substring(0, restr.length - 1)
+                }
+                return restr
+            },
+        },
+        methods: {
+            //获取页面数据 START
+            takeData: function (i) {
+                var tempData = document.getElementById("tailor").value
+                    if (tempData != "") {
+                        this.customInfo = JSON.parse(tempData)
+                    }
+                    else{
+                        this.customInfo.Travelers = "2"/*0217 F*/
+                        this.customInfo.Memo1 = (api.devicetype == 'ios' || api.devicetype == 'android' ? 'App' : "Wap")
+                        this.customInfo.Birthland = "北京"//api.getDepCity()["CityName"]
+                        //获取已存的数据
+
+                        if (this.$route != undefined && this.$route.query.desname != undefined && this.$route.query.desname.length > 0) {
+                            this.customInfo.Destination = this.$route.query.desname
+                        }
+                }
+                commit('UPDATE_LOADING',false)/*0228 F*/
+            },
+            //index-list 内的城市列表以及右侧导航
+            makeData: function (dt) {
+                this.indexwords = []/*0223-F*/
+                this.alphabet = []/*0223-F*/
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(initial => {
+                    let isShow = true
+                    let tempArr = []
+                    let cells = dt.filter(citycell => (String(citycell['CityNamePY']).toUpperCase()[0] === initial));
+                    for (let p = 0, q = cells.length; p < q; p++) {
+                        tempArr.push(cells[p]['CityName'])
+                    }
+                    if (tempArr.length > 0) {
+                        this.alphabet.push({ initial, tempArr, isShow });
+                    }
+                });
+                this.indexWords.push({ 'initial': '当前' }, { 'initial': '历史' }, { 'initial': '热门' })
+                this.indexWords = this.indexWords.concat(this.alphabet)
+            },
+            //获取目的地城市
+            makeDepCity: function () {
+                //目的地 START
+                this.$http.get('/static/tailor.json').then((response) => {
+                    var data = response.data
+                    let _tempselectedcity = {}
+                    this.selectedList = []
+                    let _temparr = !this.customInfo.Destination || this.customInfo.Destination.split("，")
+                    if (_temparr) {
+
+                        if (_temparr && _temparr.length > 4) {
+                            _temparr = _temparr.slice(0, 4)
+                        }
+                        for (let s in _temparr) {
+                            if (_temparr[s] && _temparr[s].trim() != "") {
+                                _tempselectedcity[_temparr[s]] = true
+                            }
+                        }
+                    }
+                    //返回数据中有重复的城市名 设置一个已选择的城市对象 为过滤数据使用
+                    var selectedName = {}
+                    for (let p = 0, q = data.DestinationListAll.length; p < q; p++) {
+                        for (let z in data.DestinationListAll[p].DestinationList) {
+                            let _ck = _tempselectedcity[data.DestinationListAll[p].DestinationList[z]] && (!selectedName[data.DestinationListAll[p].DestinationList[z]]) || false
+                            data.DestinationListAll[p].DestinationList[z] = { name: data.DestinationListAll[p].DestinationList[z], checked: _ck }
+                            if (_ck) {
+                                this.selectedList.push({ name: data.DestinationListAll[p].DestinationList[z].name, item: data.DestinationListAll[p].DestinationList[z] })
+                                selectedName[data.DestinationListAll[p].DestinationList[z].name] = true
+                            }
+                        }
+                    }
+                    //add 手写输入并且不在城市列表里的标签处理
+                    if (_temparr.length > 0) {
+                        for (let CityName in _tempselectedcity) {
+
+                            let _flag = false
+                            for (let xx = 0; xx < this.selectedList.length; xx++) {
+                                if (this.selectedList[xx].item.name == CityName) {
+                                    _flag = true
+                                }
+                            }
+                            if (!_flag) {
+                                this.selectedList.push({ name: CityName, item: { name: CityName, checked: true } })
+                            }
+                        }
+                    }
+                    this.destinationListAll = data.DestinationListAll
+                    commit('UPDATE_LOADING',false)/*0228 F*/
+                }, (response) => {
+                    commit('UPDATE_LOADING',false)/*0228 F*/
+                });
+                //目的地 END
+            },
+
+            //点击搜索关键词列表 跳转搜索结果页
+            resultClick(item) {
+                this._oldcity = this.currentcity
+                if (item.other == -1) {
+                    this.currentcity = ''
+                    return
+                } else {
+                    this.currentcity = this.cityJson[item.other].CityName
+                }
+
+                // this.isConfirmShow = true
+                var cityItem = this.cityJson.filter(function (element, index, array) {
+                    return element.CityName == item.CityName
+                })
+
+                item.CityName = item.normalstr ? item.normalstr : item.title
+                if (this.historyCites.length > 0) {
+                    if (inarray(this.historyCites, item)) {
+                        this.historyCites.push(item)
+                    }
+                } else {
+                    this.historyCites.push(item)
+                }
+                this.customInfo.Birthland = this.currentcity
+                this.isDepartShow = false
+                this.isOverHidden=false
+                this.isShowSubmit=true
+                //                api.setLocalStorage("historycity",JSON.stringify(this.historyCites))
+
+            },
+
+            //获取会员信息
+            getMemberInfo: function () {
+                var vm = this
+                // var useCache = false
+                var memberid = api.getMemberId()
+                if (memberid !=''&&memberid.length>0) {
+                    var param = JSON.stringify({
+                        memberid: memberid,
+                    });
+                    api.post({
+                        path: api.config.microServiceHost.memberurl,
+                        controller: 'CrmMember',
+                        action: 'GetMemberSimple',
+                        param: param,
+                        useCache: false,
+                        useProxy: true,
+                        callback: function (obj) {
+                            if (obj.ReturnCode == 0) {
+                                var data = obj.Data
+                                vm.customInfo.CustomerName=data.Name
+                                vm.customInfo.CustomerPhone = data.Mobile
+                                vm.customInfo.CustomerEmail = data.Email
+                                vm.customInfo.CustomerID=memberid
+                                document.getElementById("tailor").value=JSON.stringify(vm.customInfo)
+                                commit('UPDATE_LOADING',false)/*0228 F*/
+                            }
+                        }
+                    })
+                }
+                else {
+                    var url = location.href
+                    //location.href = "http://mpass.aoyou.com?from=" + encodeURIComponent(url)  + "&forward=" + encodeURIComponent(url)
+                     var fromurl=api.getCookie('wapfrom')
+                     //用记录cookey的方式，解决document.referrer因为#符号丢参数的问题
+                     if(fromurl==null||fromurl==undefined||fromurl==""||typeof (fromurl)== 'undefined')
+                     {
+                         fromurl=encodeURIComponent(document.referrer)
+                     }
+                     else
+                     {
+                         fromurl=encodeURIComponent(fromurl)
+                     }
+                     api.toLogin(fromurl, encodeURIComponent(url), "back")
+                     return false
+                    //var urlgo = "http://mpass.aoyou.com?from=" + fromurl + "&forward=" + encodeURIComponent(url)
+                    //location.replace(urlgo);
+                    commit('UPDATE_LOADING',false)/*0228 F*/
+                }
+            },
+
+            //获取出发城市信息
+            getDepartCity: function () {
+                var vm = this
+                var useCache = true
+                var useProxy = true
+                api.post({
+                    path: api.config.microServiceHost.elementurl,
+                    controller: 'ElementService',
+                    action: 'GetCityInfos',
+                    param: JSON.stringify({}),
+                    useCache: useCache,
+                    useProxy: useProxy,
+                    callback: function (obj) {
+                        if (obj.ReturnCode == 0) {
+                            // var data = JSON.parse(obj.Data)
+                            vm.hotCities = obj.Data.HotCities
+                            vm.cityJson = obj.Data.Cities
+                            vm.makeData(vm.cityJson)
+                        }
+                        commit('UPDATE_LOADING',false)/*0228 F*/
+                    }
+                })
+
+            },
+
+            //下一步
+            nextStep: function () {
+                var pageDataOne = JSON.stringify(this.customInfo)
+                document.getElementById("tailor").value = pageDataOne
+            },
+
+
+            //获取搜索列表关键词数据 原始数据 模糊匹配
+            takeSearchList: function (val) {
+                let rs = []
+                if (val != undefined && val.trim() != '') {
+                    let upperVal = String(val).toUpperCase();
+                    for (let i = 0, j = this.cityJson.length; i < j; i++) {
+                        let _temstr = this.cityJson[i]['CityName']
+                        if (String(this.cityJson[i]['CityNamePY']).toUpperCase().startsWith(upperVal)) {
+                            rs.push({
+                                title: _temstr, other: i
+                            })
+                        } else if (_temstr.indexOf(val) != -1) {
+                            let _reg = new RegExp(val, "g");
+                            let newstr = _temstr.replace(_reg, "<em>" + val + "</em>");
+                            rs.push({
+                                title: newstr, other: i, normalstr: _temstr
+                            })
+                        }
+                    }
+                }
+                if ((!rs || rs.length == 0) && val.trim() != '') {
+                    rs = [{ title: "<span>暂无相关城市</span>", other: -1 }]
+                }
+                return rs
+            },
+
+            //点击搜索框，初始状态弹出空白搜索关键词列表 START
+            getResult: function (val) {
+                setTimeout(() => {
+                    this.results = this.takeSearchList(val)
+                }, 500);
+            },
+
+            //关闭搜索页面
+            onCancelSearch() {
+                this.value = ''
+                this.results = []
+            },
+
+            //热门城市
+            selectHotFun: function (item) {
+                this._oldcity = this.currentcity
+                this.currentcity = item.CityName
+
+                // this.isConfirmShow = true
+                var cityItem = this.cityJson.filter(function (element, index, array) {
+                    return element.CityName == item.CityName
+                })
+
+                if (this.historyCites.length > 0) {
+                    if (inarray(this.historyCites, item)) {
+
+                        this.historyCites.push(item)
+                    }
+                } else {
+                    this.historyCites.push(item)
+                }
+                this.customInfo.Birthland = this.currentcity
+                 this.isDepartShow = false
+                 this.isOverHidden=false
+                this.isShowSubmit=true
+                //                api.setLocalStorage("historycity",JSON.stringify(this.historyCites))
+            },
+            //判断数组中是否存在某对象
+            ArrayMake: function (arr, item) {
+                for (var i in arr) {
+                    if (item.CityID == arr.CityID) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+
+            //点击城市列表
+            selectCity: function (_str) {
+                //修改当前城市
+                var cityItem = this.cityJson.filter(function (element, index, array) {
+                    return element.CityName == _str
+                })
+
+                this._oldcity = this.currentcity
+                this.currentcity = _str
+                // this.isConfirmShow = true
+                if (this.historyCites.length > 0) {
+                    if (inarray(this.historyCites, cityItem[0])) {
+                        this.historyCites.push(cityItem[0])
+                    }
+                } else {
+                    this.historyCites.push(cityItem[0])
+                }
+                this.customInfo.Birthland = this.currentcity
+                this.isDepartShow = false
+                this.isOverHidden=false/*0227 F*/
+                this.isShowSubmit=true
+            },
+
+
+            //关闭确认
+            closeConfirm() {
+                this.currentcity = this._oldcity
+                //this.isConfirmShow = false /*0227 F*/
+            },
+
+            //取消切换城市
+            onCancel: function () {
+                this.currentcity = this._oldcity
+            },
+
+            //确认切换城市、关闭出发地页面
+            onConfirm: function () {
+                this._oldcity = this.currentcity
+                this.customInfo.Birthland = this.currentcity
+                this.isDepartShow = false
+                this.isOverHidden = false /*0227-F*/
+                this.isShowSubmit=true
+                //                this.takeData()
+            },
+
+
+            //显示选择出发地页面
+            showDepart: function () {
+                this.isShowSubmit=false
+                this.results = []
+                this.isDepartShow = true
+                this.isOverHidden = true /*0223-F*/
+            },
+            //关闭出发地选择
+            closeDepart: function () {
+                this.isShowSubmit=true
+                this.value = ""
+                this.isDepartShow = false
+                this.isOverHidden = false /*0223-F*/
+            },
+            //显示目的地
+            showDestination: function () {
+                this.makeDepCity();
+                this.isShowSubmit=false
+                this.isDestinationShow = true
+                this.isOverHidden = true /*0223-F*/
+            },
+            //关闭目的地
+            closeDestination: function () {
+                this.isShowSubmit=true
+                this.isDestinationShow = false
+                this.isOverHidden = false /*0223-F*/
+            },
+            closeDestinationAndSubmit: function () {
+                this.isShowSubmit=true
+                this.customInfo.Destination = this.selectedListStr
+                this.selectedList = this.selectedListStr
+                this.isDestinationShow = false
+                this.isOverHidden = false /*0227-F*/
+            },
+
+            //以下是目的地页面的 START
+            //清空已选列表
+            clearAll: function () {
+                for (let qq in this.selectedList) {
+                    this.selectedList[qq].item.checked = false
+                }
+                this.selectedList = []
+            },
+            //删除已选项
+            removeSelect: function (idx, it) {
+                this.selectedList.$remove(this.selectedList[idx])
+                it.item.checked = false
+            },
+            //选择目的地国家
+            checkCities: function (it, idx) {
+                //判断已有的城市
+                var isContains = false
+                for (var i = 0, len = this.selectedList.length; i < len; i++) {
+                    if (this.selectedList[i].name == it.name) {
+                        isContains = true
+                        this.isWarningShowOne = true
+                        let temp = this
+                        setTimeout(function () {
+                            temp.isWarningShowOne = false
+                        }, 1000)
+                        return
+                    }
+                }
+                if (!isContains) {
+                    if (it.checked) {
+                        for (let t in this.selectedList) {
+                            if (this.selectedList[t] == it.name) {
+                                this.selectedList.$remove(this.selectedList[t])
+                                it.checked = false
+                                break;
+                            }
+                        }
+                    } else {
+                        if (this.selectedList.length >= 4) {
+                            this.isWarningShow = true
+                            let tempo = this
+                            setTimeout(function () {
+                                tempo.isWarningShow = false
+                            }, 1000)
+                            return
+                        }
+                        it.checked = true
+                        this.selectedList.push({ name: it.name, item: it })
+                    }
+                }
+            },
+
+            //关闭顶部提醒
+            closeWarning() {
+                this.isWarningShow = false
+                this.isWarningShowOne = false
+            },
+
+            //切换区域标签
+            tabSelect(i) {
+                this.selectedTab = i
+                this.selectedContent = i
+            },
+            //以上是目的地页面的 END
+
+            //提交需求
+            submit: function () {
+                var vm = this
+                var useCache = false
+                var useProxy = true
+                vm.TailorInfo.MemberID=vm.customInfo.CustomerID
+                vm.TailorInfo.MemberName=vm.customInfo.CustomerName
+                vm.TailorInfo.MobilePhone=vm.customInfo.CustomerPhone
+                vm.TailorInfo.Email=vm.customInfo.CustomerEmail
+                vm.TailorInfo.ProductType=0
+                var DstArr=[]
+                if(vm.customInfo.Destination.length>0)
+                {
+                    DstArr=vm.customInfo.Destination.split('，')
+                    for(let i=0;i<DstArr.length;i++)
+                    {
+                        vm.TailorInfo.DestinationOne=DstArr[0]||""
+                        vm.TailorInfo.DestinationTwo=DstArr[1]||""
+                        vm.TailorInfo.DestinationThree=DstArr[2]||""
+                    }
+                }
+                vm.TailorInfo.PlaceOfDeparture=vm.customInfo.Birthland
+                vm.TailorInfo.Description="目的地:"+vm.customInfo.Destination+"|特殊需求:"+vm.customInfo.Special
+                if(vm.demo2=="个人定制")
+                {
+                    vm.TailorInfo.CustomType=1
+                    if(vm.customInfo.LeaderNeed[0]==1)
+                    {
+                        vm.TailorInfo.TravelMode=2
+                    }
+                    else{
+                        vm.TailorInfo.TravelMode=1
+                    }
+                }
+                else{
+                    vm.TailorInfo.CustomType=2
+                    if(vm.customInfo.TravelNeed[0]==1)
+                    {
+                        vm.TailorInfo.TravelMode=1
+                    }
+                    else{
+                        vm.TailorInfo.TravelMode=2
+                    }
+                }
+                vm.TailorInfo.TravelSize=vm.customInfo.Travelers
+                vm.TailorInfo.CompanyName=vm.customInfo.CompanyName
+                //提交定制单
+                api.post({
+                    path: api.config.microServiceHost.memberurl,
+                    controller: 'Custom',
+                    action: 'CreateCustomChannel',
+                    param: JSON.stringify(vm.TailorInfo),
+                    useCache: useCache,
+                    useProxy: useProxy,
+                    callback: function (obj) {
+                        if (obj.ReturnCode == 0) {
+                            var pageDataOne = JSON.stringify(vm.customInfo)
+                            document.getElementById("tailor").value = JSON.stringify(vm.customInfo)
+                            go({ path: "/success" }, vm.$router)
+                        }
+                    }
+                })
+            },
+            //回到顶部 0220F
+            scrollTop() {
+                this.$refs.viewBox.$els.viewBoxBody.scrollTop = 0
+            },
+
+            //input onFocus 底部按钮不固定
+            onFocus() {
+//                document.querySelector('.tailor-footer').style.position = "relative"
+//                document.querySelector('.main-content').style.paddingBottom = "0"
+
+            },/*0224F*/
+
+            //input onBlur 底部按钮恢复固定
+            onBlur() {
+                document.querySelector('.tailor-footer').style.position = "fixed"
+                document.querySelector('.main-content').style.paddingBottom = "50px"
+            }, /*0224F*/
+
+            //获取轮播图列表
+            getBannerList:function(){
+                var vm = this
+                var param = JSON.stringify({
+                    cityId: 1,
+                    channelTypeid:390,
+                    type:2,
+                    SpaceGuid:"1b5a699a-6acb-43a2-a875-8847b967ee6b"
+                });
+                api.post({
+                    path: api.config.microServiceHost.elementurl,
+                    controller: 'ElementService',
+                    action: 'GetBannerList',
+                    param: param,
+                    useCache: false,
+                    useProxy: true,
+                    callback: function (obj) {
+                        if (obj.ReturnCode == 0) {
+                            var data =JSON.parse(obj.Data)
+                            vm.bannerLists=[]
+                            if(data.length>0) {
+                                for (var i = 0, len = data.length; i < len; i++) {
+                                    var tempobj = {'img':data[i].img}
+                                    vm.bannerLists.push(tempobj)
+                                }
+                            }
+                            else {
+                                vm.bannerLists.push({'img':"http://m.aoyou.com/static/img/pic-tailor-kv.67dedf3.png"})
+                            }
+                        }
+                    }
+                })
+            }
+
+
+        },
+
+        created() {
+            commit('UPDATE_LOADING',true)/*0228 F*/
+            this.screenHeight = `${document.body.clientHeight - 88}px`//计算搜索关键词列表高度：屏幕高度-顶部标题栏高度
+        },
+        ready() {
+//            let con =  document.getElementsByClassName('swiper-item-content');
+//
+//            this.swiperheight = document.getElementsByClassName('swiper-item-content')[1].offsetHeight +'px';
+            this.takeData()
+            if(!this.customInfo.CustomerName || !this.customInfo.CustomerPhone)
+            {
+                this.getMemberInfo()
+            }
+            this.getDepartCity()
+            this.makeDepCity()
+            this.getBannerList()
+
+        }
+    }
+
+
+    function getResult(val) {
+        let rs = []
+        for (let i = 0; i < 8; i++) {
+            rs.push({
+                title: `${val} result: ${i + 1} `,
+                other: i
+            })
+        }
+        return rs
+    }
+    //搜索关键词模糊匹配 START？？
+    function getdataFormReg(datas, _txt, ky1, ky2, ky3, ky4) {//从数据中获取正则匹配
+        let _temfuzzydata = [];
+        if (_txt == "") {
+            _temfuzzydata = []
+        } else {
+            let reguse = new RegExp('^' + _txt + '.*$', 'im');
+            for (let i = 0, j = datas.length; i < j; i++) {//匹配
+                if (datas[i][ky1]) {
+                    if (((datas[i][ky4]).indexOf(_txt) != -1) || ((datas[i][ky1]).indexOf(_txt) != -1) || reguse.test(datas[i][ky2]) || reguse.test(datas[i][ky3])) {
+                        _temfuzzydata.push({
+                            title: `${datas[i][ky1]} `,
+                            other: i
+                        })
+                    }
+                }
+            }
+        }
+        return _temfuzzydata;
+    }
+    //搜索关键词模糊匹配 END
+
+    //判断是否存在
+    function inarray(needle, haystack) {
+        var i = 0, n = needle.length;
+        for (; i < n; ++i)
+            if (needle[i].CityName == haystack.CityName)
+                return false;
+
+        return true;
+    }
+
+</script>
+
+<style lang="less">
+    @import '../../styles/index.less';
+    @import '../../styles/ayui/base/reset.less';
+
+    input,textarea{
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-user-modify: read-write-plaintext-only;
+        outline: none;
+
+        &::-webkit-input-placeholder{
+             color:#999;
+         }
+    }/*0224F*/
+    .ay-slider > .ay-indicator > a > .ay-icon-dot, .ay-slider .ay-indicator-right > a > .ay-icon-dot {
+        width: 20px;
+        height: 2px;
+        background-color: #fff;
+        opacity: .5;
+        border-radius: 0;
+        float: inherit;
+    }
+    .ay-slider > .ay-indicator > a > .ay-icon-dot.active, .ay-slider .ay-indicator-right > a > .ay-icon-dot.active {
+        background-color: #FF4800;
+    }
+    .ay-slider > .ay-swiper > .ay-swiper-item > a > .ay-swiper-desc {
+        height: 0.4em;
+    }
+    .icons{
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .tips{
+        font-size: 12px;
+        color: #41B3EE;
+        &:before{
+            content: '';
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAAgpJREFUSA29ljFLw0AUx99d0i5dWtysi5NzBaGLONQqFARBJ7+KjvpVnBQEoaC1g7gUBDt3crE6SV26tE3O+4dempyXJpGkt+Tu3Xv/X3J5d/cYJWj77VHNcemYEe1K96oQYh1hjLFP+RgKoheL091Tq9KHfVmTGtGtcf9zKsi9lIJb0V6LGSk2YMQvukflm4U13DMCDx5+NqcT91q61sPuiUe9QpGfPR6W3/WIP8Bme7TnOHQrSKzpzmnGjNi3ZdFJp1V5DsaFgIDNXOqQEIWgk95vVIueqTuc6FPhMWNTm1MzCPWBWMbZRLzGfRlg57WSJ3zVH1McFF9qF9mOWl6uXgn/LA4G342SHxLqKx39Cc15PnhTXjSyUY7+myA6wzSuzxnkAZH6Ji+T7WPs+uZg3zdGdBSDeZvaEW8RfkZz4qTRoi2Lbds4QTR77DAuUaIEwOIyTXFcraSBhX9YTUvDkqplTRlbtdVBnDQwuA8Rk2Z5wVpsqoTEtPtQkxV8fsVo9nyGkvWFLxzmI29UHXJcnsapHIxgcdzUOWgbJcHiKAvk/hgYPTI0ggGWl6UoCzLUNkophgec1yA9o2c2xp6qc/x9iBoEl2U2+gsVaEJbWXwgbmTUILL2m6pJ0zN4JQX7Jl9oQVPd9vCR/zLckhRR6hxddqwlKqIUeqVlooLiubJCOAhFP8tS/xdYjdBzuv8a6gAAAABJRU5ErkJggg==) no-repeat;
+            background-size: contain;
+            vertical-align: -2px;
+            margin-right: 5px;
+        }
+    }
+    .icon-close{
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAArVJREFUWAnd2LuLE0EcB/Bk84CDWNkmhAhaSDyRvEx7EUsRLRUE/wq1V3v/A8VOsbCLqJUQ8kJMETwESZGk8uqLeWz8/sb9hb3c7t3M7OweupDMY2fn98mS2fklsdi/ctRqtYvVavXSWXopPjncBosaOFFfLpf7q9Xqe7lcfuIeEFW9VCo9ovjkIA/HFUDbtvPoiNNrvV4/jRpZqVQeI/ZzNjgeNGMxASwUCu/i8fhH0YO3KJGEA+gZxyYHebidoMpwOFzl8/m3GFhD84JzspHNZufT6fSL0zZeeOFSqdStZrP5m4MJIDXG4/FyG4k7GRrSD9dqtQ4ZR+UGSI2okLK4Y8AokCo4T2CYSFWcLzAMpA7uRKBJpC7uVKAJZBCcFDAIMihOGqiDNIFTAqogTeGUgTJIkziKRxmM1lGv13cWi8V7bIc3XBN8QP0mt2njp711e/vi8zKlNpAm90GKuCZwNFEgIE1AyPl83kL1KrWdY5BOp68HuXM8kcgHuaFTIgO+g+uubF1bRP/drT6t5pFsRnUGLIh7yCFf4Tr+oDbqnJnfRj75E/nkQHVe93ie2N0nVffADfC9u4yLGWQB/xLj7ktN6DNIC+iFw/yNXq+3n0gk9kwilReJH67f7//im4BfZefxC+0z2rtOn21Z1oNut/uax8iWSkAZHAc2hZQGquBMIqWAOjhTyFMXSRAcITudzoGzcL45aKXVfeIdDIrju0il8538hCrvOFILxxdoEsdQHaQnMAycLvIYMEycDvIIMAqcKnIDjBKnghRA/Ku5i/ToKy7kxw5t+A339sWTmi69Fk4ymbzWbrdF0iFAyDpKZ4GjD+s8Jxuobp6T2MfLdI4OkQ8Wi8Ufs9nsHNKlDh6qD5GVHPw9Hc37ZDI5zOVybxBtB4ZuJpN5MRqN5tFE/9+j/AGtGaLnHN8cXgAAAABJRU5ErkJggg==);
+    }
+
+    .icon-close-white{
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAQVJREFUSA3tkzsOgkAQhk20s1Bj5RWMhVJ4Ar2ApbHzULYewVhYWJh4HePrBvgNsGZhWRYFrXaSn03m9bHD0Gh48xNwTSAMwyaaoV6J3A55c9Ry5RpxijZI7IGmRkLiIDZGVyS2teVZ/RTtotL48eQwYPgEcotToufR2tAWoGyILlqTFAy/QNRNJO0uPlu/Qj+FI2TApCHKQoLCZq6gBaaPS25SDaJeIgeGK7L6IBpsqbpr51rFazlpnP0mipVakEqwHIiMy1iQX0ACQLnb+BXMcpP3dtUCo0kfOf8TC2xQ+mY0WCBlhStMUnaMq09AbRrs0RlNXIUJ7MR5QF1Xvo/7CfxnAi9fBRHRlnshXAAAAABJRU5ErkJggg==);
+    }
+
+    .tailor-wrap{ /*0223-F*/
+        /*width: 100%;*/
+        height: 100%;
+
+        .ay_icon{
+            display: block;
+            line-height: 0;
+        }
+
+        .ay_icon_warn:before{
+            font-size: 18px;
+            line-height: 44px;
+        }
+
+        /*弹出确认框*/
+        .ay_dialog{
+            padding: 45px 30px 30px 30px;
+            width: (270rem/20);
+            background-color: #fff;
+            box-sizing: border-box;
+
+            .ay_dialog_hd{
+                display: none;
+            }
+
+            .ay_dialog_bd{
+                font-size: 14px;
+                color: #333333;
+                line-height: 20px;
+                font-weight: 300;
+                padding: 0;
+                text-align: left;
+
+                em{
+                    color: #41B3EE;
+                }
+            }
+
+            .ay_dialog_ft{
+                margin:15px auto 0;
+                width: 150px;
+
+                &:after{
+                    display: none;
+                }
+
+                a{
+                    width: 100px;
+                    height: 40px;
+                    border: 1px solid #DFDFDF;
+                    border-radius: 20px;
+                    box-sizing: border-box;
+                    font-size: 17px;
+                    color: #333;
+                    line-height: 40px;
+
+                     &:after{
+                          display: none;
+                     }
+
+                     &:first-child{
+                          margin-right: 10px;
+                     }
+                }
+            }
+
+            .btn-close{
+                display: block;
+                position: absolute;
+                top:20px;
+                right: 20px;
+                width: 12px;
+                height: 12px;
+                background: no-repeat center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAW1JREFUSA2dlN1OwyAYhgvxEnZ/Zsa0JzvQqMmixyYe2OjJDmgXTe9vt2Dr+zJYOgb0GyT8FD6epwWKMsZsq6p6Qv6t63qrlBrRLk7TNOmu6z4AWCO3Nyg2yCvkFwysEHBfKnHwPViEM200CmObx2INyZ6Bsz5RMwLnPKNsacwX6ge2XeJyib8kAf9umubRCgjFXhRJcnByT4ISyRL8QnCNRAKPCiQSKTwpyEk4xpOGyh9FdtkNZSNMZ3sQDsY23sWI4IzNChgQkbDbp+Sb+4BFAQMTkkU450r/2D8GBynWF4TIlugTs3gZxlKLv/U5NuD7skuEpQnhg5t46wGos5KkIAbH/XRHMI7pDyqRJCpIwf017n40keRCsATnFzBJJWcCKfyokElOgmvhUokVlMIlEtX3/es4ju8+GPXA0+I3dNafbcb2RGv9pgFvZjOL4JzPF3LHePA8SGteFTvkA3Jb8uYexnomafF4wPPuHxWECWUSKpFnAAAAAElFTkSuQmCC);
+                background-size: 12px;
+            }
+        }
+
+        .ay-x-input{
+            padding: 8px 0;
+
+            &:before{
+             .setTopLine(#DFDFDF);
+            }
+
+             .ay-label{
+                 display: block;
+                 padding-right: 0.5rem;
+                 width: (100rem/20) !important;
+                 box-sizing: border-box;
+                 font-size: 17px;
+                 color: #333333;
+             }
+
+            .ay-input{
+                display: block;
+                font-size: 17px;
+                color: #333333;
+                font-weight: 300;
+                height:44px;/*0222F*/
+                line-height: normal;/*0222F*/
+                padding: 0;/*0222F*/
+                overflow: hidden;
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+                -webkit-backface-visibility:hidden;
+                -webkit-perspective: 1000px;
+
+                &::-webkit-input-placeholder {
+                     color: #999;
+                }
+            }
+        }
+    }
+
+    .tailor-header-wrap{
+        height: 44px;
+
+        .ay-header{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            background-color: #FF5523;
+            z-index: 9;
+
+            .ay-header-left{
+                top:0;
+                left: 0;
+                width:44px;
+                height:44px;
+
+                .ay-header-back{
+                    display: none;
+                }
+
+                .left-arrow{
+                    top: 0;
+                    left: 0;
+                    width: 88px;
+                    height: 88px;
+                    transform: scale(0.5);
+                    -webkit-transform: scale(0.5);
+                    transform-origin: 0 0;
+                    -webkit-transform-origin: 0 0;
+
+                    &:before{
+                         top:28px;
+                         left:46px;
+                         width: 26px;
+                         height:26px;
+                         border-width: 3px 0 0 3px;
+                     }
+                }
+            }
+
+            .ay-header-right{
+                top:0;
+                right: 0;
+                width:44px;
+                height:44px;
+
+                .ay-header-more{
+                    display: none;
+                }
+
+                a,button{
+                    margin-left: 0;
+                }
+            }
+
+            .ay-header-title, .ay-header h1{
+                margin: 0 70px;
+                box-sizing: border-box;
+                font-size: 19px;
+
+                span{
+                    width: 100%;
+                    height: 40px;
+                    overflow: hidden;
+                    -o-text-overflow: ellipsis;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    word-wrap: normal;
+                    font-size: 19px;
+                }
+            }
+        }
+
+    }
+    /*页面*/
+    .page-main{
+        position: relative;
+        height: 100%;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /*初始页面*/
+    .main-wrap{
+        height: 100%;
+    }
+
+    .fixed-wrap{
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .main-content{
+        height: 100%;
+        /*.ay-slider,.ay-slider > .ay-swiper{*/
+            /*overflow: inherit;*/
+        /*}*/
+        .ay-tab{
+            padding: 0 20px;
+            height: 60px;
+            overflow: hidden;
+        }
+        .ay-tab .ay-tab-item{
+            line-height: 60px;
+        }
+    }
+    .ay-section.no-padding{
+        margin-bottom: 0;
+    }
+
+    .kv{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        width: 100%;
+        height: (110rem/20);
+        background: url("../../assets/wap/pic-tailor-kv.png") no-repeat top center;/*0210*/
+        background-size: 100%;
+
+        .kv-inner{
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        p{
+            margin: 0;/*0210*/
+            width: 100%;
+            color: #fff;
+            text-align: center;
+        }
+
+        .kv-title{
+            font-size: 23px;
+            font-weight: bold;
+            line-height: 30px;
+        }
+
+        .kv-subtitle{
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+    }
+
+    /*步骤*/
+    .tailor-step{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        padding: 0 20px;
+        width: 100%;
+        height: 60px;
+        box-sizing: border-box;
+        text-align: center;
+
+        .ay-step{
+            display: block;
+            width: 100%;
+            line-height: 0;
+            white-space: nowrap;
+            font-size: 0;
+            -webkit-text-size-adjust:none;
+
+        }
+
+        .ay-step-item{
+            padding-right: 3px;
+            width: 33%;
+            line-height: 0;
+            box-sizing: border-box;
+        }
+
+        .ay-step-item-head{
+            margin-right: 0;
+            vertical-align: middle;
+
+            .ay-step-item-head-inner{
+                background-size: contain;
+                .ay-step-item-icon{
+                    display: none;
+                }
+            }
+        }
+
+        .ay-step-item-main{
+            padding-left: 3px;
+            line-height: 0;
+            vertical-align: middle;
+        }
+
+        .ay-step-item-checked::before{/*已完成 对勾*/
+            display: none;
+        }
+
+        .ay-step-item-title{/*步骤名称*/
+            font-size: (14rem/20);
+            color: #333;
+            font-weight: 300;
+            line-height: 20px;
+        }
+
+        .ay-step-item-tail{
+            left: auto;
+            top: 50%;
+            margin-top: -4px;
+            width: 8px;
+            height: 8px;
+            background: no-repeat center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAAXNSR0IArs4c6QAAAPJJREFUOBFjYKAFOHv2rMeZM2c23L9/n4OQ+UzoCkCagWIbgNj/3bt3BA3BMACo0ej////sIIOBtDshQzAMMDY2bgPqrQcZAAKEDGGEKMMkgWFQBxRthMkwMjLuFBISClBUVPwBEwPROA0ASRJjCF4DiDEEIwxAmpABMExagM6/CBMDhcnHjx+VYXy8BgAVM507d24BkNaHaQAaNlNfX/8anA9joNNImmNhciDNRkZGmUD6P1wMxkCmidUM0oMRiKRoBhnAAiKQATAp9wP5eJ2NrB5bIM4BKngDUoTNz8iacbKBCUgX6JJOoHcwvIhTE7kSAHvthdkB2YKXAAAAAElFTkSuQmCC);
+            background-size: contain;
+        }
+
+
+        .ay-step-item-head-wait .ay-step-item-head-inner,/*未完成*/
+        .ay-step-item-head-process .ay-step-item-head-inner,/*进行中*/
+        .ay-step-item-head-finish .ay-step-item-head-inner/*已完成*/
+        {
+            border: none;
+            background-color: #fff;
+        }
+
+        .step-fill{
+            .ay-step-item-head-wait .ay-step-item-head-inner,
+            .ay-step-item-head-process .ay-step-item-head-inner,
+            .ay-step-item-head-finish .ay-step-item-head-inner{
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAABT1JREFUWAnNWV1sVEUU/qZs2xS2UkqF2kjVFMXYKiImJJbQ+GRM/I/GRCPlwQeDkkg0Rl8oJT4YA0ETJCb6QI0vWpSgxgefLFL/0WhaUiMaCtLagiB1l9ofdvzOzN69t9t7d+eupXqSu3d+zpnz3TNn5pyZVSiRdG97E6bUvVCZtdCqAUo3QKPBDKcwxLYhtvFddgTl+qBq7fqlFFUqjpDufWIZpi48RZn7+bTEkSVvH58DKF+4R7W+Puoq6wRQ929O4kzqGVroWQ6cdB08gi8FhZ2oS+5SzXtTETy55qIAdc+mB6D1XkAvz0nNSUGNQKnNqm3f+4WGK4vq1For3bOxA8jsn3twolU+OLNfdIiuKByhHfrzrVWYPNvFQR6KEpzbdtWNitp2ddvu8fxxZ1nQfM28ghNINAR1hllyFkAcat82f5YL2osgje5gG7ieAmQWhPicntkeYPn3xcWrgOXrgfM/ASOHZ46nqBllDwYXTg6g2UpOp49Z550pN2e1urXADU/SLAvskIMfAMffyxueq/vyRSu9LSiR65V9jt+Wq0cVquqBK24Hqq8GymNuiSIr4E5/AyxdA1x1jy2nTwS0cXVbLJ3SaCyYjRASigprrN8AXPsYZ6EiMKBjUXP2FNWd+JCgvgVWPw8kqoDvXwTGfs4fJMWI0yQRxy6S6fEtRcEtWkFw7aWBE/UG3EfA6NfATc9ZcKNfhoET7mQ2pMJOsdb3SWtBaryb4LIeMUZj//ouMPVXQRHUXA80PUo5TutwD8F9Adyyw9anGOUG3iwkL/F+W8JmJbqlEKfpq77GZxl4Axgf9uthpaU3E9wjFszJj4HfP+O0vmDrwl/cf1sEW5lJmcIU5LdV1vgtf5/xy2Gl2tVcrfQasfhIL613yPpcxWXcJDJhEuFtTOcSNp8L7y+5ddXjFpwMIKu1phmoWAyc7WP5Ovqj4yJjrpkwyabsj3GpvBpYyRXt0Ri30FOf2JpYSijF7SPZyAWxEDh3FOh/BWhlYuRKTIRpQZMJu4r4fAsqgWXr/LqsUg+gTKPiBiHghP4cYLq6m8nLlK27/hIbLQibprsKeXyTY8DR17waMPGHXx48CIgfysykTwHH3ia4Sb/ftURstKDSTEhdRWbyBR2+YglQd6vtT/9GYHw8qr3RTvHFC16L25vYEvxK2S/oUDFJ/Kx5i7vQkQ765HF3fsOph2WRDBEkl1ZMujjBkMWo4ErTaVdOn4/YZJHwaOi3OZckigR90FkwBiOx0YI8tyLDLT8mVdYB63a6C30nUzzozi+cxFYmh+p4Ullu7iomAZDtxeUpJQcmtoSc+PWnG7nFFzmIi895aZbsgRLuetrjfZvkgorrUigzTQvxiaY+wcbd1NCBaL5sj0QFj1bc6ZXiva+8w27gIpU+yZ+Czm8w2c/hdQTzr62USIpsKEnutoQxVajxLqB+PdOtlK27/Eq4q6z1OUe/8suzS5Kw7pFm8SRD5pCusT1bDX81P83NeE14X5xWCX0/vESJCAsqbFdtb3XKkN4UU3FyF/GOFNTT/6pNVCfOFWSL7Jw8D0gY/PFlskSAEwwGix0lZ0Gpxjp2li92STqtFvmdZpibLPJhhY6d3khOU+0xz/U7MLXe0DMsKI3m+qFn0zsszdO9TA5KN9r2PawkeQmQ74PZRsPAixz6Y3eA7xIXs5dHeeBE6SwLekiMJe1dSQf9OZLP4y/pbXwOndjQtSPfct54RRX/1xeYRQHKl/yvr4A9UxugcokutxD2oN8S7HMoS7y/NJfoYcrn62+IfwCuSMXKL7QfNgAAAABJRU5ErkJggg==);
+            }
+        }
+
+        .step-expert{
+            .ay-step-item-head-wait .ay-step-item-head-inner{
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAABRhJREFUWAnNWUlPXEcQrnnsO4hl2EEMBCFGQgL+B0kUlKPPieJDlJxj4TO+Wb77GIFi+X8wSEiDhBDDrkHDvph9S33t182bfls/NDgpaeh+1VXd36vqrqrXxOiZNDc3l7Asa+Lh4WGMp2jHLxaLoaXHx8csN+LHMimW+Tw+Pp7BWFSKRVFYWFhoub29/Y11fuBfMoouy6b596mkpOT9yMjIrqmuEcDFxcXqq6urP3jSP9k61aaTe8mxlb8wf7q8vPzd8PAw+oEUCjCVSv3IoD7wLPHAmaIP5hjsr2NjY/8EqVp+gwwqxuDe8Pgs/woNDstizlmsgbXA8CLPga2trYpcLveRFSa9lF6ANxOPx191dXVd6nO7LIi3+cbggGkSa3pZslhHPD8//xcUdL7fM4cRqq+vp5qaGiotLSUOKXR9fU0nJyd0dnbmp+bFn+S1F3lgyjmY52IcCB6c9XoTp5LsNzU1UUdHBxUXu95TiJyfn9Pm5iZdXFxIlcCWD80jC/zkPDgKIELJ5eXlCgsYHYju7m5qbm4OXBCDsOjq6qqwaKjwV4FcRUVFvwxBag/acc4IXGtrax64m5sb2tnZoUwmQ+vr67S3tyeAYT1sgb6+PuJFDfFR3MYi5IUFkSHu7u4y7NrQIMyZgJLJpFgYMxweHtLGxoYCJFEAUCKRoLKyMsHCflxeXpbDgS2COW+bBDKOsCCnr9cm4DAr3AqrgHhLCIvBjTphDK7lecUQDpGpFYHFTqkkXfy9voDfc11dnRrKZrMKgGI6Ojgcx8fHiuPUVUz/DvI9WahKuDVO/NJlUDY5nTjJkpy6khfQJu2KyZoIEHIN8f5QPN63qu/Xub+/V0NOXcUM6PBWmrB4/6CeMyYEYUlckciub1tZWanGeF+pvkkH2LAHRZFpogAZp8taWloC1RDAGxoalEzEzAK99sgAEeMkNTY2En5eBHf29PSoLINY+SyAPFEkC+JgIPZJ6u3tpfb2pylgNZzWoaEhkaOl3Pb2duCJl3LOFtiKOeZ8DVTOkZA+AjP2n9xfbW1tVFtbSwjiKBh04kqFjo6OdHboM7DBxTuhkpoAAjNc7Xy3qqoqFzjIwdoI0HiJqKcY2FCG4OvrOw2D7yNcCLcGBV3OpaI42N3dFXkY4GFhHJi1tTWRgXwXyB/ISoD5bJ8nuG9gYEC4V4rASgcHBwIQgCGUgCcJdSEAgmDJwcFBkZNNgjyrZDkWWimhHfIH+dcJDu7d39+ndDotaj4AQYx0gsOUqHKwZ2XALioqov7+ftd28Foe2BCoP3sN6jz+XlCWAwiUVljYJPjiRZaWlpQsDlNnZ6e+hOsZ2Cz7ix8f1b4E1zrjHWo+WCwKwf0rKyvqYGE/Stf7zJMGNlmrf2Ih34IBpb08gcgkKKVM0py+MCx/enqqDhhAOjOTJg9MJADiOoIT/++8rzwL1urqJzbemstxba7nPfpZkI2BgvU9ZhX1oH1XMu23DPbMS5BXULfXmZb3N9LFcNk7dt0vLOD6LkGaQqDFSS4Uwd3IMB6UAxbJfyrumBP1s1NOUqiWXev67Mwzif09OlWoBZ8xz5Tzmxj6eRYEgw8KLo3+5q7x7QL0CkAzDO5n24pqujwLggsBXORwd0ZJvXxHXB7p4LCsy4ISCyxp39O8QV/yC9nagKZGR0ffeoHDWqEL4+AwwP/sAjMUIN7if30FDICS7Ev01/yMD33f1CjltRb5/mUu0bWFxOO3+jfEv4ltSlaKyUm1AAAAAElFTkSuQmCC);
+            }
+            .ay-step-item-head-process .ay-step-item-head-inner,
+            .ay-step-item-head-finish .ay-step-item-head-inner{
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAABZRJREFUWAnNWVlsVFUY/u7t3k4r3aRMrAgtCLYsEdHEGnB5NBEXjMuDbYwxgvpAJNH4IGlfjIl1SQghbmkfjcQGEx+MEVNMjSYqYkoAo1hAhtJCqXS60zl+/116bmfunblTS/Ekvfc//3a++c895//PqYF5NtXTXIdpYxuMxCYoIwpDRaEQtdwZiJEXI49v82fkqYNGU+ef8xnKyMZI9bxwI6bHXqLNI/xrzMaWur3860Je8V6jaf9AWNtQANWxnRFcjL/CCO2m40hY5wF6cRh4G1WRdqNhXzxAZ5adEaDqbnkUSu0D1NJZqwUhjAswjJ3G1o7P07kzg4RKKUN1P7MHSBxYeHAyqvzgxAEZQ8YKwuErUN/vKsLUUCedPB5kuLB84zPkVzQbd787nuw3JYLWr1lUcAKJgeCYfpHMTUaMw81vkBc+cjmFQOXtQPlaIL+cszYNjHORDv0KDB9PcR/MIMjDzccob/XqzJlia0HIN6e4zsK0ZfcBK7YDeQELe+Qv4PcOIN4Xxhs4qgLM7d6FMwvE2koGR/8IvSBWtQBRAszUZqaA49wELh3JpOnIubqrS+rdLUh/g7LPhd1Kah+cC27iEnD6ILfi94ETHwKxbznVV+0Bc/KBtTuAktqQALm6LSy2uhVBJ0NIKgqYK4/vggrgzrc4ExxY2sCPnMZPgJkJu+8+BVDDy0CRs30OnwCOvulKM73jzDh1knHsCF4dp6cQ4MRt9H4NbvQcI/ZBKjjRGz3Lqd3PSUlID1iyhlG82aYzPyNOSoUNUKmHM9s4GhUbtGpfFwE4U6m5mho5BVz8Sfcr1ms6MyX5HqZVlWST+AurteuREAXKFYJ0W5HH1uUFvxsFm2mVTMFKqRJDrytMZ8z1c6ffzEv1l47Dcs606rl0SsmyiUHNKblJ00FUZLmWTF7WdBiKtaZpFZthlF0d75RFH3C5/u+8UqD6Di3LKrPQjIUwI8hKOJsW+0Zr19wDLG3SfS9lMIuufpZZhiClyV6ZLUBiYwSdMt12k/kpaWvgB6235nnglsd0P5dbaeVGYFMbUMUc7bZTnzIiM24v3JvYclk0Khak4QxcrZMfA8UMfMTZ15Y/xGKhgcXCEqCw0tXS77+/Aga5oWfbiI1LUp3P1g4J5tfYIZp6flhZXSo4qWwk2rKYlm9jMZCT5VDqfK51+oJaHdoyrwy49TlOo2fDTjYe62dxwHLr3NfAbS8CZSvtCFdttjPP6JlkC/8+T4acYjka+stTuJKHN7ym86soSJT6v2P99xswFgMmh8mb1KZSxQhAaZFaYOPrdk6On7Z56Z7Exgjy3IrE0+n0LJlZAKx/VYOTHHuhB+jjmWdyKNj8zBfA1D9A3VNAbpH9t243cKSNK9uzp/p5IDZTDtV+shRePX9DcY3Nlhqv9z3g5EfpwblO+ruBX1oJ9IrNyednsvJJVxr8JjbTOfH3BmtRUlgF1GzRKgJs6Kjuh6HGuRZ73+HCYuSlyQZe6ky9zUl+9go290zSRWljssZsf9m9XIGm3ZUyXkop2WaybTP8Ni/z2FGxzrasvguQise/CSbYAHkdwfprF/v+BWvZKu2idAWwOXThqe38qLJ6P67wpGDdK4QVFuuuRK4jglr+DUGS/8YvKPe3Jxb3/sadYqalSDsGR3fwI3FqdI+tpCnZaN0y3yOaNymb/dkvfcx5aKoqaXcFhkvIO+tjp9d4IWifY6fz5dvenfMo94Pr1lq9Z2JBMSeCwrCuH7pbOKeLdS8jo0rj/czWjicMKV48bU4ELTVR4EWOZeBRvLakc3mUBM7CEzSwFUn7nmZP6KuQIGdBfOub413Mls625Mi5JilT7Arc9/W+wMwIUID+r6+A3UhaQOUSXW4h7IN+cGr0Gmla8v21uUTXY2hqsf4N8S9mC9aJV7YTVwAAAABJRU5ErkJggg==);
+            }
+        }
+
+        .step-success{
+            .ay-step-item-head-wait .ay-step-item-head-inner{
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAABT5JREFUWAnNmUlP5EYUx6sbGLZB7FuzikUCMRIS8D0miYJyzD1KTsl5lpwztyj3HCNQRvM9AAlpOCDCjhp12BexL3m/ip9Tbey2OxpInuQuu+q9V/96W5XdKfMvaWZmpj+dTr+8u7sbFxUZrlQqRWvu7++z0thLeGaF58PExMQyY8VSqhiB+fn5luvr629F5nO5XhQjK7wf5XpfVlb28+jo6J9JZRMBXFhYeH5xcfG9KP1BrPM8qfIwPrHyqfT/VFFR8W5kZIT7ghQLcHZ29gsB9YtoaS2oqfjBnID9Znx8/PdCoumoQQGVEnCvZXxark8NjmnROc0czEVHGIUObG5uVuZyuV9FYDJM6BH6plpbW7/u6uo6D+p+YEFW88TgwDTJnGGWfABwbm7uFQLBlTzB86Q3d95UeS4mIWR0OmwleVKBh2fPnpmqqiojJcRI3TNXV1dGst5cXl4aqYEB7uhHSZp7Gf3STRwfIKXk/Pz8D2FIlBCizDQ3N5vGxkYLLmza29tbs7KyYo6Pj8OGo/pylZWVA1qCfBd7dS4RuNraWiMKjAR1JDhmLykpMQ0NDVFAovpbPSx23FqQHeLm5mZZXBtbhNva2kwmkzFYUAk3npyc+C4tLy83XPAsLy/bfuVN0orcaWlpaT87TikCsn19J00icB0dHf4cImey2azZ39+PjTViE4siE0cYyttSX6mLP4sTwq1YTom4krg1u7u7icANDw/bsABoQmK/NylOJdKSHJGEq4g53AYBbmlpKZI/ONDb22uT6ezszGxvb5v29nYjdc9aPsgbeB6QBaVfBjofPJKtCg4XkZlJiSzn0ozu7u62iQVoibOCasCW9s5zBRmZQImYY7IkJCcWAyBoY2PDJouUMvuMV+IyHGwExD+BZUXzf7QI00u2khBJCAB9fX22cO/t7fly3CvFARS+TCxAdgglSgkgXaqpqTEkUJCokVJw7Y6C9ZSOjo701mDhGMqkZaUFLcj2pcTWFSRiaWBgwMhpxB+qr6+3uwyLIV7dRREeUnMtL2WHK4rAlpaaw/4XSa4CdyIVICZR0dnZaUESEj09PXZYjm1GY075ad0YLpQoYCONtuWqQTCM3MIapkxjClCAbGlpsVY5ODiwNTJMp6vH1R/Cu00M8vYVSa4CYiqMALm+vm4tiQUJBZ7DiHH1CpYM84ojl8WCBQGenp5aJewA1dXVhgk4TgUJkMQWSbOzs5PnRpeX+FRKcMrJUqhnVSCsZYVkrxKHhSgiQ7e2tiIPB5QeQkDJzWjtc1uwUag/uJ1h92xLSk1NTdaS+lxMy16OByC8EFdTwZb23vh5qY4kLKjuwAr9/f3+1hcpFBhgYa71NfsDbO7jR7CRJND7v5vo37W1Nf+oRG0cGhoKLdBBDSyII5qWHsYPDw+NZn+Q33m2mFJ0JD2wkiSDg4N+FiKLdUkK4snNSFxJQhBz6lb4OdEsLi7m8dLvkizKP7BagAx6L9BvXMawe0oNO4c7KXwUa7IYkNQ5LSWuDiy3urpaEBz8AvCNvDi9tfeqoJiXJiYn4DmG4cI4IiGIuQRuRVVOjOC/NOVpL/a1EytyIqmrq7NnPBcsRRj3YzWyFQvHkchHv3aqcFJXK7/bqmvZfdx4dHkK3buuVb48C9IpK+Wj0W9y+9RfF6Yk7r7yrKj4jJYZvwMGPuRIx5Tf+fg39uNREBzTPrCgYsGS3reS19xr/6dsPUBvx8bGfgwDx1yxE5M4AvA/+4AZC5BV/K8/AQNQyfuIzlcIXvRfaH/C9vE+oocBeKq/If4CUHeah2SNAnIAAAAASUVORK5CYII=);
+            }
+            .ay-step-item-head-process .ay-step-item-head-inner,
+            .ay-step-item-head-finish .ay-step-item-head-inner{
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAABeRJREFUWAnNWVtsFUUY/ub09F4q9EqbFi0txdCiIU2IgFrxRWNIFAIhxkgb9cEQjEGNiS+UamKiwZgoIfqgoT6YGIjoow/GFCwPGm/YFi00aaLphUIv0guc0q7fv3Pm7PacPbtbUqp/crr/zsw/8+0//22mCrdJVldLLebUk1ALTbBUJZRVCQuV9nQKg2wbZBufkZ+QaX2tdnT0385SailCVteLZZibOUSZ3fw1LkWWY7v5O4PMvONqx0dXwsqGAmj1HCzA1alXqaHXOHFB2MnTjJuCwjGUFLynGk5MpRmTaA4EaHW27oFlnQCs8oTUsjBqBEodVM0nv/SbLpKu07IsZXUeaAMWTi8/OFlVPnjhtKwha6XD4dlhnT+ci9hYByfZl05wedvVKWQVtajt788mz5uiQftrVhScQKIiuKaXJlMA4mzLkZXTnFtfBGmv7W4D/clFtkOIzVmL211DvNnsYvr23UD2aiAjB7gxCsyMALPDNLOYt4xXq+LKiOx1O04CoB1KRqcva+P1kk5qU1Gg8lFg7YMaXFK3/Tp/A+j5EBiXEBiW6N2l+XUmBDlbLHEubCgpuh/Y+g5Q90x6cIJHtFm+PSyy+Dh6t41Fv9oajGcISUXBQbh6F1Czl8aRUD4wz22c/INbyq0VreWW8scoojKowQ/Yzu1eGk0x49RKxuE+kW7NvsS/4cCtd0We2AQw8BUw0hVsa5EsIJoHiEwwFcRT6hG9xZb1VKCMbKtoztB4D/DjG8DQdyHAZQNN7TSLd+kD5MOR5HtE7KokKPGLQ2w44GyrgLtwjJqfCbdUfSuQx0JHvLpoM8G+BZQF2majYIvYJVPQMuKtOSV6lGxR73HyC0FSur/8Ie0oYpu9TOkbWmhM64B7XwAyV/nPwXIuYtdz/sN0KDFjxObCai6vgoCe1ZJ9HVqD03/pd3Ggsm1mVu8na82IXWx6d+tWE4TlTbxVHCIMRTKBTYcYamhzw98DV85rKeENlT1gOO8nC2FqkJWwH0mGMCShJDkzrN5Eu6IDJVMtY2R+FTPKIHCJ2jN07RfDabt03lI5YqMG42V6ardukfRlSOJcMm2kLW1+Bah63Okp3coss1N/jNid+6PmWbDMTeux0VwdehzJxRyxUYOK+c+HMjiJIZk8mQZYb1qcovZpDTKnFKh/To+6/DlgbM4td2vKeYv6hF9ii3L2IY5O706xf5zJsgod3nAjtCnJKvXPOyBFM6M/6BhpxrmfWXc5b7FJh0/hrCFxEhqJD8XGnc78aod3c8PngL5P+K0MPdlrdMr781P3CIcXDUuOFpJosHBT815/iS2qj4ZevfG2yUucZI4hnV65qoYAioCbY6kCAlK0vaYBGPyWHu9hDiJV0uTIjvc6vBfHYys1yHOrH8kXSuYwtG6X4VKfY78B/bS7dMWB4kdWPebIXfvZ4b04YovIodqrb1Hb3984rxWPAIW1zvtSuJo9egdERnZB7NSPiC0SP/F3+43DBLdi7Hc9RDJAw8u6nPIVSupc2wxUP+E0DpzRpuO0JHPdgs0UrBwdQH00euNx4oVb2oDiLQFC7JZtXb8f2BgPPSJxlVY1fDZI1sbE+EDn01ca/WR9ghJ7C+uA+17X6UsEhcTQpeQau6CLVd3K4oLeKg4hNieOZej6APDr2/7eCyQKVhugyNqHdAtHhfclCTWNhwmgePEwCdZz17X3ioZNKHGPEs1d/DgIHLWOo6r5s3YRdQDK/UvYQ1M0H7hnN1Cxk+GHsT6IxCHE5oK3VSAtOjQlAMoaSz52Zpew1tumbVGKCjdYCcITF7W9ibdKLA0iv2OnkQ291UbA/ZQCVHK3OJNfhnDLuHnX1prmRRqURvv6obP1C3L7zKCVefJ+pvnkfpVUvJgwk8BgD+BFDm3hVKLxjjPxy6MkcLJsigYNFluT+q6kbclXIWaSoKdtc2jHwx1vJmvOiKYFaAb81xeYgQAF6P/6Ctho0gYqGUduIfRBv9HdF4KXfH9nLtG9Fl+pf0P8CyKtEHhJesgSAAAAAElFTkSuQmCC)
+            }
+        }
+    }
+
+    /*出行信息*/
+    .travel-info{
+        .ay_cells{
+            &:before,&:after{
+                display: none;
+            }
+        }
+
+        .ay_cell{
+            padding: 8px 0;
+        }
+        .weituo{
+            padding: 8px 0 24px;
+        }
+        .ay_cell_primary{
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            -webkit-align-items: center;
+            -webkit-box-align: center;
+        }
+
+        .ay_cell_bd > p{
+            padding-right: (10rem/20);
+            min-width: (100rem/20);
+            box-sizing: border-box;
+            font-size: 17px;
+            color: #333333;
+        }
+        .ay_label{
+            padding-right: (10rem/20) ;
+            width: (100rem/20) !important;
+            box-sizing: border-box;
+            font-size: 17px;
+            color: #333333;
+        }
+
+        .ay_cell_ft{
+            margin-right: 0;
+
+            &.with_arrow:after{
+                 right: -12px;
+                 margin-top: -7px;
+                 width: 16px;
+                 height: 16px;
+                 border-color: #777;
+                 border-width: 3px 3px 0 0;
+                 transform: rotate(45deg) scale(0.5);
+                 -webkit-transform: rotate(45deg) scale(0.5);
+                 transform-origin: 0 0;
+                 -webkit-transform-origin: 0 0;
+             }
+        }
+
+
+
+        .departure-input{/*出发地*/
+            .ay-label-desc{
+                font-size: 17px;
+                color: #333333;
+                font-weight: 300;
+            }
+
+            .ay_cell_ft{
+
+                &:after{
+                     display: block;
+                     content: '';
+                     position: absolute;
+                     top: 50%;
+                     right: -12px;
+                     margin-top: -7px;
+                     width: 16px;
+                     height: 16px;
+                     border-color: #777;
+                     border-style: solid;
+                     border-width: 3px 3px 0 0;
+                     transform: rotate(45deg) scale(0.5);
+                     -webkit-transform: rotate(45deg) scale(0.5);
+                     transform-origin: 0 0;
+                     -webkit-transform-origin: 0 0;
+                 }
+            }
+
+        }
+
+        .destination-input{/*目的地*/
+
+            .ay-cell__ft{
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                align-items: center;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+                /*-webkit-box-flex: 0;!*0221F*!*/
+                /*-moz-box-flex: 0;!*0221F*!*/
+                /*-webkit-flex-shrink: 0;*/
+                /*-ms-flex: none;*/
+                /*flex: none;*/
+                width: 60px;
+            }/*0221F*/
+
+
+            .ay_cell_ft{
+                -webkit-box-flex: 0;
+                -moz-box-flex: 0;
+                -webkit-flex-shrink: 0;
+                -ms-flex: none;
+                flex: none;
+                width: 60px;
+            }
+
+            button.ay_btn, input.ay_btn{
+                -webkit-flex: 1;/*0214*/
+                flex: 1;/*0214*/
+                -webkit-box-flex: 1;/*0214*/
+                -moz-box-flex: 1;/*0214*/
+                -ms-flex: 1;/*0214*/
+                margin: 0;
+                padding:0 12px 0 6px;/*0214*/
+                width: 100%;
+                height: 44px;/*0214*/
+                background: #fff no-repeat right center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAMCAYAAABvEu28AAAAAXNSR0IArs4c6QAAAL9JREFUKBVjdNzybibDf4Y0BkoAI8MsJhFFwVxGBobj5JoD0gsyg2m1NuMvVlb2YAZGhuckGwbUA9ILMoMJpHmnB/dzJmaWYEYGxl/EGgZSC9ID0gvSAzYIxNjryXf8PyNjLohNDACpBemBqYUbBBLY7yMwC+jFWTBJnDRQDVgtkgIUg0DihAIfFrhIZoCZGAbhDXykwCVoEEgBtsBHD1yiDAIpQg989MBFN4ggH5TywamfgEoWAvLgwCekBiQPAKjsO49qJ4TeAAAAAElFTkSuQmCC);
+                background-size: 9px;
+                box-sizing: border-box;
+                border: 0;
+                font-size: 12px;
+                color: #41B3EE;
+                line-height: 44px;/*0214*/
+                font-weight: 300;
+                text-align:right;
+
+                &:after{
+                    display: none;
+                }
+            }
+        }
+        .weituo{
+            .ay_cell_hd{
+                position: absolute;
+                right: 0;
+                bottom: 10px;
+                line-height: 1;
+                color: #41B3EE;
+                font-size: 12px;
+            }
+        }
+        .type-wrap{/*0210*/
+            .ay_cell_primary{
+                -webkit-flex: none;
+                flex: none;
+                -webkit-box-flex: 0;
+                -moz-box-flex: 0;
+                -ms-flex: none;
+
+                p{
+                    width: (100rem/20) ;
+                }
+            }
+
+            .type-title{
+                width: 100px;
+                font-size: 17px;
+                line-height: 44px;
+                color: #333;
+            }
+        }
+
+        .tailor-type{/*出游性质*/
+            width: auto;/*0210*/
+
+            .ay-checker-box{
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                align-items: center;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+            }
+
+            .tailor-type-item{
+                display: block;
+                position: relative;
+                margin-right: (20rem/20);
+                width: (100rem/20);
+                height: 30px;
+                font-size: 14px;
+                color: #333;
+                font-weight: 300;
+                line-height: 30px;
+                text-align: center;
+                border-radius: 100px;
+
+                &:after {
+                    content: " ";
+                    width: 200%;
+                    height: 200%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border: 1px solid #999;
+                    -webkit-transform: scale(0.5);
+                    transform: scale(0.5);
+                    -webkit-transform-origin: 0 0;
+                    transform-origin: 0 0;
+                    box-sizing: border-box;
+                    border-radius: 100px;
+                }
+
+                &:last-child{
+                    margin-right: 0;
+                 }/*0213*/
+            }
+
+            .tailor-type-selected{
+                color: #FF5523;
+
+                &:after{
+                    border-color: #FF5523;
+                }
+            }
+        }
+
+        .input-after-title{
+            padding-left: 5px;
+            font-size: 14px;
+            color: #999999;
+            font-weight: 300;
+        }
+
+        .other-need{/*0224F*/
+            display: block;
+
+            .other-area{
+                margin: 10px 0;
+                position: relative;
+                padding: 1px;
+                width: 100%;
+                height: 150px;
+                box-sizing: border-box;
+                overflow: hidden;
+
+                &:after{
+                     content: " ";
+                     width: 200%;
+                     height: 200%;
+                     position: absolute;
+                     top: 0;
+                     left: 0;
+                     border: 1px solid #DFDFDF;
+                     -webkit-transform: scale(0.5);
+                     transform: scale(0.5);
+                     -webkit-transform-origin: 0 0;
+                     transform-origin: 0 0;
+                     box-sizing: border-box;
+                     border-radius: 20px;
+                     z-index: 1;
+                 }
+
+                textarea{
+                    position: relative;
+                    display: block;
+                    padding: 10px;
+                    width: 100%;
+                    height: 100%;
+                    box-sizing: border-box;
+                    font-size: 17px;
+                    color: #333;
+                    line-height: 20px;
+                    font-weight: 300;
+                    resize: none;
+                    border: none;
+                    border-radius: 10px;
+                    z-index: 3;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        .other-input{
+            padding: 0 0 20px 0;
+
+            &:before{
+                display: none;
+             }
+
+            .ay_cell_primary{
+                position: relative;
+                padding: 1px;
+                overflow: hidden;
+
+                &:after {
+                     content: " ";
+                     width: 200%;
+                     height: 200%;
+                     position: absolute;
+                     top: 0;
+                     left: 0;
+                     border: 1px solid #DFDFDF;
+                     -webkit-transform: scale(0.5);
+                     transform: scale(0.5);
+                     -webkit-transform-origin: 0 0;
+                     transform-origin: 0 0;
+                     box-sizing: border-box;
+                     border-radius: 20px;
+                     z-index: 1;
+                }
+            }
+
+            .ay_textarea{
+                position: relative;
+                padding: 10px;
+                height: 150px;
+                box-sizing: border-box;
+                font-size: 17px;
+                color: #333;/*0210*/
+                line-height: 19px;
+                font-weight: 300;
+                border-radius: 20px;
+                z-index: 3;
+                overflow: hidden;
+            }
+
+            textarea::-webkit-input-placeholder{/*0210*/
+                color:#999;
+            }
+        }
+    }
+
+    /*联系人信息*/
+    .contact-info{
+
+        .ay_cells{
+            &:before,&:after{
+                display: none;
+            }
+        }
+
+        .ay-x-input{
+            &:first-child{
+                &:before{
+                    display: none;
+                }
+            }
+        }/*0221F*/
+
+        .ay_cell{
+            padding: 8px 0;
+        }
+
+        .ay_cell_ft{/*0210*/
+            -webkit-flex: 0;
+            flex: 0;
+            -webkit-box-flex: 0;
+            -moz-box-flex: 0;
+            -ms-flex: 0;
+            margin-right: 0;
+            width: auto;
+        }
+
+        .ay_label{
+            padding-right: (10rem/20) ;
+            width: (100rem/20) !important;
+            box-sizing: border-box;
+            font-size: 17px;
+            color: #333333;
+        }
+
+
+    }
+
+
+
+    /*底部按钮*/
+    .tailor-footer{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        box-sizing: border-box;
+        background-color: #fff;
+        box-sizing: border-box;
+        z-index: 9;
+
+        &:before{
+            .setTopLine(#dfdfdf);
+        }
+
+        button.ay_btn, input.ay_btn{
+            margin: 0 auto;
+            width: 53%;
+            height: 45px;
+            background: #FF5523;
+            border-radius: 50px;
+            font-size: 16px;
+            color: #FFFFFF;
+
+            &.ay_btn_disabled{
+                 background-color: #ccc;
+             }
+        }
+
+
+        .ay_btn:after{
+            display: none;
+        }
+
+        .ay_btn_warn:not(.ay_btn_disabled):active {
+            background-color: #F0410D;
+        }
+    }
+
+    .tailor-button{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 60px;
+
+        button.ay_btn, input.ay_btn{
+            margin: 0 auto;
+            width: 53%;
+            height: 45px;
+            background: #FF5523;
+            border-radius: 50px;
+            font-size: 16px;
+            color: #FFFFFF;
+
+            &.ay_btn_disabled{
+                 background-color: #ccc;
+             }
+        }
+
+
+        .ay_btn:after{
+            display: none;
+        }
+
+        .ay_btn_warn:not(.ay_btn_disabled):active {
+            background-color: #F0410D;
+        }
+
+    }/*0221F*/
+
+
+
+    /*选择出发地页面*/
+
+    .box-header{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 44px;
+        background-color: #fff;
+        z-index: 129;
+
+        .box-header-btn{
+            position: absolute;
+            top:0;
+            width: 60px;
+            height: 44px;
+            font-size: 14px;
+            line-height: 21px;
+
+            a,span{
+                display: block;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                -webkit-transform: translate(100%, 60%);
+                transform: translate(100%, 60%);
+            }
+        }
+
+        .box-header-title,h1{
+            margin: 0 60px;
+            width: auto;
+            height: 44px;
+            font-size: 18px;
+            color: #333;
+            font-weight: 400;
+            line-height: 44px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .left{
+            left: 0;
+        }
+
+        .right{
+            right: 0;
+        }
+
+        .bubble{
+            display: block;
+            position: absolute;
+            top: 9px;
+            right: 9px;
+            padding: 0 3px;
+            box-sizing: border-box;
+            min-width:14px;
+            width: auto;
+            height: 14px;
+            border-radius: 14px;
+            background-color: #FF1616;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-style: normal;
+            font-size: 12px;
+            color: #fff;
+            line-height: 14px;
+        }
+
+        .btn-close{
+            float: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 88px;
+            height: 88px;
+            transform: scale(0.5);
+            -webkit-transform: scale(0.5);
+            transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+        }
+    }
+
+    .depart-wrap{
+        position: fixed;
+        top:0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding-top: 88px;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        box-sizing: border-box;
+        z-index: 121;
+
+        .ay-search-box{
+            padding: 0;
+        }
+
+        .search-tab{
+            position: absolute;
+            top: 44px;
+            left: 0;
+            width: 100%;
+            z-index: 121;
+
+            .block{
+                box-sizing: border-box;
+                height: 44px;
+                line-height: 1;
+                padding: 0 1rem;
+            }
+            .ay-search-box{
+                padding: 0;
+            }
+        }
+
+        .search-box{
+            padding: 0;
+            border-bottom: 1px solid #333333;
+
+            .icon-search{
+                float: left;
+                margin-top: 1.2rem;
+            }
+            .search-input{
+                width: 90%;
+                margin-left:10%;
+                input{
+                    width: 100%;
+                    font-size: (18rem/20);
+                    padding: 1rem 0;
+                    border: 0;
+                    -webkit-font-smoothing: antialiased;
+                }
+            }
+        }
+
+
+        .ay_icon_clear{
+            display: none;
+        }
+        .ay_search_cancel{/*input内删除按钮*/
+            /*display: block;*/
+            position: absolute;
+            top: 8px;
+            right: 13px;
+            width: 30px;
+            height: 30px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAA2JJREFUWAnNmDuLGlEUx6+vxhemSSFsSsFHaaMmRYqtkiaNjRAQxC6kCORDBFIs24lgZWOzTVJNOrP6BZQFOw24kEYLFcVXzn+YO1xH7zx0NXthnPs495yf93nOuJjDVK/XX8xms3fb7faaur6iJ0r5KNS4XK4hvfAMKK/4/f6fhUJhhDa7yWVXsFKpfCDDn0j+DT1em/1WJNckuNtyuXxnp48lULVazW02m28Ek7WjUCZDUC232/21VCrdy2RQLwVqNBqe8Xj8nUA+mylw2kZgN5FI5Es+n18f6nsQqFarRZbLZYNgsE6ePGF9+Xy+fLFYHBuV7wFpMC2CiRuFn7JMUA8ElTVCuUUjmCZtZM4KA5v4w7AFmyLDDpC2Zs4yTaJRnseSgE1exlufMuym9Xr9W2y8VN7j8bzmu08fIWxtGUA6nWapVErWbFmfzWZZLBaTyom2VSDt0JOeM/P5nEHpMVC5XI4lEgm2WCykQDR1WTBAQD1xqQInsDR1Oh21LZPJqG9elnbQGgATj8eZoiis3++bimsMdy7cTZPJ5C9JW14HGCFAtdttZgXlBEYjXQWDwZfe6XT63g4MOnEIq5E6AgbqVRaMiqNtbgV1JAyAkK4BdKVmHfzIoE6EAcEVgFRfxgGPKsqhsPvoGmDhcNj2AjaxFfXS6j4KCEoBBRisKTpLbO0mExhcJ1E3KdyaCVm1YWQAQ74OC4VCVuKm7WDBlD3Sc5Qmcc0ABtOHxKdTLTj7eQQQfGD5uS5RKMKIh57VkSBRx6uHABrwkt23DIaPzAlQAwD9oufjqTC8/ylQtIYUbyAQ+EFXB6IDwJkm2cgYOx0JtULY5NbipqZRqbFsF4b3AxTuPEyfTS+hCRZ1VGiobukMeMuVGd/YPXZvbbGvOFKkn3W7XbF5Jw8GVOgeI/kj99TpoE8E5wr+jLibdrRZFJLJJBuNRmw4xIbeTwTTokAyhxZ93SCIk7mwvV5vX4uDGrORgRrY5up0FxY+LZHe8IZLvWGT+9OwqQOhgIiSBBTkL5FgCzZFWztACG8RUZLggyh0jjxswJYxpN4BgmFEkogozzlS0H0oaoV9fZehIKZn9bFBBHs2n2NEKOQRN9E5hXDp/36wMoIhbNIiFQQH8McPfdL7Q/UK7kmnn/T+AdDDx0jZPYrLAAAAAElFTkSuQmCC);
+            background-size: 18px;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 9;
+        }
+
+
+        .ay_cells.ay-search_show{
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
+
+            &:before{
+                display: none;
+            }
+
+            .ay_cell{
+                padding: 8px 0;
+                font-size: 17px;
+                color: #41B3EE;
+
+                &:last-child{
+                    &:after{
+                        .setBottomLine(#DFDFDF);
+                    }
+                }
+            }
+
+            .ay_cell_bd > p{
+                display:block;
+
+                span{
+                    display: block;
+                    font-size: 14px;
+                    color: #999999;
+                    text-align: center;
+                    font-weight: 300;
+                }
+
+                em{
+                    color:#41B3EE;
+                }
+            }
+
+        }
+
+
+        /**/
+
+        .ay_search_outer:after{
+            border: 2px solid #DFDFDF;
+            border-radius: 30px;
+        }
+        .ay-search-mask{
+            /*border: 1px solid #DFDFDF;*/
+            /*border-radius: 30px;*/
+        }
+
+        .ay_search_inner{
+            padding-left: 40px;
+            height: 30px;
+            line-height: 0;
+            /*border-radius: 30px;*/
+            /*border: 1px solid #DFDFDF;*/
+            overflow: hidden;
+
+            .ay_icon_search{
+                top:0;
+                left: 15px;
+            }
+
+            .ay_search_input{
+                font-size: 17px;
+                color: #999999;
+                font-weight: 300;
+                line-height: 20px;
+            }
+        }
+
+
+        .page-indexlist-wrapper{
+            position: static;
+            height: 100%;
+        }
+
+        .search-content{
+            padding-left: 20px;
+        }
+
+        .ay-indexlist{
+            position: relative;/*0223 FF*/
+            height: 100%;
+
+
+            /*.ay-indexlist-nav{
+                top:88px;
+            }*//*0224 FF*/
+            .ay-indexlist-navitem{
+                padding: 0;
+                /*width: 30px;*/
+                width: (30rem/20);/*0223F*/
+            }
+            .ay-indexlist-content{
+                position: absolute;/*0223 FF*/
+                top:0;/*0223 FF*/
+                left:0;/*0223 FF*/
+                height: 100%;
+                -webkit-overflow-scrolling: touch;/*0220F*/
+
+                &::-webkit-scrollbar {/*隐藏滚轮*/
+                     display: none;
+                 }
+            }
+        }
+
+
+        .title-block{
+            padding: 8px 0;
+            font-size: 17px;
+            color: #999999;
+            font-weight: 300;
+            line-height: 44px;
+        }
+        .currentcity{
+            span{
+                position: relative;
+                display: block;
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-top: 8px;/*0223F*/
+                /*width: 31%;*/
+                width: (100rem/20);
+                height: 30px;
+                /*border: 1px solid #FF5523;*//*0223F*/
+                border-radius: 100px;
+                box-sizing: border-box;
+                font-size: 14px;
+                color: #FF5523;
+                font-weight: 300;
+                line-height: 30px;
+                text-align: center;
+
+                &:before{
+                     content: '';
+                     position: absolute;
+                     top: 0;
+                     left: 0;
+                     display: block;
+                     width: 200%;
+                     height: 200%;
+                     border: 1px solid #FF5523;
+                     -webkit-transform: scale(0.5);
+                     transform: scale(0.5);
+                     -webkit-transform-origin: 0 0;
+                     transform-origin: 0 0;
+                     box-sizing: border-box;
+                     border-radius: 100px;
+                 }/*0223F*/
+            }
+        }
+        .search-content{
+            padding-left: 1rem;
+        }
+        .hotcity{
+            &:after{
+                 content: "";
+                 display: table;
+                 clear: both;
+             }
+            .hotlist{
+                position: relative;
+                display: block;
+                float: left;
+                margin-bottom:15px;
+                /*padding-bottom: 15px;*/
+                margin-right: 0;/*0223F*/
+                padding-right: 0;/*0223F*/
+                /*width: 30%;*/
+                width:  (108rem/20);/*0223F*/
+                height: 30px;
+                border-radius: 100px;
+                /*box-sizing: border-box;*/
+                font-size: 14px;
+                text-align: center;
+                font-weight: 300;
+                overflow: hidden;
+
+                &:nth-child(3n){
+                     margin-right: 0;
+                    padding-right: 0;
+                 }
+            }
+            .checker{
+                position: absolute;/*0223F*/
+                top:0;
+                left: 0;
+                display: block;
+                width: (100rem/20);/*0223F*/
+                height: 30px;/*0223F*/
+                padding: 0 10px;
+                box-sizing: border-box;
+                /*border: 1px solid #999999;*//*0223F*/
+                border: none;
+                /*border-radius: 100px;*/
+                color: #333333;
+                /*line-height: 28px;*/
+                line-height: 30px;/*0223F*/
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                &:before{
+                     content: '';
+                     position: absolute;
+                     top: 0;
+                     left: 0;
+                     display: block;
+                     width: 200%;
+                     height: 200%;
+                     border: 1px solid #999;
+                     -webkit-transform: scale(0.5);
+                     transform: scale(0.5);
+                     -webkit-transform-origin: 0 0;
+                     transform-origin: 0 0;
+                     box-sizing: border-box;
+                     border-radius: 100px;
+                 }/*0223F*/
+            }
+            .active{
+                /*border: 1px solid #FF5523;*//*0223F*/
+                color:#FF5523;
+
+                &:before{
+                     border: 1px solid #FF5523;
+                 }/*0223F*/
+            }
+        }
+        .left-btn{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            float: left;
+        }
+        .right-btn{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            float: right;
+        }
+        .clear{
+            display: block;
+            margin-top: 13px;
+
+        }
+        .ay_search_focusing{
+            .ay_icon_clear{
+                display: none;
+            }
+        }
+
+        /*index-list样式重置*/
+
+        .city-list{
+            .ay_cells{
+                padding-left:20px;
+
+                &:before,&:after{
+                    display: none;
+                 }
+            }
+
+            .ay_cell{
+                padding:8px 0;
+
+                &:last-child{
+                    &:after{
+                        display: none;
+                    }
+                 }
+            }
+        }
+
+    }
+
+
+    /*目的地弹出页*/
+    .destination-wrap{
+        position: fixed;
+        top:0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding-top: 44px;
+        padding-bottom: 60px;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        background-color: #F5F5F5;
+        font-weight: 300;
+        z-index: 121;
+
+        .box-header{
+            &:after{
+                .setBottomLine(#DFDFDF);
+             }
+        }
+
+        .content{
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            -webkit-align-items: center;
+            -webkit-box-align: center;
+            flex-direction: column;
+            -webkit-flex-direction: column;
+            -webkit-box-orient: vertical;
+            -moz-box-orient: vertical;
+            box-orient: vertical;
+            -webkit-box-direction: normal;
+            padding-top: 44px;
+            padding-bottom: 60px;
+            height: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+
+        .tailor-tabbar{
+            z-index: 129;/*0225F*/
+
+            button.ay_btn, input.ay_btn{
+                width: 40%;
+            }
+        }
+
+    }
+
+    /*已选列表*/
+    .destination-select{
+
+        position: relative;
+        padding: 15px 65px 0 20px;
+        width: 100%;
+        min-height: 60px;
+        /*height: 60px;*/
+        max-height:105px;
+        background-color: #fff;
+        box-sizing: border-box;
+        overflow: hidden;
+        z-index: 102;
+
+        &:after{
+            .setBottomLine(#DFDFDF);
+         }
+
+
+        .btn-clear{
+            display: block;
+            position: absolute;
+            right: (10rem/20);
+            top: 0;
+            padding: 0 (10rem/20);
+            width: auto;
+            height: auto;
+            font-size: 14px;
+            color: #333333;
+            line-height: 40px;
+        }
+
+
+        ul{
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+
+            &:after{
+                 content: '';
+                 display: block;
+                 width: 100%;
+                 line-height: 0;
+                 clear: both;
+             }
+
+            li{
+                display: block;
+                float: left;
+                margin-right: 7%;
+                margin-bottom: 15px;
+                width: 43%;
+                height: 30px;
+            }
+        }
+
+        .item-content{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #FFFFFF;
+            border: 1px solid #FF5523;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        .item-title{
+            display: block;
+            padding: 0 10px;/*0223 F*/
+            width: 100%;/*0223 F*/
+            height: 100%;/*0223 F*/
+            box-sizing: border-box;/*0223 F*/
+            font-size: 14px;
+            color: #FF5523;
+            text-align: center;
+            line-height: 28px;
+            overflow: hidden;/*0223 F*/
+        }
+
+        .btn-delete{
+            position: absolute;
+            right: -1px;
+            top: -1px;
+            width: 13px;
+            height: 13px;
+            border-radius: 0 8px 0 8px;
+            background-color: #FF5523;
+            overflow: hidden;
+            background-size: 13px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+
+    }
+
+    .destination-content{
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -ms-flex: 1;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        background-color: #F5F5F5;
+        overflow: hidden;
+
+        &:after{
+             display: block;
+             content: '';
+             width: 100%;
+             line-height: 0;
+             clear: both;
+         }
+    }
+
+    /*左侧区域列表*/
+    .destination-menu{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30%;
+        height: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+
+        .menu-list{
+            padding:0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+
+            ul{
+                padding-left: 20px;
+                width: 100%;
+                height: 100%;
+                overflow-x: hidden;
+                overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
+
+                li{
+                    display: block;
+                }
+            }
+
+            .menu-item{
+                position: relative;
+                display: block;
+                padding-right: 10px;
+                width: 100%;
+                height: 60px;
+                font-size: 17px;
+                color: #333333;
+                font-weight: normal;
+                line-height: 58px;
+                box-sizing: border-box;
+
+                &:after{
+                     content: " ";
+                     position: absolute;
+                     left: 0;
+                     bottom: 0;
+                     width: 40px;
+                     height: 1px;
+                     border-bottom: 1px solid #DFDFDF;
+                     color: #DFDFDF;
+                     -webkit-transform-origin: 0 100%;
+                     transform-origin: 0 100%;
+                     -webkit-transform: scaleY(0.5);
+                     transform: scaleY(0.5);
+                 }
+
+                &:last-child{
+                    &:after{
+                         border: 0;
+                     }
+                }
+
+
+                span{
+                    display: block;
+                }
+
+                &.active{
+                     color: #FF5523;
+                    &:after{
+                         height: 4px;/*0224F*/
+                         border-bottom: 4px solid #FF5523;/*0224F*/
+                     }
+                }
+            }
+        }
+    }
+
+    /*右侧国家列表*/
+    .destination-list{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 70%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #fff;
+        box-sizing: border-box;
+
+
+        .checker-list{
+            padding-top:20px;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+
+            &:after{
+                 content: '';
+                 display: block;
+                 width: 100%;
+                 line-height: 0;
+                 clear: both;
+             }
+
+            &::-webkit-scrollbar {/*隐藏滚轮*/
+                 display: none;
+             }
+        }
+
+        .checker-item{
+            float: left;
+            display: block;
+            position: relative;
+            margin-left: 8%;
+            margin-bottom: 15px;
+            width: 38%;
+            height: 30px;
+            border-radius: 100px;
+            z-index: 103;
+
+            .item-content{
+                position: relative;
+                display: block;
+                width: 100%;
+            }
+
+            .item-inner{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: visible;
+                &:after {
+                     display: block;
+                     content: " ";
+                     width: 200%;
+                     height: 200%;
+                     position: absolute;
+                     top: 0;
+                     left: 0;
+                     border: 1px solid #999;
+                     -webkit-transform: scale(0.5);
+                     transform: scale(0.5);
+                     -webkit-transform-origin: -0.5px 0;
+                     transform-origin: -0.5px 0;
+                     box-sizing: border-box;
+                     border-radius: 100px;
+                 }
+            }
+
+            .item-title{
+                width: 100%;
+                height: 100%;
+                font-size: 14px;
+                color: #333;
+                line-height: 30px;
+                text-align: center;
+            }
+
+            &.current{
+                 color: #FF5523;
+
+                .item-title{
+                    color: #FF5523;
+                }
+
+                .item-inner{
+                    &:after{
+                         border: 1px solid #FF5523;
+                     }
+                }
+
+            }
+
+            input:checked + .item-inner{
+
+                &:after{
+                     border: 1px solid #FF5523;
+                 }
+
+                .item-title{
+                    color: #FF5523;
+                }
+            }
+        }
+
+    }
+
+    /*提醒*/
+    .top-warning{
+        position: absolute;
+        top:44px;
+        left: 0;
+        padding: 0 20px;
+        width: 100%;
+        height: 40px;
+        background-color: rgba(255,170,9,0.95);
+        box-sizing: border-box;
+        z-index:103;
+        .warning-title{
+            font-size: 14px;
+            color: #FFFFFF;
+            line-height: 40px;
+        }
+
+        .btn-close-warning{
+            display: block;
+            position: absolute;
+            right: 0;
+            top:0;
+            width: 40px;
+            height: 40px;
+            background: no-repeat center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAPtJREFUSA2tlmEKgzAMRsvuvCGCFxiCNxg72gb+8wyj+z5pILqIabpAbK32vVpCMeWcO+SCvCMvqTHIKCwyu4TLjJR4oBOWcC6SDImZgkHuShuSYO4eTtywbgg6E+9UVEkwz4JPm93GSyGJCy6mWkkVvFYSgnslTfAzyV/gJxJd5/DlbbXIZG9LACkH0QaXRQBuSVxw77HwEZlqrTH12NnF6seD7eHw6MTYrxnwJ8aYOmISEPYrJ5hnDrNNcgSX72ySnMGbJF54SFILr5JE4S4J4D1Sx1otMtnbAmBVV5/w4K3oIbgswpC8KLgh+YvBuvceHcL8ackoLDKvX+cFj2wm/hEFAAAAAElFTkSuQmCC);
+            background-size: 12px;
+        }
+    }
+
+    .expand-transition {
+        transition: all .3s ease;
+        height: 40px;
+        overflow: hidden;
+        z-index:103;
+        }
+    .expand-enter,.expand-leave {
+        height: 0;
+        opacity: 0;
+    }
+
+
+</style>

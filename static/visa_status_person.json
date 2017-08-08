@@ -1,0 +1,65 @@
+{
+    "GuestInfo": {
+        "GuestId": "0",
+        "GuestName": "张三",
+        "VisaStageText": "整理资料",
+        "VisaStatusText": "整理中"
+    },
+    "StageList": [{
+            "VisaStage": "1",
+            "VisaStageText": "提交资料",
+            "VisaStatusText": "",
+            "VisaStatusDesc": "签证大厅 已收取资料",
+            "FinishTime": "2017-01-05 10:20:57",
+            "CurStatus": "-1"
+        },
+        {
+            "VisaStage": 2,
+            "VisaStageText": "资料审核",
+            "VisaStatusText": "",
+            "VisaStatusDesc": "签证大厅 已审核完成",
+            "FinishTime": "2017-01-05 10:20:57",
+            "CurStatus": "-1"
+        },
+        {
+            "VisaStage": 3,
+            "VisaStageText": "整理资料",
+            "VisaStatusText": "整理中",
+            "VisaStatusDesc": "签证大厅 您的资料正在签证服务处理审核中，审核时间预计1-2个工作日",
+            "FinishTime": "2017-01-05 10:20:57",
+            "CurStatus": "1"
+        },
+        {
+            "VisaStage": "4",
+            "VisaStageText": "向使馆预约",
+            "VisaStatusText": "",
+            "VisaStatusDesc": "",
+            "FinishTime": "",
+            "CurStatus": "0"
+        },
+        {
+            "VisaStage": "5",
+            "VisaStageText": "签证结果",
+            "VisaStatusText": "",
+            "VisaStatusDesc": "",
+            "FinishTime": "",
+            "CurStatus": "0"
+        },
+        {
+            "VisaStage": "6",
+            "VisaStageText": "销签",
+            "VisaStatusText": "",
+            "VisaStatusDesc": "",
+            "FinishTime": "",
+            "CurStatus": "0"
+        },
+        {
+            "VisaStage": "7",
+            "VisaStageText": "已取消",
+            "VisaStatusText": "",
+            "VisaStatusDesc": "",
+            "FinishTime": "",
+            "curr": "0"
+        }
+    ]
+}

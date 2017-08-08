@@ -1,0 +1,169 @@
+{
+    "Statics": {
+        "RecommendValue": 100
+    },
+    "Lables": [
+        {
+            "LableName": "简单方便",
+            "TotalNum": 5
+        },
+        {
+            "LableName": "不错",
+            "TotalNum": 3
+        },
+        {
+            "LableName": "性价比高",
+            "TotalNum": 3
+        },
+        {
+            "LableName": "信赖",
+            "TotalNum": 2
+        },
+        {
+            "LableName": "一家三口办美签",
+            "TotalNum": 1
+        },
+        {
+            "LableName": "快捷",
+            "TotalNum": 1
+        },
+        {
+            "LableName": "省心",
+            "TotalNum": 1
+        },
+        {
+            "LableName": "美国签证办理速度快",
+            "TotalNum": 1
+        },
+        {
+            "LableName": "美签",
+            "TotalNum": 1
+        },
+        {
+            "LableName": "推荐",
+            "TotalNum": 1
+        }
+    ],
+    "PagerOrderEvaluateInfosDTOs": [
+        {
+            "CustomerId": 11278867,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "有年纪较小的孩子同行的家庭",
+            "EvaluateTime": "2016-08-05T10:25:49.507",
+            "StarNum": 5,
+            "VerifyRecord": "",
+            "Title": "满意&_&不满意",
+            "Replay": "已经完美出签了，不得不说中青旅真的很负责，从接单客服到后期面试前的注意事项再到签证部的刘群不厌其烦的回答我各种臆想的问题，做好了百分百的准备去迎战面试。没想到准备的东西都没要，问了两句话，听说我们是准备从中青旅报自由行的团去美国，就跟我们说：“好了可以了，谢谢，拜拜！”然后就出了十年签~~！&_&没有任何不满意的地方",
+            "LabelName": "一家三口办美签",
+            "PhotePath":["http://images1.aoyou.com/productlist/201412/r06r6b08172852.jpg","http://images1.aoyou.com/productlist/201602/d0822402144621.jpg","http://images1.aoyou.com/productlist/201511/x44v0003163054.jpg"]
+        },
+        {
+            "CustomerId": 11050792,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "有老人同行",
+            "EvaluateTime": "2016-07-28T10:05:33.1",
+            "StarNum": 5,
+            "VerifyRecord": "",
+            "Title": "满意&_&不满意",
+            "Replay": "办理速度快、服务态度好，因为我着急出行，晚上7点多还电话我告知可以领签证，非常贴心，我只选择遨游网，几次出行都很愉快。&_&",
+            "LabelName": "省心&_&快捷",
+            "PhotePath": null
+        },
+        {
+            "CustomerId": 100000843,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "年长的夫妇",
+            "EvaluateTime": "2016-06-08T15:22:20.913",
+            "StarNum": 4,
+            "VerifyRecord": null,
+            "Title": "满意&_&不满意",
+            "Replay": "&_&",
+            "LabelName": "美国签证办理速度快",
+            "PhotePath": null
+        },
+        {
+            "CustomerId": 11530803,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "独行侠",
+            "EvaluateTime": "2016-02-20T19:04:12.483",
+            "StarNum": 5,
+            "VerifyRecord": "",
+            "Title": "满意&_&不满意",
+            "Replay": "挺好的，收费合理，而且客服态度也好。&_&介绍说有人陪同，不过实际没有，大概人少，而且不需要陪同的人，不过既然写了有陪同实际却没有也没给解释，还不如不写。",
+            "LabelName": "美签",
+            "PhotePath": null
+        },
+        {
+            "CustomerId": 3898,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "朋友团体",
+            "EvaluateTime": "2015-11-30T16:14:24.64",
+            "StarNum": 5,
+            "VerifyRecord": null,
+            "Title": "满意&_&不满意",
+            "Replay": "在网上对比了好几家，发现遨游网的签证价格真的很低，没想到出签速度也很快，完全超出预期，很满意&_&",
+            "LabelName": "简单方便&_&性价比高&_&推荐",
+            "PhotePath": null
+        },
+        {
+            "CustomerId": 3897,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "独行侠",
+            "EvaluateTime": "2015-11-30T16:13:32.047",
+            "StarNum": 5,
+            "VerifyRecord": null,
+            "Title": "满意&_&不满意",
+            "Replay": "出签非常顺利，按照遨游的要求准备了充足的资料，好多都没看，以后签证还会选遨游，美中不足的一点就是电话联系不是很方便。&_&",
+            "LabelName": "简单方便&_&不错&_&信赖",
+            "PhotePath": null
+        },
+        {
+            "CustomerId": 3890,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "独行侠",
+            "EvaluateTime": "2015-11-30T16:11:32.55",
+            "StarNum": 5,
+            "VerifyRecord": null,
+            "Title": "满意&_&不满意",
+            "Replay": "还不错，准备的很充分，顺利出签&_&中间把材料弄错了，还好及时更改了",
+            "LabelName": "简单方便&_&不错",
+            "PhotePath": null
+        },
+        {
+            "CustomerId": 3899,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "独行侠",
+            "EvaluateTime": "2015-11-30T16:10:28.843",
+            "StarNum": 5,
+            "VerifyRecord": null,
+            "Title": "满意&_&不满意",
+            "Replay": "陪签人员很耐心，尽职尽责，在使馆排队等候时间远远超过面签时间，签证官仅两个问题就顺利通过！\r\n十年美签，哈哈哈，真好，美国我来啦&_&",
+            "LabelName": "简单方便",
+            "PhotePath": null
+        },
+        {
+            "CustomerId": 3896,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "有老人同行",
+            "EvaluateTime": "2015-11-30T16:09:26.39",
+            "StarNum": 5,
+            "VerifyRecord": null,
+            "Title": "满意&_&不满意",
+            "Replay": "遨游网的服务没的说，非常认真专业！开始还担心妈妈会被拒签，签证很顺利的通过了，谢谢遨游网的签证同事，圆了妈妈的美国之旅&_&",
+            "LabelName": "信赖",
+            "PhotePath": null
+        },
+        {
+            "CustomerId": 3895,
+            "CustomerAvatarUrl": "http://pic2.aoyou.com/visalogo/221.jpg",
+            "IdentityDesc": "独行侠",
+            "EvaluateTime": "2015-11-30T16:08:27.273",
+            "StarNum": 5,
+            "VerifyRecord": null,
+            "Title": "满意&_&不满意",
+            "Replay": "服务好，全程有人跟进。&_&",
+            "LabelName": "出签快",
+            "PhotePath": null
+        }
+    ]
+}

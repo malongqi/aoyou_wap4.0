@@ -1,0 +1,252 @@
+﻿{
+    "ChannelID": "1",
+    "ChannelName": "签证",
+    "ChannelAdvNum": 1,
+    "ChannelWordNum": 2,
+    "ChannelGroupNum": 3,
+    "ChannelLable": 5,
+    "LuoboProduct":{
+        "ChannelProductGroupName": "产品组名称",
+        "ChannelTemplateProduct": [
+            {
+                "channelProductName": "澳大利亚黄金海岸",
+                "channelProductDoc": "初次去日本顾客",
+                "channelProductimg": "http://images1.aoyou.com/productlist/201511/4640nr26145322.jpg",
+                "channelProductUrl": "https://www.baidu.com/",
+                "channelProductPrice": 9996,
+                "ProductTag": "自由行",
+                "ClasstTag": [
+                    { "TypeID": 1, "Value": "4钻" },
+                    { "TypeID": 2, "Value": "国庆" },
+                    { "TypeID": 2, "Value": "中秋" },
+                    { "TypeID": 3, "Value": "蜜月度假" }
+                ]
+            },
+            {
+                "channelProductName": "2澳大利亚黄金海岸",
+                "channelProductDoc": "初次去日本顾客",
+                "channelProductimg": "http://images1.aoyou.com/productlist/201401/j2208j08165221.jpg",
+                "channelProductUrl": "https://www.baidu.com/",
+                "channelProductPrice": 9996,
+                "ProductTag": "跟团游",
+                "ClasstTag": [
+                    { "TypeID": 1, "Value": "4钻" },
+                    { "TypeID": 2, "Value": "国庆" },
+                    { "TypeID": 2, "Value": "中秋" },
+                    { "TypeID": 3, "Value": "蜜月度假" }
+                ]
+            },
+            {
+                "channelProductName": "2澳大利亚黄金海岸",
+                "channelProductDoc": "初次去日本顾客",
+                "channelProductimg": "http://images1.aoyou.com/productlist/201401/j2208j08165221.jpg",
+                "channelProductUrl": "https://www.baidu.com/",
+                "channelProductPrice": 9996,
+                "ProductTag": "跟团游",
+                "ClasstTag": [
+                    { "TypeID": 1, "Value": "4钻" },
+                    { "TypeID": 2, "Value": "国庆" },
+                    { "TypeID": 2, "Value": "中秋" },
+                    { "TypeID": 3, "Value": "蜜月度假" }
+                ]
+            },
+            {
+                "channelProductName": "2澳大利yy亚黄金海岸",
+                "channelProductDoc": "初次去日本顾客",
+                "channelProductimg": "http://images1.aoyou.com/productlist/201401/j2208j08165221.jpg",
+                "channelProductUrl": "https://www.baidu.com/",
+                "channelProductPrice": 9996,
+                "ProductTag": "跟团游",
+                "ClasstTag": [
+                    { "TypeID": 1, "Value": "4钻" },
+                    { "TypeID": 2, "Value": "国庆" },
+                    { "TypeID": 2, "Value": "中秋" },
+                    { "TypeID": 3, "Value": "蜜月度假" }
+                ]
+            }
+        ]
+    },
+    "ChannelTemplateAdv": [
+        {
+            "channelAdvImg": "http://images1.aoyou.com/upload/201701/8888l019113500.jpg",
+            "channelAdvWapurl": "https://www.baidu.com/"
+        },
+        {
+            "channelAdvImg": "http://images1.aoyou.com/upload/201612/fv2hjx30142854.jpg",
+            "channelAdvWapurl": "https://www.baidu.com/"
+        }
+    ],
+    "KeyWrodList":[
+        {
+            "ChannelKeyGroupName": "关键词组名称1",
+            "ChannelKeyType":1,
+            "ChannelTemplateKey": [
+                {
+                    "channelKeyTitle": "关键字1",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字2",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字2",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字2",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字2",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字2",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                }
+            ]
+        },{
+            "ChannelKeyGroupName": "关键词组名称2",
+            "ChannelKeyType":2,
+            "ChannelTemplateKey": [
+                {
+                    "channelKeyTitle": "关键字3",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字4",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                }
+            ]
+        },{
+            "ChannelKeyGroupName": "关键词组名称2",
+            "ChannelKeyType":2,
+            "ChannelTemplateKey": [
+                {
+                    "channelKeyTitle": "关键字3",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字4",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                }
+            ]
+        },{
+            "ChannelKeyGroupName": "关键词组名称2",
+            "ChannelKeyType":2,
+            "ChannelTemplateKey": [
+                {
+                    "channelKeyTitle": "关键字3",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字4",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                }
+            ]
+        },{
+            "ChannelKeyGroupName": "关键词组名称2",
+            "ChannelKeyType":2,
+            "ChannelTemplateKey": [
+                {
+                    "channelKeyTitle": "关键字3",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字4",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                }
+            ]
+        }
+    ],
+    "channelProductList":{
+        "ChannelProductGroupName": "产品组名称",
+        "ChannelTemplateProduct": [
+        {
+            "channelProductName": "澳大利亚黄金海岸澳大利亚黄金海岸澳大利亚黄金海岸澳大利亚黄金海岸澳大利亚黄金海岸澳大利亚黄金海岸澳大利亚黄金海岸澳大利亚黄金海岸澳大利亚黄金海岸",
+            "channelProductDoc": "该属性控制UILabel控件内的阴影文本与正常文本之间的偏移，该属性区需要指定Horizontal和Vertical两个属性值，分别指定阴影文本与正常文本在水平和垂直方向的偏移距",
+            "channelProductimg": "http://images1.aoyou.com/productlist/201511/4640nr26145322.jpg",
+            "channelProductUrl": "https://www.baidu.com/",
+            "channelProductPrice": 9996,
+            "ClasstTag": [
+                { "TypeID": 4, "Value": "自由行" },
+                { "TypeID": 1, "Value": "4钻" }
+            ]
+        },
+        {
+            "channelProductName": "澳大利亚黄金海岸",
+            "channelProductDoc": "初次去日本顾客",
+            "channelProductimg": "http://images1.aoyou.com/productlist/201401/j2208j08165221.jpg",
+            "channelProductUrl": "https://www.baidu.com/",
+            "channelProductPrice": 9996,
+            "ClasstTag": [
+                { "TypeID": 5, "Value": "跟团游" },
+                { "TypeID": 1, "Value": "4钻" }
+            ]
+        }
+    ]
+    },
+    "ZidingyiProductGroup": [
+        {
+            "ChannelProductGroupName": "产品自大标题1",
+            "ZDYProductListKey": [
+                {
+                    "channelKeyTitle": "关键字1",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字2",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                }
+            ],
+            "ChannelTemplateProduct": [
+                {
+                    "channelProductName": "1澳大利亚黄金海岸",
+                    "channelProductDoc": "初次去日本顾客",
+                    "channelProductimg": "http://images1.aoyou.com/productlist/201401/j2208j08165221.jpg",
+                    "channelProductUrl": "https://www.baidu.com/",
+                    "channelProductPrice": 9996
+                },
+                {
+                    "channelProductName": "1澳大利亚黄金海岸",
+                    "channelProductDoc": "初次去日本顾客",
+                    "channelProductimg": "http://images1.aoyou.com/productlist/201401/j2208j08165221.jpg",
+                    "channelProductUrl": "https://www.baidu.com/",
+                    "channelProductPrice": 9996
+                }
+            ]
+
+        },{
+            "ChannelProductGroupName": "产品自大标题2",
+            "ZDYProductListKey": [
+                {
+                    "channelKeyTitle": "关键字3",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                },
+                {
+                    "channelKeyTitle": "关键字4",
+                    "channelKeyWordWapurl": "https://www.baidu.com/"
+                }
+            ],
+            "ChannelTemplateProduct": [
+                {
+                    "channelProductName": "2澳大利亚黄金海岸",
+                    "channelProductDoc": "初次去日本顾客",
+                    "channelProductimg": "http://images1.aoyou.com/productlist/201401/j2208j08165221.jpg",
+                    "channelProductUrl": "https://www.baidu.com/",
+                    "channelProductPrice": 9996
+                },
+                {
+                    "channelProductName": "2澳大利亚黄金海岸",
+                    "channelProductDoc": "初次去日本顾客",
+                    "channelProductimg": "http://images1.aoyou.com/productlist/201401/j2208j08165221.jpg",
+                    "channelProductUrl": "https://www.baidu.com/",
+                    "channelProductPrice": 9996
+                }
+            ]
+
+        }
+    ]
+
+}

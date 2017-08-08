@@ -1,0 +1,125 @@
+{
+    "Id": "1",
+    "Title": "东京一地经典5天",
+    "AuthorName": "Li_Suming",
+    "AuthorLabel":"日本资深产品设计师",
+    "AuthorImg": "http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+    "BannerImg": "http://images1.aoyou.com/productlist/201611/4j82p223144113.jpg",
+    "Summary": "银座、新宿、浅草、上野、迪斯尼乐园；落樱、霓虹、美术馆、幽深酒巷，为这座城的独特和精致，值得玩5天。",
+    "DesTagsJSON": [
+        {
+             "TypeId": "1",
+             "Value": "4"
+         },{
+             "TypeId": "2",
+             "Value": "34"
+         }
+    ],
+    "LabelId": "1，3，5",
+    "Duration": "2，4，6",
+    "Theme": "8，9，10",
+    "FeatureThem": "11,12,13",
+    "RecommendProducts": [
+        {
+            "ProductId": "1",
+            "Title": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+            "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+            "ImgUrl": "http://images5.aoyou.com/productlist/201310/088z2010144350.jpg",
+            "TypeId": "4",
+            "TypeName": "自由行",
+            "Price": "4900",
+            "SortNo": "1"
+        }, {
+            "ProductId": "2",
+            "Title": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+            "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+            "ImgUrl": "http://images5.aoyou.com/productlist/201310/088z2010144350.jpg",
+            "TypeId": "1",
+            "TypeName": "跟团游",
+            "Price": "4900",
+            "SortNo": "1"
+        }, {
+            "ProductId": "3",
+            "Title": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+            "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+            "ImgUrl": "http://images5.aoyou.com/productlist/201310/088z2010144350.jpg",
+            "TypeId": "4",
+            "TypeName": "自由行",
+            "Price": "4900",
+            "SortNo": "1"
+        }, {
+            "ProductId": "4",
+            "Title": "美国塞班岛5晚7天百变自由行【卡诺亚主楼海景同级/北京直飞/环...",
+            "SubTitle": "赠双体船出海游 超高性价比 地中海俱乐部豪华旗舰店 吃喝玩乐",
+            "ImgUrl": "http://images5.aoyou.com/productlist/201310/088z2010144350.jpg",
+            "TypeId": "4",
+            "TypeName": "自由行",
+            "Price": "4900",
+            "SortNo": "1"
+        }
+    ],
+    "Itinerary": [{
+        "Title": "东京",
+        "SubTitle": "东京浅草寺 - 晴空塔 - 水上巴士 - 浪漫台场",
+        "Summary": "到达东京的第一天，以轻度的景点为主，建议体验一下水上巴士以及东京晴空塔。",
+        "ItineraryItems": [{
+            "Title": "浅草寺",
+            "TypeId": "1",
+            "TypeName": "娱乐景点",
+            "ImgUrl": "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg",
+            "Description": "东京怀旧江户风情，怀旧风情与古朴样貌的浅草区曾是江户时代的商业中心，如今是著名观光胜地。以浅草寺为中心向四周延伸，除了参观著名的雷门和观音寺外，仲见世通上的传统小吃、零食点心以及出售和服、木屐、纸伞、扇子、瓷器陶器等复古纪念商品等店铺也是不能错过的浅草特色。",
+            "OpenTimes": "周一 至 周五 9:00-12:00",
+            "Address": "一个地址",
+            "TimeCost": "60",
+            "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price":"4900" }
+        }, {
+            "Title": "表参道怀石料理名店",
+            "TypeId": "2",
+            "TypeName": "餐厅",
+            "ImgUrl": "",
+            "Description": "2004年开店，米其林2星，美食口评度保持高水准。提供以京料怀石为主的经典料亭日料。可以一边眺望日本美丽的庭园，一边品味着日式料理。",
+            "OpenTimes": "周一 至 周五 9:00-12:00",
+            "Address": "一个地址",
+            "TimeCost": "60",
+            "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price":"4900" }
+        }, {
+            "Title": "银座",
+            "TypeId": "3",
+            "TypeName": "购物店",
+            "ImgUrl": "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg",
+            "Description": "东京市中心日本皇宫附近的银座是全城最繁华的闹市区。从一丁目到八丁目，合称银座八町。集中了许多专卖店、百货商店夜总会的那个。",
+            "OpenTimes": "周一 至 周五 9:00-12:00",
+            "Address": "一个地址",
+            "TimeCost": "60",
+            "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price":"4900" }
+        }],
+        "EndWords": "吹拂着东京湾的海风，远眺彩虹大桥及东京铁塔，小憩一下在“阳光庭园”享受日光浴。第一天的行程就这样结束了。"
+    }, {
+        "Title": "大阪",
+        "SubTitle": "相扑观赛 - 两国国技馆参",
+        "Summary": "到达东京的第一天，以轻度的景点为主，建议体验一下水上巴士以及东京晴空塔。",
+        "ItineraryItems": [{
+            "Title": "大阪海港落日",
+            "TypeId": "4",
+            "TypeName": "娱乐景点",
+            "ImgUrl": "http://images1.aoyou.com/productlist/201507/p8zfxp03103300.jpg",
+            "Description": "东京怀旧江户风情，怀旧风情与古朴样貌的浅草区曾是江户时代的商业中心，如今是著名观光胜地。以浅草寺为中心向四周延伸，除了参观著名的雷门和观音寺外，仲见世通上的传统小吃、零食点心以及出售和服、木屐、纸伞、扇子、瓷器陶器等复古纪念商品等店铺也是不能错过的浅草特色。",
+            "OpenTimes": "周一 至 周五 9:00-12:00",
+            "Address": "一个地址",
+            "TimeCost": "60",
+            "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price": "4900" }
+        }, {
+            "Title": "水上巴士",
+            "TypeId": "5",
+            "TypeName": "餐厅",
+            "ImgUrl": "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg",
+            "Description": "2004年开店，米其林2星，美食口评度保持高水准。提供以京料怀石为主的经典料亭日料。可以一边眺望日本美丽的庭园，一边品味着日式料理。",
+            "OpenTimes": "周一 至 周五 9:00-12:00",
+            "Address": "一个地址",
+            "TimeCost": "60",
+            "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price": "4900" }
+        }],
+        "EndWords": "吹拂着东京湾的海风，远眺彩虹大桥及东京铁塔，小憩一下在“阳光庭园”享受日光浴。第一天的行程就这样结束了。"
+    }],
+    "AirportAndHotel": "航班推荐日航直飞，酒店可选择位于充满活力的时尚购物区池袋。Sunshine City集暸望台、Alpa购物中心、水族馆、博物馆和剧院等娱乐设施于一身。"
+}

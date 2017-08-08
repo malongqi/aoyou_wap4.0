@@ -1,0 +1,750 @@
+{
+  "ProductBaseInfo": {
+    "ProductID": 39204,
+    "ProductNo": "011403110054",
+    "ProductType": 4,
+    "MainTitle": "香港3晚4天百变自由行【尖沙咀君怡酒店/早去晚回】",
+    "SubTitle": "【尖沙咀爆款抢购】酒店毗邻弥敦道，步行即可前往尖沙咀地铁站及火车站",
+    "ProductStatus": 30,
+    "ConfirmType": 2,
+    "Duration": 4,
+    "InterFlag": 2,
+    "PictureList": "",
+    "ProductGrade": 4,
+    "ProductGradeDescription": "",
+    "ProductGradeShortDescription": "",
+    "ShowPrice": 3380,
+    "ShowPriceRemark": "",
+    "MinTripNumber": 1,
+    "PreBookingDay": 5,
+    "DepartCity": 0,
+    "DepartCityText": "北京",
+    "DestCity": 0,
+    "DestCityName": "",
+    "SpecialOffers": [
+      ""
+    ],
+    "BookingPolicy": [{
+      "Description": "酒店入住退房时间： 按照国际惯例，酒店入住时间：通常为下午14点以后；退房时间：通常为中午12点以前。时差提醒：香港、澳门与中国大陆无时差。（香港、澳门与北京属于同一时区，均使用北京时间。）出入境提示：大陆居民前往香港、澳门，需持有有效的《大陆居民往来港澳通行证》，并附有效签注。证件及签注，需出行人本人自行到户口所在地公安局出入境管理部门申请办理。小费提示：无硬性要求。但香港、澳门的餐厅及酒楼用餐，一般会收取额外的服务费，通常为总消费额的10%-15%，会在收费单上体现。货币提示：香港使用港币，澳门使用澳门币、港币皆可。香港澳门街头有货币兑换处。消费时，多数商家支持刷银联卡，银行会按照当天汇率自动帮您转换为人民币，多刷卡也可以减少现金携带量，保护自身安全。出境人员携出金额在等值5000美元以内（含5000美元）的，不需申领《携带证》，海关予以放行。当天多次往返及短期内多次往返者除外。在香港，可以使用贴有“银联”标识的银行卡，汇率直接以当日国家公布的外汇牌价用人民币与当地货币换算。您也可以使用贴有万事达（MASTER）或维萨（VISA）标识的银行卡，换算方式是按当日汇率将当地货币转换成美元，再将美元按还款当日汇率转换成人民币价格。用电规格：港澳地区酒店内的电压均220伏，插座为三项扁平插头，跟国内不一样。酒店一般可以免费借用转换插头。但数量有限，建议您自备转换器（内地大型超市等都可以购买，请按图选择英式插头的转换器）。香港、澳门便利店也有售。港澳酒店内的自来水不能直接饮用。房间内没有开水供应，但一般都备有烧开水用的电水壶。人身安全提示：过马路时要遵守交通规则，绿灯亮时才可通过，否则发生事故，责任由违反交通规则的一方承担。因为香港原属于英联邦领地，其交通规则与我国不一样，交通工具一律靠左行驶，所以过马路时最好左右都看，大多数人不记得要向右看有没有车。乘机、坐车、上船，请注意扶梯，台阶处站稳，以免扭伤或摔伤身体。外出时最好结伴而行，并带上酒店地址卡，以免迷路后无法返回酒店。如在港澳期间遇到8级以上台风即黑色暴雨预警，请务必不要外出。 财物安全提示：香港是国际金融中心，向每位客人提供周到而完善的金融服务，我们可以尽量使用旅行支票或信用卡，避免携带大量现金。坐飞机及乘船时不要将钱款和贵重物品放在托运的行李中。尽管香港澳门治安较好，但千万不要掉以轻心。现金和贵重物品应在入住酒店后存入酒店前台或房间内的保险箱，而不应放在房间内。如使用酒店前台的保险箱，一些酒店会收取相应的费用，此笔费用须由使用保险箱的客人自行承担。如不会使用酒店保险箱，可咨询酒店服务人员。",
+      "Element": 9,
+      "ElementText": "温馨提示"
+    },
+      {
+        "Description": "产品中所展示航班、机型信息仅供参考，最终信息以出行通知为准。近期北京上海等国内部分城市进入雨季，若您从外阜出发，建议您提前一天抵达机场。另航班可能因为天气等原因受到影响，造成延误或取消，请您实时关注航班变化，与所乘航空公司密切沟通，保持信息畅通",
+        "Element": 1001,
+        "ElementText": "航班"
+      },
+      {
+        "Description": "产品中所展示的酒店信息、图片仅供参考，酒店星级为当地酒店评定标准，最终以实际入住为准",
+        "Element": 1002,
+        "ElementText": "酒店"
+      },
+      {
+        "Description": "请您携带本人的有效身份证或其他身份证明的原件。以防搭乘交通工具或入住酒店时，相关单位提出须出示相关身份证明原件的要求。具体有效证件包括：居民身份证、个人因私护照、港澳通行证、台湾通行证、军官证等。若您持个人因私护照出境，请确保出行人护照有效期距离返回出发地日期半年以上，如因出行人护照遗失、过期、有效期不足而产生的相关费用，中青旅不予承担。",
+        "Element": 1003,
+        "ElementText": "证件"
+      },
+      {
+        "Description": "若您持有外籍护照，请您自行与出入境管理局确认您的中国签证可以在您旅行结束后顺利返回中国，如因外籍出行人护照、签证手续不全导致产生的相关费用，中青旅不予承担。",
+        "Element": 1004,
+        "ElementText": "外籍"
+      },
+      {
+        "Description": "在自由行过程中您自愿参加的一切活动项目，请充分了解活动的内容并严格遵守活动项目的安全规定，建议您主动购买相关保险，中青旅对您在此过程中发生的意外不承担任何责任。",
+        "Element": 1005,
+        "ElementText": "自由活动"
+      },
+      {
+        "Description": "本产品至少需要提前10个工作日预定并付全款",
+        "Element": 1,
+        "ElementText": "预订时间"
+      },
+      {
+        "Description": "香港酒店因当地客观因素，酒店房型面积和床型尺寸和大陆酒店相比较小，请您知晓。行程中所列酒店房型为基础房型，酒店星级标准为当地酒店评定标准；根据国际惯例，酒店的入住时间为下午14：00之后，退房时间为中午12：00之前，如超时需支付附加费",
+        "Element": 13,
+        "ElementText": "酒店房型"
+      },
+      {
+        "Description": "本产品价格只适用于中国大陆公民",
+        "Element": 10,
+        "ElementText": "预订限制"
+      },
+      {
+        "Description": "本产品适用于持《往来港澳通行证》及香港个人访问签注（G签注），探亲签注（T签注）或商务签注（S签注）或者Q签的大陆居民预订",
+        "Element": 3,
+        "ElementText": "签证"
+      }
+    ],
+    "FeeContain": [{
+      "Description": "北京—香港往返直飞经济舱机票（已含机票税和燃油附加税），此票不能退票、改期、签转；往返客票只能按顺序依次使用，去程航段机票未使用，回程航段机票自动取消。注：10月2日、3日出发参考航班为港龙航空，参考时间如下：去程KA905 08：00起飞，11:40抵达；回程KA906 19：00起飞，22:30抵达 ",
+      "Element": 1,
+      "ElementText": "航班"
+    },
+      {
+        "Description": "香港酒店标准间住宿（不含早）",
+        "Element": 4,
+        "ElementText": "酒店"
+      },
+      {
+        "Description": "本产品价格只适用于持有有效港澳通行证及签注的中国大陆公民",
+        "Element": 0,
+        "ElementText": "其他"
+      }
+    ],
+    "FeeNotContain": [{
+      "Description": "护照费用和港澳通行证费用",
+      "Element": 3,
+      "ElementText": "签证"
+    },
+      {
+        "Description": "机场至酒店之间的往返接送",
+        "Element": 2,
+        "ElementText": "交通"
+      },
+      {
+        "Description": "以上未提及的费用",
+        "Element": 0,
+        "ElementText": "其他"
+      }
+    ],
+    "JourneyList": [{
+      "ArriveCity": 1729,
+      "ArriveCityText": "香港",
+      "BreakfastInfo": "自理",
+      "DayNo": 1,
+      "DepartCity": 1,
+      "DepartCityText": "北京",
+      "DinnerInfo": "自理",
+      "HotelInfo": "尖沙咀君怡酒店",
+      "JourneyDesc": "当日于北京首都国际机场，乘机前往香港。抵达后可选择乘坐香港活力穿梭巴士、机场快线、出租车等交通工具前往您下榻的酒店。<br />全天自由活动。建议行程：<br />【走进购物天堂】推荐购物地区：尖沙咀 海港城 如果你时间有限，建议走百家不如逛一家。在这家香港最大的购物中心里，基本品牌都已包罗。最好在咨询台拿一张海港城地图，找到你准备光顾的品牌店所在的楼层和大致位置。穿梭在长得不得了的通道里，见到中意的要当机立断，千万别指望着“待会回头再来买”，因为你多半会因为迷路，或“走不动了”等原因和它们失之交臂。<br />铜锣湾的购物点数不胜数，打算尽情购物的话，可以从时代广场或崇光百货开始，然后再到周边的商场及店铺，最后才到铜锣湾西面的名店坊。这里鱼龙混杂的热闹劲很容易让人迷路，依靠地铁是最好的办法。铜锣湾地铁范围覆盖了大部分主要街道与商场，可直接通过出口直达各个商场，比如位于A出口的时代广场，B出口的铜锣湾广场，D出口的崇光百货，十分方便。",
+      "JourneyPicture": [],
+      "JourneyPictureName": [],
+      "JourneyTitle": "北京-香港",
+      "LunchInfo": "自理",
+      "NightNum": 1,
+      "PathCity": [],
+      "PathCityText": [],
+      "TrafficInfo": "3.5小时",
+      "TrafficType": 1,
+      "TrafficTypeText": "飞机",
+      "FlightTitle": ""
+    },
+      {
+        "ArriveCity": 1729,
+        "ArriveCityText": "香港",
+        "BreakfastInfo": "自理",
+        "DayNo": 2,
+        "DepartCity": 1729,
+        "DepartCityText": "香港",
+        "DinnerInfo": "自理",
+        "HotelInfo": "尖沙咀君怡酒店",
+        "JourneyDesc": "全天自由活动。 推荐行程：<br />您可利用今天的时间前往香港迪士尼乐园，走入童话王国，展开您的童趣之旅。<br />【香港迪士尼乐园】踏进香港迪士尼乐园，你会发现童话故事一一实现，童话人物真的来到你面前，你可以欣赏百老汇式精彩表演，或畅玩乐趣无穷的动感机动游戏，享受一整天的开心精彩，感受迪士尼故事的魅力！ \r\n香港迪士尼乐园度假区位于香港大屿山，于2005年9月开幕，为宾客提供独一无二的奇妙迪士尼体验。 \r\n香港迪士尼乐园分为七大主题园区，他们分别是美国小镇大街、幻想世界、明日世界、探险世界、2011年11月开幕的反斗奇兵大本营、2012年7月开幕的灰熊山谷以及2013年5月开幕的迷离庄园。代表不同年代不同时空的迪士尼体验。 \r\n <br />推荐交通：乘坐港铁东涌线抵达欣澳站，换乘港铁迪士尼线，即可前往香港迪士尼乐园，让您轻松走进这个奇妙王国。",
+        "JourneyPicture": [],
+        "JourneyPictureName": [],
+        "JourneyTitle": "走入童话王国",
+        "LunchInfo": "自理",
+        "NightNum": 2,
+        "PathCity": [],
+        "PathCityText": [],
+        "TrafficInfo": "",
+        "TrafficType": 5,
+        "TrafficTypeText": "其他",
+        "FlightTitle": ""
+      },
+      {
+        "ArriveCity": 1729,
+        "ArriveCityText": "香港",
+        "BreakfastInfo": "自理",
+        "DayNo": 3,
+        "DepartCity": 1729,
+        "DepartCityText": "香港",
+        "DinnerInfo": "自理",
+        "HotelInfo": "尖沙咀君怡酒店",
+        "JourneyDesc": "全天自由活动。推荐行程：<br />【海洋公园】：位于香港南部香港仔海洋公园道。三面环海，东濒深水湾，南临东博寮海峡，西接大树湾。是亚洲最大的海洋公园。公园建筑分布于南朗山上及黄竹坑谷地。两园间设有架空缆车，游客只需乘坐1.4公里的缆车，便可来往于两园之间，形成一个完整的公园景区。在缆车内还可观赏深水湾、浅水湾海景。它包括海洋天地、集古村、绿野花园、雀鸟天堂、山上机动城、急流天地、水上乐园、儿童王国等八区，让您的旅程更加开心。<br />推荐交通：金钟地铁站有专线巴士直达。<br /><br />【太平山顶】位处港岛西南部，是香港岛的第一高峰，自开埠以内，它一直被视为香港的标志。在太平山上可俯瞰维多利亚港及九龙半岛，将两岸的景色一览无遗，而该处的夜景更是世界著名，被列为世界「四大夜景」之一。山顶上除了迷人的夜色外，还拥有世界知名的山顶缆车。于一八八八年启用的山顶缆车，是香港最古老的机动交通工具，亦是世界最古老的登山缆车。缆车轨道全长逾五千呎，高达海拔一千三百英呎，全程约需十五分钟。沿途从缆车往外观望，即可将香港半山多姿多彩的景致尽收眼底。缆车的终站是山顶凌霄阁，那里气氛极佳，是游人观光或情侣谈心的好地点。<br />推荐交通：山顶缆车总站位于香港中环花园道33号。",
+        "JourneyPicture": [],
+        "JourneyPictureName": [],
+        "JourneyTitle": "海洋探险",
+        "LunchInfo": "自理",
+        "NightNum": 3,
+        "PathCity": [],
+        "PathCityText": [],
+        "TrafficInfo": "",
+        "TrafficType": 5,
+        "TrafficTypeText": "其他",
+        "FlightTitle": ""
+      },
+      {
+        "ArriveCity": 1,
+        "ArriveCityText": "北京",
+        "BreakfastInfo": "自理",
+        "DayNo": 4,
+        "DepartCity": 1729,
+        "DepartCityText": "香港",
+        "DinnerInfo": "自理",
+        "HotelInfo": "无",
+        "JourneyDesc": "根据航班时间自行前往香港机场乘机飞回北京。",
+        "JourneyPicture": [],
+        "JourneyPictureName": [],
+        "JourneyTitle": "香港-北京",
+        "LunchInfo": "自理",
+        "NightNum": 4,
+        "PathCity": [],
+        "PathCityText": [],
+        "TrafficInfo": "3.5",
+        "TrafficType": 1,
+        "TrafficTypeText": "飞机",
+        "FlightTitle": ""
+      }
+    ],
+    "OtherInfo": "<DIV><IMG border=0 src=\"https://img.alicdn.com/imgextra/i4/224591973/TB2WlP2cFXXXXXAXpXXXXXXXXXX_!!224591973.jpg\" \r\n\r\nwidth=800 ></DIV>\r\n<DIV><IMG border=0 src=\"http://images1.aoyou.com/erpproother/201601/vt86zt06141127.jpg\" \r\n\r\nwidth=800 ></DIV>\r\n<DIV><IMG border=0 src=\"https://img.alicdn.com/imgextra/i2/224591973/TB2nE6VcFXXXXa0XpXXXXXXXXXX_!!224591973.jpg\" \r\n\r\nwidth=800 ></DIV>\r\n<DIV><IMG border=0 src=\"https://img.alicdn.com/imgextra/i2/224591973/TB2emD6cFXXXXaUXXXXXXXXXXXX_!!224591973.jpg\" \r\n\r\nwidth=800 ></DIV>\r\n<DIV><IMG border=0 src=\"https://img.alicdn.com/imgextra/i3/224591973/TB2dPH7cFXXXXaVXXXXXXXXXXXX_!!224591973.jpg\" \r\n\r\nwidth=800 ></DIV>\r\n<DIV><IMG border=0 src=\"https://img.alicdn.com/imgextra/i1/224591973/TB2D064cFXXXXcNXXXXXXXXXXXX_!!224591973.jpg\" \r\n\r\nwidth=800 ></DIV>\r\n",
+    "ProductFeature": [{
+      "Description": "搭乘早去晚回优质航班，更多时间体验魅力香港。",
+      "Element": 0,
+      "ElementText": "航班"
+    },
+      {
+        "Description": "精选君怡酒店，位处尖沙咀——香港最繁盛的地区；步行5分钟即可到达尖沙咀地铁站，交通极为方便",
+        "Element": 1,
+        "ElementText": "住宿"
+      },
+      {
+        "Description": "+30元即可得价值HKD48电话卡一张（香港致电中国大陆，每分钟HKD0.2；澳门致电中国大陆，每分钟HKD 0.95），玩得开心家人放心",
+        "Element": 2,
+        "ElementText": "增值服务"
+      },
+      {
+        "Description": "吃不完的美食，享不尽的时尚，玩不停的游戏都能在此亲历",
+        "Element": 3,
+        "ElementText": "餐饮"
+      }
+    ],
+    "ProductMark": ["中青旅自营"]
+  },
+  "ProductDepDateList": [
+    {
+      "DepartDate": "2017-01-27T00:00:00",
+      "ShowPrice": "4600"
+    },
+    {
+      "DepartDate": "2017-01-29T00:00:00",
+      "ShowPrice": "6450"
+    },
+    {
+      "DepartDate": "2017-02-01T00:00:00",
+      "ShowPrice": "5770"
+    },
+    {
+      "DepartDate": "2017-02-02T00:00:00",
+      "ShowPrice": "4730"
+    },
+    {
+      "DepartDate": "2017-02-03T00:00:00",
+      "ShowPrice": "4680"
+    },
+    {
+      "DepartDate": "2017-02-04T00:00:00",
+      "ShowPrice": "4630"
+    },
+    {
+      "DepartDate": "2017-02-05T00:00:00",
+      "ShowPrice": "4580"
+    },
+    {
+      "DepartDate": "2017-02-07T00:00:00",
+      "ShowPrice": "3380"
+    },
+    {
+      "DepartDate": "2017-02-08T00:00:00",
+      "ShowPrice": "3480"
+    },
+    {
+      "DepartDate": "2017-02-09T00:00:00",
+      "ShowPrice": "3580"
+    }
+  ],
+  "ProductPriceList": [{
+    "CurrentYear": 2017,
+    "CurrentMonth": 1,
+    "IsCurrentShow": false,
+    "dayPriceList": [{
+      "AirStock": 10,
+      "DepartDate": "2017-01-27T00:00:00",
+      "FreeTourType": 2,
+      "HotelStock": 100,
+      "PreBookingDate": "2017-01-20T00:00:00",
+      "ShowPrice": "4600"
+    },
+      {
+        "AirStock": 10,
+        "DepartDate": "2017-01-29T00:00:00",
+        "FreeTourType": 2,
+        "HotelStock": 100,
+        "PreBookingDate": "2017-01-20T00:00:00",
+        "ShowPrice": "6450"
+      }
+    ]
+  },
+    {
+      "CurrentYear": 2017,
+      "CurrentMonth": 2,
+      "IsCurrentShow": false,
+      "dayPriceList": [{
+        "AirStock": 10,
+        "DepartDate": "2017-02-01T00:00:00",
+        "FreeTourType": 2,
+        "HotelStock": 1,
+        "PreBookingDate": "2017-01-20T00:00:00",
+        "ShowPrice": "5770"
+      },
+        {
+          "AirStock": 10,
+          "DepartDate": "2017-02-02T00:00:00",
+          "FreeTourType": 2,
+          "HotelStock": 1,
+          "PreBookingDate": "2017-01-20T00:00:00",
+          "ShowPrice": "4730"
+        },
+        {
+          "AirStock": 10,
+          "DepartDate": "2017-02-03T00:00:00",
+          "FreeTourType": 2,
+          "HotelStock": 1,
+          "PreBookingDate": "2017-01-20T00:00:00",
+          "ShowPrice": "4680"
+        },
+        {
+          "AirStock": 10,
+          "DepartDate": "2017-02-04T00:00:00",
+          "FreeTourType": 2,
+          "HotelStock": 1,
+          "PreBookingDate": "2017-01-20T00:00:00",
+          "ShowPrice": "4630"
+        },
+        {
+          "AirStock": 10,
+          "DepartDate": "2017-02-05T00:00:00",
+          "FreeTourType": 2,
+          "HotelStock": 1,
+          "PreBookingDate": "2017-01-20T00:00:00",
+          "ShowPrice": "4580"
+        },
+        {
+          "AirStock": 10,
+          "DepartDate": "2017-02-07T00:00:00",
+          "FreeTourType": 2,
+          "HotelStock": 1,
+          "PreBookingDate": "2017-01-20T00:00:00",
+          "ShowPrice": "3380"
+        },
+        {
+          "AirStock": 10,
+          "DepartDate": "2017-02-08T00:00:00",
+          "FreeTourType": 2,
+          "HotelStock": 3,
+          "PreBookingDate": "2017-01-20T00:00:00",
+          "ShowPrice": "3480"
+        },
+        {
+          "AirStock": 10,
+          "DepartDate": "2017-02-09T00:00:00",
+          "FreeTourType": 2,
+          "HotelStock": 3,
+          "PreBookingDate": "2017-01-23T00:00:00",
+          "ShowPrice": "3580"
+        }
+      ]
+    }],
+  "AirPriceList": [{
+    "IsAppendStock": 1,
+    "Pplid": 96916,
+    "AdultPrice": 3500,
+    "AirLineUpCount": 0,
+    "AirPaidCount": 4,
+    "AirPlanID": 12513,
+    "AirStock": 0,
+    "AirTicketList": [{
+      "AirProductID": 12513,
+      "AirProductSegmentList": [{
+        "AirlineCode": "CA",
+        "AirlineID": 21,
+        "AirlineLogo": "CA.gif",
+        "AirlineName": "国航",
+        "ArriveCityCode": "HKG",
+        "ArriveCityID": 1729,
+        "ArriveCityName": "香港",
+        "ArrivePortCode": "HKG",
+        "ArrivePortID": 166,
+        "ArrivePortName": "香港国际机场",
+        "ArriveTime": "1125",
+        "CountryID": 44,
+        "CountryName": "中国",
+        "FlightCabin": "经济舱",
+        "FlightCabinText": null,
+        "FlightNo": "CA101",
+        "LeaveCityCode": "BJS",
+        "LeaveCityID": 1,
+        "LeaveCityName": "北京",
+        "LeavePortCode": "PEK",
+        "LeavePortID": 2,
+        "LeavePortName": "首都国际",
+        "LeaveTime": "0800",
+        "NoOfDay": 1,
+        "PlaneType": "空客321",
+        "PlaneTypeText": null,
+        "ElementTypeText": "飞机"
+      },
+        {
+          "AirlineCode": "CA",
+          "AirlineID": 21,
+          "AirlineLogo": "CA.gif",
+          "AirlineName": "国航",
+          "ArriveCityCode": "BJS",
+          "ArriveCityID": 1,
+          "ArriveCityName": "北京",
+          "ArrivePortCode": "PEK",
+          "ArrivePortID": 2,
+          "ArrivePortName": "首都国际",
+          "ArriveTime": "2255",
+          "CountryID": 44,
+          "CountryName": "中国",
+          "FlightCabin": "经济舱",
+          "FlightCabinText": null,
+          "FlightNo": "CA116",
+          "LeaveCityCode": "HKG",
+          "LeaveCityID": 1729,
+          "LeaveCityName": "香港",
+          "LeavePortCode": "HKG",
+          "LeavePortID": 166,
+          "LeavePortName": "香港国际机场",
+          "LeaveTime": "2000",
+          "NoOfDay": 4,
+          "PlaneType": "321",
+          "PlaneTypeText": null,
+          "ElementTypeText": "飞机"
+        }
+      ],
+      "PolicyInfo": "此机票不能签转、改期和退票"
+    }],
+    "AirUnpaidHolderCount": 0,
+    "ChildPrice": 3500,
+    "Rank": 1,
+    "ElementType": 1,
+    "PreBookingDate": "2017-01-20T00:00:00"
+  }],
+  "HotelPriceList": [{
+    "HotelList": [{
+      "HotelAddress": "尖沙咀金巴利道28号",
+      "HotelArea": "九龙",
+      "HotelDesc": "　香港君怡酒店位于尖沙咀 - 香港繁华的商业区之一，商店、食肆林立，令游客目不暇接。距离机场大约四十五分钟，交通极为方便,设备先进完善，共有五百四十六间客房及套房，每间客房设备舒适优雅。酒店亦有雅致的餐厅及酒吧，供应各款美食及殷懃热情的服务。康乐设施方面，有豪华温泉浴、 健身室、高尔夫球练习球道、设备完善的商务中心并设有秘书服务、大型的功能活动室、研讨会和宴会设施。客房并不华丽，格调现代沉稳。可随时享用房间内特设的卫星电视、国际直拨长途电话、自选电影、小型酒吧、免费咖啡茶烹煮、设备风筒等。",
+      "HotelGift": "",
+      "HotelID": 299050,
+      "HotelName": "尖沙咀君怡酒店",
+      "HotelNameEng": "Kimberley Hotel",
+      "HotelPicList": [
+        "http://images.aoyou.com/Images/FIles/Hotel_Photo/44/1729/299050/20120425165105736694d.jpg",
+        "http://images.aoyou.com/Images/FIles/Hotel_Photo/44/1729/299050/20120425165105893645d.JPG",
+        "http://images.aoyou.com/Images/FIles/Hotel_Photo/44/1729/299050/20120425165105373988d.jpg"
+      ],
+      "HotelProductID": 3760,
+      "StarLevel": 4,
+      "StartDay": 1,
+      "StayNights": 3,
+      "RoomPlanList": [{
+        "PlanID": 612,
+        "PlanPrice": 2160,
+        "RoomList": [{
+          "BedTypeDesc": [],
+          "CheckInDate": "2017-02-05T00:00:00",
+          "CheckOutDate": "2017-02-08T00:00:00",
+          "HaveRoomNet": true,
+          "RoomID": 122217,
+          "RoomName": "标准客房",
+          "RoomNetText": "收费上网（含大堂）：HK$120港币/天/2部手机、电脑。",
+          "RoomPicList": [
+            "http://images.aoyou.com/Images/FIles/Hotel_Photo/44/1729/299050/122217/20120425164816551223d.jpg"
+          ],
+          "MealInfoStr": "不含餐",
+          "RoomArea": 22,
+          "BedTypeStr": "单人床/大床",
+          "BedSizeStr": "2.0*1.1m/2.0*1.5m",
+          "RoomWifiStr": "--"
+        }],
+        "PaidCount": 3,
+        "Stock": 1,
+        "IsRecommend": true,
+        "Rank": 1,
+        "IsAppendStock": 0
+      }]
+    }],
+    "HotelPlanList": null,
+    "EndDay": 3,
+    "StartDay": 1,
+    "StayID": 200,
+    "StayName": "香港"
+  }],
+
+  "TourStatic": {
+    "AirProductViewList": [
+      {
+        "NoOfDay": 1,
+        "ElementTypeText": "飞机",
+        "PlaneTypeText": "空客330-300",
+        "AirlineName": "中国東方航空公司",
+        "FlightNo": "MU763",
+        "FlightCabinText": "经济舱",
+        "LeaveTime": "16:40",
+        "LeavePortName": "首都国际",
+        "ArriveTime": "00:30",
+        "ArrivePortName": "塞班国际机场",
+        "AddDay": 0
+      },
+      {
+        "NoOfDay": 6,
+        "ElementTypeText": "飞机",
+        "PlaneTypeText": "空客330-300",
+        "AirlineName": "中国東方航空公司",
+        "FlightNo": "MU764",
+        "FlightCabinText": "经济舱",
+        "LeaveTime": "01:30",
+        "LeavePortName": "塞班国际机场",
+        "ArriveTime": "06:35",
+        "ArrivePortName": "首都国际",
+        "AddDay": 0
+      }
+    ],
+    "HotelProductViewList": [
+      {
+        "HotelLocalCity": "塞班岛",
+        "StartDayNo": 1,
+        "EndDayNo": 5,
+        "HotelPicList": [
+          "http://erp.aoyou.com:8060/FileSite/Hotel_Photo/138/8354/299048/122215/20120409151902648969d.JPG",
+          "http://erp.aoyou.com:8060/FileSite/Hotel_Photo/138/8354/299048/20120420095452235976d.jpg"],
+        "HotelNameEng": "Saipan Kanoa Resort",
+        "HotelName": "塞班卡诺亚酒店（主楼）",
+        "StarLevel": 3,
+        "StarLevelText": "",
+        "HotelAddress": "Beach Rd. Susupe PO BOX 500369 Saipan MP 96950",
+        "lstHotelRoomInfoDTO": [
+          {
+            "RoomPicList": [
+              "http://erp.aoyou.com:8060/FileSite/Hotel_Photo/138/8354/299048/122215/20120409151901118167d.JPG",
+              "http://erp.aoyou.com:8060/FileSite/Hotel_Photo/138/8354/299048/122215/20120409151902648969d.JPG",
+              "http://erp.aoyou.com:8060/FileSite/Hotel_Photo/138/8354/299048/122215/20150325135256723431d.jpg"
+            ],
+            "RoomName": "主楼海景房Ocean View",
+            "RoomArea": "面积/30㎡",
+            "BedSize": "单人床/1.90*1.10m",
+            "CanyinInfo": "不含餐",
+            "WifiCondition": "",
+            "StartDay": 1,
+            "EndDay": 5
+          }
+        ]
+      }
+    ],
+    "TransportPolicy": null,
+    "ProductVisa": null,
+    "IsYaoyue": false,
+    "ProductID": 56565,
+    "ProductType": 4,
+    "ProductSubType": 0,
+    "MainTitle": "美国塞班岛5晚6天百变自由行【北京直飞/卡诺亚主楼海景/北部环岛游】",
+    "SubTitle": "【预售】北部观光环岛游 1顿自助餐 中文接送机 自助早餐 +1800元升级商务舱",
+    "ProductStatus": 30,
+    "ConfirmType": 2,
+    "Duration": 6,
+    "InterFlag": 2,
+    "SaleStat": 1789,
+    "PictureUrl":
+    "http://erp.aoyou.com:8060/FileSite/Hotel_Photo/138/8354/299048/122215/20120409151902648969d.JPG",
+    "ProductDept": "010101010301",
+    "ActivityType": 0,
+    "ProductGrade": 3,
+    "ProductGradeDescription": "【住宿】入住当地3星级或外网评级3星标准酒店/客栈。",
+    "ProductGradeShortDescription": "经济实惠，酒店舒适！",
+    "SearchPrice": 6999,
+    "MinTripNumber": 1,
+    "PreBookingDay": 1,
+    "DepartCity": 1,
+    "DepartCityText": "北京",
+    "DestCity": 8354,
+    "DestCityName": "塞班",
+    "SpecialOffers": [
+      "优惠不与中青旅其他任何优惠同时使用"
+    ],
+    "BookingPolicy": [
+      {
+        "Description": "本产品订单提交成功后不可更改、不可取消、不可签转。请确保旅客信息准确、出行证件有效。",
+        "Element": 0,
+        "ElementText": "取消规则"
+      },
+      {
+        "Description": "如遇不可预见之航空公司、天气及地接等政策调整所致的费用增加，我司有权另行收取实际多发生之费用。请客人予以理解。",
+        "Element": 0,
+        "ElementText": "特别关注"
+      }
+    ],
+    "FeeContain": [
+      {
+        "Description": "行程中所列航班经济舱机票及相关税费；",
+        "Element": 0,
+        "ElementText": "机票"
+      },
+      {
+        "Description": "单人入住单间差2200元",
+        "Element": 0,
+        "ElementText": "酒店"
+      }
+    ],
+    "FeeNotContain": [
+      {
+        "Description": "行程中所列航班经济舱机票及相关税费；",
+        "Element": 0,
+        "ElementText": "机票"
+      },
+      {
+        "Description": "单人入住单间差2200元",
+        "Element": 0,
+        "ElementText": "酒店"
+      }
+    ],
+    "JourneyList": [
+      {
+        "ArriveCity": 8354,
+        "ArriveCityText": "塞班",
+        "BreakfastInfo": "自理",
+        "DayNo": 1,
+        "DepartCity": 1,
+        "DepartCityText": "北京",
+        "DinnerInfo": "自理",
+        "HotelInfo": "卡诺亚酒店或格兰维罗酒店主楼",
+        "JourneyDesc": "请于当天自行前往北京首都机场，13:30集合后办理离境登机手续后乘搭航东方航空客机MU763  1630/0030+1直航飞往塞班岛。",
+        "JourneyPicture": [],
+        "JourneyPictureName": [],
+        "JourneyTitle": "北京--塞班",
+        "LunchInfo": "自理",
+        "NightNum": 1,
+        "PathCity": [],
+        "PathCityText": [],
+        "TrafficInfo": "5.5小时",
+        "TrafficType": 1,
+        "TrafficTypeText": "飞机",
+        "FlightTitle": null
+      },
+      {
+        "ArriveCity": 1,
+        "ArriveCityText": "北京",
+        "BreakfastInfo": "自理",
+        "DayNo": 6,
+        "DepartCity": 8354,
+        "DepartCityText": "塞班",
+        "DinnerInfo": "自理",
+        "HotelInfo": "无",
+        "JourneyDesc": "塞班岛国际机场搭乘中国东方航空MU764（0130/0635)直航飞回北京，结束愉快的旅行。",
+        "JourneyPicture": [],
+        "JourneyPictureName": [],
+        "JourneyTitle": "塞班-北京",
+        "LunchInfo": "自理",
+        "NightNum": 6,
+        "PathCity": [],
+        "PathCityText": [],
+        "TrafficInfo": "5.5小时",
+        "TrafficType": 1,
+        "TrafficTypeText": "飞机",
+        "FlightTitle": null
+      }
+    ],
+    "OtherInfo":
+    "<IMG align=absMiddle src=\"http://img03.taobaocdn.com/imgextra/i3/224591973/TB2BpHObXXXXXXDXXXXXXXXXXXX_!!224591973.jpg\"><IMG style=\"LINE-HEIGHT: 1.5\" align=absMiddle src=\"http://img02.taobaocdn.com/imgextra/i2/224591973/TB2.9TPbXXXXXXHXXXXXXXXXXXX_!!224591973.jpg\">",
+    "ProductFeature": [
+      {
+        "Description": "位于北马里亚纳群岛的首府太平洋中部，菲律宾海与太平洋之间，近邻赤道一年四季如夏，风景秀美",
+        "Element": 0,
+        "ElementText": "目的地"
+      },
+      {
+        "Description": "酒店距离约机场15分钟车程；卡诺亚酒店距离市中心仅10分钟车程，酒店大堂有至DFS的免费往返班车。专门为您安排好机场-酒店往返拼车中文接送机，让您的行程高枕无忧。",
+        "Element": 0,
+        "ElementText": "当地交通"
+      },
+      {
+        "Description": "观光探险：\r\n南部观光，201元/人\r\n丛林探险，235元/人\r\nATV（驾驶全地形四轮越野车探险）370元/人  \r\nUTV（最高峰探险，1小时）570元/人\r\n海上游玩：\r\n军舰岛+自助午餐，281元/人\r\n军舰岛+拖拽伞+香蕉船+午餐，750元/人\r\n水上摩托艇，单人235元，双人380元\r\n体验潜水（岸潜）1小时，400元/人          \r\n海底漫步，436元/人\r\n观光潜水艇，583元/人\r\n餐食表演：\r\n悦泰海鲜自助晚餐，241元/人\r\n沙滩BBQ，271元/人\r\n悦泰第一晚餐秀，400元/人\r\n星条旗夕阳游轮晚宴，503元/人\r\n动感活动：\r\n敞篷野马24小时，899元/车\r\n敞篷大黄蜂24小时，999元/车\r\n滑翔机两岛游（塞班+军舰岛）25分钟，1275元/人",
+        "Element": 0,
+        "ElementText": "自费项目"
+      }
+    ]
+  },
+
+
+   "PreferentialList":[
+     {
+       "PreName": "优惠不与中青旅其他任何优惠同时使用",
+       "IsShare": false,
+       "PreDescription": "优惠不与中青旅其他任何优惠同时使用",
+       "PreStartDate": "0001-01-01T00:00:00",
+       "PreEndDate": "0001-01-01T00:00:00"
+     }
+
+  ],
+
+   "RecommendProducts":[
+     {
+       "ProductID": 92561,
+       "InterFlag": 2,
+       "DepartCityText": "北京",
+       "ProductName": "美国塞班岛半自助6日游【北京直飞 海景房/蓝洞 鸟岛/军舰岛含午餐】",
+       "ProductSubName": "【塞班PLUS】中文接送机+酒店自助早餐+环岛游+1顿自助午餐+军舰岛（含午餐）",
+       "SalePrice": 7599,
+       "ProductType": 4,
+       "SpecialType": 0,
+       "ProductImageUrl":"http://7xipiw.com2.z0.glb.qiniucdn.com/productlist/201504/84frtx27130003.jpg",
+       "ProductGrade": 0,
+       "HolidayLabelList": null,
+       "ShowLabelList": [
+         "购物",
+         "亲子游",
+         "家庭游"
+       ],
+       "DepartDateList": [
+         "2017-02-14T00:00:00+08:00",
+         "2017-02-21T00:00:00+08:00",
+         "2017-02-28T00:00:00+08:00"
+       ]
+     },
+     {
+       "ProductID": 91863,
+       "InterFlag": 2,
+       "DepartCityText": "北京",
+       "ProductName": "美国塞班岛半自助7日游【北京直飞 海景房/军舰岛含自助餐/北部环岛游】",
+       "ProductSubName": "【塞班Plus】北部观光环岛游揽美景 军舰岛体验纯正白沙滩 多套餐可选升级",
+       "SalePrice": 7699,
+       "ProductType": 1,
+       "SpecialType": 0,
+       "ProductImageUrl": "http://7xipiw.com2.z0.glb.qiniucdn.com/productlist/201312/8hdv2h31133316.jpg",
+       "ProductGrade": 0,
+       "HolidayLabelList": null,
+       "ShowLabelList": [
+         "亲子游",
+         "家庭游"
+       ],
+       "DepartDateList": [
+         "2017-02-09T00:00:00+08:00",
+         "2017-02-11T00:00:00+08:00",
+         "2017-02-18T00:00:00+08:00"
+       ]
+     }
+   ],
+
+   "StatisticsEvaluate":{
+     "RecommendValue": 0,
+     "EvaluateTotal": 0,
+     "LableList": [
+       "string"
+     ]
+   }
+
+
+
+
+}

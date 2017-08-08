@@ -1,0 +1,104 @@
+{
+  "Id":"1",
+  "Title": "最美人間四月天，#四月·遇見最美的紫荆城#",
+  "AuthorName": "Li_Suming",
+  "AuthorLabel":"",
+  "AuthorImg":"http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+  "Summary": "地处日本中心的爱知县名古屋，作为日本的“心脏”，对观光客来说有无穷的吸引力，这里有尖端的工业技术、梦幻般的胜景、历史悠久的传统文化、举世瞩目的体育等盛世等，共同构成了爱知县的独特魅力。这次非常开心有机会参加爱知县邀请的考察活动，加深了对爱知县的认知，也再次对日本这个国家有了新的感受~",
+  "Itinerary": [
+      {
+      "Title": "东京",
+      "SubTitle": "东京浅草寺 - 晴空塔 - 水上巴士 - 浪漫台场",
+      "Summary": "到达东京的第一天，以轻度的景点为主，建议体验一下水上巴士以及东京晴空塔。",
+      "ItineraryItems": [{
+        "Title": "浅草寺",
+        "TypeId": "1",
+        "TypeName": "娱乐景点",
+        "ImgUrl": "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg",
+        "Description": "东京怀旧江户风情，怀旧风情与古朴样貌的浅草区曾是江户时代的商业中心，如今是著名观光胜地。以浅草寺为中心向四周延伸，除了参观著名的雷门和观音寺外，仲见世通上的传统小吃、零食点心以及出售和服、木屐、纸伞、扇子、瓷器陶器等复古纪念商品等店铺也是不能错过的浅草特色。",
+        "OpenTimes": "周一 至 周五 9:00-12:00",
+        "Address": "一个地址",
+        "TimeCost": "60",
+        "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price":"4900" }
+      }, {
+        "Title": "表参道怀石料理名店",
+        "TypeId": "2",
+        "TypeName": "餐厅",
+        "ImgUrl": "",
+        "Description": "2004年开店，米其林2星，美食口评度保持高水准。提供以京料怀石为主的经典料亭日料。可以一边眺望日本美丽的庭园，一边品味着日式料理。",
+        "OpenTimes": "周一 至 周五 9:00-12:00",
+        "Address": "一个地址",
+        "TimeCost": "60",
+        "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price":"4900" }
+      }, {
+        "Title": "银座",
+        "TypeId": "3",
+        "TypeName": "购物店",
+        "ImgUrl": "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg",
+        "Description": "东京市中心日本皇宫附近的银座是全城最繁华的闹市区。从一丁目到八丁目，合称银座八町。集中了许多专卖店、百货商店夜总会的那个。",
+        "OpenTimes": "周一 至 周五 9:00-12:00",
+        "Address": "一个地址",
+        "TimeCost": "60",
+        "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price":"4900" }
+      }],
+      "EndWords": "吹拂着东京湾的海风，远眺彩虹大桥及东京铁塔，小憩一下在“阳光庭园”享受日光浴。第一天的行程就这样结束了。"
+    }, {
+      "Title": "大阪",
+      "SubTitle": "相扑观赛 - 两国国技馆参",
+      "Summary": "到达东京的第一天，以轻度的景点为主，建议体验一下水上巴士以及东京晴空塔。",
+      "ItineraryItems": [{
+        "Title": "大阪海港落日",
+        "TypeId": "4",
+        "TypeName": "娱乐景点",
+        "ImgUrl": "http://images1.aoyou.com/productlist/201507/p8zfxp03103300.jpg",
+        "Description": "东京怀旧江户风情，怀旧风情与古朴样貌的浅草区曾是江户时代的商业中心，如今是著名观光胜地。以浅草寺为中心向四周延伸，除了参观著名的雷门和观音寺外，仲见世通上的传统小吃、零食点心以及出售和服、木屐、纸伞、扇子、瓷器陶器等复古纪念商品等店铺也是不能错过的浅草特色。",
+        "OpenTimes": "周一 至 周五 9:00-12:00",
+        "Address": "一个地址",
+        "TimeCost": "60",
+        "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price": "4900" }
+      }, {
+        "Title": "水上巴士",
+        "TypeId": "5",
+        "TypeName": "餐厅",
+        "ImgUrl": "http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg",
+        "Description": "2004年开店，米其林2星，美食口评度保持高水准。提供以京料怀石为主的经典料亭日料。可以一边眺望日本美丽的庭园，一边品味着日式料理。",
+        "OpenTimes": "周一 至 周五 9:00-12:00",
+        "Address": "一个地址",
+        "TimeCost": "60",
+        "Product": { "ProductId": "1", "ProductName": "东京羽田机场至东京市区【利木津巴士】单程兑换券", "ImgUrl":"http://images1.aoyou.com/productlist/201507/pblp4805150209.jpg", "Price": "4900" }
+      }],
+      "EndWords": "吹拂着东京湾的海风，远眺彩虹大桥及东京铁塔，小憩一下在“阳光庭园”享受日光浴。第一天的行程就这样结束了。"
+    }
+  ],
+  "Message":[
+    {
+      "AuthorName":"旅行的小猪",
+      "AuthorImg":"http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+      "Adress":"北京市朝阳区",
+      "Time":"2天前",
+      "Note":"承乾宫的庭院深深，梨花似朱墙下点点飞雪，不争不扰，却独具清雅。",
+      "NoteImg":"http://images1.aoyou.com/productlist/201412/0bxnhd08170411.jpg"
+    },{
+      "AuthorName":"旅行的小猪",
+      "AuthorImg":"http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+      "Adress":"北京市朝阳区",
+      "Time":"2天前",
+      "Note":"承乾宫的庭院深深，梨花似朱墙下点点飞雪，不争不扰，却独具清雅。",
+      "NoteImg":""
+    },{
+      "AuthorName":"旅行的小猪",
+      "AuthorImg":"http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+      "Adress":"北京市朝阳区",
+      "Time":"2天前",
+      "Note":"承乾宫的庭院深深，梨花似朱墙下点点飞雪，不争不扰，却独具清雅。",
+      "NoteImg":""
+    },{
+      "AuthorName":"旅行的小猪",
+      "AuthorImg":"http://bbs.aoyou.com/uc_server/avatar.php?uid=308862&size=middle",
+      "Adress":"北京市朝阳区",
+      "Time":"2天前",
+      "Note":"承乾宫的庭院深深，梨花似朱墙下点点飞雪，不争不扰，却独具清雅。",
+      "NoteImg":""
+    }
+  ]
+}
